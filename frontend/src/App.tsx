@@ -15,7 +15,7 @@ function App() {
     <div className="App">
       <Router>
         <Switch>
-          <Redirect path="/" exact to="/home" />
+          <Route path="/" exact children={<Home />} />
           <Route path="/home" children={<Home />} />
         </Switch>
       </Router>
