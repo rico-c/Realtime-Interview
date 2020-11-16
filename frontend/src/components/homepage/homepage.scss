@@ -1,0 +1,22 @@
+.home-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .title {
+    font-size: 30px;
+    font-family: "Noto Serif","PT Serif","source-han-serif-sc",Songti SC,serif;
+    text-align: center;
+    margin: 100px auto 10px auto;
+  }
+  .sub-title {
+    font-size: 14px;
+    margin-bottom: 30px;
+  }
+  .try {
+    width: 100px;
+    height: 40px;
+    font-size: 16px;
+    font-weight: 500;
+  }
+}

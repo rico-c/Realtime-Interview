@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@ant-design/icons": "^4.3.0",
     "@babel/core": "7.12.3",
     "@pmmmwh/react-refresh-webpack-plugin": "0.4.2",
     "@svgr/webpack": "5.4.0",
@@ -16,6 +17,8 @@
     "@types/react-router-dom": "^5.1.6",
     "@typescript-eslint/eslint-plugin": "^4.5.0",
     "@typescript-eslint/parser": "^4.5.0",
+    "agora-rtc-sdk": "^3.2.3",
+    "agora-rtm-sdk": "^1.4.1",
     "antd": "^4.8.2",
     "axios": "^0.21.0",
     "babel-eslint": "^10.1.0",
@@ -48,7 +51,9 @@
     "jest-circus": "26.6.0",
     "jest-resolve": "26.6.0",
     "jest-watch-typeahead": "0.6.1",
+    "lodash": "^4.17.20",
     "mini-css-extract-plugin": "0.11.3",
+    "monaco-editor-webpack-plugin": "^2.0.0",
     "node-sass": "^4.14.1",
     "optimize-css-assets-webpack-plugin": "5.0.4",
     "pnp-webpack-plugin": "1.6.4",
@@ -61,8 +66,10 @@
     "react-app-polyfill": "^2.0.0",
     "react-dev-utils": "^11.0.0",
     "react-dom": "^17.0.1",
+    "react-monaco-editor": "^0.40.0",
     "react-refresh": "^0.8.3",
     "react-router-dom": "^5.2.0",
+    "react-split-pane": "^0.1.92",
     "resolve": "1.18.1",
     "resolve-url-loader": "^3.1.2",
     "sass-loader": "8.0.2",
@@ -76,7 +83,8 @@
     "webpack": "4.44.2",
     "webpack-dev-server": "3.11.0",
     "webpack-manifest-plugin": "2.2.0",
-    "workbox-webpack-plugin": "5.1.4"
+    "workbox-webpack-plugin": "5.1.4",
+    "xterm-for-react": "^1.0.4"
   },
   "scripts": {
     "start": "node scripts/start.js",

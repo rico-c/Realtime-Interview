@@ -69,3 +69,13 @@ declare module '*.module.sass' {
   const classes: { readonly [key: string]: string };
   export default classes;
 }
+
+declare module 'react-split' {
+  const content: any
+  export = content
+}
+
+declare module 'react-split-pane' {
+  const content: any
+  export = content
+}
