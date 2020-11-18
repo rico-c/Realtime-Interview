@@ -1,7 +1,8 @@
 import React, { FC, useMemo, useEffect } from "react";
-import useInterviewId from '@/hooks/useInterviewId';
+import { useInterviewId } from '@/hooks';
 import CodeEditor from '@/components/interview/codeeditor';
 import Terminal from '@/components/interview/terminal';
+import Videotalk from '@/components/interview/videotalk';
 import SplitPane from 'react-split-pane';
 import { Input } from 'antd';
 
@@ -11,7 +12,6 @@ const { TextArea } = Input;
 
 const Interview: FC = () => {
   const id = useInterviewId();
-  console.log(id);
 
   useEffect(() => {
     const setUp = async () => {
@@ -27,6 +27,7 @@ const Interview: FC = () => {
 
   return (
     <div className="interview">
+      <Videotalk />
       <SplitPane split="vertical" defaultSize={'50%'}>
         <CodeEditor />
         <SplitPane split="horizontal" defaultSize={'50%'}>

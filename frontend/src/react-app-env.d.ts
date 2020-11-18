@@ -79,3 +79,8 @@ declare module 'react-split-pane' {
   const content: any
   export = content
 }
+
+declare module 'agora-stream-player' {
+  const content: any
+  export = content
+}

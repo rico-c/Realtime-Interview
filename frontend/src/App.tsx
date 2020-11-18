@@ -23,7 +23,7 @@ function App() {
           <Route path="/home" children={<Home />} />
           <Route path="/login" children={<Login />} />
           <Route path="/price" children={<Price />} />
-          <Route path="/interview" children={<Interview />} />
+          <Route path="/interview/:userid" children={<Interview />} />
           <Route path="/dashboard" children={<Dashboard />} />
         </Switch>
       </Router>
