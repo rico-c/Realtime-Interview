@@ -11,7 +11,7 @@ const defaultState = {
   appId: "3df1d4e0372c4892a380fe3399f49e2d",
   channel: "ChannelTest",
   uid: 'rico',
-  token: '0063df1d4e0372c4892a380fe3399f49e2dIABJ1XnVG77wXKiMF+wlZ8SKiMcMDCREq3dSd7UjOlgzn9uQH+4AAAAAEABID2UqNLG2XwEAAQAzsbZf',
+  token: '0063df1d4e0372c4892a380fe3399f49e2dIADRHRlF3Fccds/712nbTq2cGZo0tOBdntJPNICPbC1uutuQH+4AAAAAEABID2UqwOu3XwEAAQDA67df',
   cameraId: "",
   microphoneId: "",
   mode: "rtc",
