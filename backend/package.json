@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "node ./bin/www",
+    "socket": "y-websockets-server --port 1234 --db leveldb"
   },
   "dependencies": {
     "axios": "^0.21.0",
@@ -21,7 +22,10 @@
     "morgan": "~1.9.0",
     "pm2": "^4.5.0",
     "pug": "2.0.0-beta11",
-    "sequelize": "^6.3.5"
+    "sequelize": "^6.3.5",
+    "y-leveldb": "^0.1.0",
+    "y-websockets-server": "^9.2.1",
+    "yjs": "^13.4.5"
   },
   "devDependencies": {
     "nodemon": "^2.0.6"
