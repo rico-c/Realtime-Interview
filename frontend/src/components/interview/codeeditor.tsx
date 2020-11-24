@@ -24,7 +24,7 @@ const CodeEditor: FC = () => {
 
   const ydoc = new Y.Doc()
   const roomName = 'room1';
-  const provider = new WebsocketProvider('ws://127.0.0.1:1234', roomName, ydoc)
+  const provider = new WebsocketProvider('ws://124.70.3.148:1234', roomName, ydoc)
   const type = ydoc.getText('monaco')
 
 
