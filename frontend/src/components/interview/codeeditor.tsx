@@ -11,6 +11,9 @@ import { MonacoBinding } from 'y-monaco'
 
 import './codeeditor.scss';
 
+const host = '127.0.0.1';
+// const host = '124.70.3.148';
+
 const CodeEditor: FC = () => {
   const [code, setCode] = useState('const hello = (param) => {console.log("world")};');
   const options = useMemo(() => {
@@ -21,10 +24,10 @@ const CodeEditor: FC = () => {
       automaticLayout: true
     }
   }, []);
-
-  const ydoc = new Y.Doc()
+  
+  const ydoc = new Y.Doc();
   const roomName = 'room1';
-  const provider = new WebsocketProvider('ws://124.70.3.148:1234', roomName, ydoc)
+  const provider = new WebsocketProvider(`ws://${host}:1234`, roomName, ydoc)
   const type = ydoc.getText('monaco')
 
 
@@ -32,6 +35,7 @@ const CodeEditor: FC = () => {
     console.log('onChange')
   }, []);
   const editorDidMount = useCallback((editor, monaco) => {
+    console.log('editor mounted');
     const monacoBinding = new MonacoBinding(type, (editor.getModel()), new Set([editor]), provider.awareness);
     provider.connect();
   }, []);
