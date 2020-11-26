@@ -1,6 +1,7 @@
 import React, { FC, useMemo, useEffect, useState, useCallback } from "react";
 import MonacoEditor from 'react-monaco-editor';
 import Button from '@/components/common/button';
+import LanguageSelector from './languageSelector';
 import { Button as AntBtn } from 'antd';
 import { CaretRightFilled } from '@ant-design/icons';
 import { yjsHost } from '@/utils/API';
@@ -8,11 +9,12 @@ import * as Y from 'yjs'
 import { WebsocketProvider } from 'y-websocket'
 // @ts-ignore
 import { MonacoBinding } from 'y-monaco'
+import { runCodeToken} from '@/utils/Requests';
 
 import './codeeditor.scss';
 
 const CodeEditor: FC = () => {
-  const [code, setCode] = useState('const hello = (param) => {console.log("world")};');
+  const [code, setCode] = useState('const hello = (param) => {console.log("world")};hello();');
   const options = useMemo(() => {
     return {
       selectOnLineNumbers: true,
@@ -23,10 +25,9 @@ const CodeEditor: FC = () => {
   }, []);
 
   const onChange = useCallback((newValue, e) => {
-    console.log('onChange')
+    setCode(newValue);
   }, []);
   const editorDidMount = useCallback((editor, monaco) => {
-    console.log('editor mounted');
     const roomName = 'room1';
     const ydoc = new Y.Doc();
     const provider = new WebsocketProvider(yjsHost, roomName, ydoc);
@@ -34,6 +35,13 @@ const CodeEditor: FC = () => {
     const monacoBinding = new MonacoBinding(type, (editor.getModel()), new Set([editor]), provider.awareness);
     // provider.connect();
   }, []);
+  const runCode = useCallback(async() => {
+    const res = await runCodeToken({
+      source_code: code,
+      language_id: 63
+    })
+    console.log(res);
+  }, [code]);
   return (
     <div className="editor">
       <div className="top-bar">
@@ -48,7 +56,8 @@ const CodeEditor: FC = () => {
         editorDidMount={editorDidMount}
       />
       <div className="bottom-bar">
-        <AntBtn className="run-btn" type="primary" icon={< CaretRightFilled />} color="red">运行</AntBtn>
+        <AntBtn className="run-btn" type="primary" icon={< CaretRightFilled />} color="red" onClick={runCode}>运行</AntBtn>
+        <LanguageSelector />
       </div>
     </div>
   )

@@ -10,6 +10,9 @@
   .bottom-bar {
     padding: 5px;
     background-color: rgb(14, 14, 14);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     .run-btn {
       background-color: #67C23A;
       border-color: #67C23A;

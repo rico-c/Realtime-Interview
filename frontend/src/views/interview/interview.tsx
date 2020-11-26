@@ -30,10 +30,10 @@ const Interview: FC = () => {
       <Videotalk />
       <SplitPane split="vertical" defaultSize={'50%'}>
         <CodeEditor />
-        <SplitPane split="horizontal" defaultSize={'50%'}>
-          <Terminal />
-          <TextArea rows={20} placeholder="笔记板..."/>
-        </SplitPane>
+        {/* <SplitPane split="horizontal" defaultSize={'50%'}> */}
+        <Terminal />
+          {/* <TextArea rows={20} placeholder="笔记板..."/> */}
+        {/* </SplitPane> */}
       </SplitPane>
     </div>
   )

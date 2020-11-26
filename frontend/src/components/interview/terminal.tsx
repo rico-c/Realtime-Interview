@@ -27,7 +27,7 @@ const Terminal: FC = () => {
       <div className="top-bar">
         top
       </div>
-      <XTerm ref={xtermRef} options={options}/>
+      <XTerm className="x-term" ref={xtermRef} options={options}/>
       <div className="bottom-bar">
         bottom
       </div>
@@ -36,5 +36,3 @@ const Terminal: FC = () => {
 }
 
 export default Terminal;
-
-// 1e1e1e
