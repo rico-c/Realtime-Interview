@@ -7,7 +7,16 @@
   
 - 后端1：ExpressJs + NodeJs
   - 代码同步服务：Yjs（由package.json > script 启动）端口1234
+    - 启动`PORT=1234 node ./node_modules/y-websocket/bin/server.js`
   - 接口服务：端口3001
 
 - 后端2：Ruby
-  - 远程代码编译：[Judge0](https://github.com/judge0/judge0/blob/master/CHANGELOG.md#deployment-procedure) 端口8090 
+  - 远程代码编译：[Judge0](https://github.com/judge0/judge0/blob/master/CHANGELOG.md#deployment-procedure) 端口8090
+    - 启动 (HTTP)
+      ```
+        cd judge0-v1.12.0
+        docker-compose up -d db redis
+        sleep 10s
+        docker-compose up -d
+        sleep 5s
+      ```

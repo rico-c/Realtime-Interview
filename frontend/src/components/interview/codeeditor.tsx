@@ -3,15 +3,13 @@ import MonacoEditor from 'react-monaco-editor';
 import Button from '@/components/common/button';
 import { Button as AntBtn } from 'antd';
 import { CaretRightFilled } from '@ant-design/icons';
-
+import { yjsHost } from '@/utils/API';
 import * as Y from 'yjs'
 import { WebsocketProvider } from 'y-websocket'
 // @ts-ignore
 import { MonacoBinding } from 'y-monaco'
 
 import './codeeditor.scss';
-
-// const host = '124.70.3.148';
 
 const CodeEditor: FC = () => {
   const [code, setCode] = useState('const hello = (param) => {console.log("world")};');
@@ -29,10 +27,9 @@ const CodeEditor: FC = () => {
   }, []);
   const editorDidMount = useCallback((editor, monaco) => {
     console.log('editor mounted');
-    const host = '127.0.0.1';
     const roomName = 'room1';
     const ydoc = new Y.Doc();
-    const provider = new WebsocketProvider(`ws://${host}:1234`, roomName, ydoc);
+    const provider = new WebsocketProvider(yjsHost, roomName, ydoc);
     const type = ydoc.getText('monaco');
     const monacoBinding = new MonacoBinding(type, (editor.getModel()), new Set([editor]), provider.awareness);
     // provider.connect();
