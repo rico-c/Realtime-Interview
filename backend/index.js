@@ -11,7 +11,7 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 
 const app = express();
-
+const MongoStore = require('connect-mongo')(session);
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -20,11 +20,16 @@ app.use(cors());
 app.use(session({
     secret: 'realtime-interview',
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
     cookie: {
         // secure: true, // https
         maxAge: 60000
-    }
+    },
+    store: new MongoStore({
+        url: 'mongodb://124.70.3.148:27017/interview',
+        autoRemove: 'interval', // 过期自动删除
+        autoRemoveInterval: 24 * 60 * 1 // 分钟
+    })
 }))
 app.use(bodyParser.json());
 app.use(logger('dev'));
