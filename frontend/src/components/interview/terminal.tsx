@@ -28,9 +28,6 @@ const Terminal: FC = () => {
         top
       </div>
       <XTerm className="x-term" ref={xtermRef} options={options}/>
-      <div className="bottom-bar">
-        bottom
-      </div>
     </div>
   )
 }

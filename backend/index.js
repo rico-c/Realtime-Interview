@@ -6,9 +6,10 @@ const bodyParser = require("body-parser")
 const logger = require('morgan');
 const cors = require('cors')
 const session = require("express-session");
-
+const router = require("./routes/index.js");
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
+const usersRouter = require('./routes/user');
+const db = require('./mongodb');
 
 const app = express();
 const MongoStore = require('connect-mongo')(session);
@@ -23,12 +24,12 @@ app.use(session({
     saveUninitialized: false,
     cookie: {
         // secure: true, // https
-        maxAge: 60000
+        maxAge: 60000 * 60 * 24 //1天
     },
     store: new MongoStore({
         url: 'mongodb://124.70.3.148:27017/interview',
         autoRemove: 'interval', // 过期自动删除
-        autoRemoveInterval: 24 * 60 * 1 // 分钟
+        autoRemoveInterval: 24 * 60 * 1 // 1天
     })
 }))
 app.use(bodyParser.json());
@@ -38,8 +39,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+router(app);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

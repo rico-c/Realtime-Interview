@@ -4,18 +4,20 @@
   flex-direction: column;
 
   .top-bar {
-    padding: 5px;
+    height: 50px;
+    display: flex;
+    align-items: center;
     background-color: rgb(14, 14, 14);
   }
   .bottom-bar {
     padding: 5px;
-    background-color: rgb(14, 14, 14);
+    background-color: #1e1e1e;
     display: flex;
     justify-content: space-between;
     align-items: center;
     .run-btn {
-      background-color: #67C23A;
-      border-color: #67C23A;
+      background-color: rgb(97, 152, 32);
+      border-color: rgb(97, 152, 32);
     }
     .run-btn:hover {
       opacity: 0.9;

@@ -3,12 +3,13 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
+    "start": "nodemon ./bin/www",
     "socket": "PORT=1234 node ./node_modules/y-websocket/bin/server.js"
   },
   "dependencies": {
     "axios": "^0.21.0",
     "body-parser": "^1.19.0",
+    "connect-mongo": "^3.2.0",
     "cookie-parser": "~1.4.3",
     "cors": "^2.8.5",
     "dayjs": "^1.9.6",

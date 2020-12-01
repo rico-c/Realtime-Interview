@@ -15,9 +15,12 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-monaco-editor": "^0.40.0",
+    "react-redux": "^7.2.2",
     "react-refresh": "^0.8.3",
     "react-router-dom": "^5.2.0",
     "react-split-pane": "^0.1.92",
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0",
     "semver": "7.3.2",
     "xterm-for-react": "^1.0.4",
     "y-monaco": "^0.1.1",
@@ -25,7 +28,6 @@
     "yjs": "^13.4.5"
   },
   "devDependencies": {
-    "webpack-bundle-analyzer": "^4.1.0",
     "@babel/core": "7.12.3",
     "@pmmmwh/react-refresh-webpack-plugin": "0.4.2",
     "@svgr/webpack": "5.4.0",
@@ -36,6 +38,7 @@
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.53",
     "@types/react-dom": "^16.9.8",
+    "@types/react-redux": "^7.1.11",
     "@types/react-router-dom": "^5.1.6",
     "@typescript-eslint/eslint-plugin": "^4.5.0",
     "@typescript-eslint/parser": "^4.5.0",
@@ -90,6 +93,7 @@
     "url-loader": "4.1.1",
     "web-vitals": "^0.2.4",
     "webpack": "4.44.2",
+    "webpack-bundle-analyzer": "^4.1.0",
     "webpack-dev-server": "3.11.0",
     "webpack-manifest-plugin": "2.2.0",
     "workbox-webpack-plugin": "5.1.4"

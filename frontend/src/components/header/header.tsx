@@ -24,7 +24,7 @@ const Header: FC = () => {
       </div>
       <div className="menu">
         <Menu onClick={jumpRoute} selectedKeys={[]} mode="horizontal">
-          <SubMenu title="产品">
+          <SubMenu title="产品" popupOffset={[-60, 0]}>
             <Menu.Item key="setting:1">实时代码面试</Menu.Item>
             <Menu.Item key="setting:2">限时编码题目</Menu.Item>
             <Menu.Item key="setting:3">限时预留作业</Menu.Item>
