@@ -1,0 +1,14 @@
+.dashboard {
+  height: 100vh;
+  .layout {
+    background-color: #fff;
+    .sider {
+      height: 100vh;
+      border-right: 1px solid #f0f0f0;
+      .logo {
+        text-align: center;
+        padding: 20px 0;
+      }
+    }
+  }
+}

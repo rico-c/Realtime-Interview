@@ -1,25 +1,30 @@
 import React, { FC, useMemo, useEffect, useState, useCallback } from "react";
 import { Form, Input, Button, Checkbox, Tabs } from 'antd';
+import { useDispatch } from 'react-redux';
+import { login } from '@/actions';
+import { useHistory } from "react-router-dom";
 import './login.scss';
 
 const { TabPane } = Tabs;
 
 const Login: FC = () => {
-  const onFinish = (values: any) => {
-    console.log('Success:', values);
-  };
-
-  const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
-  };
-
-  const doLogin = useCallback(
-    () => {
-      console.log(111);
-    },
-    []
-  )
+  const history = useHistory();
+  const dispatch = useDispatch();
   const [rememberChecked, setRemeber] = useState(true);
+  const [help, setHelp] = useState('');
+
+  const onFinish = useCallback((values:any) => {
+    const run = async () => {
+      const res:any = await dispatch(login(values));
+      if(res.code === 0) {
+        history.push('/dashboard')
+      }
+      else {
+        setHelp(res.message)
+      }
+    }
+    run();
+  }, []);
 
   useEffect(() => {
     const setUp = async () => {
@@ -41,47 +46,11 @@ const Login: FC = () => {
     )
   }
 
+  const HelpCom:FC = () => <div className="help-word">{help}</div>
+
   return (
     <div className="login">
-      <Tabs defaultActiveKey="email" className="tabs" centered>
-        <TabPane
-          tab={
-            <span>
-              邮箱登录
-        </span>
-          }
-          key="email"
-        >
-          <Form
-            className="form"
-            initialValues={{ remember: true }}
-            onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
-          >
-            <Form.Item
-              name="email"
-            >
-              <Input placeholder="邮箱" className="input" />
-            </Form.Item>
-
-            <Form.Item
-              name="password"
-            >
-              <Input.Password placeholder="密码" className="input" onPressEnter={doLogin} />
-            </Form.Item>
-
-            <Form.Item>
-              <Checkbox checked={rememberChecked} onChange={() => setRemeber(!rememberChecked)}>记住我</Checkbox>
-              <span>忘记密码？</span>
-            </Form.Item>
-
-            <Form.Item >
-              <Button type="primary" htmlType="submit" className="login-btn">
-                登录
-              </Button>
-            </Form.Item>
-          </Form>
-        </TabPane>
+      <Tabs defaultActiveKey="passwrd" className="tabs" centered>
         <TabPane
           tab={
             <span>
@@ -93,25 +62,61 @@ const Login: FC = () => {
           <Form
             className="form"
             initialValues={{ remember: true }}
-            onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
           >
             <Form.Item
               name="mobile"
             >
-              <Input placeholder="手机" className="input" />
+              <Input placeholder="手机号码" className="input" />
             </Form.Item>
 
             <Form.Item
               name="code"
             >
-              <Input placeholder="验证码" className="input" onPressEnter={doLogin} addonAfter={VerifyBtn}/>
+              <Input placeholder="验证码" className="input" addonAfter={<VerifyBtn />} />
             </Form.Item>
 
             <Form.Item >
               <Button type="primary" htmlType="submit" className="login-btn">
                 登录
             </Button>
+            </Form.Item>
+          </Form>
+        </TabPane>
+        <TabPane
+          tab={
+            <span>
+              密码登录
+            </span>
+          }
+          key="passwrd"
+        >
+          <Form
+            className="form"
+            initialValues={{ remember: true }}
+            onFinish={onFinish}
+          >
+            <Form.Item
+              name="mobile"
+            >
+              <Input placeholder="手机号码" className="input" />
+            </Form.Item>
+
+            <Form.Item
+              name="password"
+              help={<HelpCom />}
+            >
+              <Input.Password placeholder="密码" className="input" />
+            </Form.Item>
+
+            <Form.Item>
+              <Checkbox checked={rememberChecked} onChange={() => setRemeber(!rememberChecked)}>记住我</Checkbox>
+              <span>忘记密码？</span>
+            </Form.Item>
+
+            <Form.Item >
+              <Button type="primary" htmlType="submit" className="login-btn">
+                登录
+              </Button>
             </Form.Item>
           </Form>
         </TabPane>

@@ -3,6 +3,8 @@ import { RunCode } from "@/types";
 import axios from "axios";
 import { runCodeAPI } from "@/utils/API";
 
+axios.defaults.withCredentials = true;
+
 export const runCode = ({ source_code, language_id }: RunCode) => async (
   dispatch:any,
   getState:any
