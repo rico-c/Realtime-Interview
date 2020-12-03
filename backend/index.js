@@ -22,8 +22,7 @@ app.use(
     resave: false,
     saveUninitialized: false,
     cookie: {
-      secure: true, // https
-      sameSite: "none", //注意上线后取消，用于跨域cookie
+      // secure: true, // https
       maxAge: 60000 * 60 * 24 //1天
     },
     store: new MongoStore({

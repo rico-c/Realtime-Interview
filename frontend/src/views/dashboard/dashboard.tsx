@@ -1,23 +1,74 @@
-import React, { FC,useEffect } from "react";
-import { Layout, Menu } from 'antd';
+import React, { FC, useEffect, useMemo, useCallback } from "react";
 import './dashboard.scss';
-import Header from '@/components/dashboard/header';
-import { login } from '@/actions';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { Dropdown, Button, Menu, Layout } from 'antd';
+import { DownOutlined } from '@ant-design/icons';
+import { logout } from '@/actions';
+import { useHistory } from "react-router-dom";
+
+import List from '@/components/dashboard/list';
+import Team from '@/components/dashboard/team';
+import Questions from '@/components/dashboard/questions';
+import Settings from '@/components/dashboard/setting';
+
 import {
-  UserOutlined,
-  UploadOutlined,
-  VideoCameraOutlined,
-} from '@ant-design/icons';
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
+
+import Setting from '@/assets/imgs/setup.png';
+import Group from '@/assets/imgs/group.png';
+import Monitor from '@/assets/imgs/monitor.png';
+import Folder from '@/assets/imgs/folder.png';
 
 const { Sider, Content } = Layout;
 
 const Dashboard: FC = () => {
-  // const dispatch = useDispatch();
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const user = useSelector(state => (state as any).accout);
+  const menuData = useMemo(() => {
+    return [{
+      name: '面试',
+      icon: Monitor,
+      path: '/dashboard/list'
+    }, {
+      name: '团队',
+      icon: Group,
+      path: '/dashboard/team'
+    }, {
+      name: '我的题库',
+      icon: Folder,
+      path: '/dashboard/questions'
+    }, {
+      name: '设置',
+      icon: Setting,
+      path: '/dashboard/settings'
+    }]
+  }, [])
 
-  // useEffect(() => {
-  //   dispatch(login({}));
-  // }, [])
+  const handleLogout = useCallback(() => {
+    const run = async () => {
+      const res: any = await dispatch(logout());
+      if (res.code === 0) {
+        history.push('/')
+      }
+    }
+    run();
+  }, []);
+
+  const Usermenu = (
+    <Menu onClick={handleLogout}>
+      <Menu.Item key="logout">
+        退出登录
+      </Menu.Item>
+    </Menu>
+  );
+
+  const jumpRoute = useCallback((e) => {
+    history.push(e.key);
+  }, [])
 
   return (
     <div className="dashboard">
@@ -25,23 +76,33 @@ const Dashboard: FC = () => {
         <Sider width={120}
           className="sider"
           theme="light">
-          <div className="logo">Dashboard</div>
-          <Menu theme="light" mode="inline" defaultSelectedKeys={['1']}>
-            <Menu.Item key="1">
-              <UserOutlined />
-              <div>nav 1</div>
-            </Menu.Item>
-            <Menu.Item key="2" icon={<VideoCameraOutlined />}>
-              nav 2
-            </Menu.Item>
-            <Menu.Item key="3" icon={<UploadOutlined />}>
-              nav 3
-            </Menu.Item>
+          <Menu theme="light" mode="inline" defaultSelectedKeys={['1']} onClick={jumpRoute}>
+            {
+              menuData.map(i => (
+                <Menu.Item key={i.path} className="menu-item">
+                  <div className="icon">
+                    <img src={i.icon} />
+                  </div>
+                  <div>{i.name}</div>
+                </Menu.Item>
+              ))
+            }
           </Menu>
+          <Dropdown overlay={Usermenu} className="user-dropdown">
+            <Button>
+              {user.name} <DownOutlined />
+            </Button>
+          </Dropdown>
         </Sider>
         <Content>
-          <Header />
-          content
+          <Router>
+            <Switch>
+              <Route path="/dashboard/list" children={<List />} />
+              <Route path="/dashboard/team" children={<Team />} />
+              <Route path="/dashboard/questions" children={<Questions />} />
+              <Route path="/dashboard/settings" children={<Settings />} />
+            </Switch>
+          </Router>
         </Content>
       </Layout>
     </div>

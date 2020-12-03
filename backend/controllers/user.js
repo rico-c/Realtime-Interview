@@ -9,7 +9,7 @@ class User {
   async login(req, res) {
     const userid = req.session.userid;
     // 检查session登录状态
-    console.log(req.session.userid);
+    console.log('req session:' + req.session.userid);
     if (req.session.userid) {
       const userInfo = await UserModel.findOne({ userid });
       if (userInfo) {
@@ -38,6 +38,7 @@ class User {
     }
     const userInfo = await UserModel.findOne({ mobile, password });
     if (userInfo) {
+      console.log('success:' + userInfo.toObject().userid);
       req.session.userid = userInfo.toObject().userid;
       res.send({
         code: 0,

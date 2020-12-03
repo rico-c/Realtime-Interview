@@ -2,15 +2,15 @@ import React, { FC, useCallback } from "react";
 import { Menu } from 'antd';
 import { useHistory } from "react-router-dom";
 import Icon from "@/assets/imgs/icon.svg";
+import { useSelector } from 'react-redux';
 import "./header.scss";
 
 const { SubMenu } = Menu;
 
 const Header: FC = () => {
   const history = useHistory();
-
+  const userid = useSelector(state => (state as any).accout.userid);
   const jumpRoute = useCallback((e) => {
-    console.log(e);
     history.push(e.key);
   }, [])
 
@@ -24,20 +24,26 @@ const Header: FC = () => {
       </div>
       <div className="menu">
         <Menu onClick={jumpRoute} selectedKeys={[]} mode="horizontal">
-          <SubMenu title="产品" popupOffset={[-60, 0]}>
-            <Menu.Item key="setting:1">实时代码面试</Menu.Item>
-            <Menu.Item key="setting:2">限时编码题目</Menu.Item>
-            <Menu.Item key="setting:3">限时预留作业</Menu.Item>
-          </SubMenu>
+          <Menu.Item title="" key="/product">
+            产品
+          </Menu.Item>
           <Menu.Item key="/price">
             价格
           </Menu.Item>
-          <Menu.Item key="/login">
-            登录
+          <Menu.Item key="/help">
+            帮助
           </Menu.Item>
-          <Menu.Item key="/dashboard">
-            控制台
-          </Menu.Item>
+          {
+            userid ? (
+              <Menu.Item key="/dashboard">
+                我的控制台
+              </Menu.Item>
+            ) : (
+              <Menu.Item key="/login">
+                登录
+              </Menu.Item>
+            )
+          }
         </Menu>
       </div>
     </div>

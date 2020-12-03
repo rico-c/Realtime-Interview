@@ -5,9 +5,33 @@
     .sider {
       height: 100vh;
       border-right: 1px solid #f0f0f0;
-      .logo {
+      text-align: center;
+      .menu-item {
+        height: 100px;
+        padding-left: 20px;
+        padding-right: 20px;
         text-align: center;
-        padding: 20px 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        .icon {
+          img {
+            width: 40px;
+          }
+        }
+      }
+      .ant-menu-item::after {
+        border: none;
+      }
+      .ant-layout-sider-children {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        .user-dropdown {
+          width: 80%;
+          margin-bottom: 30px;
+        }
       }
     }
   }
