@@ -6,13 +6,12 @@ import { DownOutlined } from '@ant-design/icons';
 import { logout } from '@/actions';
 import { useHistory } from "react-router-dom";
 
-import List from '@/components/dashboard/list';
-import Team from '@/components/dashboard/team';
-import Questions from '@/components/dashboard/questions';
-import Settings from '@/components/dashboard/setting';
+import List from '@/views/dashboard/list';
+import Team from '@/views/dashboard/team';
+import Questions from '@/views/dashboard/questions';
+import Settings from '@/views/dashboard/setting';
 
 import {
-  BrowserRouter as Router,
   Switch,
   Route
 } from "react-router-dom";
@@ -34,13 +33,14 @@ const Dashboard: FC = () => {
       icon: Monitor,
       path: '/dashboard/list'
     }, {
-      name: '团队',
-      icon: Group,
-      path: '/dashboard/team'
-    }, {
       name: '我的题库',
       icon: Folder,
       path: '/dashboard/questions'
+    }, {
+      name: '团队',
+      icon: Group,
+      path: '/dashboard/team'
+
     }, {
       name: '设置',
       icon: Setting,
@@ -95,14 +95,12 @@ const Dashboard: FC = () => {
           </Dropdown>
         </Sider>
         <Content>
-          <Router>
-            <Switch>
-              <Route path="/dashboard/list" children={<List />} />
-              <Route path="/dashboard/team" children={<Team />} />
-              <Route path="/dashboard/questions" children={<Questions />} />
-              <Route path="/dashboard/settings" children={<Settings />} />
-            </Switch>
-          </Router>
+          <Switch>
+            <Route path="/dashboard/list" children={<List />} />
+            <Route path="/dashboard/team" children={<Team />} />
+            <Route path="/dashboard/questions" children={<Questions />} />
+            <Route path="/dashboard/settings" children={<Settings />} />
+          </Switch>
         </Content>
       </Layout>
     </div>

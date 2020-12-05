@@ -6,9 +6,9 @@ import './App.scss';
 
 const App: FC = () => {
   return (
-    <Provider store={store}>
-      <Routes />
-    </Provider>
+      <Provider store={store}>
+        <Routes />
+      </Provider>
   );
 }
 

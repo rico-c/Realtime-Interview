@@ -84,3 +84,8 @@ declare module 'agora-stream-player' {
   const content: any
   export = content
 }
+
+declare module 'react-copy-to-clipboard' {
+  const content: any
+  export = content
+}
