@@ -1,10 +1,18 @@
-import React, { FC, useCallback, useState } from "react";
+import React, { FC, useCallback, useState, useEffect } from "react";
 import { Table, Tag, Space } from 'antd';
 import { useHistory } from "react-router-dom";
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchInterviews} from '@/actions';
 import "./interviewTable.scss";
 
 const InterviewTable: FC = () => {
+  const teamid = useSelector(state => (state as any).accout.teamid);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchInterviews(teamid))
+  }, [teamid])
+  const dataList = useSelector(state => (state as any).interview.list);
+  console.log(dataList);
   const columns = [
     {
       title: '标题',
@@ -43,15 +51,13 @@ const InterviewTable: FC = () => {
     },
   ];
 
-  const data = [];
-
   const enterInterview = (id) => {
     console.log(id);
   }
  
   return (
     <div className="table">
-      <Table class="table-list" columns={columns} dataSource={data} />
+      <Table class="table-list" columns={columns} dataSource={dataList} />
     </div>
   )
 }

@@ -1,7 +1,7 @@
 const user = require('./user');
-// const editor = require('./editor');
+const interview = require('./interview');
 
 module.exports =  app => {
-  // app.use("/editor", editor);
+  app.use("/interview", interview);
   app.use("/user", user);
 };

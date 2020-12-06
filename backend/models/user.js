@@ -6,10 +6,11 @@ const userSchema = new Schema({
   username: String,
   password: String,
   name: String,
-  id: Number
+  userid: String,
+  team: String,
+  teamid: String,
+  company: String,
 });
-
-userSchema.index({ id: 1 });
 
 const Users = mongoose.model("users", userSchema);
 
