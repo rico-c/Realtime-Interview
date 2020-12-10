@@ -68,7 +68,7 @@ const Header: FC = () => {
   const onFinish = useCallback(
     (values) => {
       console.log(values);
-      createInterview(values);
+      createInterview({ info: values, id: roomUrl});
     },
     [],
   )
@@ -158,14 +158,14 @@ const Header: FC = () => {
             <b>面试者信息：</b>
             <div style={{ display: 'flex', justifyContent: 'space-between', margin: '10px 0' }}>
               <Form.Item
-                name="name"
+                name="joinerName"
                 style={{ width: '40%' }}
                 rules={[{ required: true, message: '请输入面试者姓名' }]}
               >
                 <Input placeholder="面试者姓名" />
               </Form.Item>
               <Form.Item
-                name="mail"
+                name="joinerEmail"
                 style={{ width: '55%' }}
                 rules={[
                   { required: true, message: '请输入邮箱' }

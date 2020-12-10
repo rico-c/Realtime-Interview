@@ -22,7 +22,7 @@ export const createRoomid = async userid => {
   }
 };
 
-export const createInterview = async params => {
+export const createInterview = async ({info, id}) => {
   const res = await axios.post(createInterviewAPI, {
     // roomId
     // time

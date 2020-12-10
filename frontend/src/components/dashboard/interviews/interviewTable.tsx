@@ -15,11 +15,6 @@ const InterviewTable: FC = () => {
   console.log(dataList);
   const columns = [
     {
-      title: '标题',
-      dataIndex: 'name',
-      key: 'name'
-    },
-    {
       title: '面试者',
       dataIndex: 'joiner',
       key: 'joiner',
