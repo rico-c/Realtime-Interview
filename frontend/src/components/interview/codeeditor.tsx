@@ -1,23 +1,25 @@
 import React, { FC, useMemo, useEffect, useState, useCallback } from "react";
-import MonacoEditor from 'react-monaco-editor';
-import Button from '@/components/common/button';
-import LanguageSelector from './languageSelector';
-import { Button as AntBtn, Tooltip } from 'antd';
-import { CaretRightFilled } from '@ant-design/icons';
-import { yjsHost } from '@/utils/API';
-import * as Y from 'yjs'
-import { WebsocketProvider } from 'y-websocket'
+import MonacoEditor from "react-monaco-editor";
+import Button from "@/components/common/button";
+import LanguageSelector from "./languageSelector";
+import { Button as AntBtn, Tooltip } from "antd";
+import { CaretRightFilled } from "@ant-design/icons";
+import { yjsHost } from "@/utils/API";
+import * as Y from "yjs";
+import { WebsocketProvider } from "y-websocket";
 // @ts-ignore
-import { MonacoBinding } from 'y-monaco'
-import { useSelector, useDispatch } from 'react-redux';
-import { useRunShortCut } from '@/hooks/useUtils';
-import { runCode } from '@/actions';
+import { MonacoBinding } from "y-monaco";
+import { useSelector, useDispatch } from "react-redux";
+import { useRunShortCut } from "@/hooks/useUtils";
+import { runCode } from "@/actions";
 
-import './codeeditor.scss';
+import "./codeeditor.scss";
 
 const CodeEditor: FC = () => {
   const dispatch = useDispatch();
-  const [code, setCode] = useState('const hello = (param) => {console.log("world")};hello();');
+  const [code, setCode] = useState(
+    'const hello = (param) => {console.log("world")};hello();'
+  );
 
   const options = useMemo(() => {
     return {
@@ -27,7 +29,7 @@ const CodeEditor: FC = () => {
       minimap: {
         enabled: false
       }
-    }
+    };
   }, []);
 
   const os = useRunShortCut();
@@ -36,18 +38,25 @@ const CodeEditor: FC = () => {
     setCode(newValue);
   }, []);
   const editorDidMount = useCallback((editor, monaco) => {
-    const roomName = 'room1';
+    const roomName = "room1";
     const ydoc = new Y.Doc();
     const provider = new WebsocketProvider(yjsHost, roomName, ydoc);
-    const type = ydoc.getText('monaco');
-    const monacoBinding = new MonacoBinding(type, (editor.getModel()), new Set([editor]), provider.awareness);
+    const type = ydoc.getText("monaco");
+    const monacoBinding = new MonacoBinding(
+      type,
+      editor.getModel(),
+      new Set([editor]),
+      provider.awareness
+    );
     // provider.connect();
   }, []);
   const runCodeCallback = useCallback(async () => {
-    dispatch(runCode({
-      source_code: code,
-      language_id: 63
-    }))
+    dispatch(
+      runCode({
+        source_code: code,
+        language_id: 63
+      })
+    );
   }, [code]);
   return (
     <div className="editor">
@@ -63,11 +72,20 @@ const CodeEditor: FC = () => {
         editorDidMount={editorDidMount}
       />
       <div className="bottom-bar">
-        <Tooltip placement="top" title={os === 'mac' ? '⌘+Enter' : 'Ctl+Enter'}><AntBtn className="run-btn" type="primary" icon={< CaretRightFilled />} onClick={runCodeCallback}>运行</AntBtn></Tooltip>
+        <Tooltip placement="top" title={os === "mac" ? "⌘+Enter" : "Ctl+Enter"}>
+          <AntBtn
+            className="run-btn"
+            type="primary"
+            icon={<CaretRightFilled />}
+            onClick={runCodeCallback}
+          >
+            运行
+          </AntBtn>
+        </Tooltip>
         <LanguageSelector />
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default CodeEditor;

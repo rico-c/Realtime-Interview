@@ -3,15 +3,16 @@ import { useParams } from "react-router-dom";
 import AgoraRTC from "@/utils/AgoraEnhancer";
 import StreamPlayer from "agora-stream-player";
 import { useCamera, useMicrophone, useMediaStream } from "@/hooks";
-import { Button } from 'antd';
-import './videotalk.scss';
+import { Button } from "antd";
+import "./videotalk.scss";
 
-// const { userid } = useParams<any>();
+// const { userId } = useParams<any>();
 const defaultState = {
   appId: "3df1d4e0372c4892a380fe3399f49e2d",
   channel: "ChannelTest",
-  uid: 'rico',
-  token: '0063df1d4e0372c4892a380fe3399f49e2dIADRHRlF3Fccds/712nbTq2cGZo0tOBdntJPNICPbC1uutuQH+4AAAAAEABID2UqwOu3XwEAAQDA67df',
+  uid: "rico",
+  token:
+    "0063df1d4e0372c4892a380fe3399f49e2dIADRHRlF3Fccds/712nbTq2cGZo0tOBdntJPNICPbC1uutuQH+4AAAAAEABID2UqwOu3XwEAAQDA67df",
   cameraId: "",
   microphoneId: "",
   mode: "rtc",
@@ -20,7 +21,7 @@ const defaultState = {
 
 const reducer = (
   state: typeof defaultState,
-  action: { type: string;[propName: string]: any }
+  action: { type: string; [propName: string]: any }
 ) => {
   switch (action.type) {
     default:
@@ -73,7 +74,7 @@ const Videotalk: FC = () => {
   const [isPublished, setIsPublished] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [state, dispatch] = useReducer(reducer, defaultState);
-  const [agoraClient, setClient] = useState<any>(undefined)
+  const [agoraClient, setClient] = useState<any>(undefined);
   // const agoraClient = AgoraRTC.createClient({ mode: "rtc", codec: "vp8" });
   const cameraList = useCamera();
   const microphoneList = useMicrophone();
@@ -87,8 +88,11 @@ const Videotalk: FC = () => {
     });
   };
   const join = async () => {
-    const client = AgoraRTC.createClient({ mode: state.mode, codec: state.codec })
-    setClient(client)
+    const client = AgoraRTC.createClient({
+      mode: state.mode,
+      codec: state.codec
+    });
+    setClient(client);
     setIsLoading(true);
     try {
       const uid = isNaN(Number(state.uid)) ? null : Number(state.uid);
@@ -160,17 +164,19 @@ const Videotalk: FC = () => {
 
   return (
     <div className="video-talk">
-      <Button
-        onClick={isJoined ? leave : join}
-        disabled={isLoading}
-      >
+      <Button onClick={isJoined ? leave : join} disabled={isLoading}>
         {isJoined ? "Leave" : "Join"}
       </Button>
       <h4>Local video</h4>
       <div id="me">
         {localStream && (
-          <StreamPlayer stream={localStream} fit="contain" label="local" video={true}
-            audio={true} />
+          <StreamPlayer
+            stream={localStream}
+            fit="contain"
+            label="local"
+            video={true}
+            audio={true}
+          />
         )}
       </div>
       <h4>Remote video </h4>
@@ -180,7 +186,7 @@ const Videotalk: FC = () => {
             key={stream.getId()}
             stream={stream}
             fit="contain"
-            label={'label'}
+            label={"label"}
             video={true}
             audio={true}
             networkDetect={true}
@@ -190,7 +196,7 @@ const Videotalk: FC = () => {
         ))}
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Videotalk;

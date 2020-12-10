@@ -9,7 +9,7 @@ const { SubMenu } = Menu;
 
 const Header: FC = () => {
   const history = useHistory();
-  const userid = useSelector(state => (state as any).accout.userid);
+  const userId = useSelector(state => (state as any).accout.userId);
   const jumpRoute = useCallback((e) => {
     history.push(e.key);
   }, [])
@@ -34,7 +34,7 @@ const Header: FC = () => {
             帮助
           </Menu.Item>
           {
-            userid ? (
+            userId ? (
               <Menu.Item key="/dashboard">
                 我的控制台
               </Menu.Item>
