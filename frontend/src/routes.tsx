@@ -26,7 +26,7 @@ const Routes: FC = () => {
           <Route path="/home" children={<Home />} />
           <Route path="/login" children={<Login />} />
           <Route path="/price" children={<Price />} />
-          <Route path="/interview" children={<Interview />} />
+          <Route path="/interview/:roomId" children={<Interview />} />
           <Route path="/dashboard" children={<Dashboard />} />
         </Switch>
       </Router>

@@ -165,9 +165,8 @@ const Videotalk: FC = () => {
   return (
     <div className="video-talk">
       <Button onClick={isJoined ? leave : join} disabled={isLoading}>
-        {isJoined ? "Leave" : "Join"}
+        {isJoined ? "退出通话" : "加入通话"}
       </Button>
-      <h4>Local video</h4>
       <div id="me">
         {localStream && (
           <StreamPlayer
@@ -179,7 +178,6 @@ const Videotalk: FC = () => {
           />
         )}
       </div>
-      <h4>Remote video </h4>
       <div id="remote-container">
         {remoteStreamList.map((stream: any) => (
           <StreamPlayer

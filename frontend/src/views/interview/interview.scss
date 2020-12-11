@@ -1,6 +1,33 @@
 .interview {
   width: 100vw;
   height: 100vh;
+  .right-area {
+    height: 100vh;
+    .top-bar {
+      padding-right:15px;
+      height: 44px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: rgb(14, 14, 14);
+      color: #fff;
+    }
+    .top-left {
+        display: flex;
+        .c-gap-right {
+            margin-right: 15px !important;
+        }
+    }
+    .top-right {
+        .online-icon {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: #00b17f;
+            border-radius: 50%;
+        }
+    }
+  }
   .Resizer {
     background: rgb(14, 14, 14);
     // opacity: 0.2;

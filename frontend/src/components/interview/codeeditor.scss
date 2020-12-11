@@ -4,10 +4,12 @@
   flex-direction: column;
 
   .top-bar {
-    height: 50px;
+    height: 44px;
     display: flex;
     align-items: center;
     background-color: rgb(14, 14, 14);
+    flex: 1 0 44px;
+    padding-left: 15px;
   }
   .bottom-bar {
     padding: 5px;

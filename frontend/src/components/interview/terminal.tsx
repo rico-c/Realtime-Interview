@@ -23,7 +23,6 @@ const Terminal: FC = () => {
 
   return (
     <div className="terminal">
-      <div className="top-bar">top</div>
       <XTerm className="x-term" ref={xtermRef} options={options} />
     </div>
   );

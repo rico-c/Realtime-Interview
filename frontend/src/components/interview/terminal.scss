@@ -1,14 +1,6 @@
 .terminal {
   height: 100%;
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  .top-bar {
-    height: 50px;
-    display: flex;
-    align-items: center;
-    background-color: rgb(14, 14, 14);
-  }
   .x-term {
     height: 100%;
   }

@@ -1,1 +1,2 @@
 export const UPDATE_INTERVIEWS = "UPDATE_INTERVIEWS";
+export const UPDATE_TEAM = "UPDATE_TEAM";

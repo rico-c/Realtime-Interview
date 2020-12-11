@@ -1,4 +1,4 @@
-import { UPDATE_INTERVIEWS } from "./types";
+import { UPDATE_INTERVIEWS, UPDATE_TEAM } from "./types";
 import axios from "axios";
 import {
     createInterviewAPI,
@@ -22,11 +22,11 @@ export const createRoomid = async userId => {
     }
 };
 
-export const createInterview = async ({ info, id, creator,teamId }) => {
+export const createInterview = async ({ info, id, creator, teamId }) => {
     const time = `${info.date.format('YYYY-MM-DD')} ${info.time.format('HH:mm:ss')}`;
     const res = await axios.post(createInterviewAPI, {
         roomId: id,
-        teamIdteamId: teamId,
+        teamId: teamId,
         time: time,
         createTime: new Date(),
         updater: creator,
@@ -63,3 +63,12 @@ export const fetchInterviews = teamId => async (
     }
     return res.data;
 };
+
+export const updateTeam = (team) => async (dispatch: any, getState: any) => {
+    dispatch({
+        type: UPDATE_TEAM,
+        payload: {
+            currentTeam: team
+        }
+    });
+}

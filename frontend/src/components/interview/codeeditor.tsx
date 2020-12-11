@@ -12,11 +12,15 @@ import { MonacoBinding } from "y-monaco";
 import { useSelector, useDispatch } from "react-redux";
 import { useRunShortCut } from "@/hooks/useUtils";
 import { runCode } from "@/actions";
+import {
+useParams
+} from "react-router-dom";
 
 import "./codeeditor.scss";
 
 const CodeEditor: FC = () => {
   const dispatch = useDispatch();
+  const {roomId} = useParams();
   const [code, setCode] = useState(
     'const hello = (param) => {console.log("world")};hello();'
   );
@@ -38,9 +42,8 @@ const CodeEditor: FC = () => {
     setCode(newValue);
   }, []);
   const editorDidMount = useCallback((editor, monaco) => {
-    const roomName = "room1";
     const ydoc = new Y.Doc();
-    const provider = new WebsocketProvider(yjsHost, roomName, ydoc);
+    const provider = new WebsocketProvider(yjsHost, roomId, ydoc);
     const type = ydoc.getText("monaco");
     const monacoBinding = new MonacoBinding(
       type,

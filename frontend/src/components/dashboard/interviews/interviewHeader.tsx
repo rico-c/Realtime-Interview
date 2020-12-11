@@ -14,15 +14,16 @@ import {
 import { MailOutlined } from "@ant-design/icons";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { useHistory } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import "moment/locale/zh-cn";
 import locale from "antd/es/date-picker/locale/zh_CN";
 import "./interviewHeader.scss";
-import { createInterview, createRoomid } from "@/actions";
+import { createInterview, createRoomid, updateTeam } from "@/actions";
 
 const { Option } = Select;
 
 const Header: FC = () => {
+  const dispatch = useDispatch();
   const userId = useSelector(state => (state as any).accout.userId);
   const teamIds = useSelector(state => (state as any).accout.teamId);
 
@@ -31,13 +32,15 @@ const Header: FC = () => {
   const [copied, setCopy] = useState(false);
   const [roomUrl, setroomUrl] = useState("");
 
-  const [currentTeam, setTeam] = useState(teamIds ? teamIds[0] : null);
+  const currentTeam = useSelector(
+    state => (state as any).interview.currentTeam
+  );
 
   useEffect(() => {
-      if(teamIds && teamIds.length > 1) {
-        setTeam(teamIds[0])
-      }
-  }, [teamIds])
+    if (teamIds && teamIds.length > 1) {
+      dispatch(updateTeam(teamIds[0]));
+    }
+  }, [teamIds]);
 
   const handleCancel = () => {
     setIsModalVisible(false);
@@ -57,8 +60,9 @@ const Header: FC = () => {
     setIsModalVisible(true);
   }, []);
 
-  const handleTeamChange = useCallback(async (value) => {
+  const handleTeamChange = useCallback(async value => {
     console.log(value);
+    dispatch(updateTeam(value));
   }, []);
 
   const onFinish = useCallback(
