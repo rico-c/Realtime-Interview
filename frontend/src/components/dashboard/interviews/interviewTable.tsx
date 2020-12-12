@@ -7,12 +7,14 @@ import moment from "moment";
 import "./interviewTable.scss";
 
 const InterviewTable: FC = () => {
-    const history = useHistory();
+  const history = useHistory();
   const teamId = useSelector(state => (state as any).interview.currentTeam);
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(fetchInterviews(teamId));
   }, [teamId]);
+
   const dataList = useSelector(state => (state as any).interview.list);
   const statusDic = useMemo(() => {
     return {
@@ -46,18 +48,21 @@ const InterviewTable: FC = () => {
       title: "面试时间",
       dataIndex: "time",
       key: "time",
+      sorter: (a, b) => new Date(a.time) - new Date(b.time),
       render: time => <span>{moment(time).format("YYYY-MM-DD HH:mm:ss")}</span>
     },
     {
       title: "状态",
       dataIndex: "status",
       key: "status",
+      sorter: true,
       render: index => <span>{statusDic[index]}</span>
     },
     {
       title: "创建时间",
       dataIndex: "createTime",
       key: "createTime",
+      sorter: (a, b) => new Date(a.time) - new Date(b.time),
       render: text => <span>{moment(text).format("YYYY-MM-DD")}</span>
     },
     {
@@ -65,11 +70,6 @@ const InterviewTable: FC = () => {
       dataIndex: "creator",
       key: "creator"
     },
-    // {
-    //   title: "最新编辑者",
-    //   dataIndex: "updater",
-    //   key: "updater"
-    // },
     {
       title: "备注",
       dataIndex: "note",
@@ -78,6 +78,7 @@ const InterviewTable: FC = () => {
     {
       title: "操作",
       key: "action",
+      dataIndex: "action",
       render: (text, record) => (
         <Space size="middle">
           <a onClick={() => enterInterview(record.roomId)}>进入面试</a>
@@ -89,7 +90,7 @@ const InterviewTable: FC = () => {
 
   return (
     <div className="table">
-      <Table class="table-list" columns={columns} dataSource={dataList} />
+      <Table class="table-list" columns={columns} dataSource={dataList} rowKey={row => row.roomId}/>
     </div>
   );
 };

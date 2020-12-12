@@ -18,19 +18,21 @@ import { useSelector, useDispatch } from "react-redux";
 import "moment/locale/zh-cn";
 import locale from "antd/es/date-picker/locale/zh_CN";
 import "./interviewHeader.scss";
-import { createInterview, createRoomid, updateTeam } from "@/actions";
+import { createInterview, createRoomid, updateTeam, fetchInterviews } from "@/actions";
 
 const { Option } = Select;
 
 const Header: FC = () => {
+  const history = useHistory();
   const dispatch = useDispatch();
   const userId = useSelector(state => (state as any).accout.userId);
   const teamIds = useSelector(state => (state as any).accout.teamId);
+  const currentTeamId = useSelector(state => (state as any).interview.currentTeam);
 
   const [visible, setVisible] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [copied, setCopy] = useState(false);
-  const [roomUrl, setroomUrl] = useState("");
+  const [roomId, setroomId] = useState("");
 
   const currentTeam = useSelector(
     state => (state as any).interview.currentTeam
@@ -49,14 +51,33 @@ const Header: FC = () => {
     setVisible(visible);
   };
 
-  const createInterviewNow = useCallback(() => {
+  const createInterviewNow = useCallback(async () => {
     setVisible(false);
+    const roomid = await createRoomid(userId);
+    if (!roomid) {
+      message.error('创建面试ID失败');
+    }
+    const res = await createInterview({
+      id: roomid,
+      creator: userId,
+      teamId: currentTeam,
+      type: 2
+    });
+    if (res.code === 0) {
+      history.push(`/interview/${roomid}`)
+    }
+    else {
+      message.error('创建失败，请稍后再试');
+    }
   }, []);
 
   const createInterviewReservation = useCallback(async () => {
     setVisible(false);
     const roomid = await createRoomid(userId);
-    setroomUrl(roomid);
+    if (!roomid) {
+      message.error('创建面试ID失败');
+    }
+    setroomId(roomid);
     setIsModalVisible(true);
   }, []);
 
@@ -72,25 +93,27 @@ const Header: FC = () => {
         message.error("缺少创建者用户信息，请稍后再试");
         return;
       }
-      if (!roomUrl) {
+      if (!roomId) {
         message.error("缺少面试ID信息，请稍后再试");
         return;
       }
       const res = await createInterview({
         info: values,
-        id: roomUrl,
+        id: roomId,
         creator: userId,
-        teamId: currentTeam
+        teamId: currentTeam,
+        type: 1
       });
       console.log(res);
       if (res.code === 0) {
         message.success("创建成功");
         setIsModalVisible(false);
+        dispatch(fetchInterviews(currentTeamId));
       } else {
         message.error(res.message);
       }
     },
-    [roomUrl, userId]
+    [roomId, userId]
   );
 
   const content = (
@@ -108,7 +131,7 @@ const Header: FC = () => {
         }}
         onClick={createInterviewNow}
       >
-        立即创建
+        立即开始
       </Button>
       <br />
       <Button
@@ -171,20 +194,20 @@ const Header: FC = () => {
                 marginRight: "10px"
               }}
             >
-              {roomUrl}
+              {roomId}
             </span>
             <CopyToClipboard
               style={{
                 cursor: "pointer"
               }}
-              text={roomUrl}
+              text={roomId}
               onCopy={() => setCopy(true)}
             >
               {copied ? (
                 <Button>已拷贝</Button>
               ) : (
-                <Button type="primary">拷贝</Button>
-              )}
+                  <Button type="primary">拷贝</Button>
+                )}
             </CopyToClipboard>
           </div>
         </div>
