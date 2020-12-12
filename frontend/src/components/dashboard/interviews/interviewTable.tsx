@@ -37,12 +37,14 @@ const InterviewTable: FC = () => {
     {
       title: "面试者",
       dataIndex: "joinerName",
-      key: "joinerName"
+      key: "joinerName",
+      render: joinerName => <span>{joinerName || '暂无'}</span>
     },
     {
       title: "面试者邮箱",
       dataIndex: "joinerEmail",
-      key: "joinerEmail"
+      key: "joinerEmail",
+      render: joinerEmail => <span>{joinerEmail || '暂无'}</span>
     },
     {
       title: "面试时间",

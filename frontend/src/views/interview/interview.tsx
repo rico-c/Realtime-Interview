@@ -14,9 +14,17 @@ import "./interview.scss";
 const Interview: FC = () => {
   const myName = useSelector(state => (state as any).accout.name);
   const [inviteVisible, setInviteVisible] = useState(false);
+  const [type, setType] = useState('terminal');
   const handleInviteVisibleChange = useCallback(value => {
     setInviteVisible(value);
   }, []);
+
+  const onTypeChange = useCallback(
+    (type) => {
+      setType(type.target.value);
+    },
+    []
+  )
   return (
     <div className="interview">
       <SplitPane split="vertical" defaultSize={"50%"}>
@@ -24,7 +32,7 @@ const Interview: FC = () => {
         <div className="right-area">
           <div className="top-bar">
             <div className="top-left">
-              <Radio.Group defaultValue="terminal" buttonStyle="solid" className="c-gap-right">
+              <Radio.Group defaultValue="terminal" buttonStyle="solid" className="c-gap-right" onChange={onTypeChange}>
                 <Radio.Button value="terminal">终端</Radio.Button>
                 <Radio.Button value="note">笔记</Radio.Button>
               </Radio.Group>
@@ -47,8 +55,8 @@ const Interview: FC = () => {
               </span>
             </div>
           </div>
-          {/* <Terminal /> */}
-          <Markdown />
+          {type === 'terminal' ? <Terminal /> : null}
+          {type === 'note' ? <Markdown /> : null }
         </div>
       </SplitPane>
     </div>
