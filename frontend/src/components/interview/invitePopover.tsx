@@ -34,8 +34,8 @@ const InvitePopover: FC = () => {
           {copied ? (
             <Button>已拷贝</Button>
           ) : (
-            <Button type="primary">拷贝</Button>
-          )}
+              <Button type="primary">拷贝</Button>
+            )}
         </CopyToClipboard>
       </div>
       <div>

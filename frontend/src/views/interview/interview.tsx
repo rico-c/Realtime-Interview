@@ -55,8 +55,8 @@ const Interview: FC = () => {
               </span>
             </div>
           </div>
-          {type === 'terminal' ? <Terminal /> : null}
-          {type === 'note' ? <Markdown /> : null }
+          <div style={{ display: type === 'terminal' ? 'block' : 'none', height: '100%' }}><Terminal /></div>
+          <div style={{ display: type === 'note' ? 'block' : 'none', height: '100%' }}><Markdown /></div>
         </div>
       </SplitPane>
     </div>

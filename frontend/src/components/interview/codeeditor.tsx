@@ -13,16 +13,17 @@ import { useSelector, useDispatch } from "react-redux";
 import { useRunShortCut } from "@/hooks/useUtils";
 import { runCode } from "@/actions";
 import {
-useParams
+  useParams
 } from "react-router-dom";
 
 import "./codeeditor.scss";
 
 const CodeEditor: FC = () => {
   const dispatch = useDispatch();
-  const {roomId} = useParams();
+  const { roomId } = useParams();
   const [code, setCode] = useState(
-    'const hello = (param) => {console.log("world")};hello();'
+    `var hello = (param) => {console.log("world")};
+     hello();`
   );
 
   const options = useMemo(() => {

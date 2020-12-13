@@ -67,7 +67,7 @@ const Dashboard: FC = () => {
   );
 
   const jumpRoute = useCallback((e) => {
-    history.push(e.key);
+    history.replace(e.key);
   }, [])
 
   return (
@@ -96,6 +96,7 @@ const Dashboard: FC = () => {
         </Sider>
         <Content>
           <Switch>
+            <Route path="/dashboard" exact children={<List />} />
             <Route path="/dashboard/list" children={<List />} />
             <Route path="/dashboard/team" children={<Team />} />
             <Route path="/dashboard/questions" children={<Questions />} />

@@ -15,9 +15,6 @@ const Terminal: FC = () => {
   }, []);
 
   React.useEffect(() => {
-    // You can call any method in XTerm.js by using 'xterm xtermRef.current.terminal.[What you want to call]
-    (xtermRef as any).current.terminal.writeln("Hello, World!");
-    (xtermRef as any).current.terminal.writeln("Hello, World!");
     (xtermRef as any).current.terminal.writeln("Hello, World!");
   }, []);
 
