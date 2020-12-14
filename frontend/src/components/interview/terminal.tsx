@@ -10,7 +10,8 @@ const Terminal: FC = () => {
     return {
       fontSize: 14,
       lineHeight: 1.2,
-      theme: { background: "#1e1e1e" }
+      theme: { background: "#1e1e1e" },
+      markers: '$'
     };
   }, []);
 
