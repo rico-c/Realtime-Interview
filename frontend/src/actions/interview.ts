@@ -7,7 +7,6 @@ import {
   getInterviewsAPI
 } from "@/utils/API";
 import moment from 'moment';
-import { useSelector } from "react-redux";
 
 axios.defaults.withCredentials = true;
 

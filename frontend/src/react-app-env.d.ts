@@ -89,3 +89,8 @@ declare module 'react-copy-to-clipboard' {
   const content: any
   export = content
 }
+
+declare module 'socket.io-client' {
+  const content: any
+  export = content
+}

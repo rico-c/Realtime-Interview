@@ -15,8 +15,13 @@ import { runCode } from "@/actions";
 import {
   useParams
 } from "react-router-dom";
+import io from "socket.io-client";
 
 import "./codeeditor.scss";
+
+const socket = io('http://127.0.0.1:3002');
+socket.emit('msg', '你好服务器');
+socket.on("message", function (data) { console.log(data) });
 
 const CodeEditor: FC = () => {
   const dispatch = useDispatch();
@@ -62,6 +67,7 @@ const CodeEditor: FC = () => {
       })
     );
   }, [code]);
+
   return (
     <div className="editor">
       <div className="top-bar">
