@@ -15,21 +15,18 @@ import { runCode } from "@/actions";
 import {
   useParams
 } from "react-router-dom";
-import io from "socket.io-client";
 
 import "./codeeditor.scss";
 
-const socket = io('http://127.0.0.1:3002');
-socket.emit('msg', '你好服务器');
-socket.on("message", function (data) { console.log(data) });
-
-const CodeEditor: FC = () => {
+const CodeEditor: FC = (props) => {
+  const { socket } = props;
   const dispatch = useDispatch();
   const { roomId } = useParams();
   const [code, setCode] = useState(
     `var hello = (param) => {console.log("world")};
      hello();`
   );
+  const userId = useSelector(state => (state as any).accout.userId);
 
   const options = useMemo(() => {
     return {
@@ -60,12 +57,19 @@ const CodeEditor: FC = () => {
     // provider.connect();
   }, []);
   const runCodeCallback = useCallback(async () => {
-    dispatch(
+    const res = await dispatch(
       runCode({
         source_code: code,
         language_id: 63
       })
     );
+    console.log(res);
+    if(res) {
+      socket.emit('update', res)
+    }
+    else {
+      console.log('编辑失败');
+    }
   }, [code]);
 
   return (

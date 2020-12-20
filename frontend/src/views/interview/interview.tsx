@@ -8,6 +8,10 @@ import SplitPane from "react-split-pane";
 import { useSelector, useDispatch } from "react-redux";
 import { Radio, Button, Popover } from "antd";
 import { UserAddOutlined } from "@ant-design/icons";
+import io from "socket.io-client";
+import {
+  useParams
+} from "react-router-dom";
 
 import "./interview.scss";
 
@@ -15,6 +19,17 @@ const Interview: FC = () => {
   const myName = useSelector(state => (state as any).accout.name);
   const [inviteVisible, setInviteVisible] = useState(false);
   const [type, setType] = useState('terminal');
+  const { roomId } = useParams();
+  const userId = useSelector(state => (state as any).accout.userId);
+
+  const socket = useMemo(() => io(`ws://127.0.0.1:3002/${roomId}`), []);
+
+
+  socket.on("connect", () => {
+    console.log(socket);
+    console.log('已连接房间终端同步');
+  });
+  
   const handleInviteVisibleChange = useCallback(value => {
     setInviteVisible(value);
   }, []);
@@ -28,7 +43,7 @@ const Interview: FC = () => {
   return (
     <div className="interview">
       <SplitPane split="vertical" defaultSize={"50%"}>
-        <CodeEditor />
+        <CodeEditor socket={socket} />
         <div className="right-area">
           <div className="top-bar">
             <div className="top-left">
@@ -55,7 +70,7 @@ const Interview: FC = () => {
               </span>
             </div>
           </div>
-          <div style={{ display: type === 'terminal' ? 'block' : 'none', height: '100%' }}><Terminal /></div>
+          <div style={{ display: type === 'terminal' ? 'block' : 'none', height: '100%' }}><Terminal socket={socket} /></div>
           <div style={{ display: type === 'note' ? 'block' : 'none', height: '100%' }}><Markdown /></div>
         </div>
       </SplitPane>

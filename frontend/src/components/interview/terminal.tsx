@@ -3,8 +3,14 @@ import { XTerm } from "xterm-for-react";
 
 import "./terminal.scss";
 
-const Terminal: FC = () => {
+const Terminal: FC = (props) => {
+  const { socket } = props;
   const xtermRef = useRef(null);
+
+  socket.on("sync", (data: any) => {
+    console.log(data);
+    (xtermRef as any).current.terminal.writeln(data);
+  });
 
   const options = useMemo(() => {
     return {
@@ -13,10 +19,6 @@ const Terminal: FC = () => {
       theme: { background: "#1e1e1e" },
       markers: '$'
     };
-  }, []);
-
-  React.useEffect(() => {
-    (xtermRef as any).current.terminal.writeln("Hello, World!");
   }, []);
 
   return (
