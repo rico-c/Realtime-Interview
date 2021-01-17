@@ -7,7 +7,6 @@ import { Button, Input } from "antd";
 const InvitePopover: FC = () => {
   const { roomId } = useParams();
   const [copied, setCopy] = useState(false);
-  console.log(roomId);
   return (
     <div className="invite-popover">
       <div>

@@ -1,4 +1,4 @@
-import { RUN_CODE } from "./types";
+import { RUN_CODE, UPDATE_LANG } from "./types";
 import { RunCode } from "@/types";
 import axios from "axios";
 import { runCodeAPI } from "@/utils/API";
@@ -28,10 +28,22 @@ export const runCode = ({ source_code, language_id }: RunCode) => async (
   //     });
   //   }
   // }, 1000);
-  if (judgeRes.data && judgeRes.data.status && judgeRes.data.status.id >= 2) {
-    return judgeRes.data.stdout;
-  }
-  else {
-    return false;
-  }
+  // if (judgeRes.data && judgeRes.data.status && judgeRes.data.status.id >= 2) {
+    return judgeRes.data;
+  // }
+  // else {
+  //   return false;
+  // }
+};
+
+export const updateLang = (language_id) => async (
+  dispatch: any,
+  getState: any
+) => {
+  dispatch({
+    type: UPDATE_LANG,
+    payload: {
+      language: language_id
+    }
+  });
 };

@@ -2,11 +2,14 @@ import React, { FC, useMemo, useEffect, useState, useCallback } from "react";
 import MonacoEditor from "react-monaco-editor";
 import Button from "@/components/common/button";
 import LanguageSelector from "./languageSelector";
-import { Button as AntBtn, Tooltip } from "antd";
+import SettingSelector from "./settingSelector";
+import EndInterview from "./endInterview";
+import { Button as AntBtn, Tooltip, Modal } from "antd";
 import { CaretRightFilled } from "@ant-design/icons";
 import { yjsHost } from "@/utils/API";
 import * as Y from "yjs";
 import { WebsocketProvider } from "y-websocket";
+import languageList from "@/utils/Languages";
 // @ts-ignore
 import { MonacoBinding } from "y-monaco";
 import { useSelector, useDispatch } from "react-redux";
@@ -22,11 +25,14 @@ const CodeEditor: FC = (props) => {
   const { socket } = props;
   const dispatch = useDispatch();
   const { roomId } = useParams();
-  const [code, setCode] = useState(
-    `var hello = (param) => {console.log("world")};
-     hello();`
-  );
-  const userId = useSelector(state => (state as any).accout.userId);
+  const [code, setCode] = useState('');
+  const userAccount = useSelector(state => (state as any).accout);
+  const currentLanguage = useSelector(state => (state as any).editor.language);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const currentLanguageHighlight = useMemo(() => {
+    const one = languageList.find(i => currentLanguage === i.id);
+    return one ? one.highlight : 'javascript'
+  }, [currentLanguage])
 
   const options = useMemo(() => {
     return {
@@ -57,28 +63,49 @@ const CodeEditor: FC = (props) => {
     // provider.connect();
   }, []);
   const runCodeCallback = useCallback(async () => {
-    const res = await dispatch(
-      runCode({
-        source_code: code,
-        language_id: 63
-      })
-    );
-    console.log(res);
-    if(res) {
-      socket.emit('update', res)
+    if (code) {
+      const res = await dispatch(
+        runCode({
+          source_code: code,
+          language_id: currentLanguage
+        })
+      );
+      if (res) {
+        socket.emit('update', Object.assign({ triger: userAccount.name }, res))
+      }
+      else {
+        console.log('编辑失败');
+      }
     }
-    else {
-      console.log('编辑失败');
-    }
-  }, [code]);
+  }, [code, currentLanguage, userAccount]);
+
+  const endInterview = useCallback(
+    () => {
+      setIsModalVisible(true);
+    },
+    [],
+  )
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
 
   return (
     <div className="editor">
       <div className="top-bar">
-        <Button color="#c33232">结束面试</Button>
+          <Button color="#c33232" onClick={endInterview}>结束面试</Button>
       </div>
+      <Modal
+        title="结束面试"
+        width={800}
+        visible={isModalVisible}
+        onCancel={handleCancel}
+        footer={null}
+      >
+        <EndInterview />
+      </Modal>
       <MonacoEditor
-        language="javascript"
+        language={currentLanguageHighlight}
         theme="vs-dark"
         value={code}
         options={options}
@@ -96,7 +123,10 @@ const CodeEditor: FC = (props) => {
             运行
           </AntBtn>
         </Tooltip>
-        <LanguageSelector />
+        <div className="selectors">
+          <LanguageSelector />
+          <SettingSelector />
+        </div>
       </div>
     </div>
   );

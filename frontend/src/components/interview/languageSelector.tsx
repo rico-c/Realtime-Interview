@@ -2,12 +2,16 @@ import React, { FC, useMemo, useEffect, useRef, useCallback } from "react";
 import languageList from "@/utils/Languages";
 import "./languageSelector.scss";
 import { Select } from "antd";
+import { updateLang } from "@/actions";
+import { useSelector, useDispatch } from "react-redux";
 
 const { Option } = Select;
 
 const LanguageSelector: FC = () => {
-  const onChange = useCallback(() => {
-    console.log(111);
+  const dispatch = useDispatch();
+  const onChange = useCallback((id) => {
+    console.log(id);
+    dispatch(updateLang(id));
   }, []);
   return (
     <div className="language-selector">
