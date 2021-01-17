@@ -21,7 +21,11 @@ import {
 
 import "./codeeditor.scss";
 
-const CodeEditor: FC = (props) => {
+interface CodeEditorProp {
+  socket?: any
+}
+
+const CodeEditor: FC<CodeEditorProp> = (props) => {
   const { socket } = props;
   const dispatch = useDispatch();
   const { roomId } = useParams();
@@ -102,7 +106,7 @@ const CodeEditor: FC = (props) => {
         onCancel={handleCancel}
         footer={null}
       >
-        <EndInterview />
+        <EndInterview closeModal={handleCancel} />
       </Modal>
       <MonacoEditor
         language={currentLanguageHighlight}
