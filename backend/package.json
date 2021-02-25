@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www",
+    "serve": "nodemon ./bin/www",
     "tsocket": "nodemon ./bin/tsocket.js",
     "ysocket": "PORT=1234 node ./node_modules/y-websocket/bin/server.js"
   },
