@@ -8,6 +8,7 @@ const cors = require("cors");
 const session = require("express-session");
 const router = require("./routes/index.js");
 const db = require("./mongodb");
+const dbConfig = require("./mongodb/config");
 
 const app = express();
 const MongoStore = require("connect-mongo")(session);
@@ -26,7 +27,7 @@ app.use(
       maxAge: 60000 * 60 * 24 //1天
     },
     store: new MongoStore({
-      url: "mongodb://124.70.3.148:27017/interview",
+      url: dbConfig,
       autoRemove: "interval", // 过期自动删除
       autoRemoveInterval: 24 * 60 * 1 // 1天
     })
