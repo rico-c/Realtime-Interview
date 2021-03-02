@@ -39,7 +39,7 @@ const Header: FC = () => {
   );
 
   useEffect(() => {
-    if (teamIds && teamIds.length > 1) {
+    if (teamIds && teamIds.length >= 1) {
       dispatch(updateTeam(teamIds[0]));
     }
   }, [teamIds]);

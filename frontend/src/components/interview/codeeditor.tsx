@@ -54,6 +54,8 @@ const CodeEditor: FC<CodeEditorProp> = (props) => {
   const onChange = useCallback((newValue, e) => {
     setCode(newValue);
   }, []);
+
+  // 编辑器初始化
   const editorDidMount = useCallback((editor, monaco) => {
     const ydoc = new Y.Doc();
     const provider = new WebsocketProvider(yjsHost, roomId, ydoc);
@@ -64,8 +66,14 @@ const CodeEditor: FC<CodeEditorProp> = (props) => {
       new Set([editor]),
       provider.awareness
     );
-    // provider.connect();
+    provider.connect();
+    // 增加自定义快捷键组合
+    editor.addCommand([monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter], () => {
+      console.log(123);
+    });
   }, []);
+  
+  // 运行编辑器中的代码
   const runCodeCallback = useCallback(async () => {
     if (code) {
       const res = await dispatch(
@@ -74,7 +82,7 @@ const CodeEditor: FC<CodeEditorProp> = (props) => {
           language_id: currentLanguage
         })
       );
-      if (res) {
+      if (res && socket) {
         socket.emit('update', Object.assign({ triger: userAccount.name }, res))
       }
       else {
