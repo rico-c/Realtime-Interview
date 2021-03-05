@@ -82,6 +82,7 @@ const CodeEditor: FC<CodeEditorProp> = (props) => {
           language_id: currentLanguage
         })
       );
+
       if (res && socket) {
         socket.emit('update', Object.assign({ triger: userAccount.name }, res))
       }
@@ -89,7 +90,7 @@ const CodeEditor: FC<CodeEditorProp> = (props) => {
         console.log('编辑失败');
       }
     }
-  }, [code, currentLanguage, userAccount]);
+  }, [code, currentLanguage, userAccount, socket]);
 
   const endInterview = useCallback(
     () => {

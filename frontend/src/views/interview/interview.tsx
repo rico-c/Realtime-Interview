@@ -19,10 +19,9 @@ const Interview: FC = () => {
   const [inviteVisible, setInviteVisible] = useState(false);
   const [type, setType] = useState('terminal');
   const { roomId } = useParams();
-//   const userId = useSelector(state => (state as any).accout.userId);
+  //   const userId = useSelector(state => (state as any).accout.userId);
 
   const socket = useSocket(roomId);
-//   console.log(socket);
 
   const handleInviteVisibleChange = useCallback(value => {
     setInviteVisible(value);

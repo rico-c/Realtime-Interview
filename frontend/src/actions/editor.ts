@@ -36,7 +36,7 @@ export const runCode = ({ source_code, language_id }: RunCode) => async (
   // }
 };
 
-export const updateLang = (language_id) => async (
+export const updateLang = (language_id: number) => async (
   dispatch: any,
   getState: any
 ) => {

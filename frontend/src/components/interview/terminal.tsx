@@ -10,7 +10,6 @@ const Terminal: FC = props => {
   useEffect(() => {
     if (socket) {
       socket.on('sync', (data: any) => {
-        console.log(data);
         const infoline = `\u001b[30;1m ⦿ Execution by \u001b[34;1m ${data.triger} \u001b[30;1m in ${data.time}s`;
         (xtermRef as any).current.terminal.writeln(infoline);
         if (data.status.id > 3) {
@@ -31,10 +30,10 @@ const Terminal: FC = props => {
     (xtermRef as any).current.terminal.clear();
   }, []);
 
-  // useEffect(() => {
-  //   clear();
-  //   (xtermRef as any).current.terminal.writeln('\u001b[32;1m⦿\u001b[0m Virtual terminal ready');
-  // }, [])
+  useEffect(() => {
+    clear();
+    (xtermRef as any).current.terminal.writeln('\u001b[32;1m ⦿\u001b[0m Virtual terminal ready');
+  }, [])
 
   const options = useMemo(() => {
     return {
