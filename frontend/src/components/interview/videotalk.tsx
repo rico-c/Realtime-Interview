@@ -12,7 +12,7 @@ const defaultState = {
   channel: "ChannelTest",
   uid: "rico",
   token:
-    "0063df1d4e0372c4892a380fe3399f49e2dIADRHRlF3Fccds/712nbTq2cGZo0tOBdntJPNICPbC1uutuQH+4AAAAAEABID2UqwOu3XwEAAQDA67df",
+    "0063df1d4e0372c4892a380fe3399f49e2dIACAWsE2tq6ZrvNEUITrOfD8/pHNJ0ppZaPzno+o+qXifduQH+4AAAAAEADqgOQ9ubtDYAEAAQC4u0Ng",
   cameraId: "",
   microphoneId: "",
   mode: "rtc",
@@ -165,7 +165,7 @@ const Videotalk: FC = () => {
   return (
     <div className="video-talk">
       <Button onClick={isJoined ? leave : join} disabled={isLoading}>
-        {isJoined ? "退出通话" : "加入通话"}
+        {isJoined ? "退出通话" : "开始通话"}
       </Button>
       <div id="me">
         {localStream && (

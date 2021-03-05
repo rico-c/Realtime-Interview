@@ -19,6 +19,12 @@ export const login = ({mobile = null, password = null}: any) => async(dispatch: 
       payload
     });
   }
+  else {
+    dispatch({
+      type: UPDATE_USER,
+      payload: {}
+    });
+  }
   return res.data;
 }
 
@@ -27,10 +33,17 @@ export const logout = () => async(dispatch: any, getState:any) => {
   if(res.data.code === 0) {
     dispatch({
       type: DELETE_USER,
-      payload: {
-        accout: {}
-      }
+      payload: {}
     });
   }
   return res.data;
+}
+
+export const tempuser = (name: string) => async(dispatch: any, getState:any) => {
+  dispatch({
+    type: UPDATE_USER,
+    payload: {
+      name
+    }
+  });
 }

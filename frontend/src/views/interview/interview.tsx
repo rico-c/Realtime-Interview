@@ -1,28 +1,38 @@
-import React, { FC, useMemo, useEffect, useState, useCallback } from 'react';
-import CodeEditor from '@/components/interview/codeeditor';
-import Terminal from '@/components/interview/terminal';
-import Markdown from '@/components/interview/markdown';
-import Videotalk from '@/components/interview/videotalk';
-import InvitePopover from '@/components/interview/invitePopover';
-import SplitPane from 'react-split-pane';
-import { useSelector, useDispatch } from 'react-redux';
-import { Radio, Button, Popover } from 'antd';
-import { UserAddOutlined } from '@ant-design/icons';
-import { useSocket } from '@/hooks/useSocket';
+import React, { FC, useMemo, useEffect, useState, useCallback } from "react";
+import CodeEditor from "@/components/interview/codeeditor";
+import Terminal from "@/components/interview/terminal";
+import Markdown from "@/components/interview/markdown";
+import Videotalk from "@/components/interview/videotalk";
+import InvitePopover from "@/components/interview/invitePopover";
+import SplitPane from "react-split-pane";
+import { useSelector, useDispatch } from "react-redux";
+import { tempuser } from '@/actions/accout';
+import { Radio, Button, Popover, Modal, Input } from "antd";
+import { UserAddOutlined } from "@ant-design/icons";
+import { useSocket } from "@/hooks/useSocket";
 // import io from "socket.io-client";
-import { useParams } from 'react-router-dom';
+import { useParams } from "react-router-dom";
 
-import './interview.scss';
+import "./interview.scss";
 
 const Interview: FC = () => {
+  const dispatch = useDispatch();
   const myName = useSelector(state => (state as any).accout.name);
   const [inviteVisible, setInviteVisible] = useState(false);
-  const [type, setType] = useState('terminal');
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [username, setUsername] = useState(false);
+  const [type, setType] = useState("terminal");
   const { roomId } = useParams();
-  //   const userId = useSelector(state => (state as any).accout.userId);
+  const userAccount = useSelector(state => (state as any).accout);
+  useEffect(() => {
+    if (userAccount.requested && !userAccount.name) {
+      setIsModalVisible(true);
+      return;
+    }
+    setIsModalVisible(false);
+  }, [userAccount]);
 
   const socket = useSocket(roomId);
-
   const handleInviteVisibleChange = useCallback(value => {
     setInviteVisible(value);
   }, []);
@@ -30,9 +40,40 @@ const Interview: FC = () => {
   const onTypeChange = useCallback(type => {
     setType(type.target.value);
   }, []);
+
+  const updateUsername = useCallback(n => {
+    setUsername(n.target.value)
+  }, []);
+
+  const handleInputname = () => {
+    if (username) {
+      dispatch(tempuser(username));
+    }
+    else {
+      return;
+    }
+    setIsModalVisible(false);
+  };
+
+  const modalProps = useMemo(() => {
+    return {
+      visible: isModalVisible,
+      onOk: handleInputname,
+      maskClosable: false,
+      closable: false,
+      title: "输入您的名字并加入面试",
+      width: 400
+    };
+  }, [isModalVisible]);
+
+  const ModalFooter = (<Button type="primary" onClick={handleInputname} disabled={!username}>确认</Button>)
+
   return (
     <div className="interview">
-      <SplitPane split="vertical" defaultSize={'50%'}>
+      <Modal {...modalProps} footer={ModalFooter}>
+        <Input placeholder="名字将显示给面试官" onChange={updateUsername} />
+      </Modal>
+      <SplitPane split="vertical" defaultSize={"50%"}>
         <CodeEditor socket={socket} />
         <div className="right-area">
           <div className="top-bar">
@@ -67,16 +108,16 @@ const Interview: FC = () => {
           </div>
           <div
             style={{
-              display: type === 'terminal' ? 'block' : 'none',
-              height: '100%'
+              display: type === "terminal" ? "block" : "none",
+              height: "100%"
             }}
           >
             <Terminal socket={socket} />
           </div>
           <div
             style={{
-              display: type === 'note' ? 'block' : 'none',
-              height: '100%'
+              display: type === "note" ? "block" : "none",
+              height: "100%"
             }}
           >
             <Markdown />

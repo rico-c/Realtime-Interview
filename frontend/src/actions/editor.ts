@@ -2,16 +2,20 @@ import { RUN_CODE, UPDATE_LANG } from "./types";
 import { RunCode } from "@/types";
 import axios from "axios";
 import { runCodeAPI } from "@/utils/API";
+import { encode } from "@/utils/EnCode";
 
 export const runCode = ({ source_code, language_id }: RunCode) => async (
   dispatch: any,
   getState: any
 ) => {
   axios.defaults.withCredentials = false;
-  const judgeRes = await axios.post(runCodeAPI + "?wait=true", {
-    source_code,
-    language_id
-  });
+  const judgeRes = await axios.post(
+    runCodeAPI + "?wait=true&base64_encoded=true",
+    {
+      source_code: encode(source_code),
+      language_id
+    }
+  );
   // const token = judgeRes.data.token;
   // const interval = setInterval(async () => {
   //   const res = await axios.get(runCodeAPI + "/" + token, {

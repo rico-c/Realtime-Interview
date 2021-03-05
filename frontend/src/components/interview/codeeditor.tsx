@@ -68,9 +68,9 @@ const CodeEditor: FC<CodeEditorProp> = (props) => {
     );
     provider.connect();
     // 增加自定义快捷键组合
-    editor.addCommand([monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter], () => {
-      console.log(123);
-    });
+    // editor.addCommand([monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter], () => {
+    //   console.log(123);
+    // });
   }, []);
   
   // 运行编辑器中的代码
@@ -126,7 +126,7 @@ const CodeEditor: FC<CodeEditorProp> = (props) => {
         editorDidMount={editorDidMount}
       />
       <div className="bottom-bar">
-        <Tooltip placement="top" title={os === "mac" ? "⌘+Enter" : "Ctl+Enter"}>
+        {/* <Tooltip placement="top" title={os === "mac" ? "⌘+Enter" : "Ctl+Enter"}> */}
           <AntBtn
             className="run-btn"
             type="primary"
@@ -135,7 +135,7 @@ const CodeEditor: FC<CodeEditorProp> = (props) => {
           >
             运行
           </AntBtn>
-        </Tooltip>
+        {/* </Tooltip> */}
         <div className="selectors">
           <LanguageSelector />
           <SettingSelector />

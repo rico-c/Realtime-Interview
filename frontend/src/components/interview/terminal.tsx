@@ -1,22 +1,26 @@
 import React, { FC, useMemo, useCallback, useRef, useEffect } from 'react';
 import { XTerm } from 'xterm-for-react';
 import { Button } from 'antd';
+import { decode } from "@/utils/EnCode";
 
 import './terminal.scss';
 
 const Terminal: FC = props => {
   const { socket } = props;
   const xtermRef = useRef(null);
+  // 关于statusid的定义参考：
   useEffect(() => {
     if (socket) {
       socket.on('sync', (data: any) => {
         const infoline = `\u001b[30;1m ⦿ Execution by \u001b[34;1m ${data.triger} \u001b[30;1m in ${data.time}s`;
         (xtermRef as any).current.terminal.writeln(infoline);
-        if (data.status.id > 3) {
-          const resline = data.stderr;
+        if (data.error) {
+          (xtermRef as any).current.terminal.writeln('\u001b[31;1m' + data.error);
+        } else if (data.status.id > 3) {
+          const resline = decode(data.stderr);
           (xtermRef as any).current.terminal.writeln('\u001b[31;1m' + resline);
         } else {
-          const resline = data.stdout;
+          const resline = decode(data.stdout);
           (xtermRef as any).current.terminal.writeln('\u001b[0m' + resline);
         }
       });

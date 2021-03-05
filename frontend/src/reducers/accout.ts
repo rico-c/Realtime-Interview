@@ -5,7 +5,8 @@ const accoutReducer = (state = {}, action: AnyAction) => {
   switch (action.type) {
     case UPDATE_USER:
       return {
-        ...action.payload
+        ...action.payload,
+        requested: true
       };
     case DELETE_USER:
       return {};
