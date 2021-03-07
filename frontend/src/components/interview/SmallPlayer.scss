@@ -1,0 +1,12 @@
+.small-player {
+  .fullscreen-btn {
+    position: absolute;
+    top: -5px;
+    right: 0px;
+    z-index: 100;
+    font-size: 25px;
+    cursor: pointer;
+  }
+  border-radius: 2px;
+  overflow: hidden;
+}

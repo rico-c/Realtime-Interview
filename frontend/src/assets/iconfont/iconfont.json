@@ -1,0 +1,65 @@
+{
+  "id": "2405345",
+  "name": "interview",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "18018972",
+      "name": "options",
+      "font_class": "options",
+      "unicode": "e629",
+      "unicode_decimal": 58921
+    },
+    {
+      "icon_id": "11982733",
+      "name": "Exit fullscreen, minimize, shrink",
+      "font_class": "Exitfullscreenminimizeshrink",
+      "unicode": "e9d9",
+      "unicode_decimal": 59865
+    },
+    {
+      "icon_id": "11982740",
+      "name": "Fullscreen, maximize, expand",
+      "font_class": "Fullscreenmaximizeexpand",
+      "unicode": "e9db",
+      "unicode_decimal": 59867
+    },
+    {
+      "icon_id": "18018861",
+      "name": "cast",
+      "font_class": "cast",
+      "unicode": "e618",
+      "unicode_decimal": 58904
+    },
+    {
+      "icon_id": "18018954",
+      "name": "mic-off",
+      "font_class": "mic-off",
+      "unicode": "e625",
+      "unicode_decimal": 58917
+    },
+    {
+      "icon_id": "18018958",
+      "name": "mic",
+      "font_class": "mic",
+      "unicode": "e626",
+      "unicode_decimal": 58918
+    },
+    {
+      "icon_id": "18019036",
+      "name": "video-off",
+      "font_class": "video-off",
+      "unicode": "e632",
+      "unicode_decimal": 58930
+    },
+    {
+      "icon_id": "18019051",
+      "name": "video",
+      "font_class": "video",
+      "unicode": "e634",
+      "unicode_decimal": 58932
+    }
+  ]
+}

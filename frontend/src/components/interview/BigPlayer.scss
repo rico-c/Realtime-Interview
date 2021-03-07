@@ -1,0 +1,20 @@
+.big-player {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  border-radius: 2px;
+  overflow: hidden;
+  .video-player {
+    width: 50vw;
+    height: 30vw;
+  }
+  .fullscreen-btn {
+    position: absolute;
+    top: -5px;
+    right: 5px;
+    z-index: 100;
+    font-size: 35px;
+    cursor: pointer;
+  }
+  transform: translate(-50%, -50%);
+}

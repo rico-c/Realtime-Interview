@@ -1,12 +1,13 @@
 import { ILocalVideoTrack, IRemoteVideoTrack, ILocalAudioTrack, IRemoteAudioTrack } from "agora-rtc-sdk-ng";
 import React, { useRef, useEffect } from "react";
+import './BigPlayer.scss';
 
 export interface VideoPlayerProps {
   videoTrack: ILocalVideoTrack | IRemoteVideoTrack | undefined;
   audioTrack: ILocalAudioTrack | IRemoteAudioTrack | undefined;
 }
 
-const MediaPlayer = (props: VideoPlayerProps) => {
+const BigPlayer = (props: VideoPlayerProps) => {
   const container = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (!container.current) return;
@@ -22,11 +23,11 @@ const MediaPlayer = (props: VideoPlayerProps) => {
     };
   }, [props.audioTrack]);
   return (
-    <div>
-      <div ref={container} className="video-player" style={{ width: "240px", height: "150px" }}></div>
-      <div>buttons</div>
+    <div className="big-player">
+      <i className="iconfont fullscreen-btn" onClick={() => props.setSize(false)}>&#xe9d9;</i>
+      <div ref={container} className="video-player"></div>
     </div>
   );
 }
 
-export default MediaPlayer;
+export default BigPlayer;

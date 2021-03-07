@@ -17,13 +17,15 @@ import "./interview.scss";
 
 const Interview: FC = () => {
   const dispatch = useDispatch();
-  const myName = useSelector(state => (state as any).accout.name);
+  const userAccount = useSelector(state => (state as any).accout);
+  const myName = userAccount.name;
+  console.log(myName);
+  const userId = userAccount.userId;
   const [inviteVisible, setInviteVisible] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [username, setUsername] = useState(false);
   const [type, setType] = useState("terminal");
   const { roomId } = useParams();
-  const userAccount = useSelector(state => (state as any).accout);
   useEffect(() => {
     if (userAccount.requested && !userAccount.name) {
       setIsModalVisible(true);
@@ -78,15 +80,18 @@ const Interview: FC = () => {
         <div className="right-area">
           <div className="top-bar">
             <div className="top-left">
-              <Radio.Group
-                defaultValue="terminal"
-                buttonStyle="solid"
-                className="c-gap-right"
-                onChange={onTypeChange}
-              >
-                <Radio.Button value="terminal">终端</Radio.Button>
-                <Radio.Button value="note">笔记</Radio.Button>
-              </Radio.Group>
+              {
+                userId ?
+                <Radio.Group
+                  defaultValue="terminal"
+                  buttonStyle="solid"
+                  className="c-gap-right"
+                  onChange={onTypeChange}
+                >
+                  <Radio.Button value="terminal">终端</Radio.Button>
+                  <Radio.Button value="note">笔记</Radio.Button>
+                </Radio.Group> : null
+              }
               <VideoCall />
             </div>
             <div className="top-right">

@@ -3,21 +3,20 @@ import { useSelector, useDispatch } from "react-redux";
 import AgoraRTC from 'agora-rtc-sdk-ng';
 import useAgora from '@/hooks/useAgora';
 import { Button } from "antd";
-import MediaPlayer from '@/components/interview/mediaPlayer';
+import SmallPlayer from '@/components/interview/SmallPlayer';
+import BigPlayer from '@/components/interview/BigPlayer';
+import Draggable from 'react-draggable';
 import './videoCall.scss';
 
 const client = AgoraRTC.createClient({ codec: 'vp8', mode: 'rtc' });
 
 const VideoCall = () => {
   const [isJoined, setisJoined] = useState(false);
+  const [videoBigSize, setSize] = useState(true);
   const {
     localAudioTrack, localVideoTrack, leave, join, joinState, remoteUsers
   } = useAgora(client);
   const myName = useSelector(state => (state as any).accout.name);
-  console.log('joinstate: ' + joinState);
-  console.log(remoteUsers);
-  console.log(localVideoTrack);
-  console.log(localAudioTrack);
   const agoraCofig = {
     appId: "3df1d4e0372c4892a380fe3399f49e2d",
     channel: "ChannelTest123",
@@ -46,17 +45,26 @@ const VideoCall = () => {
       <Button onClick={isJoined ? handleLeave : handleJoin}>
         {isJoined ? "退出通话" : "开始通话"}
       </Button>
-      <div className='player-container'>
-        <div className='local-player-wrapper'>
-          <p className='local-player-text'>{localVideoTrack && `localTrack`}{joinState && localVideoTrack ? `(${client.uid})` : ''}</p>
-          <MediaPlayer videoTrack={localVideoTrack} audioTrack={undefined}></MediaPlayer>
+      {
+        isJoined && <div className='player-container'>
+          {
+            videoBigSize
+              ? <Draggable>
+                <BigPlayer videoTrack={localVideoTrack} audioTrack={undefined} setSize={setSize}></BigPlayer>
+              </Draggable>
+              : <Draggable>
+                <SmallPlayer videoTrack={localVideoTrack} audioTrack={undefined} setSize={setSize}></SmallPlayer>
+              </Draggable>
+          }
+
+          {remoteUsers.map(user => (<div className='remote-player-wrapper' key={user.uid}>
+            <Draggable>
+              <SmallPlayer videoTrack={user.videoTrack} audioTrack={user.audioTrack} setSize={setSize}></SmallPlayer>
+            </Draggable>
+          </div>))}
         </div>
-        {remoteUsers.map(user => (<div className='remote-player-wrapper' key={user.uid}>
-          <p className='remote-player-text'>{`remoteVideo(${user.uid})`}</p>
-          <MediaPlayer videoTrack={user.videoTrack} audioTrack={user.audioTrack}></MediaPlayer>
-        </div>))}
-      </div>
-    </div>
+      }
+    </div >
   );
 }
 
