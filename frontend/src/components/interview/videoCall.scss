@@ -1,0 +1,12 @@
+.video-call {
+  display: inline-block;
+  .player-container {
+    z-index: 9999;
+    position: fixed;
+    width: 200px;
+    height: 200px;
+    top: 100px;
+    right: 100px;
+    border: 1px solid red;
+  }
+}

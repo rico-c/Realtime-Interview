@@ -5,6 +5,7 @@
   "dependencies": {
     "@ant-design/icons": "^4.3.0",
     "agora-rtc-sdk": "^3.2.3",
+    "agora-rtc-sdk-ng": "^4.3.0",
     "agora-rtm-sdk": "^1.4.1",
     "agora-stream-player": "^1.2.0",
     "agoran-awe": "^1.1.2",

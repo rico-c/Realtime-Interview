@@ -2,7 +2,7 @@ import React, { FC, useMemo, useEffect, useState, useCallback } from "react";
 import CodeEditor from "@/components/interview/codeeditor";
 import Terminal from "@/components/interview/terminal";
 import Markdown from "@/components/interview/markdown";
-import Videotalk from "@/components/interview/videotalk";
+import VideoCall from "@/components/interview/videoCall";
 import InvitePopover from "@/components/interview/invitePopover";
 import SplitPane from "react-split-pane";
 import { useSelector, useDispatch } from "react-redux";
@@ -87,7 +87,7 @@ const Interview: FC = () => {
                 <Radio.Button value="terminal">终端</Radio.Button>
                 <Radio.Button value="note">笔记</Radio.Button>
               </Radio.Group>
-              <Videotalk />
+              <VideoCall />
             </div>
             <div className="top-right">
               <Popover
@@ -100,10 +100,10 @@ const Interview: FC = () => {
                 <Button icon={<UserAddOutlined />}>邀请</Button>
               </Popover>
 
-              <span className="c-gap-left-large">
+              {myName && <span className="c-gap-left-large">
                 <i className="online-icon" />
                 <span className="c-gap-left-small">{myName}</span>
-              </span>
+              </span>}
             </div>
           </div>
           <div
