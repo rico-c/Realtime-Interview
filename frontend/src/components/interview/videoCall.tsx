@@ -19,14 +19,14 @@ const VideoCall = () => {
   const myName = useSelector(state => (state as any).accout.name);
   const agoraCofig = {
     appId: "3df1d4e0372c4892a380fe3399f49e2d",
-    channel: "ChannelTest123",
+    channel: "test0308",
     token:
-      "0063df1d4e0372c4892a380fe3399f49e2dIABesZPkYh+7/+acPxk4SD8GGOfAizYYVbt+chWDSS8d7QI+3fUAAAAAEADqgOQ9/fBEYAEAAQD98ERg"
+      "0063df1d4e0372c4892a380fe3399f49e2dIACeZIVp6eSZF9SwAA09rUslpeFQqd/yob6QzrOjbiXPwCQ3EDQAAAAAEAAdwi3R05lHYAEAAQDTmUdg"
   };
 
   const handleJoin = useCallback(
     () => {
-      join(agoraCofig.appId, agoraCofig.channel, agoraCofig.token, myName)
+      join(agoraCofig.appId, agoraCofig.channel, agoraCofig.token, 1)
       setisJoined(true)
     },
     []
@@ -49,17 +49,24 @@ const VideoCall = () => {
         isJoined && <div className='player-container'>
           {
             videoBigSize
-              ? <Draggable>
-                <BigPlayer videoTrack={localVideoTrack} audioTrack={undefined} setSize={setSize}></BigPlayer>
+              ? <Draggable key="big">
+                <div>
+                  <BigPlayer videoTrack={localVideoTrack} audioTrack={localAudioTrack} setSize={setSize} leave={handleLeave}>
+                  </BigPlayer>
+                </div>
               </Draggable>
-              : <Draggable>
-                <SmallPlayer videoTrack={localVideoTrack} audioTrack={undefined} setSize={setSize}></SmallPlayer>
+              : <Draggable key="small">
+                <div>
+                  <SmallPlayer videoTrack={localVideoTrack} audioTrack={localAudioTrack} setSize={setSize}></SmallPlayer>
+                </div>
               </Draggable>
           }
 
           {remoteUsers.map(user => (<div className='remote-player-wrapper' key={user.uid}>
             <Draggable>
-              <SmallPlayer videoTrack={user.videoTrack} audioTrack={user.audioTrack} setSize={setSize}></SmallPlayer>
+              <div>
+                <SmallPlayer videoTrack={user.videoTrack} audioTrack={user.audioTrack} setSize={setSize}></SmallPlayer>
+              </div>
             </Draggable>
           </div>))}
         </div>

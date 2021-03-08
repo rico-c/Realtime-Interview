@@ -1,4 +1,8 @@
 .small-player {
+  z-index: 100;
+  position: fixed;
+  top: 90px;
+  right: 20px;
   .fullscreen-btn {
     position: absolute;
     top: -5px;
@@ -9,4 +13,14 @@
   }
   border-radius: 2px;
   overflow: hidden;
+  .bottom-btns {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    display: flex;
+    .iconfont {
+      // font-size: 20px;
+      // margin-right: 5px;
+    }
+  }
 }

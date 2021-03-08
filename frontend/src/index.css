@@ -9,12 +9,12 @@ body {
 
 @font-face {
   font-family: 'iconfont';  /* project id 2405345 */
-  src: url('//at.alicdn.com/t/font_2405345_s51k2quzj7.eot');
-  src: url('//at.alicdn.com/t/font_2405345_s51k2quzj7.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_2405345_s51k2quzj7.woff2') format('woff2'),
-  url('//at.alicdn.com/t/font_2405345_s51k2quzj7.woff') format('woff'),
-  url('//at.alicdn.com/t/font_2405345_s51k2quzj7.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_2405345_s51k2quzj7.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_2405345_uci13jksodn.eot');
+  src: url('//at.alicdn.com/t/font_2405345_uci13jksodn.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_2405345_uci13jksodn.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_2405345_uci13jksodn.woff') format('woff'),
+  url('//at.alicdn.com/t/font_2405345_uci13jksodn.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_2405345_uci13jksodn.svg#iconfont') format('svg');
 }
 
 .iconfont {
