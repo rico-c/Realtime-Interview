@@ -2,6 +2,7 @@
   height: 100%;
   width: 100%;
   position: relative;
+  z-index: -1;
   .x-term {
     height: 100%;
     width: 100%;
@@ -11,6 +12,6 @@
     position: absolute;
     top: 0;
     right: 15px;
-    z-index: 100;
+    z-index: 9;
   }
 }

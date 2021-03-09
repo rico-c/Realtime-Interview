@@ -16,12 +16,15 @@ const Terminal: FC = props => {
         (xtermRef as any).current.terminal.writeln(infoline);
         if (data.error) {
           (xtermRef as any).current.terminal.writeln('\u001b[31;1m' + data.error);
-        } else if (data.status.id > 3) {
+        } else if (data.status.id >= 7 && data.status.id <= 12)  {
           const resline = decode(data.stderr);
           (xtermRef as any).current.terminal.writeln('\u001b[31;1m' + resline);
-        } else {
+        } else if (data.status.id === 3) {
           const resline = decode(data.stdout);
           (xtermRef as any).current.terminal.writeln('\u001b[0m' + resline);
+        } else if (data.status.id > 3){
+          const resline = data.status.description;
+          (xtermRef as any).current.terminal.writeln('\u001b[31;1m' + resline);
         }
       });
       console.log('终端 socket 连接成功');

@@ -19,7 +19,6 @@ const Interview: FC = () => {
   const dispatch = useDispatch();
   const userAccount = useSelector(state => (state as any).accout);
   const myName = userAccount.name;
-  console.log(myName);
   const userId = userAccount.userId;
   const [inviteVisible, setInviteVisible] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
