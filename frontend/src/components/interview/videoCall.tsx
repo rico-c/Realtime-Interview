@@ -50,13 +50,13 @@ const VideoCall = () => {
           {
             videoBigSize
               ? <Draggable key="big">
-                <div>
+                <div className="big-v">
                   <BigPlayer videoTrack={localVideoTrack} audioTrack={localAudioTrack} setSize={setSize} leave={handleLeave}>
                   </BigPlayer>
                 </div>
               </Draggable>
               : <Draggable key="small">
-                <div>
+                <div className="small-v">
                   <SmallPlayer videoTrack={localVideoTrack} audioTrack={localAudioTrack} setSize={setSize}></SmallPlayer>
                 </div>
               </Draggable>
