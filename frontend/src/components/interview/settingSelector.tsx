@@ -1,42 +1,45 @@
-import React, { FC, useMemo, useEffect, useState, useCallback } from "react";
-import "./settingSelector.scss";
-import { Popover, Button, Form, Radio, Select } from "antd";
-import { SettingFilled, ZoomInOutlined, ZoomOutOutlined } from '@ant-design/icons';
+import React, { FC, useMemo, useEffect, useState, useCallback } from 'react';
+import './settingSelector.scss';
+import { Popover, Button, Form, Radio, Select, Switch } from 'antd';
+import {
+  SettingFilled,
+  ZoomInOutlined,
+  ZoomOutOutlined
+} from '@ant-design/icons';
+
+interface SettingSelectorProps {
+    setFontsize: any,
+    setSuggestion: any,
+    setTabsize: any
+}
 
 const { Option } = Select;
 
-const SettingSelector: FC = () => {
+const SettingSelector: FC<SettingSelectorProps> = props => {
+  const { setFontsize, setSuggestion,setTabsize } = props;
   const [visible, setVisible] = useState(false);
-  const onFormLayoutChange = useCallback(
-    () => {
-      
-    },
-    [],
-  )
+  const suggestionChange = useCallback(value => {
+    setSuggestion(value);
+  }, []);
   const content = (
-    <Form
-      layout="horizontal"
-      initialValues={{ codeHelper: false}}
-      onValuesChange={onFormLayoutChange}
-    >
-      <Form.Item label="代码提示" name="codeHelper">
-        <Radio.Group>
-          <Radio.Button value={false}>关</Radio.Button>
-          <Radio.Button value={true}>开</Radio.Button>
-        </Radio.Group>
-      </Form.Item>
-      <Form.Item label="字体大小" name="fontSize">
-        <Button icon={<ZoomInOutlined />}></Button>
-        &nbsp;&nbsp;
-        <Button icon={<ZoomOutOutlined />}></Button>
-      </Form.Item>
-      <Form.Item label="Tab大小" name="tabSize">
-        <Select defaultValue="2">
+    <div className="editor-setting-pop">
+      <div className="item">
+        <span className="labelname">代码提示：</span>
+        <Switch checkedChildren="开启" unCheckedChildren="关闭" onChange={suggestionChange} />
+      </div>
+      <div className="item">
+        <span className="labelname">代码字号：</span>
+        <Button icon={<ZoomInOutlined />} onClick={() => setFontsize(value => value + 1)}></Button>
+        <Button icon={<ZoomOutOutlined />} onClick={() => setFontsize(value => value - 1)}></Button>
+      </div>
+      <div className="item">
+        <span className="labelname">Tab空格：</span>
+        <Select defaultValue="4" onChange={value => setTabsize(Number(value))} >
           <Option value="2">2格</Option>
           <Option value="4">4格</Option>
         </Select>
-      </Form.Item>
-    </Form>
+      </div>
+    </div>
   );
   return (
     <Popover
