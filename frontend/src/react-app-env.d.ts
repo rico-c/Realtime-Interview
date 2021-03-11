@@ -104,3 +104,8 @@ declare module 'for-editor' {
   const content: any
   export = content
 }
+
+declare module 'dom-to-pdf' {
+  const content: any
+  export = content
+}

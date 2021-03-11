@@ -11,6 +11,7 @@
     "agoran-awe": "^1.1.2",
     "antd": "^4.9.1",
     "axios": "^0.21.0",
+    "dom-to-pdf": "^0.2.0",
     "for-editor": "^0.3.5",
     "lodash": "^4.17.20",
     "moment": "^2.29.1",

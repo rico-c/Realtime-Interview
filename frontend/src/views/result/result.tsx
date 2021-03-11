@@ -1,8 +1,9 @@
 import React, { FC, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Result, Button, Dropdown, Menu } from 'antd';
+import { Result, Button } from 'antd';
 import { useParams } from 'react-router-dom';
 import { useInterviewDetail } from '@/hooks';
+import FinalReport from '@/components/result/finalReport';
 import './result.scss';
 
 const InterviewResult: FC = () => {
@@ -14,11 +15,10 @@ const InterviewResult: FC = () => {
   }, []);
   const downloadReport = useCallback(() => {
     const reportHTML = interviewDetail;
-    
   }, []);
-  console.log(roomId);
+  console.log(interviewDetail);
   return (
-    <div className="Result">
+    <div className="result">
       <Result
         status="success"
         title="面试已完成！"
@@ -32,6 +32,9 @@ const InterviewResult: FC = () => {
           </Button>,
         ]}
       />
+      <div className="report-wrapper">
+        {interviewDetail && <FinalReport data={interviewDetail} />}
+      </div>
     </div>
   );
 };

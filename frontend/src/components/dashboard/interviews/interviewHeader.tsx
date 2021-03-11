@@ -305,15 +305,6 @@ const Header: FC = () => {
               </Form.Item>
             </div>
           </div>
-          <div>
-            <Form.Item
-              name="note"
-              label="备注"
-              style={{ width: "55%", margin: "0 auto" }}
-            >
-              <Input placeholder="选填" />
-            </Form.Item>
-          </div>
           <div style={{ textAlign: "center", marginTop: "20px" }}>
             <Button type="primary" htmlType="submit">
               创建
