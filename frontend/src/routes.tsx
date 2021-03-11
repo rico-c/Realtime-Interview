@@ -9,6 +9,7 @@ import Login from '@/views/login/login';
 import Interview from '@/views/interview/interview';
 import Dashboard from '@/views/dashboard/dashboard';
 import Price from '@/views/price/price';
+import Result from '@/views/result/result';
 import { login } from '@/actions';
 import { useDispatch } from 'react-redux';
 
@@ -28,6 +29,7 @@ const Routes: FC = () => {
           <Route path="/price" children={<Price />} />
           <Route path="/interview/:roomId" children={<Interview />} />
           <Route path="/dashboard" children={<Dashboard />} />
+          <Route path="/result/:roomId" children={<Result />} />
         </Switch>
       </Router>
     </div>

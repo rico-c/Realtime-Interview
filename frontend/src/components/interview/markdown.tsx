@@ -1,23 +1,37 @@
-import React, { FC, useCallback, useEffect, useState } from "react";
-import Editor from 'for-editor'
+import React, { FC, useCallback, useEffect, useState } from 'react';
+import Editor from 'for-editor';
+import { updateNote } from '@/actions/interview';
+import { useParams } from 'react-router-dom';
 
-import "./markdown.scss";
+import './markdown.scss';
 
-const Markdown: FC = () => {
+interface MarkdownProps {
+  interviewDetail: any;
+}
+
+const Markdown: FC<MarkdownProps> = props => {
+  const { interviewDetail } = props;
   const [value, setValue] = useState('');
-  const handleChange = (v) => {
+  const { roomId } = useParams();
+
+  useEffect(() => {
+      if(interviewDetail && interviewDetail.note) {
+        setValue(interviewDetail.note);
+      }
+  }, [interviewDetail]);
+
+  const handleChange = (v: any) => {
     setValue(v);
     console.log(v);
-  }
+  };
 
-  const handleSave = useCallback(
-    (md) => {
-      console.log(md);
-    },
-    [],
-  )
+  const handleSave = useCallback(content => {
+    console.log(content);
+    updateNote({ roomId, content });
+  }, []);
+
   const config = {
-    placeholder: "支持markdown语法及预览的笔记，仅您的团队成员可见",
+    placeholder: '支持markdown语法及预览的笔记，仅您的团队成员可见',
     lineNum: false,
     subfield: true, //双栏模式
     preview: true, //预览模式
@@ -37,12 +51,17 @@ const Markdown: FC = () => {
       redo: true, // 重做
       save: true, // 保存
       /* v0.2.3 */
-      subfield: true, // 单双栏模式
+      subfield: true // 单双栏模式
     }
-  }
+  };
   return (
     <div className="markdown">
-      <Editor {...config} value={value} onChange={handleChange} onSave={handleSave}/>
+      <Editor
+        {...config}
+        value={value}
+        onChange={handleChange}
+        onSave={handleSave}
+      />
     </div>
   );
 };

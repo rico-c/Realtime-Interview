@@ -15,18 +15,17 @@ import { MonacoBinding } from 'y-monaco';
 import { useSelector, useDispatch } from 'react-redux';
 import { useRunShortCut } from '@/hooks/useUtils';
 import { runCode } from '@/actions';
-import { useParams } from 'react-router-dom';
 
 import './codeeditor.scss';
 
 interface CodeEditorProp {
   socket?: any;
+  roomId: any
 }
 
 const CodeEditor: FC<CodeEditorProp> = props => {
-  const { socket } = props;
+  const { socket, roomId } = props;
   const dispatch = useDispatch();
-  const { roomId } = useParams();
   const [code, setCode] = useState('');
   const userAccount = useSelector(state => (state as any).accout);
   const currentLanguage = useSelector(state => (state as any).editor.language);
@@ -112,13 +111,13 @@ const CodeEditor: FC<CodeEditorProp> = props => {
         </Button>
       </div>
       <Modal
-        title="结束面试"
-        width={800}
+        title="面试评价"
+        width={500}
         visible={isModalVisible}
         onCancel={handleCancel}
         footer={null}
       >
-        <EndInterview closeModal={handleCancel} />
+        <EndInterview closeModal={handleCancel} roomId={roomId} />
       </Modal>
       <MonacoEditor
         language={currentLanguageHighlight}

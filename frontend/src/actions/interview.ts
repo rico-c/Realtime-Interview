@@ -1,21 +1,41 @@
 import { UPDATE_INTERVIEWS, UPDATE_TEAM } from "./types";
 import axios from "axios";
-import { CreateInterfacrAction } from "@/types";
+import { CreateInterfacrAction, UpdateNoteAPIAction, endInterviewAction } from "@/types";
 import {
   createInterviewAPI,
   createRoomidAPI,
-  getInterviewsAPI
+  getInterviewsAPI,
+  updateNoteAPI,
+  endInterviewAPI
 } from "@/utils/API";
 import moment from 'moment';
 
 axios.defaults.withCredentials = true;
 
-export const createRoomid = async userId => {
+export const createRoomid = async (userId: any) => {
   const res = await axios.get(createRoomidAPI, {
     params: {
       userId
     }
   });
+  if (res.data.code === 0) {
+    return res.data.data;
+  } else {
+    return "";
+  }
+};
+
+export const updateNote = async (params: UpdateNoteAPIAction) => {
+  const res = await axios.post(updateNoteAPI, params);
+  if (res.data.code === 0) {
+    return res.data.data;
+  } else {
+    return "";
+  }
+}
+;
+export const endInterview = async (params: endInterviewAction) => {
+  const res = await axios.post(endInterviewAPI, params);
   if (res.data.code === 0) {
     return res.data.data;
   } else {
@@ -67,7 +87,7 @@ export const createInterview = async ({
   }
 };
 
-export const fetchInterviews = teamId => async (
+export const fetchInterviews = (teamId: any) => async (
   dispatch: any,
   getState: any
 ) => {
@@ -90,7 +110,7 @@ export const fetchInterviews = teamId => async (
   return res.data;
 };
 
-export const updateTeam = team => async (dispatch: any, getState: any) => {
+export const updateTeam = (team:any) => async (dispatch: any, getState: any) => {
   dispatch({
     type: UPDATE_TEAM,
     payload: {

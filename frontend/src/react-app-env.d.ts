@@ -99,3 +99,8 @@ declare module 'draggable' {
   const content: any
   export = content
 }
+
+declare module 'for-editor' {
+  const content: any
+  export = content
+}

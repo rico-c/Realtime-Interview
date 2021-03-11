@@ -5,6 +5,9 @@ const router = express.Router();
 router.post("/create", interviewController.create);
 router.get("/createroomid", interviewController.createRoom);
 router.get("/get", interviewController.get);
+router.post("/updatenote", interviewController.updateNote);
+router.get("/getinterview", interviewController.getInterview);
+router.post("/endinterview", interviewController.endInterview);
 
 module.exports = router;
  

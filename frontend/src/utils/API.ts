@@ -14,3 +14,6 @@ export const logoutAPI = `${Host}/user/logout`;
 export const createInterviewAPI = `${Host}/interview/create`;
 export const createRoomidAPI = `${Host}/interview/createroomid`;
 export const getInterviewsAPI = `${Host}/interview/get`;
+export const updateNoteAPI = `${Host}/interview/updatenote`;
+export const getInterviewAPI = `${Host}/interview/getinterview`;
+export const endInterviewAPI = `${Host}/interview/endinterview`;

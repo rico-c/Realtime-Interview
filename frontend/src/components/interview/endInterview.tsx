@@ -1,53 +1,72 @@
-import React, { FC, useCallback, useState, useEffect, useMemo } from "react";
-import { Rate, Form, Input, Button } from "antd";
-import { useSelector, useDispatch } from "react-redux";
-import { fetchInterviews } from "@/actions";
+import React, { FC, useCallback, useState, useEffect, useMemo } from 'react';
+import { Rate, Input, Button } from 'antd';
+import { useHistory } from 'react-router-dom';
+import { endInterview } from '@/actions';
 
 const { TextArea } = Input;
 
 interface EndProp {
-  closeModal?: any
+  closeModal?: any;
+  roomId: any;
 }
 
-const EndInterview: FC<EndProp> = (props) => {
-  const { closeModal } = props;
+const EndInterview: FC<EndProp> = props => {
+  const { closeModal, roomId } = props;
   const [rateNumber, setRateNumber] = useState(0);
-  const rateChange = useCallback(
-    (rate) => {
-      setRateNumber(rate);
-    },
-    [],
-  )
+  const [comment, setComment] = useState('');
 
-  const onFinish = useCallback(
-    (values) => {
-      console.log(values);
-    },
-    [],
-  )
+  const history = useHistory();
+
+  const rateChange = useCallback(rate => {
+    setRateNumber(rate);
+    console.log(rate);
+  }, []);
+
+  const onFinish = useCallback(() => {
+    const endParams = {
+        roomId,
+        rate: rateNumber*10,
+        comment
+    };
+    endInterview(endParams);
+    history.push(`/result/${roomId}`);
+  }, [comment, rateNumber]);
   return (
     <div className="end-interview">
-      <Form
-        requiredMark={false}
-        onFinish={onFinish}>
-        <Form.Item
-          name="rate"
-          label="面试评分"
-          rules={[{ required: true, message: "请为面试者本场表现打分" }]}
+      <Rate
+        allowHalf
+        count={10}
+        onChange={rateChange}
+        style={{ fontSize: '30px' }}
+      />
+      <span
+        className="c-gap-left-large"
+        style={{ fontWeight: 500, fontSize: '20px' }}
+      >
+        {rateNumber ? rateNumber * 10 : '未评'}分
+      </span>
+      <div className="c-gap-top c-gap-bottom">
+        <TextArea
+          rows={4}
+          placeholder="对候选人的评语，可包含优缺点，是否推荐进入下一轮面试"
+          onChange={e => setComment(e.target.value)}
+        />
+      </div>
+
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <Button
+          size="large"
+          htmlType="submit"
+          type="primary"
+          className="c-gap-right"
+          onClick={onFinish}
         >
-          <Rate allowHalf onChange={rateChange} />
-        </Form.Item>
-        <Form.Item
-          name="commentContent"
-          label="面试评价"
-        >
-          <TextArea rows={4} />
-        </Form.Item>
-        <Form.Item>
-          <Button htmlType="submit" type="primary">确认结束面试</Button>
-          <Button onClick={closeModal}>取消</Button>
-        </Form.Item>
-      </Form>
+          确认结束
+        </Button>
+        <Button size="large" onClick={closeModal}>
+          取消
+        </Button>
+      </div>
     </div>
   );
 };

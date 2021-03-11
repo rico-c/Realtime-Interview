@@ -9,7 +9,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { tempuser } from '@/actions/accout';
 import { Radio, Button, Popover, Modal, Input } from 'antd';
 import { UserAddOutlined, ClearOutlined } from '@ant-design/icons';
-import { useSocket } from '@/hooks/useSocket';
+import { useSocket,useInterviewDetail } from '@/hooks';
 // import io from "socket.io-client";
 import { useParams } from 'react-router-dom';
 
@@ -26,6 +26,8 @@ const Interview: FC = () => {
   const [type, setType] = useState('terminal');
   const { roomId } = useParams();
   const ternimalRef = useRef({});
+
+  const interviewDetail = useInterviewDetail(roomId);
 
   useEffect(() => {
     if (userAccount.requested && !userAccount.name) {
@@ -82,7 +84,7 @@ const Interview: FC = () => {
         <Input placeholder="名字将显示给面试官" onChange={updateUsername} />
       </Modal>
       <SplitPane split="vertical" defaultSize={'50%'}>
-        <CodeEditor socket={socket} />
+        <CodeEditor socket={socket} roomId={roomId} />
         <div className="right-area">
           <div className="top-bar">
             <div className="top-left">
@@ -133,7 +135,7 @@ const Interview: FC = () => {
               height: '100%'
             }}
           >
-            <Markdown />
+            <Markdown interviewDetail={interviewDetail} />
           </div>
         </div>
       </SplitPane>
