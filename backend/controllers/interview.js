@@ -151,7 +151,8 @@ class Interview {
         roomId,
         rate,
         comment,
-        status: 3
+        status: 3,
+        endTime: new Date()
       },
       err => {
         if (err) {
@@ -162,7 +163,7 @@ class Interview {
         }
         res.send({
           code: 0,
-          data: '更新成功'
+          data: "更新成功"
         });
       }
     );

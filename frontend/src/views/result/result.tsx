@@ -1,4 +1,4 @@
-import React, { FC, useCallback } from 'react';
+import React, { FC, useCallback, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Result, Button } from 'antd';
 import { useParams } from 'react-router-dom';
@@ -9,14 +9,16 @@ import './result.scss';
 const InterviewResult: FC = () => {
   const { roomId } = useParams();
   const history = useHistory();
+  const reportRef = useRef({});
   const interviewDetail = useInterviewDetail(roomId);
   const goDashboard = useCallback(() => {
     history.push('/dashboard/list');
   }, []);
   const downloadReport = useCallback(() => {
-    const reportHTML = interviewDetail;
+    reportRef.current.download();
   }, []);
   console.log(interviewDetail);
+
   return (
     <div className="result">
       <Result
@@ -33,7 +35,7 @@ const InterviewResult: FC = () => {
         ]}
       />
       <div className="report-wrapper">
-        {interviewDetail && <FinalReport data={interviewDetail} />}
+        {interviewDetail && <FinalReport data={interviewDetail} reportRef={reportRef} />}
       </div>
     </div>
   );

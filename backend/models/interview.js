@@ -8,6 +8,12 @@ const interviewSchema = new Schema({
   time: Date,
   // 创建时间
   createTime: Date,
+  // 实际开始时间
+  startTime: Date,
+  // 结束时间
+  endTime: Date,
+  // 面试耗时,N分钟
+  spendTime: Number,
   // 创建面试者
   creator: String,
   // 最新编辑者
@@ -15,7 +21,9 @@ const interviewSchema = new Schema({
   tags: Array,
   // 1:待开始 2:进行中 3:已结束
   status: Number,
-  // 参加面试者
+  // 面试官信息
+  interviewer: String,
+  // 候选人信息
   joinerEmail: String,
   joinerName: String,
   // 打分

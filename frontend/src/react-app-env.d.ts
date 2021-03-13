@@ -109,3 +109,8 @@ declare module 'dom-to-pdf' {
   const content: any
   export = content
 }
+
+declare module 'markdown' {
+  const content: any
+  export = content
+}
