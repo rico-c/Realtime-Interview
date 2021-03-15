@@ -2,6 +2,7 @@ import React, { FC, useCallback, useState, useEffect, useMemo } from 'react';
 import { Rate, Input, Button } from 'antd';
 import { useHistory } from 'react-router-dom';
 import { endInterview } from '@/actions';
+import { useSelector } from "react-redux";
 
 const { TextArea } = Input;
 
@@ -19,14 +20,16 @@ const EndInterview: FC<EndProp> = props => {
 
   const rateChange = useCallback(rate => {
     setRateNumber(rate);
-    console.log(rate);
   }, []);
+
+  const interviewer = useSelector(state => (state as any).accout.name);
 
   const onFinish = useCallback(() => {
     const endParams = {
         roomId,
         rate: rateNumber*10,
-        comment
+        comment,
+        interviewer
     };
     endInterview(endParams);
     history.push(`/result/${roomId}`);

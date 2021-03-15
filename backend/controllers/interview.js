@@ -142,7 +142,7 @@ class Interview {
   // 结束面试
   async endInterview(req, res) {
     const params = req.body;
-    const { roomId, rate, comment } = params;
+    const { roomId, rate, comment,interviewer } = params;
     await InterviewModel.update(
       {
         roomId
@@ -151,6 +151,7 @@ class Interview {
         roomId,
         rate,
         comment,
+        interviewer,
         status: 3,
         endTime: new Date()
       },
