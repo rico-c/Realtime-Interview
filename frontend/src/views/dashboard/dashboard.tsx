@@ -33,7 +33,7 @@ const Dashboard: FC = () => {
       icon: Monitor,
       path: '/dashboard/list'
     }, {
-      name: '我的题库',
+      name: '题库',
       icon: Folder,
       path: '/dashboard/questions'
     }, {

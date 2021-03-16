@@ -9,7 +9,7 @@ const { TabPane } = Tabs;
 const Setting: FC = () => {
   return (
     <div className="setting-page">
-      <Tabs defaultActiveKey="1" centered size="large">
+      <Tabs defaultActiveKey="1" size="large">
         <TabPane tab="用户设置" key="1">
           <UserSetting />
         </TabPane>

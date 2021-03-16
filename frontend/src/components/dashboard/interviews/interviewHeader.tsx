@@ -155,7 +155,8 @@ const Header: FC = () => {
           <Select
             defaultValue={currentTeam}
             className="team-seletor"
-            bordered={false}
+            bordered={true}
+            size="large"
             onChange={handleTeamChange}
           >
             {teamIds.map(i => (
