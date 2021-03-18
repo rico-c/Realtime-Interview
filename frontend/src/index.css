@@ -271,3 +271,6 @@ code {
   white-space: nowrap;
   text-overflow: ellipsis;
 }
+.float-right {
+    float: right;
+}
