@@ -2,7 +2,7 @@ const InterviewModel = require('../models/interview');
 const dayjs = require('dayjs');
 const { customAlphabet } = require('nanoid');
 
-const nanoid = customAlphabet('1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ', 10);
+const nanoid = customAlphabet('123456789ABCDEFGHIJKLMNPQRSTUVWXYZ', 10);
 
 class Interview {
   constructor() {
