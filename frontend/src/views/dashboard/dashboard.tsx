@@ -10,6 +10,7 @@ import List from '@/views/dashboard/list';
 import Team from '@/views/dashboard/team';
 import Questions from '@/views/dashboard/questions';
 import Settings from '@/views/dashboard/setting';
+import CreateQuestion from '@/components/qustions/CreateQuestion';
 
 import {
   Switch,
@@ -101,6 +102,7 @@ const Dashboard: FC = () => {
             <Route path="/dashboard/team" children={<Team />} />
             <Route path="/dashboard/questions" children={<Questions />} />
             <Route path="/dashboard/settings" children={<Settings />} />
+            <Route path="/dashboard/createquestion" children={<CreateQuestion />} />
           </Switch>
         </Content>
       </Layout>

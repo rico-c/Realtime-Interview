@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useState, useEffect  } from "react";
+import React, { FC, useCallback, useState, useEffect, useRef  } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Input, Button, Select, Skeleton, List } from "antd";
 import { updateTeam } from "@/actions";
@@ -14,6 +14,7 @@ const Team: FC = () => {
   const handleTeamChange = useCallback(async value => {
     dispatch(updateTeam(value));
   }, []);
+  const inputRef = useRef({});
 
   useEffect(() => {
     if (teamIds && teamIds.length >= 1) {
@@ -27,6 +28,10 @@ const Team: FC = () => {
       }])
     }
   }, [teamIds]);
+
+  const addNewMember = useCallback(() => {
+    const email = inputRef.current.input.value;
+  }, [])
 
   return (
     <div className="team-page">
@@ -52,7 +57,8 @@ const Team: FC = () => {
         <Input
           placeholder="输入要添加的团队成员邮箱，例如user@baidu.com"
           size="large"
-          addonAfter={<span>添加</span>}
+          ref={inputRef}
+          addonAfter={<span onClick={addNewMember}>添加</span>}
         />
       </div>
       <div>
