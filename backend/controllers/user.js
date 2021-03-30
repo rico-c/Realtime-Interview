@@ -1,7 +1,8 @@
 const UserModel = require("../models/user");
 const { customAlphabet } = require("nanoid");
+const TeamController = require("./team");
 
-const nanoid = customAlphabet("123456789abcdefghijklmnpqrstuvwxyz", 6);
+const nanoid = customAlphabet("123456789abcdefghijklmnpqrstuvwxyz", 8);
 
 class User {
   constructor() {
@@ -98,12 +99,21 @@ class User {
       });
     } else {
       const userId = nanoid();
+      const result = await TeamController.create({
+        creator: userId,
+        manager: [userId],
+        users: [userId],
+        creator: userId,
+        teamName: `${name}的团队`
+      });
+      const belongTeams = [{ teamName: result.teamName, teamId: result.teamId }];
       await UserModel.create(
         {
           mobile,
           password,
           name,
           userId,
+          belongTeams,
           createTime: new Date()
         },
         err => {
@@ -122,7 +132,8 @@ class User {
           mobile,
           password,
           name,
-          userId
+          userId,
+          belongTeams
         },
         message: "注册成功"
       });

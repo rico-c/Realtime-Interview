@@ -1,11 +1,11 @@
 import React, { FC, useMemo, useEffect, useState, useCallback } from "react";
 import "./invitePopover.scss";
-import { CopyToClipboard } from "react-copy-to-clipboard";
+import CopyToClipboard from "react-copy-to-clipboard";
 import { useParams } from "react-router-dom";
 import { Button, Input } from "antd";
 
 const InvitePopover: FC = () => {
-  const { roomId } = useParams();
+  const { roomId }:any = useParams();
   const [copied, setCopy] = useState(false);
   return (
     <div className="invite-popover">

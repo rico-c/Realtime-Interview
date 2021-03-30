@@ -22,9 +22,9 @@ const Interview: FC = () => {
   const userId = userAccount.userId;
   const [inviteVisible, setInviteVisible] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [username, setUsername] = useState(false);
+  const [username, setUsername] = useState(null);
   const [type, setType] = useState('terminal');
-  const { roomId } = useParams();
+  const { roomId }: any = useParams();
   const ternimalRef = useRef({});
 
   const interviewDetail = useInterviewDetail(roomId);
@@ -51,7 +51,7 @@ const Interview: FC = () => {
   }, []);
 
   const handleInputname = () => {
-    if (username) {
+    if (!!username) {
       dispatch(tempuser(username));
     } else {
       return;
@@ -70,7 +70,7 @@ const Interview: FC = () => {
     };
   }, [isModalVisible]);
 
-  const clearTerminal = useCallback(() => ternimalRef.current.clear(), [])
+  const clearTerminal = useCallback(() => (ternimalRef as any).current.clear(), [])
 
   const ModalFooter = (
     <Button type="primary" onClick={handleInputname} disabled={!username}>

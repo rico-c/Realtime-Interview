@@ -2,7 +2,6 @@ import React, { FC, useCallback, useEffect, useState } from "react";
 import {
   Popover,
   Button,
-  Select,
   Modal,
   Switch,
   Input,
@@ -11,22 +10,21 @@ import {
   Form,
   message
 } from "antd";
+import TeamSelector from '@/components/common/teamSelector';
 import { MailOutlined } from "@ant-design/icons";
-import { CopyToClipboard } from "react-copy-to-clipboard";
+import CopyToClipboard from "react-copy-to-clipboard";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import "moment/locale/zh-cn";
 import locale from "antd/es/date-picker/locale/zh_CN";
 import "./interviewHeader.scss";
-import { createInterview, createRoomid, updateTeam, fetchInterviews } from "@/actions";
-
-const { Option } = Select;
+import { createInterview, createRoomid, fetchInterviews } from "@/actions";
 
 const Header: FC = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const userId = useSelector(state => (state as any).accout.userId);
-  const teamIds = useSelector(state => (state as any).accout.teamId);
+  const namecn = useSelector(state => (state as any).accout.name);
   const currentTeamId = useSelector(state => (state as any).interview.currentTeam);
 
   const [visible, setVisible] = useState(false);
@@ -37,12 +35,6 @@ const Header: FC = () => {
   const currentTeam = useSelector(
     state => (state as any).interview.currentTeam
   );
-
-  useEffect(() => {
-    if (teamIds && teamIds.length >= 1) {
-      dispatch(updateTeam(teamIds[0]));
-    }
-  }, [teamIds]);
 
   const handleCancel = () => {
     setIsModalVisible(false);
@@ -81,11 +73,6 @@ const Header: FC = () => {
     setIsModalVisible(true);
   }, []);
 
-  const handleTeamChange = useCallback(async value => {
-    console.log(value);
-    dispatch(updateTeam(value));
-  }, []);
-
   const onFinish = useCallback(
     async values => {
       console.log(values);
@@ -104,7 +91,6 @@ const Header: FC = () => {
         teamId: currentTeam,
         type: 1
       });
-      console.log(res);
       if (res.code === 0) {
         message.success("创建成功");
         setIsModalVisible(false);
@@ -150,23 +136,7 @@ const Header: FC = () => {
 
   return (
     <div className="header">
-      <div>
-        {teamIds && currentTeam ? (
-          <Select
-            defaultValue={currentTeam}
-            className="team-seletor"
-            bordered={true}
-            size="large"
-            onChange={handleTeamChange}
-          >
-            {teamIds.map(i => (
-              <Option value={i} key={i}>
-                {i}
-              </Option>
-            ))}
-          </Select>
-        ) : null}
-      </div>
+      <TeamSelector />
       <Popover
         content={content}
         placement="bottom"

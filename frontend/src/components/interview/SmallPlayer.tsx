@@ -4,8 +4,9 @@ import { Button } from 'antd';
 import './SmallPlayer.scss';
 
 export interface VideoPlayerProps {
-  videoTrack: ILocalVideoTrack | IRemoteVideoTrack | undefined;
-  audioTrack: ILocalAudioTrack | IRemoteAudioTrack | undefined;
+  videoTrack: ILocalVideoTrack | IRemoteVideoTrack | any;
+  audioTrack: ILocalAudioTrack | IRemoteAudioTrack | any;
+  setSize: any;
 }
 
 const SmallPlayer = (props: VideoPlayerProps) => {

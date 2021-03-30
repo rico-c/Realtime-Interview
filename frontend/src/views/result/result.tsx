@@ -7,7 +7,7 @@ import FinalReport from '@/components/result/finalReport';
 import './result.scss';
 
 const InterviewResult: FC = () => {
-  const { roomId } = useParams();
+  const { roomId }:any = useParams();
   const history = useHistory();
   const reportRef = useRef({});
   const interviewDetail = useInterviewDetail(roomId);
@@ -15,7 +15,7 @@ const InterviewResult: FC = () => {
     history.push('/dashboard/list');
   }, []);
   const downloadReport = useCallback(() => {
-    reportRef.current.download();
+    (reportRef as any).current.download();
   }, []);
   console.log(interviewDetail);
 

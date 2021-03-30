@@ -1,14 +1,19 @@
-import { UPDATE_INTERVIEWS, UPDATE_TEAM } from "./types";
+import { UPDATE_INTERVIEWS, UPDATE_TEAM, UPDATE_WRITTENEXAM } from "./types";
 import axios from "axios";
-import { CreateInterfacrAction, UpdateNoteAPIAction, endInterviewAction } from "@/types";
+import {
+  CreateInterfacrAction,
+  UpdateNoteAPIAction,
+  endInterviewAction
+} from "@/types";
 import {
   createInterviewAPI,
   createRoomidAPI,
   getInterviewsAPI,
   updateNoteAPI,
-  endInterviewAPI
+  endInterviewAPI,
+  getWrittenexamsAPI
 } from "@/utils/API";
-import moment from 'moment';
+import moment from "moment";
 
 axios.defaults.withCredentials = true;
 
@@ -32,8 +37,7 @@ export const updateNote = async (params: UpdateNoteAPIAction) => {
   } else {
     return "";
   }
-}
-;
+};
 export const endInterview = async (params: endInterviewAction) => {
   const res = await axios.post(endInterviewAPI, params);
   if (res.data.code === 0) {
@@ -103,14 +107,40 @@ export const fetchInterviews = (teamId: any) => async (
     dispatch({
       type: UPDATE_INTERVIEWS,
       payload: {
-        list: res.data.data
+        interviewlist: res.data.data
       }
     });
   }
   return res.data;
 };
 
-export const updateTeam = (team:any) => async (dispatch: any, getState: any) => {
+export const fetchWrittenexam = (teamId: any) => async (
+  dispatch: any,
+  getState: any
+) => {
+  if (!teamId) {
+    return;
+  }
+  const res = await axios.get(getWrittenexamsAPI, {
+    params: {
+      teamId
+    }
+  });
+  if (res.data.code === 0) {
+    dispatch({
+      type: UPDATE_WRITTENEXAM,
+      payload: {
+        interviewlist: res.data.data
+      }
+    });
+  }
+  return res.data;
+};
+
+export const updateTeam = (team: any) => async (
+  dispatch: any,
+  getState: any
+) => {
   dispatch({
     type: UPDATE_TEAM,
     payload: {

@@ -4,8 +4,10 @@ import React, { useRef, useEffect, useState, useCallback } from "react";
 import './BigPlayer.scss';
 
 export interface VideoPlayerProps {
-  videoTrack: ILocalVideoTrack | IRemoteVideoTrack | undefined;
+  videoTrack: ILocalVideoTrack | IRemoteVideoTrack | undefined | any;
   audioTrack: ILocalAudioTrack | IRemoteAudioTrack | undefined;
+  setSize: any;
+  leave: any;
 }
 
 const BigPlayer = (props: VideoPlayerProps) => {
@@ -32,12 +34,12 @@ const BigPlayer = (props: VideoPlayerProps) => {
 
   const muteSwitch = useCallback((value) => {
     const volume = value ? 0 : 100;
-    props.audioTrack ?.setVolume(volume);
+    props.audioTrack && props.audioTrack.setVolume(volume);
     setMute(value);
   }, [])
 
   const videoSwitch = useCallback((value) => {
-    props.videoTrack ?.setEnabled(value);
+    props.videoTrack && props.videoTrack.setEnabled(value);
     setVideo(value);
   }, [])
 

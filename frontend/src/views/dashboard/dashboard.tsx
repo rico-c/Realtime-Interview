@@ -6,10 +6,12 @@ import { DownOutlined } from '@ant-design/icons';
 import { logout } from '@/actions';
 import { useHistory } from "react-router-dom";
 
-import List from '@/views/dashboard/list';
+import InterviewList from '@/views/dashboard/list';
 import Team from '@/views/dashboard/team';
 import Questions from '@/views/dashboard/questions';
 import Settings from '@/views/dashboard/setting';
+import Overview from '@/views/dashboard/overview';
+import WrittenExamList from '@/views/dashboard/writtenExam';
 
 import {
   Switch,
@@ -20,6 +22,8 @@ import Setting from '@/assets/imgs/setup.png';
 import Group from '@/assets/imgs/group.png';
 import Monitor from '@/assets/imgs/monitor.png';
 import Folder from '@/assets/imgs/folder.png';
+import Test from '@/assets/imgs/test.png';
+import Talk from '@/assets/imgs/talk.png';
 
 const { Sider, Content } = Layout;
 
@@ -29,9 +33,17 @@ const Dashboard: FC = () => {
   const user = useSelector(state => (state as any).accout);
   const menuData = useMemo(() => {
     return [{
-      name: '面试',
+      name: '总览',
       icon: Monitor,
-      path: '/dashboard/list'
+      path: '/dashboard/overview'
+    }, {
+      name: '面试',
+      icon: Talk,
+      path: '/dashboard/interviewlist'
+    }, {
+      name: '笔试',
+      icon: Test,
+      path: '/dashboard/writtenexamlist'
     }, {
       name: '题库',
       icon: Folder,
@@ -83,7 +95,7 @@ const Dashboard: FC = () => {
                   <div className="icon">
                     <img src={i.icon} />
                   </div>
-                  <div>{i.name}</div>
+                  <div><b>{i.name}</b></div>
                 </Menu.Item>
               ))
             }
@@ -96,8 +108,10 @@ const Dashboard: FC = () => {
         </Sider>
         <Content>
           <Switch>
-            <Route path="/dashboard" exact children={<List />} />
-            <Route path="/dashboard/list" children={<List />} />
+            <Route path="/dashboard" exact children={<InterviewList />} />
+            <Route path="/dashboard/overview" children={<Overview />} />
+            <Route path="/dashboard/interviewlist" children={<InterviewList />} />
+            <Route path="/dashboard/writtenexamlist" children={<WrittenExamList />} />
             <Route path="/dashboard/team" children={<Team />} />
             <Route path="/dashboard/questions" children={<Questions />} />
             <Route path="/dashboard/settings" children={<Settings />} />

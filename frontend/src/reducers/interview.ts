@@ -1,14 +1,24 @@
 import { AnyAction } from "@/types";
-import { UPDATE_INTERVIEWS,UPDATE_TEAM } from "@/actions/types";
+import {
+  UPDATE_INTERVIEWS,
+  UPDATE_TEAM,
+  UPDATE_WRITTENEXAM
+} from "@/actions/types";
 
 const initState = {
-    list: [],
-    currentTeam: null
-}
+  interviewlist: [],
+  writtenexamlist: [],
+  currentTeam: null
+};
 
 const interviewReducer = (state = initState, action: AnyAction) => {
   switch (action.type) {
     case UPDATE_INTERVIEWS:
+      return {
+        ...state,
+        ...action.payload
+      };
+    case UPDATE_WRITTENEXAM:
       return {
         ...state,
         ...action.payload

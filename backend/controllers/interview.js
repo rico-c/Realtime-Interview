@@ -1,8 +1,7 @@
-const InterviewModel = require('../models/interview');
-const dayjs = require('dayjs');
-const { customAlphabet } = require('nanoid');
+const InterviewModel = require("../models/interview");
+const { customAlphabet } = require("nanoid");
 
-const nanoid = customAlphabet('123456789ABCDEFGHIJKLMNPQRSTUVWXYZ', 10);
+const nanoid = customAlphabet("123456789ABCDEFGHIJKLMNPQRSTUVWXYZ", 10);
 
 class Interview {
   constructor() {
@@ -24,7 +23,7 @@ class Interview {
       if (exsitId) {
         res.send({
           code: 1,
-          message: '创建唯一ID失败'
+          message: "创建唯一ID失败"
         });
       } else {
         await InterviewModel.create({
@@ -59,7 +58,7 @@ class Interview {
     if (!exsitId) {
       res.send({
         code: 1,
-        message: '未找到面试 ID，请稍后重试'
+        message: "未找到面试 ID，请稍后重试"
       });
     } else {
       await InterviewModel.update({ roomId: roomId }, params, err => {
@@ -71,14 +70,14 @@ class Interview {
         }
         res.send({
           code: 0,
-          message: '创建成功'
+          message: "创建成功"
         });
       });
     }
   }
 
   // 查询面试列表
-  async get(req, res) {
+  async getinterviews(req, res) {
     const params = req.query;
     const teamId = params.teamId;
     const list = await InterviewModel.where({
@@ -107,7 +106,7 @@ class Interview {
     } else {
       return res.send({
         code: 1,
-        message: '找不到该面试ID'
+        message: "找不到该面试ID"
       });
     }
   }
@@ -133,7 +132,7 @@ class Interview {
         }
         res.send({
           code: 0,
-          data: '更新成功'
+          data: "更新成功"
         });
       }
     );
@@ -142,7 +141,7 @@ class Interview {
   // 结束面试
   async endInterview(req, res) {
     const params = req.body;
-    const { roomId, rate, comment,interviewer } = params;
+    const { roomId, rate, comment, interviewer } = params;
     await InterviewModel.update(
       {
         roomId

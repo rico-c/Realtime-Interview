@@ -14,7 +14,7 @@ interface FinalReportProps {
 
 const FinalReport: FC<FinalReportProps> = props => {
   const { data, reportRef } = props;
-  const { roomId } = useParams();
+  const { roomId }: any = useParams();
   const interviewDetail = useInterviewDetail(roomId);
   console.log(interviewDetail);
 

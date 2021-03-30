@@ -12,7 +12,7 @@ interface MarkdownProps {
 const Markdown: FC<MarkdownProps> = props => {
   const { interviewDetail } = props;
   const [value, setValue] = useState('');
-  const { roomId } = useParams();
+  const { roomId }: any = useParams();
 
   useEffect(() => {
       if(interviewDetail && interviewDetail.note) {

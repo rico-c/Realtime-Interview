@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchInterviews } from '@/actions';
 import moment from 'moment';
-import './interviewTable.scss';
+import './writtenTable.scss';
 
 const InterviewTable: FC = () => {
   const history = useHistory();
@@ -15,7 +15,7 @@ const InterviewTable: FC = () => {
     dispatch(fetchInterviews(teamId));
   }, [teamId]);
 
-  const dataList = useSelector(state => (state as any).interview.interviewlist);
+  const dataList = useSelector(state => (state as any).interview.list);
   const statusDic = useMemo(() => {
     return {
       1: '未开始',
@@ -24,7 +24,7 @@ const InterviewTable: FC = () => {
     };
   }, []);
 
-  const enterInterview = (id:any) => {
+  const enterInterview = id => {
     history.push(`/interview/${id}`);
   };
 
@@ -35,23 +35,21 @@ const InterviewTable: FC = () => {
     //   key: "roomId"
     // },
     {
-      title: '面试者',
-      dataIndex: 'joinerName',
-      key: 'joinerName',
-      render: (joinerName: string) => <span>{joinerName || '暂无'}</span>
+      title: '试卷',
+      dataIndex: 'examName',
+      key: 'examName'
     },
     {
-      title: '面试者邮箱',
-      dataIndex: 'joinerEmail',
-      key: 'joinerEmail',
-      render: (joinerEmail: string) => <span>{joinerEmail || '暂无'}</span>
+      title: '发卷人',
+      dataIndex: 'sender',
+      key: 'sender'
     },
     {
-      title: '面试时间',
-      dataIndex: 'time',
-      key: 'time',
-      sorter: (a: any, b: any) => (new Date(a.time)).getTime() - (new Date(b.time)).getTime(),
-      render: (time: string) => (
+      title: '发卷时间',
+      dataIndex: 'sendtime',
+      key: 'sendtime',
+      sorter: (a, b) => (new Date(a.time)).getTime() - (new Date(b.time)).getTime(),
+      render: time => (
         <span>
           {moment(time).format('MM月DD日 HH:mm')}
           {moment(time).isSame(moment(), 'd') && '（今天）'}
@@ -63,24 +61,7 @@ const InterviewTable: FC = () => {
       dataIndex: 'status',
       key: 'status',
       sorter: true,
-      render: (index:any) => <span>{statusDic[index]}</span>
-    },
-    {
-      title: '创建时间',
-      dataIndex: 'createTime',
-      key: 'createTime',
-      sorter: (a, b) => (new Date(a.time)).getTime() - (new Date(b.time)).getTime(),
-      render: text => <span>{moment(text).format('YYYY-MM-DD')}</span>
-    },
-    {
-      title: '创建人',
-      dataIndex: 'creator',
-      key: 'creator'
-    },
-    {
-      title: '评语',
-      dataIndex: 'comment',
-      key: 'comment'
+      render: index => <span>{statusDic[index]}</span>
     },
     {
       title: '评分',
