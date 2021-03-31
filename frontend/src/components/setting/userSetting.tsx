@@ -14,7 +14,7 @@ const UserSetting: FC = () => {
   return (
     <div>
       <Form name="complex-form" onFinish={onFinish} labelCol={{ span: 8 }} wrapperCol={{ span: 16 }}>
-        <Form.Item label="用户名">
+        <Form.Item label="用户名" name="name">
           <span>{userAccount.name}</span>
           <a href="#API" style={{ margin: '0 8px' }}>
             修改用户名

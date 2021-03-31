@@ -7,8 +7,8 @@ const logger = require("morgan");
 const cors = require("cors");
 const session = require("express-session");
 const router = require("./routes/index.js");
-const db = require("./mongodb");
 const dbConfig = require("./mongodb/config");
+require("./mongodb");
 
 const app = express();
 const MongoStore = require("connect-mongo")(session);
@@ -19,17 +19,17 @@ app.set("view engine", "pug");
 app.use(cors({ credentials: true, origin: "http://127.0.0.1:3000" }));
 app.use(
   session({
-    secret: "realtime-interview",
+    secret: "realtime-interview-secreat",
     resave: false,
     saveUninitialized: false,
     cookie: {
       // secure: true, // https
-      maxAge: 60000 * 60 * 24 //1天
+      maxAge: 60000 * 60 * 24 * 7//7天
     },
     store: new MongoStore({
       url: dbConfig,
       autoRemove: "interval", // 过期自动删除
-      autoRemoveInterval: 24 * 60 * 1 // 1天
+      autoRemoveInterval: 24 * 60 * 7 // 7天
     })
   })
 );

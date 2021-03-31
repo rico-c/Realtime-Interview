@@ -1,7 +1,6 @@
 import React, { FC, useCallback, useEffect, useState } from "react";
 import {
-  Button,
-  message
+  Button
 } from "antd";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -14,18 +13,19 @@ const Header: FC = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const userId = useSelector(state => (state as any).accout.userId);
-  const teamIds = useSelector(state => (state as any).accout.teamId);
-  const currentTeamId = useSelector(state => (state as any).interview.currentTeam);
 
-  const currentTeam = useSelector(
-    state => (state as any).interview.currentTeam
-  );
+  const goManageExam = useCallback(
+    () => {
+      history.push('/dashboard/manageexam');
+    },
+    [],
+  )
 
   return (
     <div className="header">
       <TeamSelector />
       <div>
-        <Button type="primary" size="large">管理试卷</Button>
+        <Button type="primary" size="large" onClick={goManageExam}>管理试卷</Button>
       </div>
     </div>
   );

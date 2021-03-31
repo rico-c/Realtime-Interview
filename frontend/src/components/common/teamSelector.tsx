@@ -4,6 +4,7 @@ import {
 } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { updateTeam } from "@/actions";
+import './teamSelector.scss';
 
 const { Option } = Select;
 

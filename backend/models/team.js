@@ -1,14 +1,16 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+/**
+ * user格式
+ * {
+ *    username: string,
+ *    name: string
+ * }
+ */
+
 const teamSchema = new Schema({
   // 成员
-  /**
-   * {
-   *    username: string,
-   *    name: string
-   * }
-   */
   users: Array,
   // 团队名
   teamName: String,

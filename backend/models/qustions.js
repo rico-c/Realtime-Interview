@@ -11,6 +11,6 @@ const questionSchema = new Schema({
     type: Number
 });
 
-const Question = mongoose.model("question", questionSchema);
+const Question = mongoose.model("questions", questionSchema);
 
 module.exports = Question;

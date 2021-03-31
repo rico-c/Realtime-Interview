@@ -1,20 +1,28 @@
 import React, { FC, useCallback, useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Input, Button, Select, Skeleton, List } from "antd";
+import { Input, Tag, List } from "antd";
 import TeamSelector from "@/components/common/teamSelector";
 import { getTeamInfo } from '@/actions';
+import {
+  UserOutlined,
+  GlobalOutlined
+} from '@ant-design/icons';
 import "./team.scss";
 
 const Team: FC = () => {
   const dispatch = useDispatch();
-  const currentTeam = useSelector((state:any) => state.interview.currentTeam);
+  const currentTeam = useSelector((state: any) => state.interview.currentTeam);
   const [list, setList] = useState([]);
 
   // 获取当前团队中的成员
   useEffect(() => {
     if (currentTeam) {
-      // const teamInfo = dispatch(getTeamInfo(currentTeam)) as any;
-      // setList(teamInfo)
+      const requestTeaminfo = async () => {
+        const teamInfo = await getTeamInfo(currentTeam) as any;
+        console.log(teamInfo);
+        setList(teamInfo.list)
+      }
+      requestTeaminfo();
     }
   }, [currentTeam]);
 
@@ -34,15 +42,14 @@ const Team: FC = () => {
       <div>
         <List
           className="demo-loadmore-list"
-          // loading={initLoading}
           itemLayout="horizontal"
           dataSource={list}
           bordered={true}
           renderItem={item => (
             <List.Item actions={[<a key="list-loadmore-more">删除</a>]}>
-              <Skeleton avatar title={false} loading={item.loading} active>
-                <List.Item.Meta title={item.name} description={item.email} />
-              </Skeleton>
+              <List.Item.Meta title={item.name} description={item.mobile} />
+              <Tag icon={<UserOutlined />} color="#2db7f5">管理员</Tag>
+              <Tag icon={<GlobalOutlined />} color="#87d068">创建人</Tag>
             </List.Item>
           )}
         />
