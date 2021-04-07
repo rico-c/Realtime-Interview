@@ -1,0 +1,16 @@
+.create-question {
+  padding: 20px 50px;
+  .main-area {
+    display: flex;
+    .form-area {
+      flex: 1;
+    }
+    .find-question {
+      width: 300px;
+    }
+    .create-title {
+      font-weight: 500;
+      padding: 10px 0;
+    }
+  }
+}

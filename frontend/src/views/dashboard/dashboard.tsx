@@ -13,6 +13,8 @@ import Settings from '@/views/dashboard/setting';
 import Overview from '@/views/dashboard/overview';
 import WrittenExamList from '@/views/dashboard/writtenExam';
 import ManageExam from '@/views/writtenexam/manageExam';
+import CreateExam from '@/views/writtenexam/createExam';
+import CreateQuestion from '@/views/questions/createQuestion';
 
 import {
   Switch,
@@ -114,6 +116,8 @@ const Dashboard: FC = () => {
             <Route path="/dashboard/interviewlist" children={<InterviewList />} />
             <Route path="/dashboard/writtenexamlist" children={<WrittenExamList />} />
             <Route path="/dashboard/manageexam" children={<ManageExam />} />
+            <Route path="/dashboard/createexam" children={<CreateExam />} />
+            <Route path="/dashboard/createquestion" children={<CreateQuestion />} />
             <Route path="/dashboard/team" children={<Team />} />
             <Route path="/dashboard/questions" children={<Questions />} />
             <Route path="/dashboard/settings" children={<Settings />} />
