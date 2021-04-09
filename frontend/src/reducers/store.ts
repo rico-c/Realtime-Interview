@@ -3,6 +3,8 @@ import thunkMiddleware from "redux-thunk";
 import accoutReducer from "./accout";
 import editorReducer from './editor';
 import interviewReducer from "./interview";
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 
 const reducers = {
   accout: accoutReducer,
@@ -10,10 +12,17 @@ const reducers = {
   interview: interviewReducer
 };
 
+const persistConfig = {
+  key: "root",
+  storage: storage
+};
+
+const myPersistReducer = persistReducer(persistConfig, combineReducers(reducers));
+
 const initalState:any = {};
 
 const store = createStore(
-  combineReducers(reducers),
+  myPersistReducer,
   initalState,
   compose(
     applyMiddleware(thunkMiddleware),
@@ -21,4 +30,5 @@ const store = createStore(
   )
 );
 
+export const persistor = persistStore(store);
 export default store;

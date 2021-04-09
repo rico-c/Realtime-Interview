@@ -20,3 +20,5 @@ export const getInterviewAPI = `${Host}/interview/getinterview`;
 export const endInterviewAPI = `${Host}/interview/endinterview`;
 export const getWrittenexamsAPI = `${Host}/interview/getwrittenexams`;
 export const getTeamInfoAPI = `${Host}/team/getteaminfo`;
+export const createQuestionAPI = `${Host}/question/create`;
+export const getTeamQuestionsAPI = `${Host}/question/getbyteam`;

@@ -1,20 +1,17 @@
 import React, { FC, useCallback } from "react";
 import { List, Avatar, Button } from "antd";
 import { useHistory } from "react-router-dom";
+import TeamSelector from '@/components/common/teamSelector';
+import {useTeamQuestions} from '@/hooks';
+import { useSelector } from 'react-redux';
 import './questions.scss';
 
 const Questions: FC = () => {
   const history = useHistory();
-
-  const questionList = [{
-    language: 'js',
-    questionName: '冒泡排序',
-    creator: 'rico',
-    type: 'select',
-    description: '考察算法能力',
-    content: '请写一个冒泡排序,给定一个函数var function a = () => {return }'
-  }]
-
+  const teamId = useSelector(state => (state as any).interview.currentTeam);
+  const questionList = useTeamQuestions(teamId);
+  
+  console.log(questionList);
   const goCreate = useCallback(
     () => {
       history.push('/dashboard/createquestion');
@@ -24,7 +21,10 @@ const Questions: FC = () => {
 
   return (
     <div className="questions">
-      <div><Button type="primary" size="large" onClick={goCreate}>创建笔试题</Button></div>
+      <div className="questions-header">
+        <TeamSelector />
+        <Button type="primary" size="large" onClick={goCreate}>创建笔试题</Button>
+      </div>
       <div>
         <List
           className="demo-loadmore-list"
@@ -38,10 +38,10 @@ const Questions: FC = () => {
                 avatar={
                   <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
                 }
-                title={<a href="https://ant.design">{item.questionName}</a>}
-                description={item.description}
+                title={<a href="https://ant.design">{item.title}</a>}
+                description={item.content}
               />
-              <div>{item.content}</div>
+              <div>{item.note}</div>
             </List.Item>
           )}
         />

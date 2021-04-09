@@ -5,7 +5,6 @@ import {
   Input,
   Radio
 } from "antd";
-import './judgeQuestion.scss';
 
 const AnswerQuestion: FC = () => {
   const onAnswerChange = () => { }
@@ -14,7 +13,7 @@ const AnswerQuestion: FC = () => {
       <div className="create-title">题目标题：</div>
       <Input />
       <div className="create-title">题目内容：</div>
-      <QuestionEditor />
+      <QuestionEditor setEditorContent={null}/>
       <div className="create-title">选项：</div>
       <div className="single-item">A：正确</div>
       <div className="single-item">B：错误</div>

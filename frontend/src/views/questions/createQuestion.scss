@@ -12,5 +12,15 @@
       font-weight: 500;
       padding: 10px 0;
     }
+    .single-item {
+      display: flex;
+      align-items: center;
+      width: 50%;
+      padding: 10px 0;
+    }
+    .delete-icon {
+      padding-left: 10px;
+      font-size: 20px;
+    }
   }
 }

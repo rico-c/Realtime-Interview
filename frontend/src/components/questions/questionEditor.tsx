@@ -1,20 +1,22 @@
-import React, { FC, useCallback, useEffect, useState } from 'react';
+import React, { FC, useCallback, useEffect, useState, useRef } from 'react';
 import Editor from 'for-editor';
-import { updateNote } from '@/actions/interview';
-import { useParams } from 'react-router-dom';
 
-const QuestionEditor: FC = () => {
+interface QuestionEditorProps {
+  setEditorContent: any;
+}
+
+const QuestionEditor: FC<QuestionEditorProps> = (props) => {
+  const {setEditorContent} = props;
   const [value, setValue] = useState('');
-  const { roomId }: any = useParams();
+  const editorRef = useRef();
 
-  const handleChange = (v: any) => {
-    setValue(v);
-    console.log(v);
-  };
+  const handleChange = useCallback(content => {
+    setEditorContent(content)
+    setValue(content)
+  }, [setEditorContent]);
 
-  const handleSave = useCallback(content => {
-    console.log(content);
-    updateNote({ roomId, content });
+  const handleImg = useCallback(file => {
+    (editorRef as any).current.$img2Url(file.name, 'https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg')
   }, []);
 
   const config = {
@@ -22,7 +24,7 @@ const QuestionEditor: FC = () => {
     lineNum: false,
     subfield: true, //双栏模式
     preview: true, //预览模式
-    height: '200px',
+    height: '250px',
     style: {},
     toolbar: {
       h1: true, // h1
@@ -45,9 +47,10 @@ const QuestionEditor: FC = () => {
     <div className="markdown">
       <Editor
         {...config}
+        ref={editorRef}
         value={value}
         onChange={handleChange}
-        onSave={handleSave}
+        addImg={handleImg}
       />
     </div>
   );
