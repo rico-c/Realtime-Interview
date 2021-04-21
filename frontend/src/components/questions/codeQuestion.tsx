@@ -3,26 +3,71 @@ import QuestionEditor from '@/components/questions/questionEditor';
 import {
   Button,
   Input,
-  Radio
+  Radio,
+  message
 } from "antd";
+import { createQuestion } from '@/actions/question';
+import { useSelector } from 'react-redux';
+import { useHistory } from "react-router-dom";
+import LanguageSelector from '@/components/common/languageSelector';
 
 const CodeQuestion: FC = () => {
-  const onAnswerChange = () => { }
+  const userId = useSelector(state => (state as any).accout.userId);
+  const teamId = useSelector(state => (state as any).interview.currentTeam);
+  const history = useHistory();
+  const [title, setTitle] = useState('');
+  const [note, setNote] = useState('');
+  const [language, setLanguage] = useState(-1);
+  const [editorContent, setEditorContent] = useState('');
+  const finishCreate = useCallback(
+    () => {
+      if (!title) {
+        message.warning('请输入标题');
+        return;
+      }
+      if (language < 0) {
+        message.warning('请选择代码语言');
+        return;
+      }
+      if (!editorContent) {
+        message.warning('请输入题目内容');
+        return;
+      }
+      // 题目类型 1:判断题 2:单选题 3:多选题 4:问答题 5:编程题
+      const requestCreate = async () => {
+        const res = await createQuestion({
+          type: 5,
+          title,
+          content: editorContent,
+          note,
+          language: language,
+          creator: userId,
+          teamId
+        });
+        if (res) {
+          history.push('/dashboard/questions');
+        }
+      }
+      requestCreate();
+    },
+    [title, editorContent],
+  )
+
   return (
     <div className="judge-question">
       <div className="create-title">题目标题：</div>
-      <Input />
+      <Input onChange={e => setTitle(e.target.value)} />
+      <div className="create-title">代码语言：</div>
+      <LanguageSelector changeLanguage={setLanguage} />
       <div className="create-title">题目内容：</div>
-      <QuestionEditor setEditorContent={null}/>
-      <div className="create-title">选项：</div>
-      <div className="single-item">A：正确</div>
-      <div className="single-item">B：错误</div>
-      <div className="create-title">正确答案：</div>
-      <Radio.Group onChange={onAnswerChange}>
-        <Radio value="A">A</Radio>
-        <Radio value="B">B</Radio>
-      </Radio.Group>
-      <div className="c-gap-top"><Button type="primary">完成创建</Button></div>
+      <QuestionEditor setEditorContent={setEditorContent} />
+      <div className="create-title">为问题提供的初始代码：</div>
+      
+      <div className="create-title">参考答案：</div>
+
+      <div className="create-title">备注（选填）：</div>
+      <Input.TextArea onChange={e => setNote(e.target.value)} placeholder="备注内容仅面试官可见" />
+      <div className="c-gap-top"><Button type="primary" onClick={finishCreate}>完成创建</Button></div>
     </div>
   );
 };

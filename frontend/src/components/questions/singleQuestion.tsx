@@ -85,6 +85,7 @@ const SingleQuestion: FC = () => {
         message.warning('请输入题目内容');
         return;
       }
+      // 题目类型 1:判断题 2:单选题 3:多选题 4:问答题 5:编程题
       const requestCreate = async () => {
         const res = await createQuestion({
           type: 2,
