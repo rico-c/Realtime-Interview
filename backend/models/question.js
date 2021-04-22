@@ -17,6 +17,8 @@ const questionSchema = new Schema({
   language: Number,
   //   编程题初始代码
   initialCode: String,
+  //   编程题答案代码
+  answerCode: String,
   //   编程题测试用例代码
   testCode: String,
   //   备注

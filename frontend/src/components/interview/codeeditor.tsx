@@ -70,6 +70,7 @@ const CodeEditor: FC<CodeEditorProp> = props => {
       new Set([editor]),
       provider.awareness
     );
+    console.log(editor);
     provider.connect();
     // 增加自定义快捷键组合
     // editor.addCommand([monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter], () => {

@@ -28,7 +28,7 @@ const LanguageSelector: FC<LSProp> = (props) => {
       <Modal title="选择代码语言" visible={isModalVisible} onCancel={() => setIsModalVisible(false)} footer={null} width="60%">
         <div className="language-selector-modal">
           {languageData.map(item => (
-            <Button className="language-item" type="text" onClick={() => handleSelect(item)}>{item.name}</Button>
+            <Button key={item.name} className="language-item" type="text" onClick={() => handleSelect(item)}>{item.name}</Button>
           ))}
         </div>
       </Modal>

@@ -7,6 +7,7 @@ export interface CreateQuestion {
   creator: string;
   language?: number;
   initialCode?: string;
+  answerCode?: string;
   testCode?: string;
   answer?: string;
   tags?: string[];
