@@ -5,75 +5,76 @@ import { loginAPI, logoutAPI, registerAPI } from "@/utils/API";
 
 axios.defaults.withCredentials = true;
 
-export const login = ({ mobile = null, password = null }: any) => async (
-  dispatch: any,
-  getState: any
-) => {
-  const res: LoginRes = await axios.get(loginAPI, {
-    params: {
-      mobile,
-      password
+export const login =
+  ({
+    mobile = null,
+    password = null,
+  }: {
+    mobile: number | string;
+    password: string | number;
+  }) =>
+  async (dispatch) => {
+    const res: LoginRes = await axios.get(loginAPI, {
+      params: {
+        mobile,
+        password,
+      },
+    });
+    if (res.data.code === 0) {
+      const payload = res.data.data;
+      dispatch({
+        type: UPDATE_USER,
+        payload,
+      });
+    } else {
+      dispatch({
+        type: UPDATE_USER,
+        payload: {},
+      });
     }
-  });
-  if (res.data.code === 0) {
-    const payload = res.data.data;
-    dispatch({
-      type: UPDATE_USER,
-      payload
-    });
-  } else {
-    dispatch({
-      type: UPDATE_USER,
-      payload: {}
-    });
-  }
-  return res.data;
-};
+    return res.data;
+  };
 
-export const register = ({
-  mobile = null,
-  password = null,
-  name = null
-}: any) => async (dispatch: any, getState: any) => {
-  const res: LoginRes = await axios.post(registerAPI, {
-    mobile,
-    password,
-    name
-  });
-  if (res.data.code === 0) {
-    const payload = res.data.data;
-    dispatch({
-      type: UPDATE_USER,
-      payload
+export const register =
+  ({ mobile = null, password = null, name = null }: any) =>
+  async (dispatch: any, getState: any) => {
+    const res: LoginRes = await axios.post(registerAPI, {
+      mobile,
+      password,
+      name,
     });
-  } else {
-    dispatch({
-      type: UPDATE_USER,
-      payload: {}
-    });
-  }
-  return res.data;
-};
+    if (res.data.code === 0) {
+      const payload = res.data.data;
+      dispatch({
+        type: UPDATE_USER,
+        payload,
+      });
+    } else {
+      dispatch({
+        type: UPDATE_USER,
+        payload: {},
+      });
+    }
+    return res.data;
+  };
 
 export const logout = () => async (dispatch: any, getState: any) => {
   const res: LoginRes = await axios.get(logoutAPI);
   if (res.data.code === 0) {
     dispatch({
       type: DELETE_USER,
-      payload: {}
+      payload: {},
     });
   }
   return res.data;
 };
 
-export const tempuser = (name: string) => async (
-  dispatch: any,
-  getState: any
-) => {
-  dispatch({
-    type: UPDATE_USER,
-    payload: {
-      name
-    }
-  });
-};
+export const tempuser =
+  (name: string) => async (dispatch: any, getState: any) => {
+    dispatch({
+      type: UPDATE_USER,
+      payload: {
+        name,
+      },
+    });
+  };

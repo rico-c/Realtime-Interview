@@ -1,7 +1,7 @@
 import React, { FC, useCallback } from "react";
 import { Menu } from 'antd';
 import { useHistory } from "react-router-dom";
-import Icon from "@/assets/imgs/icon.svg";
+import Icon from "@/assets/logo/logo.svg";
 import { useSelector } from 'react-redux';
 import "./header.scss";
 
@@ -18,9 +18,8 @@ const Header: FC = () => {
     <div className="header">
       <div className="icon" onClick={() => history.push('/')}>
         <span className="logo-icon">
-          <img src={Icon} />
+          <img className="logo-txt" src={Icon} />
         </span>
-        <span className="logo-txt">Realtime Interview</span>
       </div>
       <div className="menu">
         <Menu onClick={jumpRoute} selectedKeys={[]} mode="horizontal">

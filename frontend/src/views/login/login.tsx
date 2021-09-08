@@ -1,21 +1,19 @@
-import React, { FC, useMemo, useEffect, useState, useCallback } from 'react';
-import { Tabs } from 'antd';
+import React from 'react';
 import './login.scss';
-import PasswordLogin from '@/components/login/passwordLogin';
-import MobileLogin from '@/components/login/mobileLogin';
-const { TabPane } = Tabs;
+import LoginPage from 'components/login';
+import BG from 'assets/states/work.png';
+import LOGO from 'assets/logo/logo-white.svg';
 
-const Login: FC = () => {
+const Login = () => {
   return (
     <div className="login">
-      <Tabs defaultActiveKey="passwrd" className="tabs" centered>
-        <TabPane tab={<span>手机验证码</span>} key="mobile">
-          <MobileLogin />
-        </TabPane>
-        <TabPane tab={<span>密码登录</span>} key="passwrd">
-          <PasswordLogin />
-        </TabPane>
-      </Tabs>
+      <div className="bg-img">
+        <img src={LOGO} alt="" className="logo" />
+        <img src={BG} alt="" className="bg" />
+      </div>
+      <div className="login-area">
+        <LoginPage />
+      </div>
     </div>
   );
 };

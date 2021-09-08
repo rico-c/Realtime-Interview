@@ -1,0 +1,66 @@
+Arguments: 
+  /usr/local/bin/node /usr/local/bin/yarn
+
+PATH: 
+  /Library/Frameworks/Python.framework/Versions/3.7/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Library/Frameworks/Python.framework/Versions/3.7/bin
+
+Yarn version: 
+  1.10.1
+
+Node version: 
+  12.16.1
+
+Platform: 
+  darwin x64
+
+Trace: 
+  Error: https://github.com/component/global/archive/v2.0.1.tar.gz: ETIMEDOUT
+      at Timeout._onTimeout (/usr/local/lib/node_modules/yarn/lib/cli.js:120826:19)
+      at listOnTimeout (internal/timers.js:549:17)
+      at processTimers (internal/timers.js:492:7)
+
+npm manifest: 
+  {
+    "name": "backend",
+    "version": "0.0.0",
+    "private": true,
+    "scripts": {
+      "serve": "nodemon ./bin/www",
+      "tsocket": "nodemon ./bin/tsocket.js",
+      "ysocket": "PORT=1234 node ./node_modules/y-websocket/bin/server.js"
+    },
+    "dependencies": {
+      "axios": "^0.21.0",
+      "body-parser": "^1.19.0",
+      "connect-mongo": "^3.2.0",
+      "cookie-parser": "~1.4.3",
+      "cors": "^2.8.5",
+      "dayjs": "^1.9.6",
+      "debug": "~2.6.9",
+      "express": "~4.16.0",
+      "express-session": "^1.17.1",
+      "http-errors": "~1.6.2",
+      "lodash": "^4.17.20",
+      "mongodb": "^3.6.3",
+      "mongoose": "^5.10.15",
+      "morgan": "~1.9.0",
+      "nanoid": "^3.1.20",
+      "pm2": "^4.5.0",
+      "pug": "2.0.0-beta11",
+      "sequelize": "^6.3.5",
+      "socket.io": "^3.0.4",
+      "y-leveldb": "^0.1.0",
+      "y-websocket": "^1.3.7",
+      "y-websockets-server": "^9.2.1",
+      "yjs": "^13.4.5"
+    },
+    "devDependencies": {
+      "nodemon": "^2.0.6"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
