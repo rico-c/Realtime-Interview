@@ -9,15 +9,18 @@ export const login =
   ({
     mobile = null,
     password = null,
+    rememberme = true,
   }: {
     mobile: number | string;
     password: string | number;
+    rememberme: boolean;
   }) =>
   async (dispatch) => {
     const res: LoginRes = await axios.get(loginAPI, {
       params: {
         mobile,
         password,
+        rememberme
       },
     });
     if (res.data.code === 0) {

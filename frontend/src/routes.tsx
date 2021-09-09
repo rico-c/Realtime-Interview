@@ -18,7 +18,8 @@ const Routes = () => {
   useEffect(() => {
     dispatch(login({
       mobile: '',
-      password: ''
+      password: '',
+      rememberme: true
     }));
   }, [])
 

@@ -2,24 +2,24 @@ import React, { useState, useCallback } from 'react';
 import { Form, Input, Checkbox, Button } from 'antd';
 import { WidthButton } from '../common/widthBtn';
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
 import { register } from 'actions/accout'
-
+import { useLoginJump } from '@/hooks/useLogin';
+import { checkRegister } from 'utils/checkValidate'
 
 export const Register = ({ setLogin }: { setLogin: (boolean) => void }) => {
   const dispatch = useDispatch();
-  const history = useHistory();
   const [readProtocol, setReadProtocol] = useState(false);
   const [help, setHelp] = useState<string>('');
 
-  const onRegister = async (values) => {
-    const res:any = await dispatch(register(values));
-    if (res.code === 0) {
-      history.push('/dashboard');
-    } else {
-      setHelp(res.message);
+  const onRegister = (values) => {
+    const checkRes = checkRegister(values);
+    if (!checkRes.state) {
+      return setHelp(checkRes.msg);
     }
+    dispatch(register(values));
   }
+
+  useLoginJump();
 
   const onReadProtocol = useCallback((e) => {
     const res = e.target.checked;
@@ -58,12 +58,13 @@ export const Register = ({ setLogin }: { setLogin: (boolean) => void }) => {
             注册
           </WidthButton>
         </Form.Item>
-        <div>
+        <Form.Item>
           <Checkbox
+            name="readProtocol"
             checked={readProtocol}
             onChange={onReadProtocol}
-          /> 阅读并接受《用户协议》及《隐私权保护声明》
-        </div>
+          > 阅读并接受《用户协议》及《隐私权保护声明》</Checkbox>
+        </Form.Item>
       </Form>
       <Button type="link" className="float-right" onClick={() => setLogin(true)}>
         已有帐号？去登录

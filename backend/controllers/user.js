@@ -17,48 +17,56 @@ class User {
       // 检查session登录状态
       if (req.session.userId) {
         const userInfo = await UserModel.findOne({
-          userId
+          userId,
         });
         if (userInfo) {
           res.send({
             code: 0,
-            data: userInfo
+            data: userInfo,
           });
         } else {
           res.send({
             code: 1,
             data: null,
-            message: "需要重新登录"
+            message: "需要重新登录",
           });
         }
         return;
       }
       // 检查用户名密码
-      const { mobile, password } = req.query;
+      const { mobile, password, rememberme } = req.query;
       if (!mobile || !password) {
         res.send({
           code: 1,
           data: null,
-          message: "缺少账号或密码"
+          message: "缺少账号或密码",
         });
         return;
       }
       const userInfo = await UserModel.findOne({
         mobile: mobile,
-        password
+        password,
       });
       if (userInfo) {
-        req.session.userId = userInfo.toObject().userId;
+        if (rememberme === "true") {
+          req.session.userId = userInfo.toObject().userId;
+        } else if (rememberme === "false") {
+          delete req.session;
+          console.log(req.session);
+        } else {
+          req.session.userId = userInfo.toObject().userId;
+        }
+
         res.send({
           code: 0,
           data: userInfo,
-          message: "登录成功"
+          message: "登录成功",
         });
       } else {
         res.send({
           code: 1,
           data: null,
-          message: "账号或密码错误"
+          message: "账号或密码错误",
         });
       }
     } catch (err) {
@@ -71,12 +79,12 @@ class User {
       delete req.session.userId;
       res.send({
         code: 0,
-        message: "退出成功"
+        message: "退出成功",
       });
     } catch (err) {
       res.send({
         code: 1,
-        message: "退出失败"
+        message: "退出失败",
       });
     }
   }
@@ -88,18 +96,18 @@ class User {
       res.send({
         code: 1,
         data: null,
-        message: "缺少必填信息"
+        message: "缺少必填信息",
       });
       return;
     }
     const userInfo = await UserModel.findOne({
-      mobile
+      mobile,
     });
     if (userInfo) {
       res.send({
         code: 1,
         data: null,
-        message: "该手机号已被注册，可直接登录"
+        message: "该手机号已被注册，可直接登录",
       });
     } else {
       const userId = nanoid();
@@ -108,10 +116,10 @@ class User {
         manager: [userId],
         users: [userId],
         creator: userId,
-        teamName: `${name}的团队`
+        teamName: `${name}的团队`,
       });
       const belongTeams = [
-        { teamName: result.teamName, teamId: result.teamId }
+        { teamName: result.teamName, teamId: result.teamId },
       ];
       await UserModel.create(
         {
@@ -120,13 +128,13 @@ class User {
           name,
           userId,
           belongTeams,
-          createTime: new Date()
+          createTime: new Date(),
         },
-        err => {
+        (err) => {
           if (err) {
             return res.send({
               code: 1,
-              message: err
+              message: err,
             });
           }
         }
@@ -136,12 +144,11 @@ class User {
         code: 0,
         data: {
           mobile,
-          password,
           name,
           userId,
-          belongTeams
+          belongTeams,
         },
-        message: "注册成功"
+        message: "注册成功",
       });
     }
   }
