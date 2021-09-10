@@ -1,11 +1,20 @@
 .dashboard {
   height: 100vh;
   .layout {
-    background-color: #fff;
+    background-color: #e8eff7;
     .sider {
       height: 100vh;
-      border-right: 1px solid #f0f0f0;
       text-align: center;
+      background-color: #e8eff7;
+      .logo {
+        padding: 20px 0;
+        img {
+          width: 200px;
+        }
+      }
+      .ant-menu {
+        background-color: #e8eff7;
+      }
       .menu-item {
         height: 85px;
         padding-left: 20px;
@@ -30,7 +39,8 @@
         align-items: center;
         .user-dropdown {
           width: 80%;
-          margin-bottom: 30px;
+          margin-bottom: 50px;
+          cursor: pointer;
         }
       }
     }

@@ -11,7 +11,6 @@ export const Login = ({ setLogin }: { setLogin: (boolean) => void }) => {
   const [help, setHelp] = useState<string>('');
 
   const onFinish = async (values) => {
-    console.log(values);
     const checkRes = checkLogin(values);
     if (!checkRes.state) {
       return setHelp(checkRes.msg);

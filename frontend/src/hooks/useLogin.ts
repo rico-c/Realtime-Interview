@@ -20,6 +20,24 @@ export const useLoginJump = () => {
   }, [userId, history]);
 };
 
+/**
+ * description: 检测登录状态，不合格则跳回登录页
+ * param {*}
+ * return {*}
+ */
+export const useDetectLogin = () => {
+  const history = useHistory();
+  const userId = useSelector<any>((state) => {
+    return state?.accout?.userId;
+  });
+
+  useEffect(() => {
+    if (!userId) {
+      history.push("/login");
+    }
+  }, [userId, history]);
+};
+
 export const useUserInfo = () => {
   const accout = useSelector<any, any>((state) => {
     return state?.accout;
