@@ -3,6 +3,7 @@ import { Table, Tag, Space } from 'antd';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchInterviews } from '@/actions';
+import { CardWrapper } from '@/components/common/cardWrapper';
 import moment from 'moment';
 import './interviewTable.scss';
 
@@ -105,14 +106,15 @@ const InterviewTable: FC = () => {
   ];
 
   return (
-    <div className="table">
+    <CardWrapper>
       <Table
         className="table-list"
+        sticky={true}
         columns={columns}
         dataSource={dataList}
         rowKey={row => row.roomId}
       />
-    </div>
+    </CardWrapper>
   );
 };
 

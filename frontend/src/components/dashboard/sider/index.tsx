@@ -5,10 +5,10 @@ import { CaretDownOutlined } from '@ant-design/icons';
 import { logout } from '@/actions';
 import { useHistory } from "react-router-dom";
 
-import Setting from '@/assets/imgs/setup.png';
-import Group from '@/assets/imgs/group.png';
-import Folder from '@/assets/imgs/folder.png';
-import Talk from '@/assets/imgs/talk.png';
+import Setting from '@/assets/imgs/shezhi.svg';
+import Group from '@/assets/imgs/zuzhi.svg';
+import Folder from '@/assets/imgs/document.svg';
+import Interview from '@/assets/imgs/interview.svg';
 import Logo from 'assets/logo/logo.svg'
 
 import { useUserInfo } from 'hooks/useLogin'
@@ -21,16 +21,18 @@ export const Sider = () => {
   const user = useUserInfo()
   const menuData = useRef([{
     name: '面试',
-    icon: Talk,
+    icon: Interview,
     path: '/dashboard/interviewlist'
   }, {
     name: '题库',
     icon: Folder,
-    path: '/dashboard/questions'
+    path: '/dashboard/questions',
+    develop: true
   }, {
     name: '团队',
     icon: Group,
-    path: '/dashboard/team'
+    path: '/dashboard/team',
+    develop: true
 
   }, {
     name: '设置',
@@ -62,11 +64,9 @@ export const Sider = () => {
         <Menu theme="light" mode="inline" defaultSelectedKeys={['1']} onClick={jumpRoute}>
           {
             menuData.current.map(i => (
-              <Menu.Item key={i.path} className="menu-item">
-                <div className="icon">
-                  <img src={i.icon} alt="" />
-                </div>
-                <div><b>{i.name}</b></div>
+              <Menu.Item key={i.path} className="menu-item" disabled={i.develop}>
+                <img src={i.icon} alt="" className="icon" />
+                <b>{i.name}</b>
               </Menu.Item>
             ))
           }

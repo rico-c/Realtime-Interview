@@ -1,14 +1,14 @@
-import React, { FC, useCallback, useEffect, useState } from "react";
+import React, { FC, useCallback, useState } from "react";
 import {
   Popover,
   Button,
-  Modal,
   Switch,
   Input,
   TimePicker,
   DatePicker,
   Form,
-  message
+  message,
+  Drawer
 } from "antd";
 import TeamSelector from '@/components/common/teamSelector';
 import { MailOutlined } from "@ant-design/icons";
@@ -24,7 +24,6 @@ const Header: FC = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const userId = useSelector(state => (state as any).accout.userId);
-  const namecn = useSelector(state => (state as any).accout.name);
   const currentTeamId = useSelector(state => (state as any).interview.currentTeam);
 
   const [visible, setVisible] = useState(false);
@@ -33,7 +32,7 @@ const Header: FC = () => {
   const [roomId, setroomId] = useState("");
 
   const currentTeam = useSelector(
-    state => (state as any).interview.currentTeam
+    state => (state as any).currentteam
   );
 
   const handleCancel = () => {
@@ -136,24 +135,28 @@ const Header: FC = () => {
 
   return (
     <div className="header">
-      <TeamSelector />
-      <Popover
-        content={content}
-        placement="bottom"
-        trigger="click"
-        visible={visible}
-        onVisibleChange={handleVisibleChange}
-      >
-        <Button type="primary" size="large">
-          新建面试
-        </Button>
-      </Popover>
-      <Modal
-        title="创建预约面试"
-        width={800}
+      <div></div>
+      <div>
+        <TeamSelector />
+        <Popover
+          content={content}
+          placement="bottom"
+          trigger="click"
+          visible={visible}
+          onVisibleChange={handleVisibleChange}
+        >
+          <Button type="primary" size="large">
+            新建面试
+          </Button>
+        </Popover>
+      </div>
+      <Drawer
+        title="新建预约面试"
+        placement="right"
+        width="550"
+        closable={false}
+        onClose={handleCancel}
         visible={isModalVisible}
-        onCancel={handleCancel}
-        footer={null}
       >
         <div style={{ textAlign: "center", marginBottom: "20px" }}>
           <div>
@@ -177,8 +180,8 @@ const Header: FC = () => {
               {copied ? (
                 <Button>已拷贝</Button>
               ) : (
-                  <Button type="primary">拷贝</Button>
-                )}
+                <Button type="primary">拷贝</Button>
+              )}
             </CopyToClipboard>
           </div>
         </div>
@@ -282,7 +285,7 @@ const Header: FC = () => {
             </Button>
           </div>
         </Form>
-      </Modal>
+      </Drawer>
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import { UPDATE_USER, DELETE_USER } from "./types";
+import { UPDATE_USER, DELETE_USER, CURRENT_TEAM } from "./types";
 import { LoginRes } from "@/types";
 import axios from "axios";
 import { loginAPI, logoutAPI, registerAPI } from "@/utils/API";
@@ -20,7 +20,7 @@ export const login =
       params: {
         mobile,
         password,
-        rememberme
+        rememberme,
       },
     });
     if (res.data.code === 0) {
@@ -29,6 +29,11 @@ export const login =
         type: UPDATE_USER,
         payload,
       });
+      dispatch({
+        type: UPDATE_USER,
+        payload,
+      });
+      
     } else {
       dispatch({
         type: UPDATE_USER,
@@ -79,5 +84,13 @@ export const tempuser =
       payload: {
         name,
       },
+    });
+  };
+
+export const currentTeam =
+  (name: string) => async (dispatch: any, getState: any) => {
+    dispatch({
+      type: CURRENT_TEAM,
+      payload: name,
     });
   };

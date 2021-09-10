@@ -3,46 +3,39 @@ import {
   Select
 } from "antd";
 import { useSelector, useDispatch } from "react-redux";
-import { updateTeam } from "@/actions";
+import { currentTeam } from "@/actions";
 import './teamSelector.scss';
 
 const { Option } = Select;
 
 const TeamSelector: FC = () => {
   const dispatch = useDispatch();
-  const belongTeams = useSelector(state => (state as any).accout.belongTeams);
+  const belongTeams = useSelector(state => (state as any).accout.belongTeams) || [];
 
-  const currentTeam = useSelector(
-    state => (state as any).interview.currentTeam
+  const currentTeamId = useSelector(
+    state => (state as any)?.currentteam?.teamId
   );
 
-  useEffect(() => {
-    if (belongTeams && belongTeams.length >= 1) {
-      dispatch(updateTeam(belongTeams[0].teamId));
-    }
-  }, [belongTeams]);
-
   const handleTeamChange = useCallback(async value => {
-    dispatch(updateTeam(value));
+    const teamInfo = belongTeams.find(i => i.teamId === value);
+    dispatch(currentTeam(teamInfo));
   }, []);
 
 
   return (
     <div className="team-selector">
-      {belongTeams && belongTeams.length && currentTeam ? (
-        <Select
-          defaultValue={currentTeam}
-          bordered={true}
-          size="large"
-          onChange={handleTeamChange}
-        >
-          {belongTeams.map((i: any) => (
-            <Option value={i.teamId} key={i.teamId}>
-              {i.teamName}
-            </Option>
-          ))}
-        </Select>
-      ) : null}
+      <Select
+        value={currentTeamId}
+        bordered={false}
+        size="large"
+        onChange={handleTeamChange}
+      >
+        {belongTeams.map((i: any) => (
+          <Option value={i.teamId} key={i.teamId}>
+            {i.teamName}
+          </Option>
+        ))}
+      </Select>
     </div>
   );
 };

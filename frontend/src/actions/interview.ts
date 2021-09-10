@@ -137,14 +137,14 @@ export const fetchWrittenexam = (teamId: any) => async (
   return res.data;
 };
 
-export const updateTeam = (team: any) => async (
-  dispatch: any,
-  getState: any
-) => {
-  dispatch({
-    type: UPDATE_TEAM,
-    payload: {
-      currentTeam: team
-    }
-  });
-};
+// export const updateTeam = (team: any) => async (
+//   dispatch: any,
+//   getState: any
+// ) => {
+//   dispatch({
+//     type: UPDATE_TEAM,
+//     payload: {
+//       currentTeam: team
+//     }
+//   });
+// };

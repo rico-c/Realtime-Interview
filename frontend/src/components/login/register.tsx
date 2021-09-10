@@ -8,7 +8,6 @@ import { checkRegister } from 'utils/checkValidate'
 
 export const Register = ({ setLogin }: { setLogin: (boolean) => void }) => {
   const dispatch = useDispatch();
-  const [readProtocol, setReadProtocol] = useState(false);
   const [help, setHelp] = useState<string>('');
 
   const onRegister = (values) => {
@@ -21,11 +20,6 @@ export const Register = ({ setLogin }: { setLogin: (boolean) => void }) => {
 
   useLoginJump();
 
-  const onReadProtocol = useCallback((e) => {
-    const res = e.target.checked;
-    setReadProtocol(res);
-  }, []);
-
   const HelpCom = () => <div className="help-word">{help}</div>;
 
   return (
@@ -35,6 +29,7 @@ export const Register = ({ setLogin }: { setLogin: (boolean) => void }) => {
         className="form"
         labelCol={{ span: 4 }}
         onFinish={onRegister}
+        initialValues={{ readProtocol: false }}
         size="large"
       >
         <Form.Item name="name" label="姓名">
@@ -58,12 +53,8 @@ export const Register = ({ setLogin }: { setLogin: (boolean) => void }) => {
             注册
           </WidthButton>
         </Form.Item>
-        <Form.Item>
-          <Checkbox
-            name="readProtocol"
-            checked={readProtocol}
-            onChange={onReadProtocol}
-          > 阅读并接受《用户协议》及《隐私权保护声明》</Checkbox>
+        <Form.Item valuePropName="checked" name="readProtocol">
+          <Checkbox> 阅读并接受《用户协议》及《隐私权保护声明》</Checkbox>
         </Form.Item>
       </Form>
       <Button type="link" className="float-right" onClick={() => setLogin(true)}>
