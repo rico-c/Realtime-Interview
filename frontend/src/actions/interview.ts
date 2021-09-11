@@ -1,4 +1,4 @@
-import { UPDATE_INTERVIEWS, UPDATE_TEAM, UPDATE_WRITTENEXAM } from "./types";
+import { UPDATE_INTERVIEWS, UPDATE_WRITTENEXAM } from "./types";
 import axios from "axios";
 import {
   CreateInterfacrAction,

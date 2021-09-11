@@ -52,7 +52,6 @@ class User {
           req.session.userId = userInfo.toObject().userId;
         } else if (rememberme === "false") {
           delete req.session;
-          console.log(req.session);
         } else {
           req.session.userId = userInfo.toObject().userId;
         }

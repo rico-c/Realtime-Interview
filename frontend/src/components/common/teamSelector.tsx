@@ -3,7 +3,7 @@ import {
   Select
 } from "antd";
 import { useSelector, useDispatch } from "react-redux";
-import { currentTeam } from "@/actions";
+import { setCurrentTeam } from "@/actions";
 import './teamSelector.scss';
 
 const { Option } = Select;
@@ -18,8 +18,10 @@ const TeamSelector: FC = () => {
 
   const handleTeamChange = useCallback(async value => {
     const teamInfo = belongTeams.find(i => i.teamId === value);
-    dispatch(currentTeam(teamInfo));
-  }, []);
+    if (currentTeamId !== value) {
+      dispatch(setCurrentTeam(teamInfo));
+    }
+  }, [belongTeams, currentTeamId]);
 
 
   return (
@@ -28,7 +30,7 @@ const TeamSelector: FC = () => {
         value={currentTeamId}
         bordered={false}
         size="large"
-        onChange={handleTeamChange}
+        onSelect={handleTeamChange}
       >
         {belongTeams.map((i: any) => (
           <Option value={i.teamId} key={i.teamId}>

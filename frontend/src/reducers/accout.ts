@@ -1,12 +1,15 @@
 import { AnyAction } from "@/types";
 import { UPDATE_USER, DELETE_USER } from "@/actions/types";
 
-const accoutReducer = (state = {}, action: AnyAction) => {
+const initState = {};
+
+const accoutReducer = (state = initState, action: AnyAction) => {
   switch (action.type) {
     case UPDATE_USER:
       return {
+        ...state,
         ...action.payload,
-        requested: true
+        requested: true,
       };
     case DELETE_USER:
       return {};

@@ -9,12 +9,12 @@ import './interviewTable.scss';
 
 const InterviewTable: FC = () => {
   const history = useHistory();
-  const teamId = useSelector(state => (state as any).interview.currentTeam);
+  const teamId = useSelector(state => (state as any)?.currentteam?.teamId);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchInterviews(teamId));
-  }, [teamId]);
+  }, [teamId, dispatch]);
 
   const dataList = useSelector(state => (state as any).interview.interviewlist);
   const statusDic = useMemo(() => {
@@ -25,7 +25,7 @@ const InterviewTable: FC = () => {
     };
   }, []);
 
-  const enterInterview = (id:any) => {
+  const enterInterview = (id: any) => {
     history.push(`/interview/${id}`);
   };
 
@@ -64,7 +64,7 @@ const InterviewTable: FC = () => {
       dataIndex: 'status',
       key: 'status',
       sorter: true,
-      render: (index:any) => <span>{statusDic[index]}</span>
+      render: (index: any) => <span>{statusDic[index]}</span>
     },
     {
       title: '创建时间',
@@ -110,6 +110,8 @@ const InterviewTable: FC = () => {
       <Table
         className="table-list"
         sticky={true}
+        bordered={false}
+        scroll={{ y: '100%' }}
         columns={columns}
         dataSource={dataList}
         rowKey={row => row.roomId}

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { currentTeam } from "actions";
+import { setCurrentTeam } from "actions";
 
 /**
  * description: 处理登录成功后根据redux状态跳转到控制板
@@ -38,7 +38,7 @@ export const useDetectLogin = () => {
     if (!userId) {
       history.push("/login");
     } else {
-      dispatch(currentTeam(user.belongTeams[0]));
+      dispatch(setCurrentTeam(user.belongTeams[0]));
     }
   }, [user, userId, history, dispatch]);
 };
@@ -51,6 +51,7 @@ export const useUserInfo = () => {
     return {
       isLogined: true,
       name: accout.name,
+      userId: accout.userId,
     };
   } else {
     return {

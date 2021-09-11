@@ -1,4 +1,4 @@
-import { UPDATE_USER, DELETE_USER, CURRENT_TEAM } from "./types";
+import { UPDATE_USER, DELETE_USER } from "./types";
 import { LoginRes } from "@/types";
 import axios from "axios";
 import { loginAPI, logoutAPI, registerAPI } from "@/utils/API";
@@ -29,15 +29,9 @@ export const login =
         type: UPDATE_USER,
         payload,
       });
-      dispatch({
-        type: UPDATE_USER,
-        payload,
-      });
-      
     } else {
       dispatch({
-        type: UPDATE_USER,
-        payload: {},
+        type: DELETE_USER
       });
     }
     return res.data;
@@ -45,7 +39,7 @@ export const login =
 
 export const register =
   ({ mobile = null, password = null, name = null }: any) =>
-  async (dispatch: any, getState: any) => {
+  async (dispatch: any) => {
     const res: LoginRes = await axios.post(registerAPI, {
       mobile,
       password,
@@ -66,7 +60,7 @@ export const register =
     return res.data;
   };
 
-export const logout = () => async (dispatch: any, getState: any) => {
+export const logout = () => async (dispatch: any) => {
   const res: LoginRes = await axios.get(logoutAPI);
   if (res.data.code === 0) {
     dispatch({
@@ -77,20 +71,13 @@ export const logout = () => async (dispatch: any, getState: any) => {
   return res.data;
 };
 
-export const tempuser =
-  (name: string) => async (dispatch: any, getState: any) => {
-    dispatch({
-      type: UPDATE_USER,
-      payload: {
-        name,
-      },
-    });
-  };
+export const tempuser = (name: string) => async (dispatch: any) => {
+  dispatch({
+    type: UPDATE_USER,
+    payload: {
+      name,
+    },
+  });
+};
 
-export const currentTeam =
-  (name: string) => async (dispatch: any, getState: any) => {
-    dispatch({
-      type: CURRENT_TEAM,
-      payload: name,
-    });
-  };
+

@@ -1,14 +1,12 @@
 import { AnyAction } from "@/types";
 import {
   UPDATE_INTERVIEWS,
-  UPDATE_TEAM,
   UPDATE_WRITTENEXAM
 } from "@/actions/types";
 
 const initState = {
   interviewlist: [],
-  writtenexamlist: [],
-  currentTeam: null
+  writtenexamlist: []
 };
 
 const interviewReducer = (state = initState, action: AnyAction) => {
@@ -19,11 +17,6 @@ const interviewReducer = (state = initState, action: AnyAction) => {
         ...action.payload
       };
     case UPDATE_WRITTENEXAM:
-      return {
-        ...state,
-        ...action.payload
-      };
-    case UPDATE_TEAM:
       return {
         ...state,
         ...action.payload

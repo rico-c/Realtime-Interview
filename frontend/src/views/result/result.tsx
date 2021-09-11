@@ -12,7 +12,7 @@ const InterviewResult: FC = () => {
   const reportRef = useRef({});
   const interviewDetail = useInterviewDetail(roomId);
   const goDashboard = useCallback(() => {
-    history.push('/dashboard/list');
+    history.push('/dashboard/interviewlist');
   }, []);
   const downloadReport = useCallback(() => {
     (reportRef as any).current.download();

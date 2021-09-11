@@ -1,12 +1,14 @@
 import { AnyAction } from "@/types";
 import { CURRENT_TEAM } from "@/actions/types";
 
-const teamReducer = (state = null, action: AnyAction) => {
+const initState = { teamName: null, teamId: null };
+
+const teamReducer = (state = initState, action: AnyAction) => {
   switch (action.type) {
     case CURRENT_TEAM:
-      return action.payload;
+      return { ...state, ...action.payload };
     default:
-      return null;
+      return state;
   }
 };
 
