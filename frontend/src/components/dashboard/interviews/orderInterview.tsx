@@ -101,47 +101,22 @@ export const OrderInterview = ({ roomId, setIsModalVisible }: { roomId: string; 
               name="time"
               rules={[{ required: true, message: "请输入时间" }]}
             >
-              <TimePicker format={"HH:mm"} />
-            </Form.Item>
-          </div>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center"
-            }}
-          >
-            <Form.Item
-              name="mailRemind"
-              label="面试前10分钟提醒"
-              valuePropName="checked"
-              initialValue={true}
-            >
-              <Switch
-                defaultChecked
-                checkedChildren="是"
-                unCheckedChildren="否"
-              />
+              <TimePicker format={"HH:mm"} minuteStep={5} showNow />
             </Form.Item>
           </div>
         </div>
         <div style={{ textAlign: "center", width: "70%", margin: "0 auto" }}>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between"
-            }}
-          >
+          <div>
             <Form.Item
               label="面试者信息"
               name="joinerName"
-              style={{ width: "40%" }}
               rules={[{ required: true, message: "请输入姓名" }]}
             >
               <Input placeholder="面试者姓名" />
             </Form.Item>
             <Form.Item
+              label="面试者邮箱"
               name="joinerEmail"
-              style={{ width: "55%" }}
               rules={[{ required: true, message: "请输入邮箱" }]}
             >
               <Input
@@ -159,6 +134,25 @@ export const OrderInterview = ({ roomId, setIsModalVisible }: { roomId: string; 
             <Form.Item
               name="sendMail"
               label="创建后立即发送预约邮件给面试者"
+              valuePropName="checked"
+              initialValue={true}
+            >
+              <Switch
+                defaultChecked
+                checkedChildren="是"
+                unCheckedChildren="否"
+              />
+            </Form.Item>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center"
+            }}
+          >
+            <Form.Item
+              name="mailRemind"
+              label="面试前10分钟提醒"
               valuePropName="checked"
               initialValue={true}
             >

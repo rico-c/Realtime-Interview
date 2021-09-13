@@ -3,7 +3,8 @@ import {
   Popover,
   Button,
   message,
-  Drawer
+  Drawer,
+  Input
 } from "antd";
 import TeamSelector from '@/components/common/teamSelector';
 import { useHistory } from "react-router-dom";
@@ -13,6 +14,8 @@ import "./interviewHeader.scss";
 import { createInterview, createRoomid } from "@/actions";
 import { OrderInterview } from "./orderInterview";
 import { useUserInfo } from "@/hooks/useLogin";
+
+const { Search } = Input;
 
 const Header: FC = () => {
   const history = useHistory();
@@ -60,7 +63,7 @@ const Header: FC = () => {
     setIsModalVisible(true);
   }, []);
 
-
+  const onSearch = () => {}
 
   const popContent = (
     <div
@@ -96,7 +99,10 @@ const Header: FC = () => {
 
   return (
     <div className="header">
-      <div></div>
+      <div className="header-left">
+        <span className="header-title">面试列表</span>
+        <Search size="middle" placeholder="搜索面试者" onSearch={onSearch} style={{ width: 300 }} />
+      </div>
       <div>
         <TeamSelector />
         <Popover

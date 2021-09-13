@@ -3,7 +3,7 @@ import axios from "axios";
 import {
   CreateInterfacrAction,
   UpdateNoteAPIAction,
-  endInterviewAction
+  endInterviewAction,
 } from "@/types";
 import {
   createInterviewAPI,
@@ -11,7 +11,7 @@ import {
   getInterviewsAPI,
   updateNoteAPI,
   endInterviewAPI,
-  getWrittenexamsAPI
+  getWrittenexamsAPI,
 } from "@/utils/API";
 import moment from "moment";
 
@@ -20,8 +20,8 @@ axios.defaults.withCredentials = true;
 export const createRoomid = async (userId: any) => {
   const res = await axios.get(createRoomidAPI, {
     params: {
-      userId
-    }
+      userId,
+    },
   });
   if (res.data.code === 0) {
     return res.data.data;
@@ -52,7 +52,7 @@ export const createInterview = async ({
   id,
   creator,
   teamId,
-  type
+  type,
 }: CreateInterfacrAction) => {
   // 预约创建
   if (info) {
@@ -71,7 +71,7 @@ export const createInterview = async ({
       note: info.note,
       mailRemind: info.mailRemind,
       sendMail: info.sendMail,
-      type: type
+      type: type,
     });
     return res.data;
   }
@@ -85,57 +85,61 @@ export const createInterview = async ({
       createTime: new Date(),
       updater: creator,
       status: type,
-      type: type
+      type: type,
     });
     return res.data;
   }
 };
 
-export const fetchInterviews = (teamId: any) => async (
-  dispatch: any,
-  getState: any
-) => {
-  if (!teamId) {
-    return;
-  }
-  const res = await axios.get(getInterviewsAPI, {
-    params: {
-      teamId
+export const fetchInterviews =
+  (teamId: any) => async (dispatch: any, getState: any) => {
+    if (!teamId) {
+      return;
     }
-  });
-  if (res.data.code === 0) {
-    dispatch({
-      type: UPDATE_INTERVIEWS,
-      payload: {
-        interviewlist: res.data.data
-      }
+    const res = await axios.get(getInterviewsAPI, {
+      params: {
+        teamId,
+      },
     });
-  }
-  return res.data;
-};
+    if (res.data.code === 0) {
+      const dic = {};
+      res.data?.data?.creatorsinfo.forEach((i) => {
+        dic[i.userId] = i.name;
+      });
+      const interviewlist = res.data?.data?.list.map((j) => {
+        j.name = dic[j.creator];
+        return j;
+      });
+      dispatch({
+        type: UPDATE_INTERVIEWS,
+        payload: {
+          interviewlist,
+        },
+      });
+    }
+    return res.data;
+  };
 
-export const fetchWrittenexam = (teamId: any) => async (
-  dispatch: any,
-  getState: any
-) => {
-  if (!teamId) {
-    return;
-  }
-  const res = await axios.get(getWrittenexamsAPI, {
-    params: {
-      teamId
+export const fetchWrittenexam =
+  (teamId: any) => async (dispatch: any, getState: any) => {
+    if (!teamId) {
+      return;
     }
-  });
-  if (res.data.code === 0) {
-    dispatch({
-      type: UPDATE_WRITTENEXAM,
-      payload: {
-        interviewlist: res.data.data
-      }
+    const res = await axios.get(getWrittenexamsAPI, {
+      params: {
+        teamId,
+      },
     });
-  }
-  return res.data;
-};
+    if (res.data.code === 0) {
+      dispatch({
+        type: UPDATE_WRITTENEXAM,
+        payload: {
+          interviewlist: res.data.data,
+        },
+      });
+    }
+    return res.data;
+  };
 
 // export const updateTeam = (team: any) => async (
 //   dispatch: any,

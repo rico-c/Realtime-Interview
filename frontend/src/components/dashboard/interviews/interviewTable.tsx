@@ -19,9 +19,9 @@ const InterviewTable: FC = () => {
   const dataList = useSelector(state => (state as any).interview.interviewlist);
   const statusDic = useMemo(() => {
     return {
-      1: '未开始',
-      2: '进行中',
-      3: '已结束'
+      1: { txt: '未开始', color: 'default'},
+      2: { txt: '进行中', color: '#2db7f5'},
+      3: { txt: '已结束', color: '#87d068'}
     };
   }, []);
 
@@ -30,31 +30,34 @@ const InterviewTable: FC = () => {
   };
 
   const columns = [
-    // {
-    //   title: "ID",
-    //   dataIndex: "roomId",
-    //   key: "roomId"
-    // },
+    {
+      title: "面试间ID",
+      dataIndex: "roomId",
+      key: "roomId"
+    },
     {
       title: '面试者',
       dataIndex: 'joinerName',
       key: 'joinerName',
+      ellipsis: true,
       render: (joinerName: string) => <span>{joinerName || '暂无'}</span>
     },
     {
       title: '面试者邮箱',
       dataIndex: 'joinerEmail',
       key: 'joinerEmail',
+      ellipsis: true,
       render: (joinerEmail: string) => <span>{joinerEmail || '暂无'}</span>
     },
     {
       title: '面试时间',
       dataIndex: 'time',
       key: 'time',
+      ellipsis: true,
       sorter: (a: any, b: any) => (new Date(a.time)).getTime() - (new Date(b.time)).getTime(),
       render: (time: string) => (
         <span>
-          {moment(time).format('MM月DD日 HH:mm')}
+          {moment(time).format('MM-DD HH:mm')}
           {moment(time).isSame(moment(), 'd') && '（今天）'}
         </span>
       )
@@ -64,24 +67,21 @@ const InterviewTable: FC = () => {
       dataIndex: 'status',
       key: 'status',
       sorter: true,
-      render: (index: any) => <span>{statusDic[index]}</span>
+      render: (index: any) => <Tag color={statusDic[index].color}>{statusDic[index].txt}</Tag>
     },
     {
       title: '创建时间',
       dataIndex: 'createTime',
       key: 'createTime',
+      ellipsis: true,
       sorter: (a, b) => (new Date(a.time)).getTime() - (new Date(b.time)).getTime(),
-      render: text => <span>{moment(text).format('YYYY-MM-DD')}</span>
+      render: text => <span>{moment(text).format('MM-DD HH:mm')}</span>
     },
     {
       title: '创建人',
-      dataIndex: 'creator',
-      key: 'creator'
-    },
-    {
-      title: '评语',
-      dataIndex: 'comment',
-      key: 'comment'
+      dataIndex: 'name',
+      ellipsis: true,
+      key: 'name'
     },
     {
       title: '评分',
@@ -115,6 +115,7 @@ const InterviewTable: FC = () => {
         columns={columns}
         dataSource={dataList}
         rowKey={row => row.roomId}
+        pagination={false}
       />
     </CardWrapper>
   );

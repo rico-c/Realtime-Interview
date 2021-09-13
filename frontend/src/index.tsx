@@ -5,10 +5,13 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ConfigProvider } from 'antd';
 import zhCN from 'antd/lib/locale/zh_CN';
+import ErrorBoundary from 'views/errorbundary';
 
 ReactDOM.render(
   (<ConfigProvider locale={zhCN}>
-    <App />
+    <ErrorBoundary >
+      <App />
+    </ErrorBoundary>
   </ConfigProvider>),
   document.getElementById('root')
 );
