@@ -1,9 +1,4 @@
-export default [
-  {
-    id: 46,
-    name: "Bash (5.0.0)",
-    highlight: "bash"
-  },
+const data =  [
   {
     id: 47,
     name: "Basic (FBC 1.07.1)",
@@ -30,16 +25,6 @@ export default [
     highlight: "go"
   },
   {
-    id: 88,
-    name: "Groovy (3.0.3)",
-    highlight: "groovy"
-  },
-  {
-    id: 61,
-    name: "Haskell (GHC 8.8.1)",
-    highlight: "haskell"
-  },
-  {
     id: 62,
     name: "Java (OpenJDK 13.0.1)",
     highlight: "java"
@@ -48,11 +33,6 @@ export default [
     id: 63,
     name: "JavaScript (Node.js 12.14.0)",
     highlight: "javascript"
-  },
-  {
-    id: 78,
-    name: "Kotlin (1.3.70)",
-    highlight: "kotlin"
   },
   {
     id: 64,
@@ -65,24 +45,9 @@ export default [
     highlight: "objective-c"
   },
   {
-    id: 67,
-    name: "Pascal (FPC 3.0.4)",
-    highlight: "pascal"
-  },
-  {
-    id: 85,
-    name: "Perl (5.28.1)",
-    highlight: "perl"
-  },
-  {
     id: 68,
     name: "PHP (7.4.1)",
     highlight: "php"
-  },
-  {
-    id: 43,
-    name: "Plain Text",
-    highlight: ""
   },
   {
     id: 70,
@@ -95,29 +60,9 @@ export default [
     highlight: "python"
   },
   {
-    id: 80,
-    name: "R (4.0.0)",
-    highlight: "r"
-  },
-  {
     id: 72,
     name: "Ruby (2.7.0)",
     highlight: "ruby"
-  },
-  {
-    id: 73,
-    name: "Rust (1.40.0)",
-    highlight: "rust"
-  },
-  {
-    id: 81,
-    name: "Scala (2.13.2)",
-    highlight: "scla"
-  },
-  {
-    id: 82,
-    name: "SQL (SQLite 3.27.2)",
-    highlight: "mysql"
   },
   {
     id: 83,
@@ -135,3 +80,4 @@ export default [
     highlight: ""
   }
 ];
+export default data;

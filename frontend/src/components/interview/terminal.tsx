@@ -36,6 +36,9 @@ const Terminal: FC<TerminalProps> = props => {
         } else if (data.status.id > 3) {
           const resline = data.status.description;
           (xtermRef as any).current.terminal.writeln('\u001b[31;1m' + resline);
+          if (data.compile_output){
+            (xtermRef as any).current.terminal.writeln('\u001b[31;1m' + decode(data.compile_output));
+          }
         }
       });
       console.log('终端 socket 连接成功');

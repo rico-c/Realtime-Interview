@@ -22,11 +22,9 @@ const Markdown: FC<MarkdownProps> = props => {
 
   const handleChange = (v: any) => {
     setValue(v);
-    console.log(v);
   };
 
   const handleSave = useCallback(content => {
-    console.log(content);
     updateNote({ roomId, content });
   }, []);
 

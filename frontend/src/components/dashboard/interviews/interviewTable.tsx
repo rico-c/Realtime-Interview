@@ -19,20 +19,37 @@ const InterviewTable: FC = () => {
   const dataList = useSelector(state => (state as any).interview.interviewlist);
   const statusDic = useMemo(() => {
     return {
-      1: { txt: '未开始', color: 'default'},
-      2: { txt: '进行中', color: '#2db7f5'},
-      3: { txt: '已结束', color: '#87d068'}
+      1: { txt: '未开始', color: 'default' },
+      2: { txt: '进行中', color: '#2db7f5' },
+      3: { txt: '已结束', color: '#87d068' }
     };
   }, []);
 
-  const enterInterview = (id: any) => {
+  const enterInterview = (id: string) => {
     history.push(`/interview/${id}`);
+  };
+
+  const reviewInterview = (id: string) => {
+    console.log(id);
+  };
+
+  const deleteInterview = (id: string) => {
+    console.log(id);
   };
 
   const columns = [
     {
+      title: '状态',
+      dataIndex: 'status',
+      key: 'status',
+      sorter: true,
+      width: '80px',
+      render: (index: any) => <Tag color={statusDic[index].color}>{statusDic[index].txt}</Tag>
+    },
+    {
       title: "面试间ID",
       dataIndex: "roomId",
+      width: '140px',
       key: "roomId"
     },
     {
@@ -46,28 +63,21 @@ const InterviewTable: FC = () => {
       title: '面试者邮箱',
       dataIndex: 'joinerEmail',
       key: 'joinerEmail',
-      ellipsis: true,
+      ellipsis: false,
       render: (joinerEmail: string) => <span>{joinerEmail || '暂无'}</span>
     },
     {
       title: '面试时间',
       dataIndex: 'time',
       key: 'time',
-      ellipsis: true,
+      ellipsis: false,
       sorter: (a: any, b: any) => (new Date(a.time)).getTime() - (new Date(b.time)).getTime(),
       render: (time: string) => (
         <span>
-          {moment(time).format('MM-DD HH:mm')}
-          {moment(time).isSame(moment(), 'd') && '（今天）'}
+          {moment(time).format('MM-DD HH:mm')}&nbsp;
+          {moment(time).isSame(moment(), 'd') && <Tag color="cyan">今天</Tag>}
         </span>
       )
-    },
-    {
-      title: '状态',
-      dataIndex: 'status',
-      key: 'status',
-      sorter: true,
-      render: (index: any) => <Tag color={statusDic[index].color}>{statusDic[index].txt}</Tag>
     },
     {
       title: '创建时间',
@@ -86,20 +96,25 @@ const InterviewTable: FC = () => {
     {
       title: '评分',
       dataIndex: 'rate',
-      key: 'rate'
+      key: 'rate',
+      width: '80px',
+      render: (text, record) => (
+        <span>{text === 0 ? 0 : text ? text : '未评分'}</span>
+      )
     },
     {
       title: '操作',
       key: 'action',
+      width: '165px',
       dataIndex: 'action',
       render: (text, record) => (
         <Space size="middle">
           {record.status === 3 ? (
-            <a onClick={() => enterInterview(record.roomId)}>查看报告</a>
+            <a onClick={() => reviewInterview(record.roomId)}>查看报告{record.note && '/笔记'}</a>
           ) : (
             <a onClick={() => enterInterview(record.roomId)}>进入面试</a>
           )}
-          <a>删除</a>
+          <a onClick={() => deleteInterview(record.roomId)}>删除</a>
         </Space>
       )
     }
