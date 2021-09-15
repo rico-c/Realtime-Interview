@@ -29,7 +29,7 @@ const Markdown: FC<MarkdownProps> = props => {
   }, []);
 
   const config = {
-    placeholder: '支持markdown语法及预览的笔记，仅您的团队成员可见',
+    placeholder: '对方不可见的支持markdown语法的笔记板',
     lineNum: false,
     subfield: true, //双栏模式
     preview: true, //预览模式

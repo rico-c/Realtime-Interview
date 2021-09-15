@@ -2,24 +2,29 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
-
+  background-color: rgb(14, 14, 14);
   .top-bar {
-    height: 44px;
+    height: 50px;
     display: flex;
     align-items: center;
     background-color: rgb(14, 14, 14);
-    flex: 1 0 44px;
+    flex: 1 0 50px;
     padding-left: 15px;
+    img {
+      width: 200px;
+    }
   }
   .bottom-bar {
-    padding: 5px;
-    background-color: #1e1e1e;
+    height: 55px;
+    padding: 0 5px;
+    background-color: #0e0e0e;
     display: flex;
     justify-content: space-between;
     align-items: center;
     .run-btn {
       background-color: rgb(97, 152, 32);
       border-color: rgb(97, 152, 32);
+      width: 90px;
     }
     .run-btn:hover {
       opacity: 0.9;

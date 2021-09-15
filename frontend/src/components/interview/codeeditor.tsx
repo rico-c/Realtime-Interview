@@ -1,10 +1,9 @@
-import React, { FC, useMemo, useEffect, useState, useCallback } from 'react';
+import React, { FC, useMemo, useState, useCallback } from 'react';
 import MonacoEditor from 'react-monaco-editor';
-import Button from '@/components/common/button';
 import LanguageSelector from './languageSelector';
 import SettingSelector from './settingSelector';
 import EndInterview from './endInterview';
-import { Button as AntBtn, Tooltip, Modal } from 'antd';
+import { Button, Modal } from 'antd';
 import { CaretRightFilled } from '@ant-design/icons';
 import { yjsHost } from '@/utils/API';
 import * as Y from 'yjs';
@@ -12,9 +11,13 @@ import { WebsocketProvider } from 'y-websocket';
 import languageList from '@/utils/Languages';
 // @ts-ignore
 import { MonacoBinding } from 'y-monaco';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useRunShortCut } from '@/hooks/useUtils';
 import { runCode } from '@/actions';
+import LOGO from 'assets/logo/logo-white.svg';
+import {
+  LoadingOutlined,
+} from '@ant-design/icons';
 
 import './codeeditor.scss';
 
@@ -25,11 +28,13 @@ interface CodeEditorProp {
 
 const CodeEditor: FC<CodeEditorProp> = props => {
   const { socket, roomId } = props;
-  const dispatch = useDispatch();
   const [code, setCode] = useState('');
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [running, setRunning] = useState(false);
+
   const userAccount = useSelector(state => (state as any).accout);
   const currentLanguage = useSelector(state => (state as any).editor.language);
-  const [isModalVisible, setIsModalVisible] = useState(false);
+
   const currentLanguageHighlight = useMemo(() => {
     const one = languageList.find(i => currentLanguage === i.id);
     return one ? one.highlight : 'javascript';
@@ -59,46 +64,46 @@ const CodeEditor: FC<CodeEditorProp> = props => {
     setCode(newValue);
   }, []);
 
-  // 编辑器初始化
-  const editorDidMount = useCallback((editor, monaco) => {
-    const ydoc = new Y.Doc();
-    const provider = new WebsocketProvider(yjsHost, roomId, ydoc);
-    const type = ydoc.getText('monaco');
-    const monacoBinding = new MonacoBinding(
-      type,
-      editor.getModel(),
-      new Set([editor]),
-      provider.awareness
-    );
-    console.log(editor);
-    provider.connect();
-    // 增加自定义快捷键组合
-    // editor.addCommand([monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter], () => {
-    //   console.log(123);
-    // });
-  }, []);
-
   // 运行编辑器中的代码
   const runCodeCallback = useCallback(async () => {
     if (code) {
-      const res = await dispatch(
-        runCode({
-          source_code: code,
-          language_id: currentLanguage
-        })
-      );
+      setRunning(true);
+      const res = await runCode({
+        source_code: code,
+        language_id: currentLanguage
+      });
 
       if (res && socket) {
         socket.emit('update', Object.assign({ triger: userAccount.name }, res));
       } else {
         console.log('编辑失败');
       }
+      setRunning(false);
     }
   }, [code, currentLanguage, userAccount, socket]);
 
-  const endInterview = useCallback(() => {
+  // 编辑器初始化
+  const editorDidMount = useCallback((editor, monaco) => {
+    const ydoc = new Y.Doc();
+    const provider = new WebsocketProvider(yjsHost, roomId, ydoc);
+    const type = ydoc.getText('monaco');
+    new MonacoBinding(
+      type,
+      editor.getModel(),
+      new Set([editor]),
+      provider.awareness
+    );
+    provider.connect();
+    // 增加自定义快捷键组合
+    // editor?.addCommand([monaco.KeyMod.CtrlCmd | monaco.KeyCode.KEY_I], () => {
+    //   console.log('short cut');
+    //   runCodeCallback();
+    // });
+  }, [roomId, code]);
+
+  const endInterview = () => {
     setIsModalVisible(true);
-  }, []);
+  };
 
   const handleCancel = () => {
     setIsModalVisible(false);
@@ -107,7 +112,8 @@ const CodeEditor: FC<CodeEditorProp> = props => {
   return (
     <div className="editor">
       <div className="top-bar">
-        <Button color="#c33232" onClick={endInterview}>
+        <img src={LOGO} alt="" />
+        <Button danger type="primary" onClick={endInterview}>
           结束面试
         </Button>
       </div>
@@ -129,16 +135,16 @@ const CodeEditor: FC<CodeEditorProp> = props => {
         editorDidMount={editorDidMount}
       />
       <div className="bottom-bar">
-        <Tooltip placement="top" title={os === 'mac' ? '⌘+Enter' : 'Ctl+Enter'}>
-          <AntBtn
-            className="run-btn"
-            type="primary"
-            icon={<CaretRightFilled />}
-            onClick={runCodeCallback}
-          >
-            运行
-          </AntBtn>
-        </Tooltip>
+        {/* <Tooltip placement="top" title={os === 'mac' ? '⌘+i' : 'Ctl+i'}> */}
+        <Button
+          className="run-btn"
+          type="primary"
+          icon={running ? <LoadingOutlined /> : <CaretRightFilled />}
+          onClick={runCodeCallback}
+        >
+          {!running && '运行'}
+        </Button>
+        {/* </Tooltip> */}
         <div className="selectors">
           <LanguageSelector />
           <SettingSelector

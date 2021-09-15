@@ -8,7 +8,7 @@ import { setCurrentTeam } from "actions";
  * param {*}
  * return {*}
  */
-export const useLoginJump = () => {
+export const useLoginJump = (roomId: string | void) => {
   const history = useHistory();
   const userId = useSelector<any>((state) => {
     return state?.accout?.userId;
@@ -16,9 +16,13 @@ export const useLoginJump = () => {
 
   useEffect(() => {
     if (userId) {
-      history.push("/dashboard");
+      if (roomId) {
+        history.push(`/interview/${roomId}`);
+      } else {
+        history.push("/dashboard");
+      }
     }
-  }, [userId, history]);
+  }, [userId, history, roomId]);
 };
 
 /**

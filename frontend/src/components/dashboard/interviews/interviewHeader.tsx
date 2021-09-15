@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useState } from "react";
+import React, { useCallback, useState } from "react";
 import {
   Popover,
   Button,
@@ -17,7 +17,10 @@ import { useUserInfo } from "@/hooks/useLogin";
 
 const { Search } = Input;
 
-const Header: FC = () => {
+const Header = (params: {
+  setQuery: any
+}) => {
+  const { setQuery } = params;
   const history = useHistory();
   const userId = useUserInfo()['userId'];
 
@@ -63,7 +66,10 @@ const Header: FC = () => {
     setIsModalVisible(true);
   }, []);
 
-  const onSearch = () => {}
+  const onSearch = (value) => {
+    console.log(value);
+    setQuery(value);
+  }
 
   const popContent = (
     <div
@@ -101,7 +107,7 @@ const Header: FC = () => {
     <div className="header">
       <div className="header-left">
         <span className="header-title">面试列表</span>
-        <Search size="middle" placeholder="搜索面试者" onSearch={onSearch} style={{ width: 300 }} />
+        <Search allowClear size="middle" placeholder="搜索面试者" onSearch={onSearch} style={{ width: 300 }} />
       </div>
       <div>
         <TeamSelector />

@@ -4,7 +4,9 @@ import { WidthButton } from '../common/widthBtn';
 import { useDispatch } from "react-redux";
 import { register } from 'actions/accout'
 import { useLoginJump } from '@/hooks/useLogin';
+import { useParams } from "react-router-dom";
 import { checkRegister } from 'utils/checkValidate'
+import { InterviewRoute } from 'types';
 
 export const Register = ({ setLogin }: { setLogin: (boolean) => void }) => {
   const dispatch = useDispatch();
@@ -17,8 +19,9 @@ export const Register = ({ setLogin }: { setLogin: (boolean) => void }) => {
     }
     dispatch(register(values));
   }
+  const { roomId } = useParams<InterviewRoute>();
 
-  useLoginJump();
+  useLoginJump(roomId);
 
   const HelpCom = () => <div className="help-word">{help}</div>;
 

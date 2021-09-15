@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import AgoraRTC from 'agora-rtc-sdk-ng';
 import useAgora from '@/hooks/useAgora';
 import { Button } from 'antd';
@@ -45,7 +45,7 @@ const VideoCall = () => {
       {isJoined ? (
         <Button onClick={handleLeave}>退出通话</Button>
       ) : (
-        <Button onClick={handleJoin} icon={<PhoneOutlined />}>开始通话</Button>
+        <Button className="make-call" onClick={handleJoin} type="primary" icon={<PhoneOutlined />}>开始通话</Button>
       )}
       {isJoined && (
         <div className="player-container">

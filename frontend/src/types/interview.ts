@@ -16,3 +16,7 @@ export interface endInterviewAction {
   rate: number,
   comment: string
 }
+
+export interface InterviewRoute {
+  roomId?: string;
+}

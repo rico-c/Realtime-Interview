@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useState, useEffect, useMemo } from 'react';
+import React, { useCallback, useState, useEffect, useMemo } from 'react';
 import { Table, Tag, Space } from 'antd';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
@@ -7,7 +7,8 @@ import { CardWrapper } from '@/components/common/cardWrapper';
 import moment from 'moment';
 import './interviewTable.scss';
 
-const InterviewTable: FC = () => {
+const InterviewTable = (params: { query: string }) => {
+  const query = params.query;
   const history = useHistory();
   const teamId = useSelector(state => (state as any)?.currentteam?.teamId);
   const dispatch = useDispatch();
@@ -17,6 +18,15 @@ const InterviewTable: FC = () => {
   }, [teamId, dispatch]);
 
   const dataList = useSelector(state => (state as any).interview.interviewlist);
+  const queryDataList = useMemo(() => {
+    if (query) {
+      return dataList.filter(i => {
+        return i.joinerName ? i.joinerName.indexOf(query) !== -1 : false;
+      })
+    } else {
+      return dataList;
+    }
+  }, [dataList, query]);
   const statusDic = useMemo(() => {
     return {
       1: { txt: '未开始', color: 'default' },
@@ -128,7 +138,7 @@ const InterviewTable: FC = () => {
         bordered={false}
         scroll={{ y: '100%' }}
         columns={columns}
-        dataSource={dataList}
+        dataSource={queryDataList}
         rowKey={row => row.roomId}
         pagination={false}
       />

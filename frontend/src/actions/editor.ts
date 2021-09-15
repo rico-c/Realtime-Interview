@@ -4,16 +4,13 @@ import axios from "axios";
 import { runCodeAPI } from "@/utils/API";
 import { encode } from "@/utils/EnCode";
 
-export const runCode = ({ source_code, language_id }: RunCode) => async (
-  dispatch: any,
-  getState: any
-) => {
+export const runCode = async ({ source_code, language_id }: RunCode) => {
   axios.defaults.withCredentials = false;
   const judgeRes = await axios.post(
     runCodeAPI + "?wait=true&base64_encoded=true",
     {
       source_code: encode(source_code),
-      language_id
+      language_id,
     }
   );
   // const token = judgeRes.data.token;
@@ -33,21 +30,19 @@ export const runCode = ({ source_code, language_id }: RunCode) => async (
   //   }
   // }, 1000);
   // if (judgeRes.data && judgeRes.data.status && judgeRes.data.status.id >= 2) {
-    return judgeRes.data;
+  return judgeRes.data;
   // }
   // else {
   //   return false;
   // }
 };
 
-export const updateLang = (language_id: number) => async (
-  dispatch: any,
-  getState: any
-) => {
-  dispatch({
-    type: UPDATE_LANG,
-    payload: {
-      language: language_id
-    }
-  });
-};
+export const updateLang =
+  (language_id: number) => async (dispatch: any, getState: any) => {
+    dispatch({
+      type: UPDATE_LANG,
+      payload: {
+        language: language_id,
+      },
+    });
+  };
