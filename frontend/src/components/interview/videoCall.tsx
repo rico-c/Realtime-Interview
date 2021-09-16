@@ -23,11 +23,12 @@ const VideoCall = () => {
     remoteUsers
   } = useAgora(client);
   const myName = useSelector(state => (state as any).accout.name);
+  
   const agoraCofig = {
     appId: '3df1d4e0372c4892a380fe3399f49e2d',
-    channel: 'test0308',
+    channel: 'testchannel',
     token:
-      '0063df1d4e0372c4892a380fe3399f49e2dIACeZIVp6eSZF9SwAA09rUslpeFQqd/yob6QzrOjbiXPwCQ3EDQAAAAAEAAdwi3R05lHYAEAAQDTmUdg'
+      '0063df1d4e0372c4892a380fe3399f49e2dIACu/7XOgra+eU1YKnx/CsxMrr7rZ0cr+6ILtYD3Q6Y4mupuE8wAAAAAEADkBngOR0tEYQEAAQBGS0Rh'
   };
 
   const handleJoin = useCallback(() => {

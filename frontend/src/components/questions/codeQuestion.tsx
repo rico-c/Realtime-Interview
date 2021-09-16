@@ -38,12 +38,10 @@ const CodeQuestion: FC = () => {
   }, []);
 
   const onInitChange = useCallback((newValue, e) => {
-    console.log(newValue)
     setInitCode(newValue);
   }, []);
 
   const onAnswerChange = useCallback((newValue, e) => {
-    console.log(newValue)
     setAnswerCode(newValue);
   }, []);
 

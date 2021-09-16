@@ -17,7 +17,6 @@ const InterviewResult: FC = () => {
   const downloadReport = useCallback(() => {
     (reportRef as any).current.download();
   }, []);
-  console.log(interviewDetail);
 
   return (
     <div className="result">

@@ -2,8 +2,9 @@ import React, { useCallback, useState, useEffect, useMemo } from 'react';
 import { useHistory, useParams } from "react-router-dom";
 import { tempuser } from '@/actions/accout';
 import { useDispatch } from 'react-redux';
-import { Button, Modal, Input } from 'antd';
+import { Button, Modal, Input, notification } from 'antd';
 import { InterviewRoute } from 'types';
+import { SmileOutlined, ExportOutlined } from '@ant-design/icons';
 
 export const UserTab = ({ userAccount, socket }: { userAccount: any, socket: any }) => {
   const dispatch = useDispatch();
@@ -42,18 +43,34 @@ export const UserTab = ({ userAccount, socket }: { userAccount: any, socket: any
     setUsername(n.target.value);
   }, []);
 
+  const openNotification = ({ username, state }: { username: string, state: 0 | 1 }) => {
+    const dic = [{ message: '上线', icon: <SmileOutlined style={{ color: '#108ee9' }} /> }, { message: '下线', icon: <ExportOutlined /> }];
+    notification.open({
+      message: `${username}已${dic[state].message}`,
+      icon: dic[state].icon,
+      top: 60
+    });
+  };
+
   useEffect(() => {
     socket?.on('presentusers', users => {
-      setOtherUsers(users)
+      setOtherUsers(oldusers => {
+        return users
+      })
     })
 
     socket?.on('userjoined', username => {
       setOtherUsers(old => {
-        if(!old.includes(username)) {
+        if (!old.includes(username)) {
           return old.concat(username);
         }
         return old;
       })
+      openNotification({ username, state: 0 })
+    })
+
+    socket?.on('userleft', username => {
+      openNotification({ username, state: 1 })
     })
   }, [socket])
 
@@ -79,7 +96,7 @@ export const UserTab = ({ userAccount, socket }: { userAccount: any, socket: any
       <Modal {...modalProps} footer={ModalFooter}>
         <Input placeholder="您的名字将显示给面试官" onChange={updateUsername} />
       </Modal>
-      {otherUsers.length ? otherUsers.map(i => <span className="c-gap-left-large" >
+      {otherUsers.length ? otherUsers.filter(j => j !== myName).map(i => <span className="c-gap-left-large" key={i}>
         <i className="online-icon" />
         <span className="c-gap-left-small">{i}</span>
       </span >) : null}

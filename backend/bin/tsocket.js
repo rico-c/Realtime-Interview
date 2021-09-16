@@ -9,8 +9,6 @@ const io = require("socket.io")(http);
 let users = [];
 const workspaces = io.of(/^\/\w+$/);
 workspaces.on("connection", (socket) => {
-  console.log("users");
-  console.log(users);
   setTimeout(() => {
     socket.emit("presentusers", users);
   }, 500);
@@ -23,7 +21,6 @@ workspaces.on("connection", (socket) => {
   });
 
   socket.on("newuser", (username) => {
-    console.log("newuser");
     if (!users.includes(username) && !!username) {
       socket.username = username;
       users.push(username);
@@ -32,9 +29,9 @@ workspaces.on("connection", (socket) => {
   });
 
   socket.on("disconnect", () => {
-    console.log("disconnect");
     if (users.includes(socket.username)) {
       users.splice(users.indexOf(socket.username), 1);
+      socket.broadcast.emit("presentusers", users);
       socket.broadcast.emit("userleft", socket.username);
     }
   });

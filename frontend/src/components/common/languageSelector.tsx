@@ -13,7 +13,6 @@ const LanguageSelector: FC<LSProp> = (props) => {
   const [currentLanguage, setLanguage] = useState(null);
   const handleSelect = useCallback(
     (item) => {
-      console.log(item);
       changeLanguage(item.id);
       setLanguage(item);
       setIsModalVisible(false);

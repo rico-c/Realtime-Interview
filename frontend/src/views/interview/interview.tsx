@@ -23,8 +23,6 @@ const Interview: FC = () => {
   const ternimalRef = useRef({});
   const interviewDetail = useInterviewDetail(roomId);
   const socket = useSocket(roomId);
-  const listeners = useMemo(() => socket?.listenersAny(), [socket]);
-  console.log(listeners);
   const handleInviteVisibleChange = useCallback(value => {
     setInviteVisible(value);
   }, []);

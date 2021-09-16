@@ -11,7 +11,6 @@ const Questions: FC = () => {
   const teamId = useSelector(state => (state as any).interview.currentTeam);
   const questionList = useTeamQuestions(teamId);
   
-  console.log(questionList);
   const goCreate = useCallback(
     () => {
       history.push('/dashboard/createquestion');
