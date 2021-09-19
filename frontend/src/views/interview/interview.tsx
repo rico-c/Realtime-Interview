@@ -69,7 +69,8 @@ const Interview: FC = () => {
           <div
             style={{
               display: type === 'terminal' ? 'block' : 'none',
-              height: '100%'
+              height: '100%',
+              overflowY: 'scroll'
             }}
           >
             <Terminal socket={socket} ternimalRef={ternimalRef} />
@@ -77,7 +78,8 @@ const Interview: FC = () => {
           <div
             style={{
               display: type === 'note' ? 'block' : 'none',
-              height: '100%'
+              height: '100%',
+              overflow: 'scroll'
             }}
           >
             <Markdown interviewDetail={interviewDetail} />

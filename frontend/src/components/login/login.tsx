@@ -5,8 +5,7 @@ import { WidthButton } from '../common/widthBtn';
 import { login } from 'actions/accout'
 import { checkLogin } from 'utils/checkValidate'
 import { useLoginJump } from '@/hooks/useLogin';
-import { useParams } from "react-router-dom";
-import { InterviewRoute } from 'types';
+import { getUrlParam } from 'utils/GetUrlParams';
 
 export const Login = ({ setLogin }: { setLogin: (boolean) => void }) => {
   const dispatch = useDispatch();
@@ -20,7 +19,7 @@ export const Login = ({ setLogin }: { setLogin: (boolean) => void }) => {
     dispatch(login(values));
   };
 
-  const { roomId } = useParams<InterviewRoute>();
+  const roomId = getUrlParam('r');
   useLoginJump(roomId);
 
   const HelpCom = () => <div className="help-word">{help}</div>;

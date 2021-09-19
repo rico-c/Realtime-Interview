@@ -15,7 +15,7 @@ export const UserTab = ({ userAccount, socket }: { userAccount: any, socket: any
   const [otherUsers, setOtherUsers] = useState([]);
   const { roomId } = useParams<InterviewRoute>();
   const jumpLogin = useCallback(() => {
-    history.push(`/login/${roomId}`);
+    history.push(`/login?r=${roomId}`);
   }, [])
 
   const handleInputname = useCallback(() => {

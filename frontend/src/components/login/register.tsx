@@ -1,12 +1,11 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import { Form, Input, Checkbox, Button } from 'antd';
 import { WidthButton } from '../common/widthBtn';
 import { useDispatch } from "react-redux";
 import { register } from 'actions/accout'
 import { useLoginJump } from '@/hooks/useLogin';
-import { useParams } from "react-router-dom";
 import { checkRegister } from 'utils/checkValidate'
-import { InterviewRoute } from 'types';
+import { getUrlParam } from 'utils/GetUrlParams';
 
 export const Register = ({ setLogin }: { setLogin: (boolean) => void }) => {
   const dispatch = useDispatch();
@@ -19,8 +18,7 @@ export const Register = ({ setLogin }: { setLogin: (boolean) => void }) => {
     }
     dispatch(register(values));
   }
-  const { roomId } = useParams<InterviewRoute>();
-
+  const roomId = getUrlParam('r');
   useLoginJump(roomId);
 
   const HelpCom = () => <div className="help-word">{help}</div>;

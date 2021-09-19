@@ -35,6 +35,10 @@ workspaces.on("connection", (socket) => {
       socket.broadcast.emit("userleft", socket.username);
     }
   });
+
+  socket.on("changelanguage", (data) => {
+    socket.broadcast.emit("updatelanguage", data);
+  });
 });
 
 http.listen(3002, function () {

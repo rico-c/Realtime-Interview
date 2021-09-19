@@ -5,7 +5,10 @@ export * from './interview'
 export * from './question'
 
 export interface ReduxState {
-  accout? :any;
+  accout? : {
+    userId: string;
+    name: string;
+  };
   editor?: any;
   interview?: any;
   currentteam?: any;

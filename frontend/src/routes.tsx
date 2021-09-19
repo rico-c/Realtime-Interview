@@ -31,7 +31,7 @@ const Routes = () => {
         <Switch>
           <Route path="/" exact children={<Home />} />
           <Route path="/home" children={<Home />} />
-          <Route path="/login/:roomId" children={<Login />} />
+          <Route path="/login" children={<Login />} />
           <Route path="/interview/:roomId" children={<Interview />} />
           <Route path="/dashboard" children={<Dashboard />} />
           <Route path="/result/:roomId" children={<Result />} />

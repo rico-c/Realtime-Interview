@@ -146,7 +146,7 @@ const CodeEditor: FC<CodeEditorProp> = props => {
         </Button>
         {/* </Tooltip> */}
         <div className="selectors">
-          <LanguageSelector />
+          <LanguageSelector socket={socket} userAccount={userAccount} />
           <SettingSelector
             setFontsize={setFontsize}
             setSuggestion={setSuggestion}

@@ -1,4 +1,4 @@
-import React, { FC, useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import languageList from "@/utils/Languages";
 import { Select } from "antd";
 import { updateLang } from "@/actions";
@@ -8,12 +8,24 @@ import { ReduxState } from 'types';
 const { Option } = Select;
 
 
-const LanguageSelector: FC = () => {
+const LanguageSelector = ({ socket, userAccount }: { socket: any, userAccount: any }) => {
   const dispatch = useDispatch();
+  const defaultValue = useSelector<ReduxState>(state => state?.editor?.language) || 63;
+  const name = userAccount?.name || '未知用户';
+  const isLogin = userAccount?.useId;
   const onChange = useCallback((id) => {
     dispatch(updateLang(id));
   }, [dispatch]);
-  const defaultValue = useSelector<ReduxState>(state => state.editor.language) || 63;
+
+  // useEffect(() => {
+  //   if (isLogin) {
+  //     socket.emit('changelanguage', {
+  //       id: defaultValue,
+  //       name
+  //     })
+  //   }
+  // }, [defaultValue])
+
   return (
     <div className="language-selector">
       <Select
