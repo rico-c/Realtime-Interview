@@ -34,9 +34,11 @@ export const runCodeAPI = `${judgeHost}/submissions`;
 
 // express接口
 export const APIHost = `http://${APIHostIp}:3001`;
+
 export const loginAPI = `${APIHost}/user/login`;
 export const logoutAPI = `${APIHost}/user/logout`;
 export const registerAPI = `${APIHost}/user/register`;
+
 export const createInterviewAPI = `${APIHost}/interview/create`;
 export const createRoomidAPI = `${APIHost}/interview/createroomid`;
 export const getInterviewsAPI = `${APIHost}/interview/getinterviews`;
@@ -44,6 +46,9 @@ export const updateNoteAPI = `${APIHost}/interview/updatenote`;
 export const getInterviewAPI = `${APIHost}/interview/getinterview`;
 export const endInterviewAPI = `${APIHost}/interview/endinterview`;
 export const getWrittenexamsAPI = `${APIHost}/interview/getwrittenexams`;
-export const getTeamInfoAPI = `${APIHost}/team/getteaminfo`;
+
 export const createQuestionAPI = `${APIHost}/question/create`;
 export const getTeamQuestionsAPI = `${APIHost}/question/getbyteam`;
+
+export const addTeamMemberAPI = `${APIHost}/team/addmember`;
+export const getTeamInfoAPI = `${APIHost}/team/getteaminfo`;

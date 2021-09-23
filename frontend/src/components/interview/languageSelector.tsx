@@ -8,7 +8,7 @@ import { ReduxState } from 'types';
 const { Option } = Select;
 
 
-const LanguageSelector = ({ socket, userAccount }: { socket: any, userAccount: any }) => {
+const LanguageSelector = ({ socket, userAccount }: { socket?: any, userAccount?: any }) => {
   const dispatch = useDispatch();
   const defaultValue = useSelector<ReduxState>(state => state?.editor?.language) || 63;
   const name = userAccount?.name || '未知用户';

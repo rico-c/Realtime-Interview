@@ -21,7 +21,27 @@ class Team {
         companyId,
         manager,
         creator,
-        createTime: new Date()
+        createTime: new Date(),
+      });
+      return res;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  // 新增成员
+  async addmember(params) {
+    try {
+      const { teamId, mobile } = params;
+      const res = await TeamModel.create({
+        users,
+        teamName,
+        teamId: nanoid(),
+        company,
+        companyId,
+        manager,
+        creator,
+        createTime: new Date(),
       });
       return res;
     } catch (err) {
@@ -34,7 +54,7 @@ class Team {
     try {
       const { teamId } = req.query;
       const result = await TeamModel.findOne({
-        teamId
+        teamId,
       });
       if (result) {
         const users = result.users;
@@ -43,13 +63,13 @@ class Team {
           .select("name userId mobile");
         res.send({
           code: 0,
-          data: { info: result, list: usersDetail }
+          data: { info: result, list: usersDetail },
         });
       } else {
         res.send({
           code: 1,
           data: null,
-          message: "找不到该团队"
+          message: "找不到该团队",
         });
       }
     } catch (err) {

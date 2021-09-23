@@ -240,6 +240,10 @@ code {
   color: #2b99ff;
 }
 
+.c-font-bold {
+  font-weight: 500;
+}
+
 // 限制文字显示行数类
 .c-line-clamp2,
 .c-line-clamp3,
