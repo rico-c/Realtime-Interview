@@ -51,4 +51,6 @@ export const createQuestionAPI = `${APIHost}/question/create`;
 export const getTeamQuestionsAPI = `${APIHost}/question/getbyteam`;
 
 export const addTeamMemberAPI = `${APIHost}/team/addmember`;
+export const removeTeammemberAPI = `${APIHost}/team/removemember`;
 export const getTeamInfoAPI = `${APIHost}/team/getteaminfo`;
+export const renameTeamAPI = `${APIHost}/team/rename`;

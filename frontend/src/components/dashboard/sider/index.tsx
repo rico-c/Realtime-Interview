@@ -23,10 +23,11 @@ export const Sider = () => {
     name: '面试',
     icon: Interview,
     path: '/dashboard/interviewlist'
-  // }, {
-  //   name: '题库',
-  //   icon: Folder,
-  //   path: '/dashboard/questions'
+  }, {
+    name: '题库',
+    icon: Folder,
+    path: '/dashboard/questions',
+    develop: true
   }, {
     name: '团队',
     icon: Group,
@@ -62,7 +63,7 @@ export const Sider = () => {
         <Menu theme="light" mode="inline" defaultSelectedKeys={['1']} onClick={jumpRoute}>
           {
             menuData.current.map(i => (
-              <Menu.Item key={i.path} className="menu-item">
+              <Menu.Item key={i.path} className="menu-item" disabled={i.develop}>
                 <img src={i.icon} alt="" className="icon" />
                 <b className="font-zh">{i.name}</b>
               </Menu.Item>

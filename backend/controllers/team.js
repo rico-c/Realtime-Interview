@@ -30,20 +30,139 @@ class Team {
   }
 
   // 新增成员
-  async addmember(params) {
+  async addmember(req, res) {
     try {
-      const { teamId, mobile } = params;
-      const res = await TeamModel.create({
-        users,
-        teamName,
-        teamId: nanoid(),
-        company,
-        companyId,
-        manager,
-        creator,
-        createTime: new Date(),
+      const { teamId, mobile } = req.body;
+      const teamresult = await TeamModel.findOne({
+        teamId,
       });
-      return res;
+      const userresult = await UserModel.findOne({
+        mobile,
+      });
+      if (!teamresult) {
+        res.send({
+          code: 1,
+          data: null,
+          message: "找不到该用户",
+        });
+      } else if (!userresult) {
+        res.send({
+          code: 1,
+          data: null,
+          message: "找不到该团队",
+        });
+      } else {
+        const users = teamresult.users;
+        const userId = userresult.userId;
+        if (!users.includes(userId)) {
+          await TeamModel.update(
+            { teamId: teamId },
+            { $push: { users: userId } }
+          );
+        }
+        res.send({
+          code: 0,
+          data: "success",
+        });
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  // 新增成员
+  async addmember(req, res) {
+    try {
+      const { teamId, mobile } = req.body;
+      const teamresult = await TeamModel.findOne({
+        teamId,
+      });
+      const userresult = await UserModel.findOne({
+        mobile,
+      });
+      if (!teamresult) {
+        res.send({
+          code: 1,
+          data: null,
+          message: "找不到该用户",
+        });
+      } else if (!userresult) {
+        res.send({
+          code: 1,
+          data: null,
+          message: "找不到该团队",
+        });
+      } else {
+        const users = teamresult.users;
+        const userId = userresult.userId;
+        if (!users.includes(userId)) {
+          await TeamModel.update(
+            { teamId: teamId },
+            { $push: { users: userId } }
+          );
+        }
+        res.send({
+          code: 0,
+          data: "success",
+        });
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  // 修改团队名字
+  async rename(req, res) {
+    try {
+      const { teamId, name } = req.body;
+      if (!teamId || !name) {
+        return res.send({
+          code: 1,
+          data: null,
+          message: "找不到该用户",
+        });
+      } else {
+        await TeamModel.update(
+          {
+            teamId,
+          },
+          {
+            teamName: name,
+          }
+        );
+        res.send({
+          code: 0,
+          data: "success",
+        });
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  // 删除成员
+  async removemember(req, res) {
+    try {
+      const { teamId, userId } = req.body;
+      const teamresult = await TeamModel.findOne({
+        teamId,
+      });
+      if (!teamresult || !teamresult.users.includes(userId)) {
+        res.send({
+          code: 1,
+          data: null,
+          message: "找不到该用户",
+        });
+      } else {
+        await TeamModel.update(
+          { teamId: teamId },
+          { $pull: { users: userId } }
+        );
+        res.send({
+          code: 0,
+          data: "success",
+        });
+      }
     } catch (err) {
       console.log(err);
     }

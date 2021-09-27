@@ -1,6 +1,11 @@
 import { CURRENT_TEAM } from "./types";
 import axios from "axios";
-import { getTeamInfoAPI, addTeamMemberAPI } from "@/utils/API";
+import {
+  getTeamInfoAPI,
+  addTeamMemberAPI,
+  removeTeammemberAPI,
+  renameTeamAPI,
+} from "@/utils/API";
 
 export const getTeamInfo = async (teamId: any) => {
   const res = await axios.get(getTeamInfoAPI, {
@@ -15,10 +20,46 @@ export const getTeamInfo = async (teamId: any) => {
   }
 };
 
-export const addTeamMember = async ({teamId, mobile}: {teamId: string, mobile: string | number}) => {
+export const postAddTeamMember = async ({teamId, mobile}: {teamId: string, mobile: string | number}) => {
   const res = await axios.post(addTeamMemberAPI, {
       teamId,
       mobile
+  });
+  if (res.data.code === 0) {
+    return res.data.data;
+  } else {
+    return "";
+  }
+};
+
+export const renameTeam = async ({
+  teamId,
+  name,
+}: {
+  teamId: string;
+  name: string;
+}) => {
+  const res = await axios.post(renameTeamAPI, {
+    teamId,
+    name,
+  });
+  if (res.data.code === 0) {
+    return res.data.data;
+  } else {
+    return "";
+  }
+};
+
+export const postRemovemember = async ({
+  teamId,
+  userId,
+}: {
+  teamId: string;
+  userId: string;
+}) => {
+  const res = await axios.post(removeTeammemberAPI, {
+    teamId,
+    userId
   });
   if (res.data.code === 0) {
     return res.data.data;
