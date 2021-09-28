@@ -11,8 +11,8 @@ const { Option } = Select;
 const LanguageSelector = ({ socket, userAccount }: { socket?: any, userAccount?: any }) => {
   const dispatch = useDispatch();
   const defaultValue = useSelector<ReduxState>(state => state?.editor?.language) || 63;
-  const name = userAccount?.name || '未知用户';
-  const isLogin = userAccount?.useId;
+  // const name = userAccount?.name || '未知用户';
+  // const isLogin = userAccount?.useId;
   const onChange = useCallback((id) => {
     dispatch(updateLang(id));
   }, [dispatch]);

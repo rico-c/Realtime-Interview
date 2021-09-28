@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { Button, Input } from "antd";
 
 const InvitePopover: FC = () => {
-  const { roomId }:any = useParams();
+  const roomId = window.location.href;
   const [copied, setCopy] = useState(false);
   return (
     <div className="invite-popover">
@@ -14,15 +14,6 @@ const InvitePopover: FC = () => {
       </div>
       <div>
         <span>面试链接：</span>
-        <span
-          style={{
-            padding: "6px 10px",
-            borderBottom: "1px solid #d9d9d9",
-            marginRight: "10px"
-          }}
-        >
-          {roomId}
-        </span>
         <CopyToClipboard
           style={{
             cursor: "pointer"
@@ -33,10 +24,20 @@ const InvitePopover: FC = () => {
           {copied ? (
             <Button>已拷贝</Button>
           ) : (
-              <Button type="primary">拷贝</Button>
-            )}
+            <Button type="primary">拷贝</Button>
+          )}
         </CopyToClipboard>
+        <span
+          style={{
+            padding: "6px 10px",
+            borderBottom: "1px solid #d9d9d9",
+            marginRight: "10px"
+          }}
+        >
+          {roomId}
+        </span>
       </div>
+      <br/>
       <div>
         <b>通过发送邮件邀请：</b>
       </div>

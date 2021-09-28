@@ -35,7 +35,7 @@ const CodeEditor: FC<CodeEditorProp> = props => {
   const userAccount = useSelector(state => (state as any).accout);
   const currentLanguage = useSelector(state => (state as any).editor.language);
 
-  const currentLanguageHighlight = useMemo(() => {
+  const currentLanguageName = useMemo(() => {
     const one = languageList.find(i => currentLanguage === i.id);
     return one ? one.highlight : 'javascript';
   }, [currentLanguage]);
@@ -74,7 +74,7 @@ const CodeEditor: FC<CodeEditorProp> = props => {
       });
 
       if (res && socket) {
-        socket.emit('update', Object.assign({ triger: userAccount.name }, res));
+        socket.emit('update', Object.assign({ triger: userAccount.name, language: currentLanguageName}, res));
       } else {
         console.log('编辑失败');
       }
@@ -127,7 +127,7 @@ const CodeEditor: FC<CodeEditorProp> = props => {
         <EndInterview closeModal={handleCancel} roomId={roomId} />
       </Modal>
       <MonacoEditor
-        language={currentLanguageHighlight}
+        language={currentLanguageName}
         theme="vs-dark"
         value={code}
         options={options}

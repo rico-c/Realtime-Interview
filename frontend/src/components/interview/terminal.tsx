@@ -21,7 +21,7 @@ const Terminal: FC<TerminalProps> = props => {
   useEffect(() => {
     if (socket) {
       socket.on('sync', (data: any) => {
-        const infoline = `\u001b[30;1m ⦿ Execution by \u001b[34;1m ${data.triger || '无名用户'} \u001b[30;1m in ${data.time}s`;
+        const infoline = `\u001b[30;1m ⦿ Execution by \u001b[34;1m ${data.triger || '无名用户'} \u001b[30;1m with \u001b[34;1m ${data.language} \u001b[30;1m in ${data.time}s`;
         (xtermRef as any).current.terminal.writeln(infoline);
         if (data.error) {
           (xtermRef as any).current.terminal.writeln(
