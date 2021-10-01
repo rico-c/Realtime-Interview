@@ -28,7 +28,7 @@ const VideoCall = () => {
     appId: '3df1d4e0372c4892a380fe3399f49e2d',
     channel: 'testchannel',
     token:
-      '0063df1d4e0372c4892a380fe3399f49e2dIACu/7XOgra+eU1YKnx/CsxMrr7rZ0cr+6ILtYD3Q6Y4mupuE8wAAAAAEADkBngOR0tEYQEAAQBGS0Rh'
+      '0063df1d4e0372c4892a380fe3399f49e2dIADHbuIbUkPq1NJh3h+/H+cqrsurh6kQxR+YTahrmpubX+puE8wAAAAAEAApikciO/JXYQEAAQA68ldh'
   };
 
   const handleJoin = useCallback(() => {

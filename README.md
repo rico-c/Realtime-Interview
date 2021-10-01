@@ -7,7 +7,7 @@
   - 注意：开发时使用 http://127.0.0.1:3000 ，以避免跨域问题
   
 - 后端1：ExpressJs + NodeJs
-  - 代码同步服务：Yjs（由package.json > script 启动）
+  - 代码同步服务：Yjs（由package.json > script 启动） 编辑器代码同步
   - 启动
     - 线上：启动`PORT=1234 node ./node_modules/y-websocket/bin/server.js`（线上使用pm2启动）
     - 开发：`npm run serve`
@@ -25,7 +25,12 @@
         sleep 5s
       ```
 
-- 后端3： socket.io
+- 后端3： socket.io   ternimal同步
   - 端口: 3002
   - 启动： `npm run tsocket`
   - 功能： 用于将Yjs运行结果同步至所有面试间内的其他人
+
+- Nginx配置
+```
+
+```

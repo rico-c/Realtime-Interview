@@ -10,7 +10,6 @@ import { useSelector } from 'react-redux';
 import { Radio, Button, Popover } from 'antd';
 import { UserAddOutlined, ClearOutlined } from '@ant-design/icons';
 import { useSocket, useInterviewDetail } from '@/hooks';
-// import io from "socket.io-client";
 import { useParams } from 'react-router-dom';
 import './interview.scss';
 

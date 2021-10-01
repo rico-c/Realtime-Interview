@@ -1,39 +1,30 @@
 const ENV = process.env.NODE_ENV;
 
-let remoteIp = "124.70.3.148";
-let localIp = "127.0.0.1";
+// let remoteIp = "124.70.3.148";
+let remoteIp = "https://www.realtimeinterview.work";
+let localIp = "http://127.0.0.1";
 
 // backend接口
 let APIHostIp;
-// runcode接口
-let judge0HostIp;
-// codeeditor多人同步接口
-let yjsHostIp;
-// terminal及用户等socket同步接口
-let tsocketHostIp;
 
 if (ENV === "production") {
-  judge0HostIp = remoteIp;
-  yjsHostIp = remoteIp;
-  APIHostIp = remoteIp;
-  tsocketHostIp = remoteIp;
+  APIHostIp = remoteIp + '/api';
 } else if (ENV === "development") {
-  judge0HostIp = remoteIp;
-  yjsHostIp = remoteIp;
-  APIHostIp = localIp;
-  tsocketHostIp = localIp;
+  APIHostIp = localIp + ":3001";
 }
 
-// 代码websocket同步
-export const yjsHost = `ws://${yjsHostIp}:1234`;
-export const tsocketHost = `ws://${tsocketHostIp}:3002`;
+// 代码websocket同步  port 1234
+export const yjsHost = `wss://www.realtimeinterview.work/y`;
+// terminal同步 port 4000
+export const tsocketHost = `wss://www.realtimeinterview.work`;
+// export const tsocketHost = `ws://127.0.0.1:4000`;
 
 // 代码运行docker
-export const judgeHost = `http://${judge0HostIp}:8090`;
+export const judgeHost = remoteIp + '/judge';
 export const runCodeAPI = `${judgeHost}/submissions`;
 
-// express接口
-export const APIHost = `http://${APIHostIp}:3001`;
+// express接口 port 3001
+export const APIHost = APIHostIp;
 
 export const loginAPI = `${APIHost}/user/login`;
 export const logoutAPI = `${APIHost}/user/logout`;

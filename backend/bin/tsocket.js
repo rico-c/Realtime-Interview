@@ -41,6 +41,6 @@ workspaces.on("connection", (socket) => {
   });
 });
 
-http.listen(3002, function () {
-  console.log("socketio listening on 3002");
+http.listen(4000, function () {
+  console.log("socketio listening on 4000");
 });
