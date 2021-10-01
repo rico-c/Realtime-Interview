@@ -1,4 +1,7 @@
 .team-selector {
   display: inline-block;
   margin-right: 20px;
+  .selector {
+    min-width: 100px;
+  }
 }

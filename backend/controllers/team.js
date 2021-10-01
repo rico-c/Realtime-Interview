@@ -9,7 +9,7 @@ class Team {
     this.create = this.create.bind(this);
   }
 
-  // 创建团队
+  // 创建团队内部方法
   async create(params) {
     try {
       const { users, teamName, company, companyId, manager, creator } = params;
@@ -26,6 +26,39 @@ class Team {
       return res;
     } catch (err) {
       console.log(err);
+    }
+  }
+
+  async createteam(req, res) {
+    const { userId, teamName } = req.body;
+    await TeamModel.create({
+      users: [userId],
+      teamId: nanoid(),
+      teamName,
+      manager: userId,
+      creator: userId,
+      createTime: new Date(),
+    });
+    res.send({
+      code: 0,
+      data: '创建成功'
+    });
+  }
+
+  async belongteams(req, res) {
+    try {
+      const { userId } = req.query;
+      const teamresult = await TeamModel.find({
+        users: {
+          $elemMatch: { $eq: userId },
+        },
+      });
+      res.send({
+        code: 0,
+        data: teamresult,
+      });
+    } catch(err) {
+      console.error(err);
     }
   }
 

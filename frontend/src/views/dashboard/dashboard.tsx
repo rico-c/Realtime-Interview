@@ -1,12 +1,13 @@
 import React from "react";
 import './dashboard.scss';
 import { useDetectLogin } from 'hooks/useLogin';
-import { Layout} from 'antd';
+import { Layout } from 'antd';
 import InterviewList from '@/views/dashboard/list';
 import Team from '@/views/dashboard/team';
+import { CreateTeam } from '@/components/team/createTeam';
 import Questions from '@/views/dashboard/questions';
 import Settings from '@/views/dashboard/setting';
-import {Sider as SiderComponent} from 'components/dashboard/sider'
+import { Sider as SiderComponent } from 'components/dashboard/sider'
 
 import {
   Switch,
@@ -30,6 +31,7 @@ const Dashboard = () => {
             <Route path="/dashboard" exact children={<InterviewList />} />
             <Route path="/dashboard/interviewlist" children={<InterviewList />} />
             <Route path="/dashboard/team" children={<Team />} />
+            <Route path="/dashboard/createteam" children={<CreateTeam />} />
             <Route path="/dashboard/questions" children={<Questions />} />
             <Route path="/dashboard/settings" children={<Settings />} />
           </Switch>

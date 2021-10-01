@@ -6,6 +6,7 @@ import { Input } from 'antd';
 
 const UserSetting: FC = () => {
   const userAccount = useSelector(state => (state as any).accout);
+  const [name, setName] = useState(userAccount.name);
 
   const onFinish = values => {
     console.log('Received values of form: ', values);
@@ -23,7 +24,7 @@ const UserSetting: FC = () => {
       <SettingItem>
         <>
           <span className="c-font-medium c-color-gray-a">用户名</span>
-          <Input className="input" defaultValue={userAccount.name} placeholder="将在面试时展现给候选人" />
+          <Input className="input" value={name} placeholder="将在面试时展现给候选人" />
         </>
       </SettingItem>
     </div >

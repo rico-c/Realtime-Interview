@@ -1,25 +1,52 @@
-import React, { FC, useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState, forwardRef, useImperativeHandle } from "react";
 import {
   Select
 } from "antd";
 import { useSelector, useDispatch } from "react-redux";
-import { setCurrentTeam } from "@/actions";
+import { setCurrentTeam, getBelongTeams } from "@/actions";
+import { useHistory } from "react-router-dom";
+import { useUserInfo } from 'hooks/useLogin';
+import {
+  PlusOutlined
+} from '@ant-design/icons';
 import './teamSelector.scss';
 
 const { Option } = Select;
 
-const TeamSelector: FC = () => {
+const TeamSelector = forwardRef((props, ref) => {
+  const { userId } = useUserInfo();
+  const history = useHistory();
   const dispatch = useDispatch();
-  const belongTeams = useSelector(state => (state as any).accout.belongTeams) || [];
+  const [belongTeams, setBelongTeams] = useState([]);
+
+  const initData = () => {
+    getBelongTeams(userId).then(res => {
+      setBelongTeams(res);
+      dispatch(setCurrentTeam(res[0]));
+    });
+  }
+
+  useEffect(() => {
+    initData();
+  }, [])
+
+  useImperativeHandle(ref, () => ({
+    initData: initData
+  }));
 
   const currentTeamId = useSelector(
     state => (state as any)?.currentteam?.teamId
   );
 
   const handleTeamChange = useCallback(async value => {
-    const teamInfo = belongTeams.find(i => i.teamId === value);
-    if (currentTeamId !== value) {
-      dispatch(setCurrentTeam(teamInfo));
+    if (value === 'createnewteam') {
+      history.push('/dashboard/createteam')
+    }
+    else {
+      const teamInfo = belongTeams.find(i => i.teamId === value);
+      if (currentTeamId !== value) {
+        dispatch(setCurrentTeam(teamInfo));
+      }
     }
   }, [belongTeams, currentTeamId]);
 
@@ -27,19 +54,23 @@ const TeamSelector: FC = () => {
   return (
     <div className="team-selector">
       <Select
+        className="selector"
         value={currentTeamId}
         bordered={false}
         size="large"
         onSelect={handleTeamChange}
       >
         {belongTeams.map((i: any) => (
-          <Option value={i.teamId} key={i.teamId}>
+          <Option value={i.teamId} key={i.teamName}>
             {i.teamName}
           </Option>
         ))}
+        <Option value="createnewteam" key="createnewteam">
+          <PlusOutlined />新建团队
+        </Option>
       </Select>
     </div>
   );
-};
+});
 
 export default TeamSelector;

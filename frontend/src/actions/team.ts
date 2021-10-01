@@ -5,6 +5,8 @@ import {
   addTeamMemberAPI,
   removeTeammemberAPI,
   renameTeamAPI,
+  createTeamAPI,
+  belongTeamsAPI,
 } from "@/utils/API";
 
 export const getTeamInfo = async (teamId: any) => {
@@ -20,10 +22,41 @@ export const getTeamInfo = async (teamId: any) => {
   }
 };
 
+export const getBelongTeams = async (userId: string) => {
+  const res = await axios.get(belongTeamsAPI, {
+    params: {
+      userId
+    },
+  });
+  if (res.data.code === 0) {
+    return res.data.data;
+  } else {
+    return "";
+  }
+};
+
 export const postAddTeamMember = async ({teamId, mobile}: {teamId: string, mobile: string | number}) => {
   const res = await axios.post(addTeamMemberAPI, {
       teamId,
       mobile
+  });
+  if (res.data.code === 0) {
+    return res.data.data;
+  } else {
+    return "";
+  }
+};
+
+export const postCreateTeam = async ({
+  userId,
+  teamName,
+}: {
+  userId: string;
+  teamName: string;
+}) => {
+  const res = await axios.post(createTeamAPI, {
+    userId,
+    teamName,
   });
   if (res.data.code === 0) {
     return res.data.data;

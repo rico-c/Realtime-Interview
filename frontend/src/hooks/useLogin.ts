@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { setCurrentTeam } from "actions";
+
 
 /**
  * description: 处理登录成功后根据redux状态跳转到控制板
@@ -32,7 +32,7 @@ export const useLoginJump = (roomId: string | void) => {
  */
 export const useDetectLogin = () => {
   const history = useHistory();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const user = useSelector<any, any>((state) => {
     return state?.accout;
   });
@@ -42,9 +42,9 @@ export const useDetectLogin = () => {
     if (!userId) {
       history.push("/login");
     } else {
-      dispatch(setCurrentTeam(user.belongTeams[0]));
+      // dispatch(setCurrentTeam(user.belongTeams[0]));
     }
-  }, [user, userId, history, dispatch]);
+  }, [user, userId, history]);
 };
 
 export const useUserInfo = () => {

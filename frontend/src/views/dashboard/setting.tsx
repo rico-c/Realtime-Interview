@@ -12,7 +12,7 @@ const Setting: FC = () => {
           <span className="header-title">设置</span>
         </div>
       </div>
-      <div className="setting-wrapper">
+      <div className="half-wrapper">
         <CardWrapper>
           <UserSetting />
           <GeneralSetting />

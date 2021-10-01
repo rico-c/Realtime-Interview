@@ -1,9 +1,10 @@
-import React, { FC, useState, useEffect, useCallback } from "react";
+import React, { FC, useState, useEffect, useCallback, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Input, Tag, List, Button, Popconfirm } from "antd";
 import TeamSelector from "@/components/common/teamSelector";
 import { getTeamInfo, postAddTeamMember, postRemovemember, renameTeam, login } from '@/actions';
 import { CardWrapper } from '@/components/common/cardWrapper';
+import { useHistory } from "react-router-dom";
 import {
   EditOutlined,
   GlobalOutlined
@@ -11,7 +12,8 @@ import {
 import "./team.scss";
 
 const Team: FC = () => {
-  const dispatch = useDispatch();
+  const selectorRef = useRef<any>(null);
+  const history = useHistory();
   const currentTeam = useSelector((state: any) => state.currentteam);
   const [list, setList] = useState([]);
   const [newName, setNewName] = useState<string>('');
@@ -31,10 +33,10 @@ const Team: FC = () => {
   // 获取当前团队中的成员
   useEffect(() => {
     teamInfo();
-  }, []);
+  }, [currentTeam]);
 
   const addTeamMember = async () => {
-    const res = await postAddTeamMember({
+    await postAddTeamMember({
       mobile: userMobile,
       teamId: currentTeam.teamId
     })
@@ -42,7 +44,7 @@ const Team: FC = () => {
   }
 
   const deleteMember = async (targetId) => {
-    const res = await postRemovemember({
+    await postRemovemember({
       teamId: currentTeam.teamId,
       userId: targetId
     })
@@ -50,16 +52,12 @@ const Team: FC = () => {
   }
 
   const handleRename = async () => {
-    const res = await renameTeam({
+    await renameTeam({
       teamId: currentTeam.teamId,
       name: newName
     })
     setRenamePopVisible(false);
-    dispatch(login({
-      mobile: '',
-      password: '',
-      rememberme: true
-    }));
+    selectorRef.current.initData();
   }
 
   const onAddChange = (e) => {
@@ -76,7 +74,7 @@ const Team: FC = () => {
     <div className="team-page">
       <div className="header">
         <div className="header-left">
-          <TeamSelector />
+          <TeamSelector ref={selectorRef} />
           <Popconfirm
             title={changeNameDom}
             visible={renamePopVisible}
@@ -88,6 +86,7 @@ const Team: FC = () => {
               修改团队名称
             </Button>
           </Popconfirm>
+          <Button type="link" onClick={_ => history.push('/dashboard/createteam')}>创建新团队</Button>
         </div>
       </div>
       <CardWrapper>
