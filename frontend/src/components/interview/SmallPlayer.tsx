@@ -4,9 +4,11 @@ import { Button } from 'antd';
 import './SmallPlayer.scss';
 
 export interface VideoPlayerProps {
-  videoTrack: ILocalVideoTrack | IRemoteVideoTrack | any;
-  audioTrack: ILocalAudioTrack | IRemoteAudioTrack | any;
+  videoTrack?: ILocalVideoTrack | IRemoteVideoTrack | any;
+  audioTrack?: ILocalAudioTrack | IRemoteAudioTrack | any;
   setSize: any;
+  isme: boolean;
+  id: string | number;
 }
 
 const SmallPlayer = (props: VideoPlayerProps) => {
@@ -17,33 +19,36 @@ const SmallPlayer = (props: VideoPlayerProps) => {
 
   useEffect(() => {
     if (!container.current) return;
-    props.videoTrack ?.play(container.current);
+    props.videoTrack?.play(container.current);
+    console.log(props.videoTrack);
     return () => {
-      props.videoTrack ?.stop();
+      props.videoTrack?.stop();
     };
   }, [container, props.videoTrack]);
 
-  // useEffect(() => {
-  //   props.audioTrack ?.play();
-  //   return () => {
-  //     props.audioTrack ?.stop();
-  //   };
-  // }, [props.audioTrack]);
+  useEffect(() => {
+    if (!props.isme) {
+      props.audioTrack?.play();
+      return () => {
+        props.audioTrack?.stop();
+      }
+    }
+  }, [props.audioTrack, props.isme]);
 
   const muteSwitch = useCallback((value) => {
     const volume = value ? 0 : 100;
-    props.audioTrack ?.setVolume(volume);
+    props.audioTrack?.setVolume(volume);
     setMute(value);
-  }, [])
+  }, [props.audioTrack])
 
   const videoSwitch = useCallback((value) => {
-    props.videoTrack ?.setEnabled(value);
+    props.videoTrack?.setEnabled(value);
     setVideo(value);
-  }, [])
+  }, [props.videoTrack])
 
   return (
     <div className="small-player">
-      <i className="iconfont fullscreen-btn" onClick={() => props.setSize(true)}>&#xe9db;</i>
+      <i className="iconfont fullscreen-btn" onClick={() => props.setSize(props.id)}>&#xe9db;</i>
       <div ref={container} className="video-player" style={{ width: "240px", height: "150px" }}></div>
       <div className="bottom-btns">
         <div>

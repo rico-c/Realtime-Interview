@@ -1,6 +1,4 @@
-import React, { useState, useCallback } from 'react';
-import { useSelector } from 'react-redux';
-import AgoraRTC from 'agora-rtc-sdk-ng';
+import React, { useState, useCallback, useEffect } from 'react';
 import useAgora from '@/hooks/useAgora';
 import { Button } from 'antd';
 import SmallPlayer from '@/components/interview/SmallPlayer';
@@ -9,30 +7,22 @@ import Draggable from 'react-draggable';
 import { PhoneOutlined } from '@ant-design/icons';
 import './videoCall.scss';
 
-const client = AgoraRTC.createClient({ codec: 'vp8', mode: 'rtc' });
-
 const VideoCall = () => {
   const [isJoined, setisJoined] = useState(false);
-  const [videoBigSize, setSize] = useState(true);
+  const [videoBigSize, setSize] = useState('me');
   const {
     localAudioTrack,
     localVideoTrack,
     leave,
     join,
     joinState,
-    remoteUsers
-  } = useAgora(client);
-  const myName = useSelector(state => (state as any).accout.name);
-  
-  const agoraCofig = {
-    appId: '3df1d4e0372c4892a380fe3399f49e2d',
-    channel: 'testchannel',
-    token:
-      '0063df1d4e0372c4892a380fe3399f49e2dIADHbuIbUkPq1NJh3h+/H+cqrsurh6kQxR+YTahrmpubX+puE8wAAAAAEAApikciO/JXYQEAAQA68ldh'
-  };
+    remoteUsers,
+    shareScreen,
+    closeShareScreen
+  } = useAgora();
 
   const handleJoin = useCallback(() => {
-    join(agoraCofig.appId, agoraCofig.channel, agoraCofig.token, 1);
+    join(1);
     setisJoined(true);
   }, []);
 
@@ -40,6 +30,10 @@ const VideoCall = () => {
     leave();
     setisJoined(false);
   }, []);
+
+  useEffect(() => {
+    console.log(remoteUsers);
+  }, [remoteUsers])
 
   return (
     <div className="video-call">
@@ -50,7 +44,7 @@ const VideoCall = () => {
       )}
       {isJoined && (
         <div className="player-container">
-          {videoBigSize ? (
+          {videoBigSize === 'me' ? (
             <Draggable key="big">
               <div className="big-v">
                 <BigPlayer
@@ -58,6 +52,10 @@ const VideoCall = () => {
                   audioTrack={localAudioTrack}
                   setSize={setSize}
                   leave={handleLeave}
+                  shareScreen={shareScreen}
+                  closeShareScreen={closeShareScreen}
+                  id="me"
+                  isme={true}
                 ></BigPlayer>
               </div>
             </Draggable>
@@ -68,6 +66,8 @@ const VideoCall = () => {
                   videoTrack={localVideoTrack}
                   audioTrack={localAudioTrack}
                   setSize={setSize}
+                  id="me"
+                  isme={true}
                 ></SmallPlayer>
               </div>
             </Draggable>
@@ -75,15 +75,30 @@ const VideoCall = () => {
 
           {remoteUsers.map(user => (
             <div className="remote-player-wrapper" key={user.uid}>
-              <Draggable>
-                <div>
-                  <SmallPlayer
-                    videoTrack={user.videoTrack}
-                    audioTrack={user.audioTrack}
-                    setSize={setSize}
-                  ></SmallPlayer>
-                </div>
-              </Draggable>
+              {
+                videoBigSize === user.uid ?
+                  <Draggable>
+                    <div className="big-v">
+                      <BigPlayer
+                        videoTrack={user.videoTrack}
+                        audioTrack={user.audioTrack}
+                        setSize={setSize}
+                        isme={false}
+                        id={user.uid}
+                      ></BigPlayer>
+                    </div>
+                  </Draggable> : <Draggable>
+                    <div>
+                      <SmallPlayer
+                        videoTrack={user.videoTrack}
+                        audioTrack={user.audioTrack}
+                        setSize={setSize}
+                        isme={false}
+                        id={user.uid}
+                      ></SmallPlayer>
+                    </div>
+                  </Draggable>
+              }
             </div>
           ))}
         </div>

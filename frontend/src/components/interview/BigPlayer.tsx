@@ -4,33 +4,40 @@ import React, { useRef, useEffect, useState, useCallback } from "react";
 import './BigPlayer.scss';
 
 export interface VideoPlayerProps {
-  videoTrack: ILocalVideoTrack | IRemoteVideoTrack | undefined | any;
-  audioTrack: ILocalAudioTrack | IRemoteAudioTrack | undefined;
+  videoTrack?: ILocalVideoTrack | IRemoteVideoTrack | undefined | any;
+  audioTrack?: ILocalAudioTrack | IRemoteAudioTrack | undefined;
+  shareScreen?: any;
+  closeShareScreen?: any
   setSize: any;
-  leave: any;
+  leave?: any;
+  isme: boolean;
+  id: string | number;
 }
 
 const BigPlayer = (props: VideoPlayerProps) => {
 
   const container = useRef<HTMLDivElement>(null);
 
-  const [mute, setMute] = useState(false);
-  const [video, setVideo] = useState(true);
+  const [mute, setMute] = useState<boolean>(false);
+  const [video, setVideo] = useState<boolean>(true);
+  const [screen, setScreen] = useState<boolean>(false);
 
   useEffect(() => {
     if (!container.current) return;
-    props.videoTrack ?.play(container.current);
+    props.videoTrack?.play(container.current);
     return () => {
-      props.videoTrack ?.stop();
+      props.videoTrack?.stop();
     };
   }, [container, props.videoTrack]);
 
-  // useEffect(() => {
-  //   props.audioTrack ?.play();
-  //   return () => {
-  //     props.audioTrack ?.stop();
-  //   };
-  // }, [props.audioTrack]);
+  useEffect(() => {
+    if (!props.isme) {
+      props.audioTrack?.play();
+      return () => {
+        props.audioTrack?.stop();
+      }
+    }
+  }, [props.audioTrack, props.isme]);
 
   const muteSwitch = useCallback((value) => {
     const volume = value ? 0 : 100;
@@ -42,6 +49,15 @@ const BigPlayer = (props: VideoPlayerProps) => {
     props.videoTrack && props.videoTrack.setEnabled(value);
     setVideo(value);
   }, [])
+
+  const screenShareSwitch = (value: boolean) => {
+    if(value) {
+      props.shareScreen();
+    } else {
+      props.closeShareScreen();
+    }
+    setScreen(value)
+  }
 
   return (
     <div className="big-player">
@@ -59,7 +75,9 @@ const BigPlayer = (props: VideoPlayerProps) => {
           }
         </div>
         <div>
-          <Button icon={<i className="iconfont">&#xe618;</i>}>屏幕共享</Button>
+          {
+            screen ? <Button icon={<i className="iconfont">&#xe618;</i>} onClick={_ => screenShareSwitch(false)}>停止屏幕共享</Button> : <Button icon={<i className="iconfont">&#xe618;</i>} onClick={_ => screenShareSwitch(true)}>屏幕共享</Button>
+          }
         </div>
         <div>
           <Button icon={<i className="iconfont">&#xe616;</i>} onClick={props.leave}>挂断</Button>
