@@ -6,10 +6,12 @@ import BigPlayer from '@/components/interview/BigPlayer';
 import Draggable from 'react-draggable';
 import { PhoneOutlined } from '@ant-design/icons';
 import './videoCall.scss';
+import { useUserInfo } from 'hooks/useLogin';
 
 const VideoCall = () => {
   const [isJoined, setisJoined] = useState(false);
   const [videoBigSize, setSize] = useState('me');
+  const { name } = useUserInfo();
   const {
     localAudioTrack,
     localVideoTrack,
@@ -19,7 +21,7 @@ const VideoCall = () => {
     remoteUsers,
     shareScreen,
     closeShareScreen
-  } = useAgora();
+  } = useAgora(name);
 
   const handleJoin = useCallback(() => {
     join(1);
@@ -54,6 +56,7 @@ const VideoCall = () => {
                   leave={handleLeave}
                   shareScreen={shareScreen}
                   closeShareScreen={closeShareScreen}
+                  name="我"
                   id="me"
                   isme={true}
                 ></BigPlayer>
@@ -66,6 +69,7 @@ const VideoCall = () => {
                   videoTrack={localVideoTrack}
                   audioTrack={localAudioTrack}
                   setSize={setSize}
+                  name="我"
                   id="me"
                   isme={true}
                 ></SmallPlayer>
@@ -84,6 +88,7 @@ const VideoCall = () => {
                         audioTrack={user.audioTrack}
                         setSize={setSize}
                         isme={false}
+                        name={user.uid}
                         id={user.uid}
                       ></BigPlayer>
                     </div>
@@ -93,6 +98,7 @@ const VideoCall = () => {
                         videoTrack={user.videoTrack}
                         audioTrack={user.audioTrack}
                         setSize={setSize}
+                        name={user.uid}
                         isme={false}
                         id={user.uid}
                       ></SmallPlayer>

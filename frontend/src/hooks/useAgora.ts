@@ -19,7 +19,7 @@ const agoraCofig = {
 const client = AgoraRTC.createClient({ codec: "vp8", mode: "rtc" });
 let shareScreenClent = null;
 
-export default function useAgora(): {
+export default function useAgora(username : string): {
   localAudioTrack: ILocalAudioTrack | undefined;
   localVideoTrack: ILocalVideoTrack | undefined;
   localScreenTrack: any;
@@ -61,14 +61,15 @@ export default function useAgora(): {
     return [microphoneTrack, cameraTrack];
   }
 
-  async function join(uid?: string | number | null) {
+  async function join() {
     if (!client) return;
     const [microphoneTrack, cameraTrack] = await createLocalTracks(audioConfig);
 
     await client.join(
       agoraCofig.appId,
       agoraCofig.channel,
-      agoraCofig.token || null
+      agoraCofig.token || null,
+      encodeURI(username)
     );
     await client.publish([microphoneTrack, cameraTrack]);
 
@@ -101,7 +102,8 @@ export default function useAgora(): {
     shareScreenClent.join(
       agoraCofig.appId,
       agoraCofig.channel,
-      agoraCofig.token || null
+      agoraCofig.token || null,
+      encodeURI(`${username}共享屏幕`)
     );
     const videoTrack = await AgoraRTC.createScreenVideoTrack({}, "disable");
     shareScreenClent.publish(videoTrack);

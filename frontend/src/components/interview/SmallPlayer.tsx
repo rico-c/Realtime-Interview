@@ -8,6 +8,7 @@ export interface VideoPlayerProps {
   audioTrack?: ILocalAudioTrack | IRemoteAudioTrack | any;
   setSize: any;
   isme: boolean;
+  name: string | number;
   id: string | number;
 }
 
@@ -48,6 +49,7 @@ const SmallPlayer = (props: VideoPlayerProps) => {
 
   return (
     <div className="small-player">
+      <span>{decodeURI(String(props.name))}</span>
       <i className="iconfont fullscreen-btn" onClick={() => props.setSize(props.id)}>&#xe9db;</i>
       <div ref={container} className="video-player" style={{ width: "240px", height: "150px" }}></div>
       <div className="bottom-btns">

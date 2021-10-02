@@ -11,6 +11,7 @@ export interface VideoPlayerProps {
   setSize: any;
   leave?: any;
   isme: boolean;
+  name: string;
   id: string | number;
 }
 
@@ -61,6 +62,7 @@ const BigPlayer = (props: VideoPlayerProps) => {
 
   return (
     <div className="big-player">
+      <span>{decodeURI(String(props.name))}</span>
       <i className="iconfont fullscreen-btn" onClick={() => props.setSize(false)}>&#xe9d9;</i>
       <div ref={container} className="video-player"></div>
       <div className="bottom-btns">
