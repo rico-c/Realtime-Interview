@@ -14,7 +14,7 @@ import { MonacoBinding } from 'y-monaco';
 import { useSelector } from 'react-redux';
 import { useRunShortCut } from '@/hooks/useUtils';
 import { runCode } from '@/actions';
-import LOGO from 'assets/logo/logo-white.svg';
+import LOGO from 'assets/logo/logo-white.png';
 import {
   LoadingOutlined,
 } from '@ant-design/icons';
@@ -37,12 +37,14 @@ const CodeEditor: FC<CodeEditorProp> = props => {
 
   const currentLanguageName = useMemo(() => {
     const one = languageList.find(i => currentLanguage === i.id);
-    return one ? one.highlight : 'javascript';
+    const res = one ? one.highlight : 'javascript';
+    console.log('current language is : ' + res);
+    return res;
   }, [currentLanguage]);
 
   const [fontSize, setFontsize] = useState(14);
   const [tabSize, setTabsize] = useState(4);
-  const [suggestion, setSuggestion] = useState(false);
+  const [suggestion, setSuggestion] = useState(true);
 
   const options = useMemo(() => {
     return {

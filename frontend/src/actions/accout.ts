@@ -1,7 +1,7 @@
 import { UPDATE_USER, DELETE_USER } from "./types";
 import { LoginRes } from "@/types";
 import axios from "axios";
-import { loginAPI, logoutAPI, registerAPI } from "@/utils/API";
+import { loginAPI, logoutAPI, registerAPI, renameAPI } from "@/utils/API";
 
 axios.defaults.withCredentials = true;
 
@@ -77,6 +77,12 @@ export const tempuser = (name: string) => async (dispatch: any) => {
     payload: {
       name,
     },
+  });
+};
+
+export const rename = async({name, userId}) => {
+  await axios.post(renameAPI, {
+    name, userId
   });
 };
 

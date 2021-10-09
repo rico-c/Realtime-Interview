@@ -13,7 +13,7 @@ const agoraCofig = {
   appId: "3df1d4e0372c4892a380fe3399f49e2d",
   channel: "testchannel",
   token:
-    "0063df1d4e0372c4892a380fe3399f49e2dIABkSJW7PpXrxNPXRUvu1dQhjfIr9AjHjcZZo2c1FfKnHupuE8wAAAAAEADSvifO6T5ZYQEAAQDoPllh",
+    "0063df1d4e0372c4892a380fe3399f49e2dIADKhNApbjHl6NjulH8yUz4y2HvnZA1mCnMbBrRpZr56G+puE8wAAAAAEAB9PQWkSGNiYQEAAQBIY2Jh",
 };
 
 const client = AgoraRTC.createClient({ codec: "vp8", mode: "rtc" });

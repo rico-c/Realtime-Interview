@@ -42,11 +42,11 @@ export const Register = ({ setLogin }: { setLogin: (boolean) => void }) => {
         </Form.Item>
 
         <Form.Item name="password" label="密码">
-          <Input placeholder="密码" className="input" />
+          <Input placeholder="密码" className="input" type="password" />
         </Form.Item>
 
         <Form.Item name="repeatpassword" help={<HelpCom />} label="确认密码">
-          <Input placeholder="请再输入一次密码" className="input" />
+          <Input placeholder="请再输入一次密码" className="input" type="password" />
         </Form.Item>
 
         <Form.Item>

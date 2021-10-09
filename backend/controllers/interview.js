@@ -77,6 +77,26 @@ class Interview {
     }
   }
 
+  // 删除预约面试
+  async delete(req, res) {
+    const params = req.query;
+    const { roomId } = params;
+    const exsitId = await InterviewModel.deleteOne({
+      roomId,
+    });
+    if (!exsitId) {
+      res.send({
+        code: 1,
+        message: "未找到面试 ID，请稍后重试",
+      });
+    } else {
+      res.send({
+        code: 0,
+        message: "删除成功",
+      });
+    }
+  }
+
   // 查询面试列表
   async getinterviews(req, res) {
     const params = req.query;

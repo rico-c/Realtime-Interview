@@ -1,4 +1,10 @@
 .small-player {
+  background-color: #000;
+  .top-info {
+    position: relative;
+    top: 20px;
+    z-index:10;
+  }
   .fullscreen-btn {
     position: absolute;
     top: -5px;

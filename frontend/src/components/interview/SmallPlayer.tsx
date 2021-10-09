@@ -49,8 +49,10 @@ const SmallPlayer = (props: VideoPlayerProps) => {
 
   return (
     <div className="small-player">
-      <span>{decodeURI(String(props.name))}</span>
-      <i className="iconfont fullscreen-btn" onClick={() => props.setSize(props.id)}>&#xe9db;</i>
+      <div className="top-info">
+        <span>{decodeURI(String(props.name))}</span>
+        <i className="iconfont fullscreen-btn" onClick={() => props.setSize(props.id)}>&#xe9db;</i>
+      </div>
       <div ref={container} className="video-player" style={{ width: "240px", height: "150px" }}></div>
       <div className="bottom-btns">
         <div>

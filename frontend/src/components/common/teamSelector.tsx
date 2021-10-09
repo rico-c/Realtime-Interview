@@ -19,10 +19,18 @@ const TeamSelector = forwardRef((props, ref) => {
   const dispatch = useDispatch();
   const [belongTeams, setBelongTeams] = useState([]);
 
+  const currentTeamId = useSelector(
+    state => (state as any)?.currentteam?.teamId
+  );
+
   const initData = () => {
     getBelongTeams(userId).then(res => {
       setBelongTeams(res);
-      dispatch(setCurrentTeam(res[0]));
+      let currentTeamData = res[0];
+      if (res.find(i => i.teamId === currentTeamId)) {
+        currentTeamData = res.find(i => i.teamId === currentTeamId);
+      }
+      dispatch(setCurrentTeam(currentTeamData));
     });
   }
 
@@ -33,10 +41,6 @@ const TeamSelector = forwardRef((props, ref) => {
   useImperativeHandle(ref, () => ({
     initData: initData
   }));
-
-  const currentTeamId = useSelector(
-    state => (state as any)?.currentteam?.teamId
-  );
 
   const handleTeamChange = useCallback(async value => {
     if (value === 'createnewteam') {
@@ -53,7 +57,7 @@ const TeamSelector = forwardRef((props, ref) => {
 
   return (
     <div className="team-selector">
-      <Select
+      {belongTeams && belongTeams.length ? <Select
         className="selector"
         value={currentTeamId}
         bordered={false}
@@ -68,7 +72,7 @@ const TeamSelector = forwardRef((props, ref) => {
         <Option value="createnewteam" key="createnewteam">
           <PlusOutlined />新建团队
         </Option>
-      </Select>
+      </Select> : null}
     </div>
   );
 });

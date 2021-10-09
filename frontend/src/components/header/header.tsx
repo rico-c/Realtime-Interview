@@ -1,7 +1,7 @@
 import React, { FC, useCallback } from "react";
 import { Menu } from 'antd';
 import { useHistory } from "react-router-dom";
-import Icon from "@/assets/logo/logo.svg";
+import Icon from "@/assets/logo/logo.png";
 import { useSelector } from 'react-redux';
 import "./header.scss";
 
@@ -23,12 +23,12 @@ const Header: FC = () => {
       </div>
       <div className="menu">
         <Menu onClick={jumpRoute} selectedKeys={[]} mode="horizontal">
-          <Menu.Item title="" key="/product">
+          {/* <Menu.Item title="" key="/product">
             产品
           </Menu.Item>
           <Menu.Item key="/price">
             价格
-          </Menu.Item>
+          </Menu.Item> */}
           <Menu.Item key="/help">
             帮助
           </Menu.Item>

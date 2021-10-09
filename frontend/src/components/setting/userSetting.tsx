@@ -1,16 +1,33 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { SettingItem } from './settingItem';
-import { Input } from 'antd';
+import { Input, Button } from 'antd';
+import { rename } from 'actions/accout';
+import { useUserInfo } from '@/hooks/useLogin';
 
 
 const UserSetting: FC = () => {
   const userAccount = useSelector(state => (state as any).accout);
-  const [name, setName] = useState(userAccount.name);
+  const [name, setName] = useState<string>(userAccount.name);
+  const [showBtn, setShowBtn] = useState<boolean>(false);
+  const originalName = useRef(name);
+  const { userId } = useUserInfo();
 
-  const onFinish = values => {
-    console.log('Received values of form: ', values);
-  };
+  const handleNameChange = e => {
+    const v = e.target.value;
+    setName(v);
+    if (originalName.current === v) {
+      setShowBtn(false);
+    }
+    else {
+      setShowBtn(true);
+    }
+  }
+
+  const confirmChangeName = async () => {
+    await rename({ name, userId });
+    window.location.reload();
+  }
 
   return (
     <div className="setting-section">
@@ -24,7 +41,15 @@ const UserSetting: FC = () => {
       <SettingItem>
         <>
           <span className="c-font-medium c-color-gray-a">用户名</span>
-          <Input className="input" value={name} placeholder="将在面试时展现给候选人" />
+          <span>
+            <Input
+              className="input"
+              value={name}
+              onChange={e => handleNameChange(e)}
+              placeholder="将在面试时展现给候选人"
+            />
+            {showBtn && <Button type="link" onClick={confirmChangeName}>确认更改</Button>}
+          </span>
         </>
       </SettingItem>
     </div >

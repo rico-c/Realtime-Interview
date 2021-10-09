@@ -30,20 +30,14 @@ const GeneralSetting: FC = () => {
       </SettingItem>
       <SettingItem>
         <>
-          <span className="c-font-medium c-color-gray-a">默认开启snippnets</span>
+          <span className="c-font-medium c-color-gray-a">默认开启snippets</span>
           <Switch checkedChildren="开启" unCheckedChildren="关闭" defaultChecked />
         </>
       </SettingItem>
       <SettingItem>
         <>
-          <span className="c-font-medium c-color-gray-a">候选人切屏时向面试官提示</span>
-          <Switch checkedChildren="开启" unCheckedChildren="关闭" defaultChecked />
-        </>
-      </SettingItem>
-      <SettingItem>
-        <>
-          <span className="c-font-medium c-color-gray-a">候选人切屏时向候选人提示</span>
-          <Switch checkedChildren="开启" unCheckedChildren="关闭" defaultChecked={false} />
+          <span className="c-font-medium c-color-gray-a">候选人切屏时提示（仅面试官可见）</span>
+          <Switch checkedChildren="开启" unCheckedChildren="关闭" checked={false}  disabled/>
         </>
       </SettingItem>
     </div>

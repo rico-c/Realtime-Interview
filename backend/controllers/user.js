@@ -88,6 +88,32 @@ class User {
     }
   }
 
+  async rename(req, res) {
+    try {
+      const sessionUserId = req.session.userId;
+      const params = req.body;
+      const { userId, name } = params;
+      if (sessionUserId !== userId) {
+        throw new Error("session与userid不一致");
+      }
+      await UserModel.update(
+        { userId },
+        {
+          name,
+        }
+      );
+      res.send({
+        code: 0,
+        message: "退出成功",
+      });
+    } catch (err) {
+      res.send({
+        code: 1,
+        message: "重命名失败",
+      });
+    }
+  }
+
   async register(req, res) {
     // 检查用户名密码
     const { mobile, password, name } = req.body;

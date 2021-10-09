@@ -2,7 +2,7 @@ import React from 'react';
 import './login.scss';
 import LoginPage from 'components/login';
 import BG from 'assets/states/work.png';
-import LOGO from 'assets/logo/logo-white.svg';
+import LOGO from 'assets/logo/logo-white.png';
 import {Link} from 'react-router-dom';
 
 const Login = () => {

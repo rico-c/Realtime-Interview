@@ -9,7 +9,7 @@ import Setting from '@/assets/imgs/shezhi.svg';
 import Group from '@/assets/imgs/zuzhi.svg';
 import Folder from '@/assets/imgs/document.svg';
 import Interview from '@/assets/imgs/interview.svg';
-import Logo from 'assets/logo/logo.svg'
+import Logo from 'assets/logo/logo.png'
 
 import { useUserInfo } from 'hooks/useLogin'
 

@@ -1,8 +1,8 @@
 import React, { useCallback, useState, useEffect, useMemo } from 'react';
-import { Table, Tag, Space } from 'antd';
+import { Table, Tag, Space, Popconfirm } from 'antd';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchInterviews } from '@/actions';
+import { fetchInterviews, deleteInterview } from '@/actions';
 import { CardWrapper } from '@/components/common/cardWrapper';
 import moment from 'moment';
 import './interviewTable.scss';
@@ -13,9 +13,7 @@ const InterviewTable = (params: { query: string }) => {
   const teamId = useSelector(state => (state as any)?.currentteam?.teamId);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(fetchInterviews(teamId));
-  }, [teamId, dispatch]);
+  const updateInterviewsData = () => dispatch(fetchInterviews(teamId));
 
   const dataList = useSelector(state => (state as any).interview.interviewlist);
   const queryDataList = useMemo(() => {
@@ -43,9 +41,14 @@ const InterviewTable = (params: { query: string }) => {
     console.log(id);
   };
 
-  const deleteInterview = (id: string) => {
-    console.log(id);
+  const doDeleteInterview = async (id: string) => {
+    await deleteInterview(id);
+    updateInterviewsData();
   };
+
+  useEffect(() => {
+    updateInterviewsData()
+  }, [teamId]);
 
   const columns = [
     {
@@ -124,7 +127,14 @@ const InterviewTable = (params: { query: string }) => {
           ) : (
             <a onClick={() => enterInterview(record.roomId)}>进入面试</a>
           )}
-          <a onClick={() => deleteInterview(record.roomId)}>删除</a>
+          <Popconfirm
+            title="删除后不可恢复"
+            onConfirm={() => doDeleteInterview(record.roomId)}
+            okText="确认删除"
+            cancelText="取消"
+          >
+            <a>删除</a>
+          </Popconfirm>
         </Space>
       )
     }

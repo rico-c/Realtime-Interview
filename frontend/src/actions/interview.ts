@@ -12,6 +12,7 @@ import {
   updateNoteAPI,
   endInterviewAPI,
   getWrittenexamsAPI,
+  deleteInterviewAPI
 } from "@/utils/API";
 import moment from "moment";
 
@@ -118,6 +119,19 @@ export const fetchInterviews =
       });
     }
     return res.data;
+  };
+
+export const deleteInterview =
+  async (roomId: string) => {
+    if (!roomId) {
+      return;
+    }
+    const res = await axios.get(deleteInterviewAPI, {
+      params: {
+        roomId,
+      },
+    });
+    console.log(res);
   };
 
 export const fetchWrittenexam =

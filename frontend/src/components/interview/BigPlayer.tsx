@@ -52,7 +52,7 @@ const BigPlayer = (props: VideoPlayerProps) => {
   }, [])
 
   const screenShareSwitch = (value: boolean) => {
-    if(value) {
+    if (value) {
       props.shareScreen();
     } else {
       props.closeShareScreen();
@@ -62,8 +62,10 @@ const BigPlayer = (props: VideoPlayerProps) => {
 
   return (
     <div className="big-player">
-      <span>{decodeURI(String(props.name))}</span>
-      <i className="iconfont fullscreen-btn" onClick={() => props.setSize(false)}>&#xe9d9;</i>
+      <div className="top-info">
+        <span className="c-font-big c-gap-left c-gap-inner-top">{decodeURI(String(props.name))}</span>
+        <i className="iconfont fullscreen-btn" onClick={() => props.setSize(false)}>&#xe9d9;</i>
+      </div>
       <div ref={container} className="video-player"></div>
       <div className="bottom-btns">
         <div>

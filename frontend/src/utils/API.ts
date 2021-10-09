@@ -29,8 +29,10 @@ export const APIHost = APIHostIp;
 export const loginAPI = `${APIHost}/user/login`;
 export const logoutAPI = `${APIHost}/user/logout`;
 export const registerAPI = `${APIHost}/user/register`;
+export const renameAPI = `${APIHost}/user/rename`;
 
 export const createInterviewAPI = `${APIHost}/interview/create`;
+export const deleteInterviewAPI = `${APIHost}/interview/delete`;
 export const createRoomidAPI = `${APIHost}/interview/createroomid`;
 export const getInterviewsAPI = `${APIHost}/interview/getinterviews`;
 export const updateNoteAPI = `${APIHost}/interview/updatenote`;
