@@ -11,9 +11,9 @@ import AgoraRTC, {
 
 const agoraCofig = {
   appId: "3df1d4e0372c4892a380fe3399f49e2d",
-  channel: "testchannel",
+  channel: "test",
   token:
-    "0063df1d4e0372c4892a380fe3399f49e2dIADKhNApbjHl6NjulH8yUz4y2HvnZA1mCnMbBrRpZr56G+puE8wAAAAAEAB9PQWkSGNiYQEAAQBIY2Jh",
+    "0063df1d4e0372c4892a380fe3399f49e2dIAADFACCNOZekVO/GTbmi1NBDS41ZB70z1NGuji3JA0Qiwx+f9gAAAAAEAANfVS+dlNlYQEAAQB2U2Vh",
 };
 
 const client = AgoraRTC.createClient({ codec: "vp8", mode: "rtc" });
@@ -80,14 +80,14 @@ export default function useAgora(username : string): {
   }
 
   async function leave() {
-    if (localAudioTrack) {
-      localAudioTrack.stop();
-      localAudioTrack.close();
-    }
-    if (localVideoTrack) {
-      localVideoTrack.stop();
-      localVideoTrack.close();
-    }
+    // if (localAudioTrack) {
+    //   localAudioTrack.stop();
+    //   localAudioTrack.close();
+    // }
+    // if (localVideoTrack) {
+    //   localVideoTrack.stop();
+    //   localVideoTrack.close();
+    // }
     setRemoteUsers([]);
     setJoinState(false);
     await client?.leave();

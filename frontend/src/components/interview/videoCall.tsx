@@ -24,14 +24,22 @@ const VideoCall = () => {
   } = useAgora(name);
 
   const handleJoin = useCallback(() => {
-    join(1);
+    join();
     setisJoined(true);
   }, []);
 
   const handleLeave = useCallback(() => {
     leave();
+    if (localAudioTrack) {
+      localAudioTrack.stop();
+      localAudioTrack.close();
+    }
+    if (localVideoTrack) {
+      localVideoTrack.stop();
+      localVideoTrack.close();
+    }
     setisJoined(false);
-  }, []);
+  }, [localVideoTrack, localAudioTrack]);
 
   useEffect(() => {
     console.log(remoteUsers);
@@ -42,7 +50,7 @@ const VideoCall = () => {
       {isJoined ? (
         <Button onClick={handleLeave}>退出通话</Button>
       ) : (
-        <Button className="make-call" onClick={handleJoin} type="primary" icon={<PhoneOutlined />}>开始通话</Button>
+        <Button className="make-call" onClick={handleJoin} icon={<PhoneOutlined />}>开启视频通话</Button>
       )}
       {isJoined && (
         <div className="player-container">

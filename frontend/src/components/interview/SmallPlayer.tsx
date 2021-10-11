@@ -51,18 +51,20 @@ const SmallPlayer = (props: VideoPlayerProps) => {
     <div className="small-player">
       <div className="top-info">
         <span>{decodeURI(String(props.name))}</span>
-        <i className="iconfont fullscreen-btn" onClick={() => props.setSize(props.id)}>&#xe9db;</i>
       </div>
-      <div ref={container} className="video-player" style={{ width: "240px", height: "150px" }}></div>
+      <div ref={container} className="video-player"></div>
       <div className="bottom-btns">
-        <div>
+        <div className="player-btn">
+          <i className="iconfont fullscreen-btn" onClick={() => props.setSize(props.id)}>&#xe619;</i>
+        </div>
+        <div className="player-btn">
           {
-            video ? <Button icon={<i className="iconfont">&#xe634;</i>} onClick={() => videoSwitch(false)}></Button> : <Button icon={<i className="iconfont">&#xe632;</i>} onClick={() => videoSwitch(true)}></Button>
+            video ? <i className="iconfont" onClick={() => videoSwitch(false)}>&#xe634;</i> : <i className="iconfont" onClick={() => videoSwitch(true)}>&#xe632;</i>
           }
         </div>
-        <div>
+        <div className="player-btn">
           {
-            mute ? <Button icon={<i className="iconfont">&#xe625;</i>} onClick={() => muteSwitch(false)}></Button> : <Button icon={<i className="iconfont">&#xe626;</i>} onClick={() => muteSwitch(true)}></Button>
+            mute ? <i className="iconfont" onClick={() => muteSwitch(false)}>&#xe625;</i> : <i className="iconfont" onClick={() => muteSwitch(true)}>&#xe626;</i>
           }
         </div>
       </div>

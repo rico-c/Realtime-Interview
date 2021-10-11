@@ -28,7 +28,7 @@ export const Register = ({ setLogin }: { setLogin: (boolean) => void }) => {
       <h1>注册新用户</h1>
       <Form
         className="form"
-        labelCol={{ span: 4 }}
+        labelCol={{ span: 5}}
         onFinish={onRegister}
         initialValues={{ readProtocol: false }}
         size="large"

@@ -58,8 +58,7 @@ const Terminal: FC<TerminalProps> = props => {
   const options = useMemo(() => {
     return {
       convertEol: true, //遇到回车符时，光标定位在下一行开始处
-      theme: { background: '#1e1e1e' },
-      rows: 50 //行数
+      theme: { background: '#1e1e1e' }
     };
   }, []);
 

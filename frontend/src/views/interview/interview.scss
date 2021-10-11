@@ -4,8 +4,14 @@
   background-color: #1e1e1e;
   .right-area {
     height: 100vh;
+    .right-container ::-webkit-scrollbar {
+      width: 0 !important;
+    }
+    .right-container {
+      height: calc( 100% - 50px );
+    }
     .top-bar {
-      padding-right:15px;
+      padding-right: 15px;
       height: 50px;
       display: flex;
       justify-content: space-between;
@@ -15,20 +21,20 @@
       z-index: 100;
     }
     .top-left {
-        display: flex;
-        margin-left: 5px;
-        .c-gap-right {
-            margin-right: 15px !important;
-        }
+      display: flex;
+      margin-left: 5px;
+      .c-gap-right {
+        margin-right: 15px !important;
+      }
     }
     .top-right {
-        .online-icon {
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            background: #00b17f;
-            border-radius: 50%;
-        }
+      .online-icon {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        background: #00b17f;
+        border-radius: 50%;
+      }
     }
   }
   .Resizer {

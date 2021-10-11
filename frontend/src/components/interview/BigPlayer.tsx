@@ -1,5 +1,4 @@
 import { ILocalVideoTrack, IRemoteVideoTrack, ILocalAudioTrack, IRemoteAudioTrack } from "agora-rtc-sdk-ng";
-import { Button } from 'antd';
 import React, { useRef, useEffect, useState, useCallback } from "react";
 import './BigPlayer.scss';
 
@@ -64,27 +63,34 @@ const BigPlayer = (props: VideoPlayerProps) => {
     <div className="big-player">
       <div className="top-info">
         <span className="c-font-big c-gap-left c-gap-inner-top">{decodeURI(String(props.name))}</span>
-        <i className="iconfont fullscreen-btn" onClick={() => props.setSize(false)}>&#xe9d9;</i>
       </div>
       <div ref={container} className="video-player"></div>
       <div className="bottom-btns">
-        <div>
+        {/* 缩放 */}
+        <div className="player-btn">
+          <i className="iconfont" onClick={() => props.setSize(false)}>&#xe617;</i>
+        </div>
+        {/* 共享 */}
+        <div className="player-btn">
           {
-            video ? <Button icon={<i className="iconfont">&#xe634;</i>} onClick={() => videoSwitch(false)}>关闭</Button> : <Button icon={<i className="iconfont">&#xe632;</i>} onClick={() => videoSwitch(true)}>开启</Button>
+            screen ? <i className="iconfont" onClick={_ => screenShareSwitch(false)}>&#xe618; </i> : <i className="iconfont" onClick={_ => screenShareSwitch(true)}>&#xe618;</i>
           }
         </div>
-        <div>
+        {/* 挂断 */}
+        <div className="player-btn offcall">
+          <i className="iconfont" onClick={props.leave}>&#xe616;</i>
+        </div>
+        {/* 视频 */}
+        <div className="player-btn">
           {
-            mute ? <Button icon={<i className="iconfont">&#xe625;</i>} onClick={() => muteSwitch(false)}>开启</Button> : <Button icon={<i className="iconfont">&#xe626;</i>} onClick={() => muteSwitch(true)}>关闭</Button>
+            video ? <i className="iconfont" onClick={() => videoSwitch(false)}>&#xe634;</i> : <i className="iconfont" onClick={() => videoSwitch(true)}>&#xe632;</i>
           }
         </div>
-        <div>
+        {/* 静音 */}
+        <div className="player-btn">
           {
-            screen ? <Button icon={<i className="iconfont">&#xe618;</i>} onClick={_ => screenShareSwitch(false)}>停止屏幕共享</Button> : <Button icon={<i className="iconfont">&#xe618;</i>} onClick={_ => screenShareSwitch(true)}>屏幕共享</Button>
+            mute ? <i className="iconfont" onClick={() => muteSwitch(false)}>&#xe625; </i> : <i className="iconfont" onClick={() => muteSwitch(true)}>&#xe626;</i>
           }
-        </div>
-        <div>
-          <Button icon={<i className="iconfont">&#xe616;</i>} onClick={props.leave}>挂断</Button>
         </div>
       </div>
     </div>

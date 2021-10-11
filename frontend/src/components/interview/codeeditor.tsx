@@ -152,6 +152,7 @@ const CodeEditor: FC<CodeEditorProp> = props => {
           <SettingSelector
             setFontsize={setFontsize}
             setSuggestion={setSuggestion}
+            suggestion={suggestion}
             setTabsize={setTabsize}
           />
         </div>

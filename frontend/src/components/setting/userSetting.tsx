@@ -1,7 +1,7 @@
 import React, { FC, useState, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { SettingItem } from './settingItem';
-import { Input, Button } from 'antd';
+import { Input, Button, message } from 'antd';
 import { rename } from 'actions/accout';
 import { useUserInfo } from '@/hooks/useLogin';
 
@@ -26,6 +26,7 @@ const UserSetting: FC = () => {
 
   const confirmChangeName = async () => {
     await rename({ name, userId });
+    message.success('修改成功');
     window.location.reload();
   }
 

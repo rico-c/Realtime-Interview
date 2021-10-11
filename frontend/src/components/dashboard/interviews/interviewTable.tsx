@@ -1,5 +1,5 @@
 import React, { useCallback, useState, useEffect, useMemo } from 'react';
-import { Table, Tag, Space, Popconfirm } from 'antd';
+import { Table, Tag, Space, Popconfirm, message } from 'antd';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchInterviews, deleteInterview } from '@/actions';
@@ -44,6 +44,7 @@ const InterviewTable = (params: { query: string }) => {
   const doDeleteInterview = async (id: string) => {
     await deleteInterview(id);
     updateInterviewsData();
+    message.success('删除成功');
   };
 
   useEffect(() => {

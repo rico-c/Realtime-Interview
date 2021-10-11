@@ -1,4 +1,4 @@
-import React, { FC, useState, useCallback, useRef, useMemo } from 'react';
+import React, { FC, useState, useCallback, useRef} from 'react';
 import CodeEditor from '@/components/interview/codeeditor';
 import Terminal from '@/components/interview/terminal';
 import Markdown from '@/components/interview/markdown';
@@ -8,9 +8,10 @@ import { UserTab } from '@/components/interview/userTab';
 import SplitPane from 'react-split-pane';
 import { useSelector } from 'react-redux';
 import { Radio, Button, Popover } from 'antd';
-import { UserAddOutlined, ClearOutlined } from '@ant-design/icons';
+import { UserAddOutlined, ClearOutlined, CodeOutlined, EditOutlined } from '@ant-design/icons';
 import { useSocket, useInterviewDetail } from '@/hooks';
 import { useParams } from 'react-router-dom';
+
 import './interview.scss';
 
 const Interview: FC = () => {
@@ -45,8 +46,12 @@ const Interview: FC = () => {
                 className="c-gap-right"
                 onChange={onTypeChange}
               >
-                <Radio.Button value="terminal">终端</Radio.Button>
-                <Radio.Button value="note">笔记</Radio.Button>
+                <Radio.Button value="terminal">
+                  <CodeOutlined />终端
+                </Radio.Button>
+                <Radio.Button value="note">
+                  <EditOutlined />笔记
+                </Radio.Button>
               </Radio.Group>
               <VideoCall />
             </div>
@@ -66,19 +71,18 @@ const Interview: FC = () => {
             </div>
           </div>
           <div
+            className="right-container"
             style={{
               display: type === 'terminal' ? 'block' : 'none',
-              height: '100%',
-              overflowY: 'scroll'
             }}
           >
             <Terminal socket={socket} ternimalRef={ternimalRef} />
           </div>
           <div
+            className="right-container"
             style={{
               display: type === 'note' ? 'block' : 'none',
-              height: '100%',
-              overflow: 'scroll'
+              overflowY: 'scroll'
             }}
           >
             <Markdown interviewDetail={interviewDetail} />
