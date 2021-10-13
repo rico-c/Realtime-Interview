@@ -8,6 +8,7 @@
     "ysocket": "PORT=1234 node ./node_modules/y-websocket/bin/server.js"
   },
   "dependencies": {
+    "agora-access-token": "^2.0.4",
     "axios": "^0.21.0",
     "body-parser": "^1.19.0",
     "connect-mongo": "^3.2.0",

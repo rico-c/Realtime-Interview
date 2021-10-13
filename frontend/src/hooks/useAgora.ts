@@ -8,18 +8,18 @@ import AgoraRTC, {
   ILocalVideoTrack,
   ILocalAudioTrack,
 } from "agora-rtc-sdk-ng";
+import { getJoiningToken } from "@/actions";
 
 const agoraCofig = {
   appId: "3df1d4e0372c4892a380fe3399f49e2d",
   channel: "test",
-  token:
-    "0063df1d4e0372c4892a380fe3399f49e2dIAADFACCNOZekVO/GTbmi1NBDS41ZB70z1NGuji3JA0Qiwx+f9gAAAAAEAANfVS+dlNlYQEAAQB2U2Vh",
+  token: "",
 };
 
 const client = AgoraRTC.createClient({ codec: "vp8", mode: "rtc" });
 let shareScreenClent = null;
 
-export default function useAgora(username : string): {
+export default function useAgora(username: string, channel: string): {
   localAudioTrack: ILocalAudioTrack | undefined;
   localVideoTrack: ILocalVideoTrack | undefined;
   localScreenTrack: any;
@@ -63,14 +63,14 @@ export default function useAgora(username : string): {
 
   async function join() {
     if (!client) return;
+    const encodedName = encodeURI(username);
     const [microphoneTrack, cameraTrack] = await createLocalTracks(audioConfig);
 
-    await client.join(
-      agoraCofig.appId,
-      agoraCofig.channel,
-      agoraCofig.token || null,
-      encodeURI(username)
-    );
+    const res = await getJoiningToken({
+      channelName: channel,
+      uid: String(encodedName)
+    });
+    await client.join(agoraCofig.appId, channel, res?.data?.data, encodedName);
     await client.publish([microphoneTrack, cameraTrack]);
 
     (window as any).client = client;
@@ -99,12 +99,12 @@ export default function useAgora(username : string): {
    */
   async function shareScreen() {
     shareScreenClent = AgoraRTC.createClient({ mode: "rtc", codec: "vp8" });
-    shareScreenClent.join(
-      agoraCofig.appId,
-      agoraCofig.channel,
-      agoraCofig.token || null,
-      encodeURI(`${username}共享屏幕`)
-    );
+    const uid = encodeURI(`${username}共享屏幕`);
+    const res = await getJoiningToken({
+      channelName: channel,
+      uid: uid
+    });
+    shareScreenClent.join(agoraCofig.appId, channel, res?.data?.data, uid);
     const videoTrack = await AgoraRTC.createScreenVideoTrack({}, "disable");
     shareScreenClent.publish(videoTrack);
     setLocalScreenTrack(videoTrack);
@@ -115,10 +115,6 @@ export default function useAgora(username : string): {
    * @returns
    */
   async function closeShareScreen() {
-    if (localScreenTrack) {
-      localScreenTrack.stop();
-      localScreenTrack.close();
-    }
     await shareScreenClent?.leave();
     shareScreenClent = null;
   }

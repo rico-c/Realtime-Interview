@@ -39,6 +39,10 @@ workspaces.on("connection", (socket) => {
   socket.on("changelanguage", (data) => {
     socket.broadcast.emit("updatelanguage", data);
   });
+
+  socket.on("joinchat", (user) => {
+    socket.broadcast.emit('newchatjoiner', user)
+  });
 });
 
 http.listen(4000, function () {

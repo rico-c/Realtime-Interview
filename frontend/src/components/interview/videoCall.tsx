@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import useAgora from '@/hooks/useAgora';
-import { Button } from 'antd';
+import { Button, Popover } from 'antd';
 import SmallPlayer from '@/components/interview/SmallPlayer';
 import BigPlayer from '@/components/interview/BigPlayer';
 import Draggable from 'react-draggable';
@@ -8,9 +8,11 @@ import { PhoneOutlined } from '@ant-design/icons';
 import './videoCall.scss';
 import { useUserInfo } from 'hooks/useLogin';
 
-const VideoCall = () => {
+const VideoCall = (props: { socket: any; roomId: string }) => {
+  const { socket, roomId } = props;
   const [isJoined, setisJoined] = useState(false);
   const [videoBigSize, setSize] = useState('me');
+  const [videoJoiner, setVideoJoiner] = useState<string | null | undefined>(null);
   const { name } = useUserInfo();
   const {
     localAudioTrack,
@@ -20,12 +22,15 @@ const VideoCall = () => {
     joinState,
     remoteUsers,
     shareScreen,
-    closeShareScreen
-  } = useAgora(name);
+    closeShareScreen,
+    localScreenTrack
+  } = useAgora(name, roomId);
 
   const handleJoin = useCallback(() => {
     join();
     setisJoined(true);
+    socket?.emit('joinchat', name);
+    setVideoJoiner(null);
   }, []);
 
   const handleLeave = useCallback(() => {
@@ -41,16 +46,33 @@ const VideoCall = () => {
     setisJoined(false);
   }, [localVideoTrack, localAudioTrack]);
 
+  const doCloseShareScreen = () => {
+    if (localScreenTrack) {
+      localScreenTrack.stop();
+      localScreenTrack.close();
+    }
+    closeShareScreen();
+  }
+
   useEffect(() => {
-    console.log(remoteUsers);
-  }, [remoteUsers])
+    socket?.on('newchatjoiner', name => {
+      console.log('name');
+      setVideoJoiner(name);
+    })
+  }, [socket])
 
   return (
     <div className="video-call">
       {isJoined ? (
         <Button onClick={handleLeave}>退出通话</Button>
       ) : (
-        <Button className="make-call" onClick={handleJoin} icon={<PhoneOutlined />}>开启视频通话</Button>
+        <Popover
+          title={`${videoJoiner}已加入通话，点击这里加入视频通话`}
+          placement="bottom"
+          visible={!!videoJoiner}
+        >
+          <Button className="make-call" onClick={handleJoin} icon={<PhoneOutlined />}>开启视频通话</Button>
+        </Popover>
       )}
       {isJoined && (
         <div className="player-container">
@@ -63,7 +85,7 @@ const VideoCall = () => {
                   setSize={setSize}
                   leave={handleLeave}
                   shareScreen={shareScreen}
-                  closeShareScreen={closeShareScreen}
+                  closeShareScreen={doCloseShareScreen}
                   name="我"
                   id="me"
                   isme={true}

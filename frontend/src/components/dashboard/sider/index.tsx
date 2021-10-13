@@ -59,7 +59,7 @@ export const Sider = () => {
   return (
     <>
       <div>
-        <div className="logo"><img src={Logo} alt="" /></div>
+        <div className="logo"><img src={Logo} alt="" onClick={_ => history.push('/')} /></div>
         <Menu theme="light" mode="inline" defaultSelectedKeys={['1']} onClick={jumpRoute}>
           {
             menuData.current.map(i => (

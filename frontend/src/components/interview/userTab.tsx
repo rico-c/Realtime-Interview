@@ -6,7 +6,7 @@ import { Button, Modal, Input, notification } from 'antd';
 import { InterviewRoute } from 'types';
 import { SmileOutlined, ExportOutlined } from '@ant-design/icons';
 
-export const UserTab = ({ userAccount, socket }: { userAccount: any, socket: any }) => {
+export const UserTab = ({ userAccount, socket, demo }: { userAccount: any, socket: any, demo: any }) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const myName = userAccount.name;
@@ -75,7 +75,7 @@ export const UserTab = ({ userAccount, socket }: { userAccount: any, socket: any
   }, [socket])
 
   useEffect(() => {
-    if (!myName) {
+    if (!myName && !demo) {
       setIsModalVisible(true);
       return;
     }

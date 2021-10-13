@@ -7,11 +7,14 @@
     height: 50px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     background-color: rgb(14, 14, 14);
     flex: 1 0 50px;
     padding-left: 15px;
+    color: #fff;
     img {
       width: 200px;
+      margin-top: -2px;
     }
   }
   .bottom-bar {

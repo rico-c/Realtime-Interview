@@ -49,3 +49,5 @@ export const getTeamInfoAPI = `${APIHost}/team/getteaminfo`;
 export const renameTeamAPI = `${APIHost}/team/rename`;
 export const createTeamAPI = `${APIHost}/team/createteam`;
 export const belongTeamsAPI = `${APIHost}/team/belongteams`;
+
+export const gettokenAPI = `${APIHost}/agora/gettoken`;

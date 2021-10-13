@@ -57,16 +57,16 @@ const SmallPlayer = (props: VideoPlayerProps) => {
         <div className="player-btn">
           <i className="iconfont fullscreen-btn" onClick={() => props.setSize(props.id)}>&#xe619;</i>
         </div>
-        <div className="player-btn">
+        {props.isme && <div className="player-btn">
           {
             video ? <i className="iconfont" onClick={() => videoSwitch(false)}>&#xe634;</i> : <i className="iconfont" onClick={() => videoSwitch(true)}>&#xe632;</i>
           }
-        </div>
-        <div className="player-btn">
+        </div>}
+        {props.isme && <div className="player-btn">
           {
             mute ? <i className="iconfont" onClick={() => muteSwitch(false)}>&#xe625;</i> : <i className="iconfont" onClick={() => muteSwitch(true)}>&#xe626;</i>
           }
-        </div>
+        </div>}
       </div>
     </div>
   );

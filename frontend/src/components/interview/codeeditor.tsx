@@ -1,10 +1,10 @@
-import React, { FC, useMemo, useState, useCallback } from 'react';
+import React, { FC, useMemo, useState, useCallback, ReactDOM } from 'react';
 import MonacoEditor from 'react-monaco-editor';
 import LanguageSelector from './languageSelector';
 import SettingSelector from './settingSelector';
 import EndInterview from './endInterview';
 import { Button, Modal } from 'antd';
-import { CaretRightFilled } from '@ant-design/icons';
+import { CaretRightFilled, LeftOutlined} from '@ant-design/icons';
 import { yjsHost } from '@/utils/API';
 import * as Y from 'yjs';
 import { WebsocketProvider } from 'y-websocket';
@@ -14,6 +14,7 @@ import { MonacoBinding } from 'y-monaco';
 import { useSelector } from 'react-redux';
 import { useRunShortCut } from '@/hooks/useUtils';
 import { runCode } from '@/actions';
+import { useHistory } from "react-router-dom";
 import LOGO from 'assets/logo/logo-white.png';
 import {
   LoadingOutlined,
@@ -23,14 +24,17 @@ import './codeeditor.scss';
 
 interface CodeEditorProp {
   socket?: any;
-  roomId: any
+  roomId: string;
+  videocallDom: any;
+  demo: any;
 }
 
 const CodeEditor: FC<CodeEditorProp> = props => {
-  const { socket, roomId } = props;
+  const { socket, roomId, videocallDom, demo } = props;
   const [code, setCode] = useState('');
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [running, setRunning] = useState(false);
+  const history = useHistory();
 
   const userAccount = useSelector(state => (state as any).accout);
   const currentLanguage = useSelector(state => (state as any).editor.language);
@@ -76,7 +80,7 @@ const CodeEditor: FC<CodeEditorProp> = props => {
       });
 
       if (res && socket) {
-        socket.emit('update', Object.assign({ triger: userAccount.name, language: currentLanguageName}, res));
+        socket.emit('update', Object.assign({ triger: userAccount.name, language: currentLanguageName }, res));
       } else {
         console.log('编辑失败');
       }
@@ -114,10 +118,14 @@ const CodeEditor: FC<CodeEditorProp> = props => {
   return (
     <div className="editor">
       <div className="top-bar">
-        <img src={LOGO} alt="" />
-        <Button danger type="primary" onClick={endInterview}>
-          结束面试
-        </Button>
+        <span>
+          <img src={LOGO} alt="" />
+          {!demo && <Button type="link" icon={<LeftOutlined />} onClick={_ => history.push('/dashboard')}>返回控制台</Button> }
+          <Button danger type="primary" onClick={endInterview}>
+            结束面试
+          </Button>
+        </span>
+        {videocallDom}
       </div>
       <Modal
         title="面试评价"

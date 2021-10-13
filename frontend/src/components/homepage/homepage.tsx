@@ -1,14 +1,34 @@
 import React, { FC, useCallback } from "react";
-import { Button } from 'antd';
+import { Button, message } from 'antd';
 import { useHistory } from "react-router-dom";
+import { createInterview, createRoomid } from "@/actions";
 import './homepage.scss';
 
 const HomePage: FC = () => {
   const history = useHistory();
 
-  const jumpDemo = useCallback((e) => {
-    history.push(e.key);
-  }, [])
+  const jumpDemo = useCallback(async () => {
+    const roomid = await createRoomid('trydemo');
+    if (!roomid) {
+      message.error('创建面试ID失败');
+    }
+    const res = await createInterview({
+      id: roomid,
+      creator: 'trydemo',
+      teamId: 'trydemo',
+      type: 2
+    });
+    if (res.code === 0) {
+      history.push({
+        pathname: `/interview/${roomid}`, state: {
+          demo: true
+        }
+      })
+    }
+    else {
+      message.error('创建失败，请稍后再试');
+    }
+  }, []);
 
   return (
     <div className="home-page">

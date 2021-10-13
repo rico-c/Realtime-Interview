@@ -3,6 +3,7 @@ const interview = require('./interview');
 const team = require('./team');
 const question = require('./question');
 const writtenexam = require("./writtenexam");
+const agora = require("./agora");
 
 module.exports =  app => {
   app.use("/interview", interview);
@@ -10,4 +11,5 @@ module.exports =  app => {
   app.use("/team", team);
   app.use("/writtenexam", writtenexam);
   app.use("/question", question);
+  app.use("/agora", agora);
 };

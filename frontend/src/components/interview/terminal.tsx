@@ -1,5 +1,6 @@
 import React, { FC, useMemo, useCallback, useRef, useEffect } from 'react';
 import { XTerm } from 'xterm-for-react';
+import { FitAddon } from 'xterm-addon-fit';
 import { decode } from '@/utils/EnCode';
 
 import './terminal.scss';
@@ -8,6 +9,8 @@ interface TerminalProps {
   socket: any;
   ternimalRef: any;
 }
+
+const fitAddon = new FitAddon();
 
 const Terminal: FC<TerminalProps> = props => {
   const { socket, ternimalRef } = props;
@@ -55,16 +58,20 @@ const Terminal: FC<TerminalProps> = props => {
     ternimalRef.current.clear = clear;
   }, [clear]);
 
+  useEffect(() => {
+    fitAddon.fit();
+  }, [])
+
   const options = useMemo(() => {
     return {
       convertEol: true, //遇到回车符时，光标定位在下一行开始处
-      theme: { background: '#1e1e1e' }
+      theme: { background: '#1e1e1e' },
     };
   }, []);
 
   return (
     <div className="terminal">
-      <XTerm className="x-term" ref={xtermRef} options={options} />
+      <XTerm className="x-term" ref={xtermRef} options={options} addons={[fitAddon]} />
     </div>
   );
 };
