@@ -1,4 +1,4 @@
-import React, { FC, useState, useCallback, useRef } from 'react';
+import React, { FC, useState, useCallback, useRef, useMemo } from 'react';
 import CodeEditor from '@/components/interview/codeeditor';
 import Terminal from '@/components/interview/terminal';
 import Markdown from '@/components/interview/markdown';
@@ -12,6 +12,7 @@ import { UserAddOutlined, ClearOutlined, CodeOutlined, EditOutlined } from '@ant
 import { useSocket, useInterviewDetail } from '@/hooks';
 import { useParams, useLocation } from 'react-router-dom';
 import { useUserInfo } from '@/hooks/useLogin';
+import { getTeamInfo } from 'actions/team';
 
 import './interview.scss';
 
@@ -25,12 +26,23 @@ const Interview: FC = () => {
   const ternimalRef = useRef({});
   const interviewDetail = useInterviewDetail(roomId);
   const socket = useSocket(roomId);
-  const { isLogined } = useUserInfo();
+  const { userId } = useUserInfo();
+
   const handleInviteVisibleChange = useCallback(value => {
     setInviteVisible(value);
   }, []);
 
-
+  const isEmployer = useMemo(async () => {
+    if (interviewDetail) {
+      const res = await getTeamInfo(interviewDetail.teamId);
+      if (res?.info?.users?.includes(userId)) {
+        return true;
+      }
+      return false;
+    }
+    return false;
+  }, [interviewDetail])
+ 
   const onTypeChange = useCallback(type => {
     setType(type.target.value);
   }, []);
@@ -44,7 +56,7 @@ const Interview: FC = () => {
         <div className="right-area">
           <div className="top-bar">
             <div className="top-left">
-              {(isLogined || demo) && <Radio.Group
+              {(isEmployer || demo) && <Radio.Group
                 defaultValue="terminal"
                 buttonStyle="solid"
                 className="c-gap-right"

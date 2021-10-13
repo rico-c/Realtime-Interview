@@ -59,13 +59,13 @@ export const OrderInterview = ({ roomId, setIsModalVisible }: { roomId: string; 
               marginRight: "10px"
             }}
           >
-            {roomId}
+            {window.location.origin + '/interview/' + roomId}
           </span>
           <CopyToClipboard
             style={{
               cursor: "pointer"
             }}
-            text={roomId}
+            text={window.location.origin + '/interview/' + roomId}
             onCopy={() => setCopy(true)}
           >
             {copied ? (
@@ -114,7 +114,7 @@ export const OrderInterview = ({ roomId, setIsModalVisible }: { roomId: string; 
             >
               <Input placeholder="面试者姓名" />
             </Form.Item>
-            <Form.Item
+            {/* <Form.Item
               label="面试者邮箱"
               name="joinerEmail"
               rules={[{ required: true, message: "请输入邮箱" }]}
@@ -123,9 +123,9 @@ export const OrderInterview = ({ roomId, setIsModalVisible }: { roomId: string; 
                 addonBefore={<MailOutlined />}
                 placeholder="example@host.com"
               />
-            </Form.Item>
+            </Form.Item> */}
           </div>
-          <div
+          {/* <div
             style={{
               display: "flex",
               justifyContent: "center"
@@ -143,8 +143,8 @@ export const OrderInterview = ({ roomId, setIsModalVisible }: { roomId: string; 
                 unCheckedChildren="否"
               />
             </Form.Item>
-          </div>
-          <div
+          </div> */}
+          {/* <div
             style={{
               display: "flex",
               justifyContent: "center"
@@ -162,7 +162,7 @@ export const OrderInterview = ({ roomId, setIsModalVisible }: { roomId: string; 
                 unCheckedChildren="否"
               />
             </Form.Item>
-          </div>
+          </div> */}
         </div>
         <div style={{ textAlign: "center", marginTop: "20px" }}>
           <Button type="primary" htmlType="submit">

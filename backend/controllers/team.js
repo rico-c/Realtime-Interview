@@ -30,6 +30,12 @@ class Team {
   }
 
   async createteam(req, res) {
+    if (!req.session.userId) {
+      return res.send({
+        code: 1,
+        data: "先请登录",
+      });
+    };
     const { userId, teamName } = req.body;
     await TeamModel.create({
       users: [userId],
@@ -47,6 +53,12 @@ class Team {
 
   async belongteams(req, res) {
     try {
+      if (!req.session.userId) {
+        return res.send({
+          code: 1,
+          data: "先请登录",
+        });
+      }
       const { userId } = req.query;
       const teamresult = await TeamModel.find({
         users: {
@@ -65,6 +77,12 @@ class Team {
   // 新增成员
   async addmember(req, res) {
     try {
+      if (!req.session.userId) {
+        return res.send({
+          code: 1,
+          data: "先请登录",
+        });
+      }
       const { teamId, mobile } = req.body;
       const teamresult = await TeamModel.findOne({
         teamId,
@@ -106,6 +124,12 @@ class Team {
   // 新增成员
   async addmember(req, res) {
     try {
+      if (!req.session.userId) {
+        return res.send({
+          code: 1,
+          data: "先请登录",
+        });
+      }
       const { teamId, mobile } = req.body;
       const teamresult = await TeamModel.findOne({
         teamId,
@@ -147,6 +171,12 @@ class Team {
   // 修改团队名字
   async rename(req, res) {
     try {
+      if (!req.session.userId) {
+        return res.send({
+          code: 1,
+          data: "先请登录",
+        });
+      }
       const { teamId, name } = req.body;
       if (!teamId || !name) {
         return res.send({
@@ -176,6 +206,12 @@ class Team {
   // 删除成员
   async removemember(req, res) {
     try {
+      if (!req.session.userId) {
+        return res.send({
+          code: 1,
+          data: "先请登录",
+        });
+      }
       const { teamId, userId } = req.body;
       const teamresult = await TeamModel.findOne({
         teamId,
@@ -204,6 +240,12 @@ class Team {
   // 获取团队信息
   async getteaminfo(req, res) {
     try {
+      if (!req.session.userId) {
+        return res.send({
+          code: 1,
+          data: "先请登录",
+        });
+      }
       const { teamId } = req.query;
       const result = await TeamModel.findOne({
         teamId,

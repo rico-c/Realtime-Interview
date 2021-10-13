@@ -1,10 +1,11 @@
 import React, { useCallback, useState, useEffect, useMemo } from 'react';
-import { Table, Tag, Space, Popconfirm, message } from 'antd';
+import { Table, Tag, Space, Popconfirm, message, Drawer } from 'antd';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchInterviews, deleteInterview } from '@/actions';
 import { CardWrapper } from '@/components/common/cardWrapper';
 import moment from 'moment';
+import FinalReport from '@/components/result/finalReport';
 import './interviewTable.scss';
 
 const InterviewTable = (params: { query: string }) => {
@@ -12,6 +13,8 @@ const InterviewTable = (params: { query: string }) => {
   const history = useHistory();
   const teamId = useSelector(state => (state as any)?.currentteam?.teamId);
   const dispatch = useDispatch();
+
+  const [reportVisible, setreportVisible] = useState<string | null>(null);
 
   const updateInterviewsData = () => dispatch(fetchInterviews(teamId));
 
@@ -38,7 +41,7 @@ const InterviewTable = (params: { query: string }) => {
   };
 
   const reviewInterview = (id: string) => {
-    console.log(id);
+    setreportVisible(id);
   };
 
   const doDeleteInterview = async (id: string) => {
@@ -71,15 +74,15 @@ const InterviewTable = (params: { query: string }) => {
       dataIndex: 'joinerName',
       key: 'joinerName',
       ellipsis: true,
-      render: (joinerName: string) => <span>{joinerName || '暂无'}</span>
+      render: (joinerName: string) => <span>{joinerName || '-'}</span>
     },
-    {
-      title: '面试者邮箱',
-      dataIndex: 'joinerEmail',
-      key: 'joinerEmail',
-      ellipsis: false,
-      render: (joinerEmail: string) => <span>{joinerEmail || '暂无'}</span>
-    },
+    // {
+    //   title: '面试者邮箱',
+    //   dataIndex: 'joinerEmail',
+    //   key: 'joinerEmail',
+    //   ellipsis: false,
+    //   render: (joinerEmail: string) => <span>{joinerEmail || '暂无'}</span>
+    // },
     {
       title: '面试时间',
       dataIndex: 'time',
@@ -113,7 +116,7 @@ const InterviewTable = (params: { query: string }) => {
       key: 'rate',
       width: '80px',
       render: (text, record) => (
-        <span>{text === 0 ? 0 : text ? text : '未评分'}</span>
+        <span>{text === 0 ? 0 : text ? text : '-'}</span>
       )
     },
     {
@@ -153,6 +156,15 @@ const InterviewTable = (params: { query: string }) => {
         rowKey={row => row.roomId}
         pagination={false}
       />
+      <Drawer
+        placement="right"
+        width="600"
+        closable={true}
+        onClose={_ => setreportVisible(null)}
+        visible={!!reportVisible}
+      >
+        <FinalReport propRoomId={reportVisible} />
+      </Drawer>
     </CardWrapper>
   );
 };

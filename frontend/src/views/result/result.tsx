@@ -28,13 +28,13 @@ const InterviewResult: FC = () => {
           <Button type="primary" key="console" onClick={goDashboard}>
             前往控制台
           </Button>,
-          <Button key="report" onClick={downloadReport}>
-            下载面试报告
-          </Button>,
+          // <Button key="report" onClick={downloadReport}>
+          //   下载面试报告
+          // </Button>,
         ]}
       />
       <div className="report-wrapper">
-        {interviewDetail && <FinalReport data={interviewDetail} reportRef={reportRef} />}
+        {interviewDetail && <FinalReport reportRef={reportRef} />}
       </div>
     </div>
   );

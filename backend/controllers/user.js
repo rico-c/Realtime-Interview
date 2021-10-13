@@ -90,6 +90,12 @@ class User {
 
   async rename(req, res) {
     try {
+      if (!req.session.userId) {
+        return res.send({
+          code: 1,
+          data: "先请登录",
+        });
+      }
       const sessionUserId = req.session.userId;
       const params = req.body;
       const { userId, name } = params;

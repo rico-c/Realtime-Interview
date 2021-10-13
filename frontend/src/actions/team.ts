@@ -9,7 +9,7 @@ import {
   belongTeamsAPI,
 } from "@/utils/API";
 
-export const getTeamInfo = async (teamId: any) => {
+export const getTeamInfo = async (teamId: string) => {
   const res = await axios.get(getTeamInfoAPI, {
     params: {
       teamId,

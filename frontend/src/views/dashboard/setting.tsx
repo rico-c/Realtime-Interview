@@ -15,7 +15,7 @@ const Setting: FC = () => {
       <div className="half-wrapper">
         <CardWrapper>
           <UserSetting />
-          <GeneralSetting />
+          {/* <GeneralSetting /> */}
         </CardWrapper>
       </div>
     </div>
