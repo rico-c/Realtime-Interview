@@ -240,12 +240,6 @@ class Team {
   // 获取团队信息
   async getteaminfo(req, res) {
     try {
-      if (!req.session.userId) {
-        return res.send({
-          code: 1,
-          data: "先请登录",
-        });
-      }
       const { teamId } = req.query;
       const result = await TeamModel.findOne({
         teamId,

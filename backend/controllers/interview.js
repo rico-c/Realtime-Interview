@@ -51,12 +51,6 @@ class Interview {
 
   // 创建预约面试
   async create(req, res) {
-    if (!req.session.userId) {
-      return res.send({
-        code: 1,
-        data: "先请登录",
-      });
-    };
     const params = req.body;
     const { roomId } = params;
     const exsitId = await InterviewModel.findOne({
@@ -90,7 +84,7 @@ class Interview {
         code: 1,
         data: "先请登录",
       });
-    };
+    }
     const params = req.query;
     const { roomId } = params;
     const exsitId = await InterviewModel.deleteOne({
@@ -116,7 +110,7 @@ class Interview {
         code: 1,
         data: "先请登录",
       });
-    };
+    }
     const params = req.query;
     const teamId = params.teamId;
     const list = await InterviewModel.where({

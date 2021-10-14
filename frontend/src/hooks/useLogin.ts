@@ -60,6 +60,8 @@ export const useUserInfo = () => {
   } else {
     return {
       isLogined: false,
+      name: accout.name,
+      userId: null
     };
   }
 };

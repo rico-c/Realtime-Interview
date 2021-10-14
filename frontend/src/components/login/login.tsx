@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
 import { useDispatch } from "react-redux";
 import { Form, Input, Checkbox, Button } from 'antd';
+import { LeftOutlined } from '@ant-design/icons'
 import { WidthButton } from '../common/widthBtn';
 import { login } from 'actions/accout'
 import { checkLogin } from 'utils/checkValidate'
 import { useLoginJump } from '@/hooks/useLogin';
 import { getUrlParam } from 'utils/GetUrlParams';
+import { useHistory } from 'react-router';
 
 export const Login = ({ setLogin }: { setLogin: (boolean) => void }) => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const [help, setHelp] = useState<string>('');
 
   const onFinish = async (values) => {
@@ -51,9 +54,14 @@ export const Login = ({ setLogin }: { setLogin: (boolean) => void }) => {
           </WidthButton>
         </Form.Item>
       </Form>
-      <Button type="link" className="float-right" onClick={() => setLogin(false)}>
-        注册账号
-      </Button>
+      <div>
+        <Button type="link" icon={<LeftOutlined />} className="float-left" onClick={() => history.push('/')}>
+          返回首页
+        </Button>
+        <Button type="link" className="float-right" onClick={() => setLogin(false)}>
+          注册账号
+        </Button>
+      </div>
     </div>
   )
 }

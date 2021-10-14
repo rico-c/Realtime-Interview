@@ -72,7 +72,7 @@ const CodeEditor: FC<CodeEditorProp> = props => {
 
   // 运行编辑器中的代码
   const runCodeCallback = useCallback(async () => {
-    if (code) {
+    if (!!code && !!currentLanguage) {
       setRunning(true);
       const res = await runCode({
         source_code: code,

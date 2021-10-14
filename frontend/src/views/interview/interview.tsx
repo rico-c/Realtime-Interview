@@ -1,4 +1,4 @@
-import React, { FC, useState, useCallback, useRef, useMemo } from 'react';
+import React, { FC, useState, useCallback, useRef, useMemo, useEffect } from 'react';
 import CodeEditor from '@/components/interview/codeeditor';
 import Terminal from '@/components/interview/terminal';
 import Markdown from '@/components/interview/markdown';
@@ -12,7 +12,7 @@ import { UserAddOutlined, ClearOutlined, CodeOutlined, EditOutlined } from '@ant
 import { useSocket, useInterviewDetail } from '@/hooks';
 import { useParams, useLocation } from 'react-router-dom';
 import { useUserInfo } from '@/hooks/useLogin';
-import { getTeamInfo } from 'actions/team';
+import { getTeamInfo } from 'actions';
 
 import './interview.scss';
 
@@ -26,7 +26,7 @@ const Interview: FC = () => {
   const ternimalRef = useRef({});
   const interviewDetail = useInterviewDetail(roomId);
   const socket = useSocket(roomId);
-  const { userId } = useUserInfo();
+  const { userId, name } = useUserInfo();
 
   const handleInviteVisibleChange = useCallback(value => {
     setInviteVisible(value);
@@ -38,10 +38,9 @@ const Interview: FC = () => {
       if (res?.info?.users?.includes(userId)) {
         return true;
       }
-      return false;
     }
     return false;
-  }, [interviewDetail])
+  }, [interviewDetail, userId])
  
   const onTypeChange = useCallback(type => {
     setType(type.target.value);

@@ -1,5 +1,5 @@
-import React, { useCallback, useState, useEffect, useMemo } from 'react';
-import { Table, Tag, Space, Popconfirm, message, Drawer } from 'antd';
+import React, { useState, useEffect, useMemo } from 'react';
+import { Table, Tag, Space, Popconfirm, message, Drawer, Button } from 'antd';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchInterviews, deleteInterview } from '@/actions';
@@ -60,13 +60,11 @@ const InterviewTable = (params: { query: string }) => {
       dataIndex: 'status',
       key: 'status',
       sorter: true,
-      width: '80px',
       render: (index: any) => <Tag color={statusDic[index].color}>{statusDic[index].txt}</Tag>
     },
     {
       title: "面试间ID",
       dataIndex: "roomId",
-      width: '140px',
       key: "roomId"
     },
     {
@@ -91,19 +89,19 @@ const InterviewTable = (params: { query: string }) => {
       sorter: (a: any, b: any) => (new Date(a.time)).getTime() - (new Date(b.time)).getTime(),
       render: (time: string) => (
         <span>
-          {moment(time).format('MM-DD HH:mm')}&nbsp;
+          {moment(time).format('YYYY/MM/DD HH:mm')}&nbsp;
           {moment(time).isSame(moment(), 'd') && <Tag color="cyan">今天</Tag>}
         </span>
       )
     },
-    {
-      title: '创建时间',
-      dataIndex: 'createTime',
-      key: 'createTime',
-      ellipsis: true,
-      sorter: (a, b) => (new Date(a.time)).getTime() - (new Date(b.time)).getTime(),
-      render: text => <span>{moment(text).format('MM-DD HH:mm')}</span>
-    },
+    // {
+    //   title: '创建时间',
+    //   dataIndex: 'createTime',
+    //   key: 'createTime',
+    //   ellipsis: true,
+    //   sorter: (a, b) => (new Date(a.time)).getTime() - (new Date(b.time)).getTime(),
+    //   render: text => <span>{moment(text).format('MM-DD HH:mm')}</span>
+    // },
     {
       title: '创建人',
       dataIndex: 'name',
@@ -114,7 +112,6 @@ const InterviewTable = (params: { query: string }) => {
       title: '评分',
       dataIndex: 'rate',
       key: 'rate',
-      width: '80px',
       render: (text, record) => (
         <span>{text === 0 ? 0 : text ? text : '-'}</span>
       )
@@ -122,14 +119,13 @@ const InterviewTable = (params: { query: string }) => {
     {
       title: '操作',
       key: 'action',
-      width: '165px',
       dataIndex: 'action',
       render: (text, record) => (
         <Space size="middle">
           {record.status === 3 ? (
-            <a onClick={() => reviewInterview(record.roomId)}>查看报告{record.note && '/笔记'}</a>
+            <Button onClick={() => reviewInterview(record.roomId)}>查看报告{record.note && '/笔记'}</Button>
           ) : (
-            <a onClick={() => enterInterview(record.roomId)}>进入面试</a>
+              <Button onClick={() => enterInterview(record.roomId)} type="primary" ghost>进入面试</Button>
           )}
           <Popconfirm
             title="删除后不可恢复"

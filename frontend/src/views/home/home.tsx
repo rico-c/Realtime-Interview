@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import Header from '@/components/header/header';
 import Homepage from '@/components/homepage/homepage';
+import {Footer} from 'components/homepage/footer';
 import "./home.scss";
 
 const Home: FC = () => {
@@ -10,6 +11,7 @@ const Home: FC = () => {
         <Header />
         <Homepage />
       </div>
+      <Footer />
     </div>
   )
 }

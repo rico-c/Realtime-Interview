@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState, forwardRef, useImperativeHandl
 import {
   Select
 } from "antd";
+import { TeamOutlined } from '@ant-design/icons'
 import { useSelector, useDispatch } from "react-redux";
 import { setCurrentTeam, getBelongTeams } from "@/actions";
 import { useHistory } from "react-router-dom";
@@ -27,7 +28,7 @@ const TeamSelector = forwardRef((props, ref) => {
     getBelongTeams(userId).then(res => {
       setBelongTeams(res);
       let currentTeamData = res[0];
-      if (res.find(i => i.teamId === currentTeamId)) {
+      if (res?.find(i => i.teamId === currentTeamId)) {
         currentTeamData = res.find(i => i.teamId === currentTeamId);
       }
       dispatch(setCurrentTeam(currentTeamData));
@@ -57,6 +58,7 @@ const TeamSelector = forwardRef((props, ref) => {
 
   return (
     <div className="team-selector">
+      <TeamOutlined  className="icon"/>
       {belongTeams && belongTeams.length ? <Select
         className="selector"
         value={currentTeamId}

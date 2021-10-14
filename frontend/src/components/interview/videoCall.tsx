@@ -24,14 +24,14 @@ const VideoCall = (props: { socket: any; roomId: string }) => {
     shareScreen,
     closeShareScreen,
     localScreenTrack
-  } = useAgora(name, roomId);
+  } = useAgora(roomId);
 
   const handleJoin = useCallback(() => {
     join();
     setisJoined(true);
     socket?.emit('joinchat', name);
     setVideoJoiner(null);
-  }, []);
+  }, [socket, name]);
 
   const handleLeave = useCallback(() => {
     leave();
@@ -56,7 +56,6 @@ const VideoCall = (props: { socket: any; roomId: string }) => {
 
   useEffect(() => {
     socket?.on('newchatjoiner', name => {
-      console.log('name');
       setVideoJoiner(name);
     })
   }, [socket])
@@ -67,9 +66,9 @@ const VideoCall = (props: { socket: any; roomId: string }) => {
         <Button onClick={handleLeave}>退出通话</Button>
       ) : (
         <Popover
-          title={`${videoJoiner}已加入通话，点击这里加入视频通话`}
+          content={`${videoJoiner}已开启视频通话，点击加入`}
           placement="bottom"
-          visible={!!videoJoiner}
+          visible={!!videoJoiner && !joinState}
         >
           <Button className="make-call" onClick={handleJoin} icon={<PhoneOutlined />}>开启视频通话</Button>
         </Popover>
@@ -93,18 +92,16 @@ const VideoCall = (props: { socket: any; roomId: string }) => {
               </div>
             </Draggable>
           ) : (
-            <Draggable key="small">
-              <div className="small-v">
-                <SmallPlayer
-                  videoTrack={localVideoTrack}
-                  audioTrack={localAudioTrack}
-                  setSize={setSize}
-                  name="我"
-                  id="me"
-                  isme={true}
-                ></SmallPlayer>
-              </div>
-            </Draggable>
+            <div className="small-v">
+              <SmallPlayer
+                videoTrack={localVideoTrack}
+                audioTrack={localAudioTrack}
+                setSize={setSize}
+                name="我"
+                id="me"
+                isme={true}
+              ></SmallPlayer>
+            </div>
           )}
 
           {remoteUsers.map(user => (
@@ -122,18 +119,17 @@ const VideoCall = (props: { socket: any; roomId: string }) => {
                         id={user.uid}
                       ></BigPlayer>
                     </div>
-                  </Draggable> : <Draggable>
-                    <div>
-                      <SmallPlayer
-                        videoTrack={user.videoTrack}
-                        audioTrack={user.audioTrack}
-                        setSize={setSize}
-                        name={user.uid}
-                        isme={false}
-                        id={user.uid}
-                      ></SmallPlayer>
-                    </div>
-                  </Draggable>
+                  </Draggable> :
+                  <div className="small-v">
+                    <SmallPlayer
+                      videoTrack={user.videoTrack}
+                      audioTrack={user.audioTrack}
+                      setSize={setSize}
+                      name={user.uid}
+                      isme={false}
+                      id={user.uid}
+                    ></SmallPlayer>
+                  </div>
               }
             </div>
           ))}

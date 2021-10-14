@@ -108,7 +108,7 @@ export const OrderInterview = ({ roomId, setIsModalVisible }: { roomId: string; 
         <div style={{ textAlign: "center", width: "70%", margin: "0 auto" }}>
           <div>
             <Form.Item
-              label="面试者信息"
+              label="参加面试者"
               name="joinerName"
               rules={[{ required: true, message: "请输入姓名" }]}
             >
