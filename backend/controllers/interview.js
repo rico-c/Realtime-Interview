@@ -77,6 +77,41 @@ class Interview {
     }
   }
 
+  // 修改面试信息
+  async update(req, res) {
+    const params = req.body;
+    const { joinerName,time, roomId } = params;
+    const exsitId = await InterviewModel.findOne({
+      roomId,
+    });
+    if (!exsitId) {
+      res.send({
+        code: 1,
+        message: "未找到面试 ID，请稍后重试",
+      });
+    } else {
+      const updateParams = {};
+      if(joinerName) {
+        updateParams.joinerName = joinerName;
+      }
+      if(time) {
+        updateParams.time = time;
+      }
+      await InterviewModel.update({ roomId: roomId }, updateParams, (err) => {
+        if (err) {
+          return res.send({
+            code: 1,
+            message: err,
+          });
+        }
+        res.send({
+          code: 0,
+          message: "修改成功",
+        });
+      });
+    }
+  }
+
   // 删除预约面试
   async delete(req, res) {
     if (!req.session.userId) {

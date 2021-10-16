@@ -6,6 +6,7 @@ import { fetchInterviews, deleteInterview } from '@/actions';
 import { CardWrapper } from '@/components/common/cardWrapper';
 import moment from 'moment';
 import FinalReport from '@/components/result/finalReport';
+import { UpdateInterview } from 'components/dashboard/interviews/updateInterview';
 import './interviewTable.scss';
 
 const InterviewTable = (params: { query: string }) => {
@@ -15,6 +16,7 @@ const InterviewTable = (params: { query: string }) => {
   const dispatch = useDispatch();
 
   const [reportVisible, setreportVisible] = useState<string | null>(null);
+  const [configVisible, setconfigVisible] = useState<string | null>(null);
 
   const updateInterviewsData = () => dispatch(fetchInterviews(teamId));
 
@@ -40,10 +42,6 @@ const InterviewTable = (params: { query: string }) => {
     history.push(`/interview/${id}`);
   };
 
-  const reviewInterview = (id: string) => {
-    setreportVisible(id);
-  };
-
   const doDeleteInterview = async (id: string) => {
     await deleteInterview(id);
     updateInterviewsData();
@@ -60,6 +58,7 @@ const InterviewTable = (params: { query: string }) => {
       dataIndex: 'status',
       key: 'status',
       sorter: true,
+      width: '80px',
       render: (index: any) => <Tag color={statusDic[index].color}>{statusDic[index].txt}</Tag>
     },
     {
@@ -74,13 +73,6 @@ const InterviewTable = (params: { query: string }) => {
       ellipsis: true,
       render: (joinerName: string) => <span>{joinerName || '-'}</span>
     },
-    // {
-    //   title: '面试者邮箱',
-    //   dataIndex: 'joinerEmail',
-    //   key: 'joinerEmail',
-    //   ellipsis: false,
-    //   render: (joinerEmail: string) => <span>{joinerEmail || '暂无'}</span>
-    // },
     {
       title: '面试时间',
       dataIndex: 'time',
@@ -94,14 +86,6 @@ const InterviewTable = (params: { query: string }) => {
         </span>
       )
     },
-    // {
-    //   title: '创建时间',
-    //   dataIndex: 'createTime',
-    //   key: 'createTime',
-    //   ellipsis: true,
-    //   sorter: (a, b) => (new Date(a.time)).getTime() - (new Date(b.time)).getTime(),
-    //   render: text => <span>{moment(text).format('MM-DD HH:mm')}</span>
-    // },
     {
       title: '创建人',
       dataIndex: 'name',
@@ -119,17 +103,19 @@ const InterviewTable = (params: { query: string }) => {
     {
       title: '操作',
       key: 'action',
+      width: '250px',
       dataIndex: 'action',
       render: (text, record) => (
         <Space size="middle">
           {record.status === 3 ? (
-            <Button onClick={() => reviewInterview(record.roomId)}>查看报告{record.note && '/笔记'}</Button>
+            <Button onClick={_ => setreportVisible(record.roomId)}>查看报告{record.note && '/笔记'}</Button>
           ) : (
-              <Button onClick={() => enterInterview(record.roomId)} type="primary" ghost>进入面试</Button>
+              <Button onClick={_ => enterInterview(record.roomId)} type="primary" ghost>进入面试</Button>
           )}
+          <Button onClick={_ => setconfigVisible(record.roomId)} type="link">修改</Button>
           <Popconfirm
             title="删除后不可恢复"
-            onConfirm={() => doDeleteInterview(record.roomId)}
+            onConfirm={_ => doDeleteInterview(record.roomId)}
             okText="确认删除"
             cancelText="取消"
           >
@@ -160,6 +146,15 @@ const InterviewTable = (params: { query: string }) => {
         visible={!!reportVisible}
       >
         <FinalReport propRoomId={reportVisible} />
+      </Drawer>
+      <Drawer
+        placement="right"
+        width="600"
+        closable={true}
+        onClose={_ => setconfigVisible(null)}
+        visible={!!configVisible}
+      >
+        <UpdateInterview roomId={configVisible} setconfigVisible={setconfigVisible} updateInterviewsData={updateInterviewsData}/>
       </Drawer>
     </CardWrapper>
   );

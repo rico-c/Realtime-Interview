@@ -1,6 +1,7 @@
 import { UPDATE_USER, DELETE_USER } from "./types";
 import { LoginRes } from "@/types";
 import axios from "axios";
+import {message} from 'antd';
 import { loginAPI, logoutAPI, registerAPI, renameAPI } from "@/utils/API";
 
 axios.defaults.withCredentials = true;
@@ -33,6 +34,9 @@ export const login =
       dispatch({
         type: DELETE_USER
       });
+      if (mobile && password) {
+        message.error(res?.data?.message);
+      }
     }
     return res.data;
   };

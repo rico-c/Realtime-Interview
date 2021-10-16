@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
-import { getInterviewAPI } from '@/utils/API';
+import { getInterviewAPI } from "@/utils/API";
 import axios from "axios";
 
 export const useInterviewDetail = (roomId: string) => {
-    const [detail, setDetail] = useState(null)
-    useEffect(() => {
+  const [detail, setDetail] = useState(null);
+  useEffect(() => {
+    if (roomId) {
       axios
         .get(getInterviewAPI, {
           params: {
@@ -16,6 +17,7 @@ export const useInterviewDetail = (roomId: string) => {
             setDetail(res.data.data);
           }
         });
-    }, [roomId]);
-    return detail;
+    }
+  }, [roomId]);
+  return detail;
 };

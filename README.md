@@ -32,7 +32,13 @@
 
 
 ## 运维
+- 防火墙： 只开放 80、443、22端口，其余端口都通过nginx转发
 - Mongodb
+  - 安装： 
+    - https://docs.mongodb.com/v4.4/tutorial/install-mongodb-on-red-hat/
+    - https://jasonkayzk.github.io/2021/03/10/CentOS7%E5%AE%89%E8%A3%85MongoDB/
+  - 数据迁移
+    
 - Nginx配置: https://juejin.cn/post/6844904134345228301
 ```
     server {                    

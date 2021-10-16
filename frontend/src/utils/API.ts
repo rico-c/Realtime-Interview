@@ -39,6 +39,7 @@ export const updateNoteAPI = `${APIHost}/interview/updatenote`;
 export const getInterviewAPI = `${APIHost}/interview/getinterview`;
 export const endInterviewAPI = `${APIHost}/interview/endinterview`;
 export const getWrittenexamsAPI = `${APIHost}/interview/getwrittenexams`;
+export const updateAPI = `${APIHost}/interview/update`;
 
 export const createQuestionAPI = `${APIHost}/question/create`;
 export const getTeamQuestionsAPI = `${APIHost}/question/getbyteam`;

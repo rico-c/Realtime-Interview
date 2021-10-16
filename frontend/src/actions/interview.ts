@@ -4,6 +4,7 @@ import {
   CreateInterfacrAction,
   UpdateNoteAPIAction,
   endInterviewAction,
+  UpdateAPIAction,
 } from "@/types";
 import {
   createInterviewAPI,
@@ -12,7 +13,8 @@ import {
   updateNoteAPI,
   endInterviewAPI,
   getWrittenexamsAPI,
-  deleteInterviewAPI
+  deleteInterviewAPI,
+  updateAPI,
 } from "@/utils/API";
 import moment from "moment";
 
@@ -39,6 +41,16 @@ export const updateNote = async (params: UpdateNoteAPIAction) => {
     return "";
   }
 };
+
+export const updateInterview = async (params: UpdateAPIAction) => {
+  const res = await axios.post(updateAPI, params);
+  if (res.data.code === 0) {
+    return res.data.data;
+  } else {
+    return "";
+  }
+};
+
 export const endInterview = async (params: endInterviewAction) => {
   const res = await axios.post(endInterviewAPI, params);
   if (res.data.code === 0) {
@@ -58,7 +70,7 @@ export const createInterview = async ({
   // 预约创建
   if (info) {
     const time = `${info.date.format("YYYY-MM-DD")} ${info.time.format(
-      "HH:mm:ss"
+      "HH:mm"
     )}`;
     const res = await axios.post(createInterviewAPI, {
       roomId: id,

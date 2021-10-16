@@ -17,24 +17,24 @@ const FinalReport: FC<FinalReportProps> = props => {
   const { roomId }: {roomId: string} = useParams();
   const interviewDetail = useInterviewDetail(roomId || propRoomId);
 
-  const download = useCallback(() => {
-    var element = document.getElementById('finalReport');
-    var options = {
-      filename: 'test.pdf'
-    };
-    const doc = new jsPDF();
-    // domToPdf(element, options, function () {
-    //   console.log('报告已下载');
-    // });
-    doc.html(element, {
-      callback: function (doc) {
-        doc.save();
-      },
-      filename: 'test',
-      x: 10,
-      y: 10
-    });
-  }, [])
+  // const download = useCallback(() => {
+  //   var element = document.getElementById('finalReport');
+  //   var options = {
+  //     filename: 'test.pdf'
+  //   };
+  //   const doc = new jsPDF();
+  //   // domToPdf(element, options, function () {
+  //   //   console.log('报告已下载');
+  //   // });
+  //   doc.html(element, {
+  //     callback: function (doc) {
+  //       doc.save();
+  //     },
+  //     filename: 'test',
+  //     x: 10,
+  //     y: 10
+  //   });
+  // }, [])
 
   // useEffect(() => {
   //   reportRef.current.download = download;

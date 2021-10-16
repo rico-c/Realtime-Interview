@@ -20,3 +20,9 @@ export interface endInterviewAction {
 export interface InterviewRoute {
   roomId?: string;
 }
+
+export interface UpdateAPIAction {
+  joinerName?: string;
+  roomId: string;
+  time?: any;
+}

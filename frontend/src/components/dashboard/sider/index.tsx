@@ -10,7 +10,7 @@ import Group from '@/assets/imgs/zuzhi.svg';
 import Folder from '@/assets/imgs/document.svg';
 import Interview from '@/assets/imgs/interview.svg';
 import Logo from 'assets/logo/logo.png'
-
+import InsertIMG from 'assets/states/paper.png'
 import { useUserInfo } from 'hooks/useLogin'
 
 import './index.scss';
@@ -71,8 +71,11 @@ export const Sider = () => {
           }
         </Menu>
       </div>
-      <Dropdown overlay={Usermenu} className="user-dropdown">
-        <div>{user?.name} <CaretDownOutlined /></div>
-      </Dropdown>
+      <div>
+        <div className="insert-img"><img src={InsertIMG} /></div>
+        <Dropdown overlay={Usermenu} className="user-dropdown">
+          <div>{user?.name} <CaretDownOutlined /></div>
+        </Dropdown>
+      </div>
     </>)
 }

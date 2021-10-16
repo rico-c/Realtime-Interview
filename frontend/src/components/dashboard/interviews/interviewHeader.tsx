@@ -109,7 +109,7 @@ const Header = (params: {
         <span className="header-title">面试列表</span>
         <Search allowClear size="middle" placeholder="搜索面试者" onSearch={onSearch} style={{ width: 300 }} />
       </div>
-      <div>
+      <div className="header-right">
         <TeamSelector />
         <Popover
           content={popContent}

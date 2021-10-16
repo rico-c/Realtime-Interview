@@ -9,6 +9,7 @@ router.get("/getinterviews", interviewController.getinterviews);
 router.post("/updatenote", interviewController.updateNote);
 router.get("/getinterview", interviewController.getInterview);
 router.post("/endinterview", interviewController.endInterview);
+router.post("/update", interviewController.update);
 
 module.exports = router;
  
