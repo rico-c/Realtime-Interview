@@ -25,7 +25,7 @@ const InterviewResult: FC = () => {
         title="面试已完成！"
         subTitle="您可以下载本次面试报告，或在控制台中查看详情"
         extra={[
-          <Button type="primary" key="console" onClick={goDashboard}>
+          <Button type="primary" key="console" size="large" onClick={goDashboard}>
             前往控制台
           </Button>,
           // <Button key="report" onClick={downloadReport}>

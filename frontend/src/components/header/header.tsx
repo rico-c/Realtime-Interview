@@ -35,7 +35,7 @@ const Header: FC = () => {
           {
             userId ? (
               <Menu.Item key="/dashboard">
-                我的控制台
+                控制台
               </Menu.Item>
             ) : (
               <Menu.Item key="/login">

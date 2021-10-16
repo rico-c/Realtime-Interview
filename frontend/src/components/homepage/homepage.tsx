@@ -2,6 +2,7 @@ import React, { FC, useCallback } from "react";
 import { Button, message } from 'antd';
 import { useHistory } from "react-router-dom";
 import { createInterview, createRoomid } from "@/actions";
+import Intro from 'assets/imgs/homepageIntro.png';
 import './homepage.scss';
 
 const HomePage: FC = () => {
@@ -32,11 +33,19 @@ const HomePage: FC = () => {
 
   return (
     <div className="home-page">
-      <div className="title">一站式在线技术面试方案</div>
-      <div className="sub-title">双向同步的在线VSCode编辑器</div>
-      <div className="sub-title">主流语言在线编译器</div>
-      <div className="sub-title">高清视频语音通话</div>
-      <Button className="try" type="primary" onClick={jumpDemo}>试用</Button>
+      <div className="title">一站式在线技术面试平台</div>
+      <div className="main">
+        <div className="left">
+          <div className="sub-title">双向同步的在线VSCode编辑器</div>
+          <div className="sub-title">主流语言实时编译器</div>
+          <div className="sub-title">高清视频语音通话</div>
+          <Button className="try" type="primary" onClick={jumpDemo}>试用</Button>
+        </div>
+        <div className="right">
+          <img src={Intro} />
+        </div>
+      </div>
+
     </div>
   )
 }

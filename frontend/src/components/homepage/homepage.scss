@@ -1,24 +1,35 @@
 .home-page {
-  // display: flex;
   // flex-direction: column;
   // align-items: center;
   padding: 0 15px;
+  .main {
+    display: flex;
+  }
   .title {
     font-size: 40px;
-    font-family: "Noto Serif","PT Serif","source-han-serif-sc",Songti SC,serif;
-    // text-align: center;
+    font-family: "Noto Serif", "PT Serif", "source-han-serif-sc", Songti SC,
+      serif;
     font-weight: 500;
-    margin: 80px auto 30px auto;
+    margin: 50px auto 20px auto;
   }
-  .sub-title {
-    font-size: 18px;
+  .left {
+    min-width: 320px;
+    .sub-title {
+      font-size: 18px;
+    }
+    .try {
+      width: 130px;
+      height: 45px;
+      font-size: 20px;
+      font-weight: 500;
+      margin-top: 80px;
+      border-radius: 4px;
+    }
   }
-  .try {
-    width: 130px;
-    height: 45px;
-    font-size: 20px;
-    font-weight: 500;
-    margin-top: 40px;
-    border-radius: 4px;
+  .right {
+    img {
+      width: 100%;
+      box-shadow: 0 0 10px 2px #bdbdbd;
+    }
   }
 }

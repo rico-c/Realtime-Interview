@@ -50,7 +50,7 @@ const SettingSelector: FC<SettingSelectorProps> = props => {
       visible={visible}
       onVisibleChange={() => setVisible(!visible)}
     >
-      <Button type="primary" icon={<SettingFilled />} className="btn"></Button>
+      <Button ghost icon={<SettingFilled />} className="btn">设置</Button>
     </Popover>
   );
 };

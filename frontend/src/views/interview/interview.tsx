@@ -58,6 +58,7 @@ const Interview: FC = () => {
               {(isEmployer || demo) && <Radio.Group
                 defaultValue="terminal"
                 buttonStyle="solid"
+                optionType="button"
                 className="c-gap-right"
                 onChange={onTypeChange}
               >
@@ -78,7 +79,7 @@ const Interview: FC = () => {
                 visible={inviteVisible}
                 onVisibleChange={handleInviteVisibleChange}
               >
-                <Button icon={<UserAddOutlined />}>邀请面试者</Button>
+                <Button icon={<UserAddOutlined />} ghost>邀请面试者</Button>
               </Popover>
 
               <UserTab userAccount={userAccount} socket={socket} demo={demo} />

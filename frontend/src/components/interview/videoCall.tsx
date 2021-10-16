@@ -63,14 +63,14 @@ const VideoCall = (props: { socket: any; roomId: string }) => {
   return (
     <div className="video-call">
       {isJoined ? (
-        <Button onClick={handleLeave}>退出通话</Button>
+        <Button onClick={handleLeave} ghost>退出通话</Button>
       ) : (
         <Popover
           content={`${videoJoiner}已开启视频通话，点击加入`}
           placement="bottom"
           visible={!!videoJoiner && !joinState}
         >
-          <Button className="make-call" onClick={handleJoin} icon={<PhoneOutlined />}>开启视频通话</Button>
+          <Button className="make-call" ghost onClick={handleJoin} icon={<PhoneOutlined />}>开启视频通话</Button>
         </Popover>
       )}
       {isJoined && (

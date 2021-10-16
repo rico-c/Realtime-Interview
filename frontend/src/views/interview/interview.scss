@@ -8,7 +8,7 @@
       width: 0 !important;
     }
     .right-container {
-      height: calc( 100% - 50px );
+      height: calc(100% - 50px);
     }
     .top-bar {
       padding-right: 15px;
@@ -35,6 +35,24 @@
         background: #00b17f;
         border-radius: 50%;
       }
+    }
+    .ant-radio-button-wrapper {
+      background-color: transparent;
+      color: #ffffff;
+      border-color: #ffffff !important;
+    }
+    .ant-radio-button-wrapper-checked {
+      background-color: #ffffff !important;
+      color: #000000;
+      border-color: #ffffff !important;
+    }
+    .ant-radio-button-wrapper-checked:hover {
+      color: #000000 !important;
+      background: #ffffff !important;
+      border-color: #ffffff !important;
+    }
+    .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled)::before {
+      background-color: #ffffff;
     }
   }
   .Resizer {

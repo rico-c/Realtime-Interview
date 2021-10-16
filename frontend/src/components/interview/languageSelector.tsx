@@ -29,6 +29,7 @@ const LanguageSelector = ({ socket, userAccount }: { socket?: any, userAccount?:
   return (
     <div className="language-selector">
       <Select
+        className="language-selector-dom"
         showSearch
         style={{ width: 220 }}
         placeholder="选择代码语言"

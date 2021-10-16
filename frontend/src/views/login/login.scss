@@ -2,13 +2,14 @@
   display: flex;
   flex: 1;
   .bg-img {
-    width: 50%;
+    width: 75%;
     height: 100vh;
-    background-color: #66b5ff;
+    background-image: linear-gradient(120deg, #89f7fe 0%, #66a6ff 100%);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    color: #ffffff;
     .bg {
       width: 50%;
     }
