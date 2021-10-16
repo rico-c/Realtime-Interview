@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "@ant-design/icons": "^4.3.0",
+    "@sentry/react": "^6.13.3",
+    "@sentry/tracing": "^6.13.3",
     "agora-rtc-sdk": "^3.2.3",
     "agora-rtc-sdk-ng": "^4.3.0",
     "agora-rtm-sdk": "^1.4.1",

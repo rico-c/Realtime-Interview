@@ -25,4 +25,6 @@ export interface UpdateAPIAction {
   joinerName?: string;
   roomId: string;
   time?: any;
+  rate?: number | string;
+  comment?: string;
 }

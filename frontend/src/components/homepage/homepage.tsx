@@ -32,8 +32,10 @@ const HomePage: FC = () => {
 
   return (
     <div className="home-page">
-      <div className="title">如何更好地远程技术面试？</div>
-      <div className="sub-title">实时同步的在线代码编辑器和视频面试</div>
+      <div className="title">一站式在线技术面试方案</div>
+      <div className="sub-title">双向同步的在线VSCode编辑器</div>
+      <div className="sub-title">主流语言在线编译器</div>
+      <div className="sub-title">高清视频语音通话</div>
       <Button className="try" type="primary" onClick={jumpDemo}>试用</Button>
     </div>
   )

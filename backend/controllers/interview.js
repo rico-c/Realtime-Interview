@@ -80,7 +80,7 @@ class Interview {
   // 修改面试信息
   async update(req, res) {
     const params = req.body;
-    const { joinerName,time, roomId } = params;
+    const { joinerName,time,rate,comment, roomId } = params;
     const exsitId = await InterviewModel.findOne({
       roomId,
     });
@@ -96,6 +96,12 @@ class Interview {
       }
       if(time) {
         updateParams.time = time;
+      }
+      if(rate) {
+        updateParams.rate = rate;
+      }
+      if(comment) {
+        updateParams.comment = comment;
       }
       await InterviewModel.update({ roomId: roomId }, updateParams, (err) => {
         if (err) {

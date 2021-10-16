@@ -101,6 +101,14 @@ const InterviewTable = (params: { query: string }) => {
       )
     },
     {
+      title: '评价',
+      dataIndex: 'comment',
+      key: 'comment',
+      render: (text, record) => (
+        <span>{text ? text : '-'}</span>
+      )
+    },
+    {
       title: '操作',
       key: 'action',
       width: '250px',
@@ -110,7 +118,7 @@ const InterviewTable = (params: { query: string }) => {
           {record.status === 3 ? (
             <Button onClick={_ => setreportVisible(record.roomId)}>查看报告{record.note && '/笔记'}</Button>
           ) : (
-              <Button onClick={_ => enterInterview(record.roomId)} type="primary" ghost>进入面试</Button>
+            <Button onClick={_ => enterInterview(record.roomId)} type="primary" ghost>进入面试</Button>
           )}
           <Button onClick={_ => setconfigVisible(record.roomId)} type="link">修改</Button>
           <Popconfirm
@@ -154,7 +162,7 @@ const InterviewTable = (params: { query: string }) => {
         onClose={_ => setconfigVisible(null)}
         visible={!!configVisible}
       >
-        <UpdateInterview roomId={configVisible} setconfigVisible={setconfigVisible} updateInterviewsData={updateInterviewsData}/>
+        <UpdateInterview roomId={configVisible} setconfigVisible={setconfigVisible} updateInterviewsData={updateInterviewsData} />
       </Drawer>
     </CardWrapper>
   );
