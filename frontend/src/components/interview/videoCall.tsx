@@ -31,20 +31,12 @@ const VideoCall = (props: { socket: any; roomId: string }) => {
     setisJoined(true);
     socket?.emit('joinchat', name);
     setVideoJoiner(null);
-  }, [socket, name]);
+  }, [socket, name, join]);
 
-  const handleLeave = useCallback(() => {
-    leave();
-    if (localAudioTrack) {
-      localAudioTrack.stop();
-      localAudioTrack.close();
-    }
-    if (localVideoTrack) {
-      localVideoTrack.stop();
-      localVideoTrack.close();
-    }
+  const handleLeave = useCallback(async () => {
+    await leave();
     setisJoined(false);
-  }, [localVideoTrack, localAudioTrack]);
+  }, [leave]);
 
   const doCloseShareScreen = () => {
     if (localScreenTrack) {
@@ -53,6 +45,14 @@ const VideoCall = (props: { socket: any; roomId: string }) => {
     }
     closeShareScreen();
   }
+
+  useEffect(() => {
+    return () => {
+      if (!window.location.pathname.includes('/interview')) {
+        leave();
+      }
+    }
+  }, [localVideoTrack, localAudioTrack])
 
   useEffect(() => {
     socket?.on('newchatjoiner', name => {

@@ -1,4 +1,4 @@
-import React, { FC, useMemo, useEffect, useState, useCallback, ReactNode } from "react";
+import React, { FC, useState, useCallback } from "react";
 import { Button, Modal } from 'antd';
 import languageData from '@/utils/Languages';
 import './languageSelector.scss';

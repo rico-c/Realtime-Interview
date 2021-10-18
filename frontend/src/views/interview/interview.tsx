@@ -1,4 +1,4 @@
-import React, { FC, useState, useCallback, useRef, useMemo, useEffect } from 'react';
+import React, { FC, useState, useCallback, useRef, useMemo } from 'react';
 import CodeEditor from '@/components/interview/codeeditor';
 import Terminal from '@/components/interview/terminal';
 import Markdown from '@/components/interview/markdown';
@@ -22,11 +22,11 @@ const Interview: FC = () => {
   const [inviteVisible, setInviteVisible] = useState(false);
   const [type, setType] = useState('terminal');
   const { roomId }: { roomId: string } = useParams();
-  const { demo } = useLocation()?.state as any || {demo: false};
+  const { demo } = useLocation()?.state as any || { demo: false };
   const ternimalRef = useRef({});
   const interviewDetail = useInterviewDetail(roomId);
   const socket = useSocket(roomId);
-  const { userId, name } = useUserInfo();
+  const { userId } = useUserInfo();
 
   const handleInviteVisibleChange = useCallback(value => {
     setInviteVisible(value);
@@ -41,7 +41,7 @@ const Interview: FC = () => {
     }
     return false;
   }, [interviewDetail, userId])
- 
+
   const onTypeChange = useCallback(type => {
     setType(type.target.value);
   }, []);

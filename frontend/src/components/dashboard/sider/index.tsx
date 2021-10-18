@@ -24,7 +24,7 @@ export const Sider = () => {
     icon: Interview,
     path: '/dashboard/interviewlist'
   }, {
-    name: '题库',
+    name: '题库（开发中）',
     icon: Folder,
     path: '/dashboard/questions',
     develop: true

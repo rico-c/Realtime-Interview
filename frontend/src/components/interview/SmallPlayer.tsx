@@ -21,7 +21,6 @@ const SmallPlayer = (props: VideoPlayerProps) => {
   useEffect(() => {
     if (!container.current) return;
     props.videoTrack?.play(container.current);
-    console.log(props.videoTrack);
     return () => {
       props.videoTrack?.stop();
     };

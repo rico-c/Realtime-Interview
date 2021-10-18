@@ -9,10 +9,12 @@ const { TextArea } = Input;
 interface EndProp {
   closeModal?: any;
   roomId: any;
+  socket: any;
+  yjsInstance: any;
 }
 
 const EndInterview: FC<EndProp> = props => {
-  const { closeModal, roomId } = props;
+  const { closeModal, roomId, socket, yjsInstance } = props;
   const [rateNumber, setRateNumber] = useState(0);
   const [comment, setComment] = useState('');
 
@@ -32,6 +34,8 @@ const EndInterview: FC<EndProp> = props => {
         interviewer
     };
     endInterview(endParams);
+    socket.close();
+    yjsInstance.destroy();
     history.push(`/result/${roomId}`);
   }, [comment, rateNumber]);
   return (

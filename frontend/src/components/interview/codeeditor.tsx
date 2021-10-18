@@ -4,7 +4,7 @@ import LanguageSelector from './languageSelector';
 import SettingSelector from './settingSelector';
 import EndInterview from './endInterview';
 import { Button, Modal } from 'antd';
-import { CaretRightFilled, LeftOutlined} from '@ant-design/icons';
+import { CaretRightFilled, LeftOutlined } from '@ant-design/icons';
 import { yjsHost } from '@/utils/API';
 import * as Y from 'yjs';
 import { WebsocketProvider } from 'y-websocket';
@@ -32,6 +32,7 @@ interface CodeEditorProp {
 const CodeEditor: FC<CodeEditorProp> = props => {
   const { socket, roomId, videocallDom, demo } = props;
   const [code, setCode] = useState('');
+  const [yjsInstance, setYjsInstance] = useState(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [running, setRunning] = useState(false);
   const history = useHistory();
@@ -100,12 +101,19 @@ const CodeEditor: FC<CodeEditorProp> = props => {
       provider.awareness
     );
     provider.connect();
+    setYjsInstance(provider);
     // 增加自定义快捷键组合
     // editor?.addCommand([monaco.KeyMod.CtrlCmd | monaco.KeyCode.KEY_I], () => {
     //   console.log('short cut');
     //   runCodeCallback();
     // });
   }, [roomId, code]);
+
+  const backDashboard = async () => { 
+    await socket.close(); 
+    await yjsInstance.destroy();
+    history.push('/dashboard') 
+  }
 
   const endInterview = () => {
     setIsModalVisible(true);
@@ -120,7 +128,7 @@ const CodeEditor: FC<CodeEditorProp> = props => {
       <div className="top-bar">
         <span>
           <img src={LOGO} alt="" />
-          {!demo && <Button type="link" icon={<LeftOutlined />} onClick={_ => history.push('/dashboard')}>返回控制台</Button> }
+          {!demo && <Button type="link" icon={<LeftOutlined />} onClick={backDashboard}>返回控制台</Button>}
           <Button danger type="primary" onClick={endInterview}>
             结束面试
           </Button>
@@ -134,7 +142,7 @@ const CodeEditor: FC<CodeEditorProp> = props => {
         onCancel={handleCancel}
         footer={null}
       >
-        <EndInterview closeModal={handleCancel} roomId={roomId} />
+        <EndInterview closeModal={handleCancel} roomId={roomId} socket={socket} yjsInstance={yjsInstance} />
       </Modal>
       <MonacoEditor
         language={currentLanguageName}

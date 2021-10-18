@@ -119,14 +119,14 @@ export default function useAgora(channel: string): {
   }
 
   async function leave() {
-    // if (localAudioTrack) {
-    //   localAudioTrack.stop();
-    //   localAudioTrack.close();
-    // }
-    // if (localVideoTrack) {
-    //   localVideoTrack.stop();
-    //   localVideoTrack.close();
-    // }
+    if (localAudioTrack) {
+      localAudioTrack.stop();
+      localAudioTrack.close();
+    }
+    if (localVideoTrack) {
+      localVideoTrack.stop();
+      localVideoTrack.close();
+    }
     setRemoteUsers([]);
     setJoinState(false);
     await client?.leave();

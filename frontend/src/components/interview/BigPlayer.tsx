@@ -44,12 +44,12 @@ const BigPlayer = (props: VideoPlayerProps) => {
     const volume = value ? 0 : 100;
     props.audioTrack && props.audioTrack.setVolume(volume);
     setMute(value);
-  }, [])
+  }, [props.audioTrack])
 
   const videoSwitch = useCallback((value) => {
     props.videoTrack && props.videoTrack.setEnabled(value);
     setVideo(value);
-  }, [])
+  }, [props.videoTrack])
 
   const screenShareSwitch = (value: boolean) => {
     if (value) {

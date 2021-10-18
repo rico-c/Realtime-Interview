@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback } from "react";
 import languageList from "@/utils/Languages";
 import { Select } from "antd";
 import { updateLang } from "@/actions";
