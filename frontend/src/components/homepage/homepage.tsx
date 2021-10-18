@@ -36,8 +36,8 @@ const HomePage: FC = () => {
       <div className="title">一站式在线技术面试平台</div>
       <div className="main">
         <div className="left">
-          <div className="sub-title">双向同步的在线VSCode编辑器</div>
-          <div className="sub-title">主流语言实时编译器</div>
+          <div className="sub-title">多人同步的在线VSCode编辑器</div>
+          <div className="sub-title">主流代码语言实时编译</div>
           <div className="sub-title">高清视频语音通话</div>
           <Button className="try" type="primary" onClick={jumpDemo}>试用</Button>
         </div>

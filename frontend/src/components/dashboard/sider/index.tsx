@@ -1,7 +1,7 @@
 import React, { useRef, useCallback } from 'react';
-import { Dropdown, Menu } from 'antd';
+import { Dropdown, Menu, Button, Tooltip } from 'antd';
 import { useDispatch } from 'react-redux';
-import { CaretDownOutlined } from '@ant-design/icons';
+import { CaretDownOutlined, UserOutlined } from '@ant-design/icons';
 import { logout } from '@/actions';
 import { useHistory } from "react-router-dom";
 
@@ -48,6 +48,10 @@ export const Sider = () => {
     dispatch(logout());
   };
 
+  const goOpinion = () => {
+    history.push('/dashboard/opinion')
+  }
+
   const Usermenu = (
     <Menu onClick={handleLogout}>
       <Menu.Item key="logout">
@@ -72,9 +76,13 @@ export const Sider = () => {
         </Menu>
       </div>
       <div>
-        <div className="insert-img"><img src={InsertIMG} /></div>
+        <div className="insert-img">
+          <Tooltip placement="top" title="反馈意见">
+            <img src={InsertIMG} alt="" onClick={goOpinion} />
+          </Tooltip>
+        </div>
         <Dropdown overlay={Usermenu} className="user-dropdown">
-          <div>{user?.name} <CaretDownOutlined /></div>
+          <Button icon={<UserOutlined />}>{user?.name}<CaretDownOutlined/></Button>
         </Dropdown>
       </div>
     </>)

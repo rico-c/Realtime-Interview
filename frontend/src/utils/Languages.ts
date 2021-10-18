@@ -75,9 +75,19 @@ const data = [
     highlight: "typescript",
   },
   {
-    id: 0,
+    id: -1,
     name: "SQL(仅支持代码高亮)",
     highlight: "sql",
+  },
+  {
+    id: -2,
+    name: "HTML(仅支持代码高亮)",
+    highlight: "html",
+  },
+  {
+    id: -3,
+    name: "CSS(仅支持代码高亮)",
+    highlight: "css",
   },
 ];
 export default data;

@@ -1,6 +1,7 @@
 import { ILocalVideoTrack, IRemoteVideoTrack, ILocalAudioTrack, IRemoteAudioTrack } from "agora-rtc-sdk-ng";
 import React, { useRef, useEffect, useState, useCallback } from "react";
 import { Tooltip } from 'antd';
+import { QuestionCircleOutlined} from '@ant-design/icons'
 import './BigPlayer.scss';
 
 export interface VideoPlayerProps {
@@ -63,7 +64,8 @@ const BigPlayer = (props: VideoPlayerProps) => {
   return (
     <div className="big-player">
       <div className="top-info">
-        <span className="c-font-big c-gap-left c-gap-inner-top">{decodeURI(String(props.name))}</span>
+        <span className="name c-font-big c-gap-left c-gap-inner-top">{decodeURI(String(props.name))}</span>
+        <span className="question"><QuestionCircleOutlined /><span>无法开启视频？</span></span>
       </div>
       <div ref={container} className="video-player"></div>
       <div className="bottom-btns">

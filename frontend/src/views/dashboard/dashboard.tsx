@@ -7,6 +7,7 @@ import Team from '@/views/dashboard/team';
 import { CreateTeam } from '@/components/team/createTeam';
 import Questions from '@/views/dashboard/questions';
 import Settings from '@/views/dashboard/setting';
+import Opinion from '@/views/dashboard/opinion';
 import { Sider as SiderComponent } from 'components/dashboard/sider'
 
 import {
@@ -34,6 +35,7 @@ const Dashboard = () => {
             <Route path="/dashboard/createteam" children={<CreateTeam />} />
             <Route path="/dashboard/questions" children={<Questions />} />
             <Route path="/dashboard/settings" children={<Settings />} />
+            <Route path="/dashboard/opinion" children={<Opinion />} />
           </Switch>
         </Content>
       </Layout>

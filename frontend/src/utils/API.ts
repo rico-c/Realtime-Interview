@@ -52,3 +52,5 @@ export const createTeamAPI = `${APIHost}/team/createteam`;
 export const belongTeamsAPI = `${APIHost}/team/belongteams`;
 
 export const gettokenAPI = `${APIHost}/agora/gettoken`;
+
+export const createopinionAPI = `${APIHost}/opinion/create`;

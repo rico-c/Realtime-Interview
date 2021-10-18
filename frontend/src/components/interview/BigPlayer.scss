@@ -11,11 +11,18 @@
     width: 50vw;
     top: 0px;
     z-index: 10;
-    span {
+    display: flex;
+    justify-content: space-between;
+    .question {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+    .name {
       text-shadow: #bbbbbb 1px 0 0, #bbbbbb 0 1px 0, #bbbbbb -1px 0 0,
         #bbbbbb 0 -1px 0;
       position: relative;
-      top: 10px;
+      // top: 10px;
     }
   }
   .video-player {

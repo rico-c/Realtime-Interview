@@ -4,3 +4,4 @@ export * from './interview';
 export * from './team';
 export * from './question';
 export * from './agora';
+export * from './opinion';
