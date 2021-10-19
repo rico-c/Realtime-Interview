@@ -7,15 +7,17 @@
   }
   .title {
     font-size: 40px;
-    font-family: "Noto Serif", "PT Serif", "source-han-serif-sc", Songti SC,
-      serif;
+    // font-family: "Noto Serif", "PT Serif", "source-han-serif-sc", Songti SC,
+    //   serif;
     font-weight: 500;
     margin: 50px auto 20px auto;
+    color: #282d3c;
   }
   .left {
     min-width: 320px;
     .sub-title {
       font-size: 18px;
+      color: #545968
     }
     .try {
       width: 130px;

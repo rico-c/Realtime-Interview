@@ -75,6 +75,11 @@ declare module 'react-split' {
   export = content
 }
 
+declare module '*.md' {
+  const content: any
+  export = content
+}
+
 declare module 'react-split-pane' {
   const content: any
   export = content

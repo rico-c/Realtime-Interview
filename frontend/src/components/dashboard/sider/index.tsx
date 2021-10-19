@@ -69,7 +69,7 @@ export const Sider = () => {
             menuData.current.map(i => (
               <Menu.Item key={i.path} className="menu-item" disabled={i.develop}>
                 <img src={i.icon} alt="" className="icon" />
-                <b className="font-zh">{i.name}</b>
+                <b>{i.name}</b>
               </Menu.Item>
             ))
           }
