@@ -17,6 +17,7 @@ const Interview = React.lazy(() => import('views/interview/interview'));
 const Dashboard = React.lazy(() => import('views/dashboard/dashboard'));
 const Result = React.lazy(() => import('views/result/result'));
 const Mobile = React.lazy(() => import('views/mobile'));
+const Help = React.lazy(() => import('views/help'));
 
 const RoutesJSX = () => {
   const dispatch = useDispatch();
@@ -42,6 +43,7 @@ const RoutesJSX = () => {
       <Switch>
         <Route path="/" exact children={<Home />} />
         <Route path="/login" children={<Login />} />
+        <Route path="/help" children={<Help />} />
         <Route path="/interview/:roomId" children={<Interview />} />
         <Route path="/dashboard" children={<Dashboard />} />
         <Route path="/result/:roomId" children={<Result />} />

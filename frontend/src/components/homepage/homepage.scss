@@ -32,4 +32,32 @@
       box-shadow: 0 0 10px 2px #bdbdbd;
     }
   }
+  @media screen and (max-width: 980px) {
+    .main {
+      display: block;
+      .left {
+        text-align: center;
+        .sub-title {
+          font-size: 18px;
+        }
+        .try {
+          width: 130px;
+          height: 45px;
+          font-size: 20px;
+          font-weight: 500;
+          margin-top: 20px;
+          border-radius: 4px;
+          margin-bottom: 20px;
+        }
+      }
+    }
+    .title {
+      font-size: 30px;
+      font-family: "Noto Serif", "PT Serif", "source-han-serif-sc", Songti SC,
+        serif;
+      font-weight: 500;
+      margin: 50px auto 20px auto;
+      text-align: center;
+    }
+  }
 }
