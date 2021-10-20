@@ -3,7 +3,7 @@ import { Dropdown, Menu, Button, Tooltip } from 'antd';
 import { useDispatch } from 'react-redux';
 import { CaretDownOutlined, UserOutlined } from '@ant-design/icons';
 import { logout } from '@/actions';
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 
 import Setting from '@/assets/imgs/shezhi.svg';
 import Group from '@/assets/imgs/zuzhi.svg';
@@ -17,6 +17,7 @@ import './index.scss';
 
 export const Sider = () => {
   const history = useHistory();
+  const location = useLocation();
   const dispatch = useDispatch();
   const user = useUserInfo()
   const menuData = useRef([{
@@ -64,7 +65,7 @@ export const Sider = () => {
     <>
       <div>
         <div className="logo"><img src={Logo} alt="" onClick={_ => history.push('/')} /></div>
-        <Menu theme="light" mode="inline" defaultSelectedKeys={['1']} onClick={jumpRoute}>
+        <Menu theme="light" mode="inline" defaultSelectedKeys={[location.pathname]} onClick={jumpRoute}>
           {
             menuData.current.map(i => (
               <Menu.Item key={i.path} className="menu-item" disabled={i.develop}>

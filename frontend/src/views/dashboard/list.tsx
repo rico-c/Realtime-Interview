@@ -6,7 +6,7 @@ import './list.scss';
 const List: FC = () => {
   const [query, setQuery] = useState<string>('');
   return (
-    <div className="home-page">
+    <div className="list-home-page">
       <InterviewHeader setQuery={setQuery} />
       <InterviewTable query={query} />
     </div>
