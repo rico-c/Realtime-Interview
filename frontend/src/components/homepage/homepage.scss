@@ -35,6 +35,29 @@
       box-shadow: 0 0 10px 2px #bdbdbd;
     }
   }
+  .desc {
+    margin: 65px 0;
+    display: flex;
+    justify-content: space-around;
+    .desc-title {
+      font-weight: 500;
+      font-size: 16px;
+      color: #282d3c;
+    }
+    .desc-txt {
+      color: #65697f;
+    }
+    .desc-item {
+      max-width: 300px;
+      display: flex;
+      align-items: center;
+      .iconfont {
+        font-size: 40px;
+        color: #0582ca;
+        padding-right: 20px;
+      }
+    }
+  }
   @media screen and (max-width: 980px) {
     .main {
       display: block;
@@ -53,6 +76,10 @@
           margin-bottom: 20px;
         }
       }
+    }
+    .desc {
+      display: block;
+      text-align: center;
     }
     .title {
       font-size: 30px;

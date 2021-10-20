@@ -38,11 +38,34 @@ const HomePage: FC = () => {
         <div className="left">
           <div className="sub-title">多人同步的在线VSCode编辑器</div>
           <div className="sub-title">17种主流代码语言实时编译</div>
-          <div className="sub-title">1080P超清视频语音通话</div>
+          <div className="sub-title">高清视频语音通话</div>
           <Button className="try" type="primary" onClick={jumpDemo}>试用</Button>
         </div>
         <div className="right">
-          <img src={Intro} />
+          <img src={Intro} alt="realtime-interview" />
+        </div>
+      </div>
+      <div className="desc">
+        <div className="desc-item">
+          <i className="iconfont">&#xe61a;</i>
+          <div>
+            <div className="desc-title">VSCode般的顺滑编码体验</div>
+            <div className="desc-txt">多人瞬时同步代码同步，snippets随叫随到</div>
+          </div>
+        </div>
+        <div className="desc-item">
+          <i className="iconfont">&#xe61b;</i>
+          <div>
+            <div className="desc-title">随意切换主流代码语言</div>
+            <div className="desc-txt">支持Java/Python/PHP/JS/TS/C++/Go等主流语言</div>
+          </div>
+        </div>
+        <div className="desc-item">
+          <i className="iconfont">&#xe61c;</i>
+          <div>
+            <div className="desc-title">免费高清视频通话</div>
+            <div className="desc-txt">想面多久，就面多久</div>
+          </div>
         </div>
       </div>
     </div>
