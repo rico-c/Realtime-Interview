@@ -79,7 +79,11 @@
     }
     .desc {
       display: block;
-      text-align: center;
+      .desc-item {
+        max-width: 100%;
+        text-align: center;
+        display: block;
+      }
     }
     .title {
       font-size: 30px;
