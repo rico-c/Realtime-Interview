@@ -1,7 +1,6 @@
 import React, { FC, useCallback, useRef } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { Result, Button } from 'antd';
-import { useParams } from 'react-router-dom';
 import { useInterviewDetail } from '@/hooks';
 import FinalReport from '@/components/result/finalReport';
 import './result.scss';

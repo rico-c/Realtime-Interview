@@ -32,9 +32,9 @@ const InterviewTable = (params: { query: string }) => {
   }, [dataList, query]);
   const statusDic = useMemo(() => {
     return {
-      1: { txt: '未开始', color: 'default' },
-      2: { txt: '进行中', color: '#2db7f5' },
-      3: { txt: '已结束', color: '#87d068' }
+      1: { txt: '未开始', color: '#FFB7A9' },
+      2: { txt: '进行中', color: '#92B6AC' },
+      3: { txt: '已结束', color: '#94ABB5' }
     };
   }, []);
 
@@ -82,7 +82,7 @@ const InterviewTable = (params: { query: string }) => {
       render: (time: string) => (
         <span>
           {moment(time).format('YYYY/MM/DD HH:mm')}&nbsp;
-          {moment(time).isSame(moment(), 'd') && <Tag color="cyan">今天</Tag>}
+          {moment(time).isSame(moment(), 'd') && <Tag>今天</Tag>}
         </span>
       )
     },

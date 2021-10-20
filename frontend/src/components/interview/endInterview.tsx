@@ -34,7 +34,7 @@ const EndInterview: FC<EndProp> = props => {
         interviewer
     };
     endInterview(endParams);
-    socket.close();
+    socket?.close();
     yjsInstance.destroy();
     history.push(`/result/${roomId}`);
   }, [comment, rateNumber]);

@@ -5,6 +5,8 @@ import { Menu } from 'antd';
 import '../home/home.scss';
 import './index.scss';
 import markdown from 'markdown';
+import { useParams } from 'react-router-dom';
+
 import progressForBoss from '@/documents/progressforboss.md';
 import manageTeam from '@/documents/manageTeam.md';
 import questions from '@/documents/questions.md';
@@ -13,6 +15,7 @@ import enviroment from '@/documents/enviroment.md';
 import price from '@/documents/price.md';
 import qa from '@/documents/qa.md';
 import feedback from '@/documents/feedback.md';
+import contract from '@/documents/contract.md';
 
 const dic = {
   progressForBoss,
@@ -22,10 +25,12 @@ const dic = {
   enviroment,
   price,
   qa,
-  feedback
+  feedback,
+  contract
 }
 
 const Help = () => {
+  const {type} = useParams<{type: string}>();
   const [html, setHtml] = useState<string>('');
   const [key, setKey] = useState<string>('progressForBoss');
   const handleMenuClick = ({ item, key }) => {
@@ -33,8 +38,12 @@ const Help = () => {
   }
 
   useEffect(() => {
+    setKey(type);
+  }, [type])
+
+  useEffect(() => {
     fetch(dic[key]).then(res => res.text()).then(text => setHtml(markdown.markdown.toHTML(text)));
-  })
+  }, [key])
 
   return (
   <div className="home">
@@ -44,7 +53,6 @@ const Help = () => {
         <Menu
           onClick={handleMenuClick}
           style={{ width: 256 }}
-          defaultSelectedKeys={['progressForBoss']}
           mode="inline"
         >
           <Menu.ItemGroup key="g1" title="面试官">
@@ -60,6 +68,7 @@ const Help = () => {
             <Menu.Item key="price">价格</Menu.Item>
             <Menu.Item key="qa">Q&A</Menu.Item>
             <Menu.Item key="feedback">联系我们/反馈问题</Menu.Item>
+            <Menu.Item key="contract">用户使用协议</Menu.Item>
           </Menu.ItemGroup>
         </Menu>
         <div className="markdown" dangerouslySetInnerHTML={{ __html: html }}>

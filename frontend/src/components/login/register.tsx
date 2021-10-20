@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Form, Input, Checkbox, Button } from 'antd';
+import {Link} from 'react-router-dom';
 import { WidthButton } from '../common/widthBtn';
 import { useDispatch } from "react-redux";
 import { register } from 'actions/accout'
@@ -55,7 +56,7 @@ export const Register = ({ setLogin }: { setLogin: (boolean) => void }) => {
           </WidthButton>
         </Form.Item>
         <Form.Item valuePropName="checked" name="readProtocol">
-          <Checkbox> 阅读并接受《用户协议》及《隐私权保护声明》</Checkbox>
+          <Checkbox> 阅读并接受<Link to="/help/contract" target="blank">《用户协议》</Link></Checkbox>
         </Form.Item>
       </Form>
       <Button type="link" className="float-right" onClick={() => setLogin(true)}>
