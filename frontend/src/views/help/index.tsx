@@ -42,12 +42,12 @@ const Help = () => {
   }, [type])
 
   useEffect(() => {
-    fetch(dic[key]).then(res => res.text()).then(text => setHtml(markdown.markdown.toHTML(text)));
+    fetch(dic[key] || progressForBoss).then(res => res.text()).then(text => setHtml(markdown.markdown.toHTML(text)));
   }, [key])
 
   return (
-  <div className="home">
-    <div className="home-wrapper">
+  <div className="help">
+    <div className="help-wrapper">
       <Header />
       <div className="help-main">
         <Menu

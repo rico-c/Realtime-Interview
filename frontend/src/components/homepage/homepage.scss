@@ -14,10 +14,11 @@
     color: #282d3c;
   }
   .left {
-    min-width: 320px;
+    min-width: 300px;
     .sub-title {
       font-size: 18px;
-      color: #545968
+      color: #545968;
+      margin-bottom: 10px;
     }
     .try {
       width: 130px;
@@ -61,5 +62,9 @@
       margin: 50px auto 20px auto;
       text-align: center;
     }
+  }
+  .intro {
+    padding-top: 60px;
+    text-align: center;
   }
 }

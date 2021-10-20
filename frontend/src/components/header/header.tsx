@@ -21,7 +21,7 @@ const Header: FC = () => {
           <img className="logo-txt" src={Icon} />
         </span>
       </div>
-      <div className="menu">
+      <div className="home-menu">
         <Menu onClick={jumpRoute} selectedKeys={[]} mode="horizontal">
           {/* <Menu.Item title="" key="/product">
             产品
@@ -29,7 +29,7 @@ const Header: FC = () => {
           <Menu.Item key="/price">
             价格
           </Menu.Item> */}
-          <Menu.Item key="/help">
+          <Menu.Item key="/help/">
             帮助
           </Menu.Item>
           {

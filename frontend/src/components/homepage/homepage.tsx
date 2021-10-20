@@ -37,15 +37,14 @@ const HomePage: FC = () => {
       <div className="main">
         <div className="left">
           <div className="sub-title">多人同步的在线VSCode编辑器</div>
-          <div className="sub-title">主流代码语言实时编译</div>
-          <div className="sub-title">高清视频语音通话</div>
+          <div className="sub-title">17种主流代码语言实时编译</div>
+          <div className="sub-title">1080P超清视频语音通话</div>
           <Button className="try" type="primary" onClick={jumpDemo}>试用</Button>
         </div>
         <div className="right">
           <img src={Intro} />
         </div>
       </div>
-
     </div>
   )
 }

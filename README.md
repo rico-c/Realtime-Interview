@@ -60,15 +60,6 @@
             proxy_set_header Connection "Upgrade";
         }
 
-        location /t {
-             proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-             proxy_set_header Host $host;
-             proxy_pass http://127.0.0.1:4000;
-             proxy_http_version 1.1;
-             proxy_set_header Upgrade $http_upgrade;
-             proxy_set_header Connection "upgrade";
-        }
-
         location /socket.io {
              proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
              proxy_set_header Host $host;
@@ -99,3 +90,6 @@
     }
 
 ```
+
+## 其他注意事项
+- Monaco Editor的webpack plugin和monaco版本有要求的对应关系，需要匹配。同时注意Nginx的路由匹配不要遮挡到资源请求。

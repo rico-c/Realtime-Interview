@@ -126,7 +126,7 @@ const Header = (params: {
       <Drawer
         title="新建预约面试"
         placement="right"
-        width="550"
+        width="600"
         closable={false}
         onClose={() => setIsModalVisible(false)}
         visible={isModalVisible}

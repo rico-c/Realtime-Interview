@@ -14,8 +14,11 @@
       }
     }
   }
-  .menu {
+  .home-menu {
     min-width: 150px;
+    .ant-menu {
+      background-color: transparent;
+    }
   }
   .ant-menu-horizontal {
     border: none;
