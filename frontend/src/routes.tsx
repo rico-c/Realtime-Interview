@@ -18,6 +18,7 @@ const Dashboard = React.lazy(() => import('views/dashboard/dashboard'));
 const Result = React.lazy(() => import('views/result/result'));
 const Mobile = React.lazy(() => import('views/mobile'));
 const Help = React.lazy(() => import('views/help'));
+const Notfound = React.lazy(() => import('views/notfound'));
 
 const RoutesJSX = () => {
   const dispatch = useDispatch();
@@ -48,6 +49,7 @@ const RoutesJSX = () => {
         <Route path="/dashboard" children={<Dashboard />} />
         <Route path="/result/:roomId" children={<Result />} />
         <Route path="/mobilenotice" children={<Mobile />} />
+        <Route children={<Notfound />} />
       </Switch>
     </Suspense>
   );

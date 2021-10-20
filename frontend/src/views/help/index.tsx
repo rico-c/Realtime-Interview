@@ -36,7 +36,8 @@ const Help = () => {
     fetch(dic[key]).then(res => res.text()).then(text => setHtml(markdown.markdown.toHTML(text)));
   })
 
-  return (<div className="home">
+  return (
+  <div className="home">
     <div className="home-wrapper">
       <Header />
       <div className="help-main">

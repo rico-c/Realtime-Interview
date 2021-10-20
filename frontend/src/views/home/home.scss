@@ -1,8 +1,10 @@
 .home {
   width: 100vw;
+  min-height: 100vh;
+  position: relative;
   .home-wrapper {
     max-width: 1170px;
     margin: auto;
   }
-  padding-bottom: 110px;
+  padding-bottom: 120px;
 }

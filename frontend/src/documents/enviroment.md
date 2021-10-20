@@ -20,25 +20,7 @@ mobile	Android	*	WeChat	*
 mobile	iOS	*	Chrome	*
 mobile	iOS	*	Edge	*
 
-## 浏览器下载
-您可以自由下载上述浏览器，也可以从下述地址：
-Chrome 浏览器
-官方地址：https://www.google.com/intl/zh-CN/chrome
-国内下载地址：https://pc.qq.com/detail/1/detail_2661.html
-Firefox 浏览器
-国内官方地址：http://www.firefox.com.cn/download/
-国外官方地址：https://www.mozilla.org/en-US/firefox/
-Edge 浏览器
-国内官方地址：https://www.microsoft.com/zh-cn/edge
-国外官方地址：https://www.microsoft.com/en-us/edge
+## 浏览器
+我们推荐您使用最新版本的Chrome浏览器
 
-## 防火墙设置
-请确认一下域名处于白名单：
-.showmebug.com
-.cdn.showmebug.com
-## 音视频
-音视频是使用udp来传输数据的，请对以下域名开放udp：
-.agora.io
-.edge.agora.io
-.sd-rtn.com
-.edge.sd-rtn.com
+官方下载地址：[https://www.google.com/intl/zh-CN/chrome](https://www.google.com/intl/zh-CN/chrome)
