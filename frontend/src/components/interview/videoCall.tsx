@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import useAgora from '@/hooks/useAgora';
-import { Button, Popover } from 'antd';
+import { Button, Popover,message } from 'antd';
 import SmallPlayer from '@/components/interview/SmallPlayer';
 import BigPlayer from '@/components/interview/BigPlayer';
 import Draggable from 'react-draggable';
@@ -31,7 +31,11 @@ const VideoCall = (props: { socket: any; roomId: string }) => {
     setisJoined(true);
     socket?.emit('joinchat', name);
     setVideoJoiner(null);
-  }, [socket, name, join]);
+    setTimeout(() => {
+      message.warning('系统超时，请重新开启视频通话')
+      leave();
+    }, 1000 * 60 * 60 * 5);
+  }, [socket, name, join,leave]);
 
   const handleLeave = useCallback(async () => {
     await leave();
