@@ -34,7 +34,7 @@ const LanguageSelector = ({ socket, userAccount }: { socket?: any, userAccount?:
         style={{ width: 220 }}
         placeholder="选择代码语言"
         optionFilterProp="children"
-        defaultValue={defaultValue} //默认JS
+        defaultValue={defaultValue}
         onChange={onChange}
       >
         {languageList.map(item => (

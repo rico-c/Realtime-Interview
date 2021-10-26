@@ -9,7 +9,10 @@ export interface ReduxState {
     userId: string;
     name: string;
   };
-  editor?: any;
+  editor?: {
+    language: number | string;
+    [props: string] : any;
+  };
   interview?: any;
   currentteam?: any;
 }

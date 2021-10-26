@@ -56,11 +56,12 @@ export const register =
         payload,
       });
     } else {
+      message.error(res?.data?.message || '系统出现错误');
       dispatch({
         type: UPDATE_USER,
         payload: {},
       });
-    }
+  }
     return res.data;
   };
 

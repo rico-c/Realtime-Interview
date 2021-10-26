@@ -12,7 +12,7 @@ import { getJoiningToken } from "@/actions";
 import { useUserInfo } from "hooks/useLogin";
 
 const agoraCofig = {
-  appId: "3df1d4e0372c4892a380fe3399f49e2d"
+  appId: "3df1d4e0372c4892a380fe3399f49e2d",
 };
 
 const client = AgoraRTC.createClient({ codec: "vp8", mode: "rtc" });
@@ -48,33 +48,10 @@ export default function useAgora(channel: string): {
     AGC: true, //是否开启自动增益
     ANS: true, //是否开启噪声抑制
   };
-  
-  // 480p_1	640 × 480	15	500	✓	✓	✓
-  // 480p_2	640 × 480	30	1000	✓	✓	✓
-  // 480p_3	480 × 480	15	400	✓	✓	✓
-  // 480p_4	640 × 480	30	750	✓	✓	✓
-  // 480p_6	480 × 480	30	600	✓	✓	✓
-  // 480p_8	848 × 480	15	610	✓	✓	✓
-  // 480p_9	848 × 480	30	930	✓	✓	✓
-  // 480p_10	640 × 480	10	400	✓	✓	✓
-  // 720p	1280 × 720	15	1130	✓	✓	✓
-  // 720p_1	1280 × 720	15	1130	✓	✓	✓
-  // 720p_2	1280 × 720	30	2000	✓	✓	✓
-  // 720p_3	1280 × 720	30	1710	✓	✓	✓
-  // 720p_5	960 × 720	15	910	✓	✓	✓
-  // 720p_6	960 × 720	30	1380	✓	✓	✓
-  // 1080p	1920 × 1080	15	2080	✓		✓
-  // 1080p_1	1920 × 1080	15	2080	✓		✓
-  // 1080p_2	1920 × 1080	30	3000	✓		✓
-  // 1080p_3	1920 × 1080	30	3150	✓		✓
-  // 1080p_5	1920 × 1080	60	4780	✓		✓
+
   const myvideoConfig = {
-    encoderConfig: {
-      // VideoEncoderConfiguration: {
-        height: 720,
-        width: 1280,
-      // },
-    }
+    encoderConfig: "720p_1" as const,
+    optimizationMode: "motion" as const,
   };
 
   async function createLocalTracks(
