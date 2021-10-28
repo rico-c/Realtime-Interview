@@ -39,7 +39,24 @@
     - https://jasonkayzk.github.io/2021/03/10/CentOS7%E5%AE%89%E8%A3%85MongoDB/
   - 数据迁移
     
-- Nginx配置: https://juejin.cn/post/6844904134345228301
+- Nginx安装配置: https://juejin.cn/post/6844904134345228301
+- Nginx配置模块
+```
+1.进入到解压后的源码包，如：
+cd /usr/local/nginx-1.14.1/
+编译
+./configure --prefix=/usr/local/nginx --with-http_stub_status_module --with-http_ssl_module --with-http_gzip_static_module --with-http_v2_module
+3. make：
+make
+千万不要执行make install，否则就覆盖安装了。
+4. 备份原有的nginx，如：
+cp /usr/local/nginx/sbin/nginx /usr/local/nginx/sbin/nginx_bak
+然后将刚刚编译好的nginx覆盖掉原有的nginx（nginx需要停止）
+cp ./objs/nginx /usr/local/nginx/sbin/
+查看安装情况，如图所示即安装ssl模块成功：
+/usr/local/nginx/sbin/nginx -V
+```
+
 ```
     server {                    
         listen 443 ssl;

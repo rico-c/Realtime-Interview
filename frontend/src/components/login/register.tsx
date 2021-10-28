@@ -56,7 +56,7 @@ export const Register = ({ setLogin }: { setLogin: (boolean) => void }) => {
           </WidthButton>
         </Form.Item>
         <Form.Item valuePropName="checked" name="readProtocol">
-          <Checkbox> 阅读并接受<Link to="/help/contract" target="blank">《用户协议》</Link></Checkbox>
+          <Checkbox> 阅读并接受<Link to="/help/contract" target="_blank">《用户协议》</Link></Checkbox>
         </Form.Item>
       </Form>
       <Button type="link" className="float-right" onClick={() => setLogin(true)}>
