@@ -1,10 +1,9 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import ReactDOM from 'react-dom/client';
 import * as Sentry from "@sentry/react";
 import { Integrations } from "@sentry/tracing";
 import "./index.scss";
 import App from "./App";
-import reportWebVitals from "./reportWebVitals";
 import { ConfigProvider } from "antd";
 import zhCN from "antd/lib/locale/zh_CN";
 // import ErrorBoundary from "views/errorbundary";
@@ -15,7 +14,8 @@ Sentry.init({
   tracesSampleRate: 1.0,
 });
 
-ReactDOM.render(
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
   <ConfigProvider
     locale={zhCN}
     theme={{
@@ -28,11 +28,5 @@ ReactDOM.render(
     }}
   >
     <App />
-  </ConfigProvider>,
-  document.getElementById("root")
+  </ConfigProvider>
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
