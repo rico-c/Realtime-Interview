@@ -11,9 +11,9 @@ import {
 import { MailOutlined } from "@ant-design/icons";
 import CopyToClipboard from "react-copy-to-clipboard";
 import locale from "antd/es/date-picker/locale/zh_CN";
-import { useUserInfo } from "@/hooks/useLogin";
+import { useUserInfo } from "hooks/useLogin";
 import { useSelector, useDispatch } from "react-redux";
-import { createInterview, fetchInterviews } from "@/actions";
+import { createInterview, fetchInterviews } from "actions";
 
 export const OrderInterview = ({ roomId, setIsModalVisible }: { roomId: string; setIsModalVisible: (boolean) => void }) => {
   const dispatch = useDispatch();

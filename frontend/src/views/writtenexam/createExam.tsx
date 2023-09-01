@@ -3,8 +3,8 @@ import React, { FC, useCallback } from "react";
 import './createExam.scss';
 import { Button, Form, Input, InputNumber, Switch } from "antd";
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
-import BackBtn from '@/components/common/backBtn';
-import BreadNavigator from '@/components/common/breadNavigator';
+import BackBtn from 'components/common/backBtn';
+import BreadNavigator from 'components/common/breadNavigator';
 import SplitPane from 'react-split-pane';
 const { TextArea } = Input;
 

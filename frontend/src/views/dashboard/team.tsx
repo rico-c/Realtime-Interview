@@ -1,9 +1,9 @@
 import React, { FC, useState, useEffect, useCallback, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Input, Tag, List, Button, Popconfirm } from "antd";
-import TeamSelector from "@/components/common/teamSelector";
-import { getTeamInfo, postAddTeamMember, postRemovemember, renameTeam, login } from '@/actions';
-import { CardWrapper } from '@/components/common/cardWrapper';
+import TeamSelector from "components/common/teamSelector";
+import { getTeamInfo, postAddTeamMember, postRemovemember, renameTeam, login } from 'actions';
+import { CardWrapper } from 'components/common/cardWrapper';
 import { useHistory } from "react-router-dom";
 import {
   EditOutlined,

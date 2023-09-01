@@ -1,8 +1,8 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import useAgora from '@/hooks/useAgora';
+import useAgora from 'hooks/useAgora';
 import { Button, Popover,message } from 'antd';
-import SmallPlayer from '@/components/interview/SmallPlayer';
-import BigPlayer from '@/components/interview/BigPlayer';
+import SmallPlayer from 'components/interview/SmallPlayer';
+import BigPlayer from 'components/interview/BigPlayer';
 import Draggable from 'react-draggable';
 import { PhoneOutlined } from '@ant-design/icons';
 import './videoCall.scss';

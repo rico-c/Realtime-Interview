@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getTeamQuestionsAPI } from "@/utils/api";
+import { getTeamQuestionsAPI } from "utils/api";
 import axios from "axios";
 
 export const useTeamQuestions = (teamId: string) => {

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getInterviewAPI } from "@/utils/api";
+import { getInterviewAPI } from "utils/api";
 import axios from "axios";
 
 export const useInterviewDetail = (roomId: string) => {

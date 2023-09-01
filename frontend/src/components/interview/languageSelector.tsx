@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
-import languageList from "@/utils/Languages";
+import languageList from "utils/Languages";
 import { Select } from "antd";
-import { updateLang } from "@/actions";
+import { updateLang } from "actions";
 import { useSelector, useDispatch } from "react-redux";
 import "./languageSelector.scss";
 import { ReduxState } from 'types';

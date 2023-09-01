@@ -1,7 +1,7 @@
 import React, { FC, useCallback, useEffect, useState } from 'react';
-import { useInterviewDetail } from '@/hooks';
+import { useInterviewDetail } from 'hooks';
 import { useParams } from 'react-router-dom';
-import markdown from 'markdown';
+import markdown from 'markdown-it';
 import { jsPDF } from "jspdf";
 import moment from 'moment';
 
@@ -40,7 +40,7 @@ const FinalReport: FC<FinalReportProps> = props => {
   //   reportRef.current.download = download;
   // }, [download]);
 
-  const markdownHTML = interviewDetail && interviewDetail.note ? markdown.markdown.toHTML(interviewDetail.note) : '面试官没有留下笔记';
+  const markdownHTML = interviewDetail && interviewDetail.note ? markdown.render(interviewDetail.note) : '面试官没有留下笔记';
 
   return (
     <div className="final-report" id="finalReport">

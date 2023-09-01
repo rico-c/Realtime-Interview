@@ -1,8 +1,8 @@
 import { RUN_CODE, UPDATE_LANG } from "./types";
 import { RunCode } from "@/types";
 import axios from "axios";
-import { runCodeAPI } from "@/utils/api";
-import { encode } from "@/utils/EnCode";
+import { runCodeAPI } from "../utils/api";
+import { encode } from "../utils/EnCode";
 
 export const runCode = async ({ source_code, language_id }: RunCode) => {
   axios.defaults.withCredentials = false;

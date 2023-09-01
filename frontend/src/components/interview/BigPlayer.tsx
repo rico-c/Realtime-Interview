@@ -2,10 +2,10 @@ import { ILocalVideoTrack, IRemoteVideoTrack, ILocalAudioTrack, IRemoteAudioTrac
 import React, { useRef, useEffect, useState, useCallback } from "react";
 import { Tooltip, Drawer } from 'antd';
 import { QuestionCircleOutlined} from '@ant-design/icons'
-import markdown from 'markdown';
+import markdown from 'markdown-it';
 import './BigPlayer.scss';
 
-const markdownHTML = markdown.markdown.toHTML(`
+const markdownHTML = markdown.render(`
   请按以下步骤检查：
 
   - 当前网站链接是否使用 HTTPS 协议，HTTP会导致视频通话无法工作。

@@ -2,7 +2,7 @@ import { UPDATE_USER, DELETE_USER } from "./types";
 import { LoginRes } from "@/types";
 import axios from "axios";
 import {message} from 'antd';
-import { loginAPI, logoutAPI, registerAPI, renameAPI } from "@/utils/api";
+import { loginAPI, logoutAPI, registerAPI, renameAPI } from "../utils/api";
 
 axios.defaults.withCredentials = true;
 

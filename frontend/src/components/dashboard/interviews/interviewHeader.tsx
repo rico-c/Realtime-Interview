@@ -6,14 +6,14 @@ import {
   Drawer,
   Input
 } from "antd";
-import TeamSelector from '@/components/common/teamSelector';
+import TeamSelector from 'components/common/teamSelector';
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import "moment/locale/zh-cn";
 import "./interviewHeader.scss";
-import { createInterview, createRoomid } from "@/actions";
+import { createInterview, createRoomid } from "actions";
 import { OrderInterview } from "./orderInterview";
-import { useUserInfo } from "@/hooks/useLogin";
+import { useUserInfo } from "hooks/useLogin";
 
 const { Search } = Input;
 

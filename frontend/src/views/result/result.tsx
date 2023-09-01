@@ -1,8 +1,8 @@
 import React, { FC, useCallback, useRef } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { Result, Button } from 'antd';
-import { useInterviewDetail } from '@/hooks';
-import FinalReport from '@/components/result/finalReport';
+import { useInterviewDetail } from 'hooks';
+import FinalReport from 'components/result/finalReport';
 import './result.scss';
 
 const InterviewResult: FC = () => {

@@ -1,5 +1,5 @@
 import { AnyAction } from "@/types";
-import { CURRENT_TEAM } from "@/actions/types";
+import { CURRENT_TEAM } from "actions/types";
 
 const initState = { teamName: null, teamId: null };
 

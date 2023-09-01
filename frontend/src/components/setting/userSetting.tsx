@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { SettingItem } from './settingItem';
 import { Input, Button, message } from 'antd';
 import { rename } from 'actions/accout';
-import { useUserInfo } from '@/hooks/useLogin';
+import { useUserInfo } from 'hooks/useLogin';
 
 
 const UserSetting: FC = () => {

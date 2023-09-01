@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { CardWrapper } from '@/components/common/cardWrapper';
+import { CardWrapper } from 'components/common/cardWrapper';
 import { Input, Button } from "antd";
 import { useHistory } from "react-router-dom";
 import { postCreateTeam } from 'actions';

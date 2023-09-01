@@ -1,7 +1,7 @@
 import React, { FC, useCallback } from "react";
 import { Button, message } from 'antd';
 import { useHistory } from "react-router-dom";
-import { createInterview, createRoomid } from "@/actions";
+import { createInterview, createRoomid } from "actions";
 import Intro from 'assets/imgs/homepageIntro.png';
 import './homepage.scss';
 

@@ -1,8 +1,8 @@
 import React, { FC, useCallback } from "react";
 import { List, Avatar, Button } from "antd";
 import { useHistory } from "react-router-dom";
-import TeamSelector from '@/components/common/teamSelector';
-import {useTeamQuestions} from '@/hooks';
+import TeamSelector from 'components/common/teamSelector';
+import {useTeamQuestions} from 'hooks';
 import { useSelector } from 'react-redux';
 import './questions.scss';
 

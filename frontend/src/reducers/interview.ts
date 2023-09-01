@@ -2,7 +2,7 @@ import { AnyAction } from "@/types";
 import {
   UPDATE_INTERVIEWS,
   UPDATE_WRITTENEXAM
-} from "@/actions/types";
+} from "actions/types";
 
 const initState = {
   interviewlist: [],

@@ -2,8 +2,8 @@ import React, { FC } from "react";
 import './manageExam.scss';
 import { Button, Table, Space } from "antd";
 import { useHistory } from 'react-router-dom';
-import BackBtn from '@/components/common/backBtn';
-import BreadNavigator from '@/components/common/breadNavigator';
+import BackBtn from 'components/common/backBtn';
+import BreadNavigator from 'components/common/breadNavigator';
 
 const ManageExam: FC = () => {
   const history = useHistory();

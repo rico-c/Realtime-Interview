@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 import { WidthButton } from '../common/widthBtn';
 import { useDispatch } from "react-redux";
 import { register } from 'actions/accout'
-import { useLoginJump } from '@/hooks/useLogin';
+import { useLoginJump } from 'hooks/useLogin';
 import { checkRegister } from 'utils/checkValidate'
 import { getUrlParam } from 'utils/GetUrlParams';
 

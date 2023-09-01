@@ -7,7 +7,7 @@ import {
   renameTeamAPI,
   createTeamAPI,
   belongTeamsAPI,
-} from "@/utils/api";
+} from "../utils/api";
 
 export const getTeamInfo = async (teamId: string) => {
   const res = await axios.get(getTeamInfoAPI, {

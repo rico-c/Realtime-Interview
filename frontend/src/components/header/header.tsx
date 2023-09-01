@@ -1,7 +1,7 @@
 import React, { FC, useCallback } from "react";
 import { Menu } from 'antd';
 import { useHistory } from "react-router-dom";
-import Icon from "@/assets/logo/logo.png";
+import Icon from "assets/logo/logo.png";
 import { useSelector } from 'react-redux';
 import "./header.scss";
 

@@ -1,4 +1,4 @@
-import { gettokenAPI } from "@/utils/api";
+import { gettokenAPI } from "../utils/api";
 import axios from "axios";
 
 export const getJoiningToken = async (params) => {

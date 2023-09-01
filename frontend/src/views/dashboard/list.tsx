@@ -1,6 +1,6 @@
 import React, { FC, useState } from "react";
-import InterviewHeader from '@/components/dashboard/interviews/interviewHeader'
-import InterviewTable from '@/components/dashboard/interviews/interviewTable'
+import InterviewHeader from 'components/dashboard/interviews/interviewHeader'
+import InterviewTable from 'components/dashboard/interviews/interviewTable'
 import './list.scss';
 
 const List: FC = () => {

@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { useInterviewDetail } from '@/hooks';
+import { useInterviewDetail } from 'hooks';
 import { Input, message, Button, DatePicker, TimePicker, Rate } from 'antd';
 import { SettingItem } from 'components/setting/settingItem';
 import locale from "antd/es/date-picker/locale/zh_CN";

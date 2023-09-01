@@ -1,6 +1,6 @@
 import React, { FC, useCallback, useEffect, useState } from 'react';
 import Editor from 'for-editor';
-import { updateNote } from '@/actions/interview';
+import { updateNote } from 'actions/interview';
 import { useParams } from 'react-router-dom';
 
 import './markdown.scss';

@@ -8,7 +8,7 @@ import AgoraRTC, {
   ILocalVideoTrack,
   ILocalAudioTrack,
 } from "agora-rtc-sdk-ng";
-import { getJoiningToken } from "@/actions";
+import { getJoiningToken } from "actions";
 import { useUserInfo } from "hooks/useLogin";
 
 const agoraCofig = {

@@ -1,15 +1,15 @@
 import React, { FC, useCallback, useEffect, useState, useMemo } from 'react';
-import QuestionEditor from '@/components/questions/questionEditor';
+import QuestionEditor from 'components/questions/questionEditor';
 import {
   Button,
   Input,
   Radio,
   message
 } from "antd";
-import { createQuestion } from '@/actions/question';
+import { createQuestion } from 'actions/question';
 import { useSelector } from 'react-redux';
 import { useHistory } from "react-router-dom";
-import LanguageSelector from '@/components/common/languageSelector';
+import LanguageSelector from 'components/common/languageSelector';
 import MonacoEditor from 'react-monaco-editor';
 
 const CodeQuestion: FC = () => {

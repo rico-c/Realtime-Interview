@@ -2,7 +2,7 @@ import React, { useRef, useCallback } from 'react';
 import { Dropdown, Menu, Button, Tooltip } from 'antd';
 import { useDispatch } from 'react-redux';
 import { CaretDownOutlined, UserOutlined } from '@ant-design/icons';
-import { logout } from '@/actions';
+import { logout } from 'actions';
 import { useHistory, useLocation } from "react-router-dom";
 
 import Setting from 'assets/imgs/shezhi.svg';

@@ -1,6 +1,6 @@
 import React, { useCallback, useState, useEffect, useMemo } from 'react';
 import { useHistory, useParams } from "react-router-dom";
-import { tempuser } from '@/actions/accout';
+import { tempuser } from 'actions/accout';
 import { useDispatch } from 'react-redux';
 import { Button, Modal, Input, notification } from 'antd';
 import { InterviewRoute } from 'types';

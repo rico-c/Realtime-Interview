@@ -5,7 +5,7 @@ import { LeftOutlined } from '@ant-design/icons'
 import { WidthButton } from '../common/widthBtn';
 import { login } from 'actions/accout'
 import { checkLogin } from 'utils/checkValidate'
-import { useLoginJump } from '@/hooks/useLogin';
+import { useLoginJump } from 'hooks/useLogin';
 import { getUrlParam } from 'utils/GetUrlParams';
 import { useHistory } from 'react-router';
 

@@ -1,5 +1,5 @@
 import { AnyAction } from "@/types";
-import { RUN_CODE, UPDATE_LANG } from "@/actions/types";
+import { RUN_CODE, UPDATE_LANG } from "actions/types";
 
 const initState = {
   language: 63

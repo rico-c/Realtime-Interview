@@ -1,5 +1,5 @@
 import { AnyAction } from "@/types";
-import { UPDATE_USER, DELETE_USER } from "@/actions/types";
+import { UPDATE_USER, DELETE_USER } from "actions/types";
 
 const initState = {};
 

@@ -4,7 +4,7 @@ import {
 } from "antd";
 import { TeamOutlined } from '@ant-design/icons'
 import { useSelector, useDispatch } from "react-redux";
-import { setCurrentTeam, getBelongTeams } from "@/actions";
+import { setCurrentTeam, getBelongTeams } from "actions";
 import { useHistory } from "react-router-dom";
 import { useUserInfo } from 'hooks/useLogin';
 import {

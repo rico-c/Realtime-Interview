@@ -1,7 +1,7 @@
 import React, { FC, useMemo, useCallback, useRef, useEffect } from 'react';
 import { XTerm } from 'xterm-for-react';
 import { FitAddon } from 'xterm-addon-fit';
-import { decode } from '@/utils/EnCode';
+import { decode } from 'utils/EnCode';
 
 import './terminal.scss';
 

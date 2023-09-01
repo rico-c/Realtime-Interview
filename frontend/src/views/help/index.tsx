@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import Header from '@/components/header/header';
+import Header from 'components/header/header';
 import { Footer } from 'components/homepage/footer';
 import { Menu } from 'antd';
 import '../home/home.scss';
 import './index.scss';
-import markdown from 'markdown';
+import markdown from 'markdown-it';
 import { useParams } from 'react-router-dom';
 
-import progressForBoss from '@/documents/progressforboss.md';
-import manageTeam from '@/documents/manageTeam.md';
-import questions from '@/documents/questions.md';
-import progress from '@/documents/progress.md';
-import enviroment from '@/documents/enviroment.md';
-import price from '@/documents/price.md';
-import qa from '@/documents/qa.md';
-import feedback from '@/documents/feedback.md';
-import contract from '@/documents/contract.md';
+import progressForBoss from 'documents/progressforboss.md';
+import manageTeam from 'documents/manageTeam.md';
+import questions from 'documents/questions.md';
+import progress from 'documents/progress.md';
+import enviroment from 'documents/enviroment.md';
+import price from 'documents/price.md';
+import qa from 'documents/qa.md';
+import feedback from 'documents/feedback.md';
+import contract from 'documents/contract.md';
 
 const dic = {
   progressForBoss,
@@ -42,7 +42,7 @@ const Help = () => {
   }, [type])
 
   useEffect(() => {
-    fetch(dic[key] || progressForBoss).then(res => res.text()).then(text => setHtml(markdown.markdown.toHTML(text)));
+    fetch(dic[key] || progressForBoss).then(res => res.text()).then(text => setHtml(markdown.render(text)));
   }, [key])
 
   return (

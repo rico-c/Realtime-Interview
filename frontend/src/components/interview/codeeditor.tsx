@@ -5,15 +5,15 @@ import SettingSelector from './settingSelector';
 import EndInterview from './endInterview';
 import { Button, Modal } from 'antd';
 import { CaretRightFilled, LeftOutlined } from '@ant-design/icons';
-import { yjsHost } from '@/utils/api';
+import { yjsHost } from 'utils/api';
 import * as Y from 'yjs';
 import { WebsocketProvider } from 'y-websocket';
-import languageList from '@/utils/Languages';
+import languageList from 'utils/Languages';
 // @ts-ignore
 import { MonacoBinding } from 'y-monaco';
 import { useSelector } from 'react-redux';
-import { useRunShortCut } from '@/hooks/useUtils';
-import { runCode } from '@/actions';
+import { useRunShortCut } from 'hooks/useUtils';
+import { runCode } from 'actions';
 import { useHistory } from "react-router-dom";
 import LOGO from 'assets/logo/logo-white.png';
 import {

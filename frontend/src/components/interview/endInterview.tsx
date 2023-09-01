@@ -1,7 +1,7 @@
 import React, { FC, useCallback, useState, useEffect, useMemo } from 'react';
 import { Rate, Input, Button } from 'antd';
 import { useHistory } from 'react-router-dom';
-import { endInterview } from '@/actions';
+import { endInterview } from 'actions';
 import { useSelector } from "react-redux";
 
 const { TextArea } = Input;

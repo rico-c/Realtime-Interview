@@ -1,17 +1,17 @@
 import React, { FC, useState, useCallback, useRef, useMemo } from 'react';
-import CodeEditor from '@/components/interview/codeeditor';
-import Terminal from '@/components/interview/terminal';
-import Markdown from '@/components/interview/markdown';
-import VideoCall from '@/components/interview/videoCall';
-import InvitePopover from '@/components/interview/invitePopover';
-import { UserTab } from '@/components/interview/userTab';
+import CodeEditor from 'components/interview/codeeditor';
+import Terminal from 'components/interview/terminal';
+import Markdown from 'components/interview/markdown';
+import VideoCall from 'components/interview/videoCall';
+import InvitePopover from 'components/interview/invitePopover';
+import { UserTab } from 'components/interview/userTab';
 import SplitPane from 'react-split-pane';
 import { useSelector } from 'react-redux';
 import { Radio, Button, Popover } from 'antd';
 import { UserAddOutlined, ClearOutlined, CodeOutlined, EditOutlined } from '@ant-design/icons';
-import { useSocket, useInterviewDetail } from '@/hooks';
+import { useSocket, useInterviewDetail } from 'hooks';
 import { useParams, useLocation } from 'react-router-dom';
-import { useUserInfo } from '@/hooks/useLogin';
+import { useUserInfo } from 'hooks/useLogin';
 import { getTeamInfo } from 'actions';
 
 import './interview.scss';

@@ -2,10 +2,10 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { Table, Tag, Space, Popconfirm, message, Drawer, Button } from 'antd';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchInterviews, deleteInterview } from '@/actions';
-import { CardWrapper } from '@/components/common/cardWrapper';
+import { fetchInterviews, deleteInterview } from 'actions';
+import { CardWrapper } from 'components/common/cardWrapper';
 import moment from 'moment';
-import FinalReport from '@/components/result/finalReport';
+import FinalReport from 'components/result/finalReport';
 import { UpdateInterview } from 'components/dashboard/interviews/updateInterview';
 import './interviewTable.scss';
 

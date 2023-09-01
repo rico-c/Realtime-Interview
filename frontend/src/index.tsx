@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import * as Sentry from "@sentry/react";
 import { Integrations } from "@sentry/tracing";
-import "./index.less";
+import "./index.scss";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { ConfigProvider } from "antd";
@@ -16,10 +16,18 @@ Sentry.init({
 });
 
 ReactDOM.render(
-  <ConfigProvider locale={zhCN}>
-    {/* <ErrorBoundary > */}
+  <ConfigProvider
+    locale={zhCN}
+    theme={{
+      token: {
+        colorPrimary: "#0582ca",
+        colorLink: "#0582ca",
+        colorWarning: "#faad14",
+        colorError: "#ff6670",
+      },
+    }}
+  >
     <App />
-    {/* </ErrorBoundary> */}
   </ConfigProvider>,
   document.getElementById("root")
 );

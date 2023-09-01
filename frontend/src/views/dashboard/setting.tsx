@@ -1,7 +1,7 @@
 import React, { FC, useCallback } from "react";
-import UserSetting from '@/components/setting/userSetting';
-import GeneralSetting from '@/components/setting/generalSetting';
-import { CardWrapper } from '@/components/common/cardWrapper';
+import UserSetting from 'components/setting/userSetting';
+import GeneralSetting from 'components/setting/generalSetting';
+import { CardWrapper } from 'components/common/cardWrapper';
 import './setting.scss';
 
 const Setting: FC = () => {
