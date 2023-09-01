@@ -5,10 +5,10 @@ import { CaretDownOutlined, UserOutlined } from '@ant-design/icons';
 import { logout } from '@/actions';
 import { useHistory, useLocation } from "react-router-dom";
 
-import Setting from '@/assets/imgs/shezhi.svg';
-import Group from '@/assets/imgs/zuzhi.svg';
-import Folder from '@/assets/imgs/document.svg';
-import Interview from '@/assets/imgs/interview.svg';
+import Setting from 'assets/imgs/shezhi.svg';
+import Group from 'assets/imgs/zuzhi.svg';
+import Folder from 'assets/imgs/document.svg';
+import Interview from 'assets/imgs/interview.svg';
 import Logo from 'assets/logo/logo.png'
 import InsertIMG from 'assets/states/paper.png'
 import { useUserInfo } from 'hooks/useLogin'
@@ -41,7 +41,7 @@ export const Sider = () => {
   }, [])
 
   const handleLogout = () => {
-    dispatch(logout());
+    dispatch(logout() as any);
   };
 
   const goOpinion = () => {

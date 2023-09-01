@@ -1,0 +1,32 @@
+.login {
+  display: flex;
+  flex: 1;
+  .bg-img {
+    width: 75%;
+    height: 100vh;
+    background-image: linear-gradient(120deg, #89f7fe 0%, #66a6ff 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    .bg {
+      width: 50%;
+    }
+    .logo {
+      width: 400px;
+      cursor: pointer;
+    }
+  }
+  .login-area {
+    width: 50%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .help-word {
+    color: #ff4d4f;
+    margin-left: 55px;
+  }
+}

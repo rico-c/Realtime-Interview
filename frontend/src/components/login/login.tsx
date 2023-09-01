@@ -19,7 +19,7 @@ export const Login = ({ setLogin }: { setLogin: (boolean) => void }) => {
     if (!checkRes.state) {
       return setHelp(checkRes.msg);
     }
-    dispatch(login(values));
+    dispatch(login(values) as any);
   };
 
   const roomId = getUrlParam('r');

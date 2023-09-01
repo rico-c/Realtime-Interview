@@ -20,7 +20,7 @@ export const UserTab = ({ userAccount, socket, demo }: { userAccount: any, socke
 
   const handleInputname = useCallback(() => {
     if (!!username) {
-      dispatch(tempuser(username));
+      dispatch(tempuser(username) as any);
       socket?.emit('newuser', username)
     } else {
       return;
@@ -47,8 +47,7 @@ export const UserTab = ({ userAccount, socket, demo }: { userAccount: any, socke
     const dic = [{ message: '上线', icon: <SmileOutlined style={{ color: '#108ee9' }} /> }, { message: '下线', icon: <ExportOutlined /> }];
     notification.open({
       message: `${username}已${dic[state].message}`,
-      icon: dic[state].icon,
-      top: 60
+      icon: dic[state].icon
     });
   };
 

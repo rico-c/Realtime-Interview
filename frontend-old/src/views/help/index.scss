@@ -1,0 +1,17 @@
+.help-main {
+  margin-top: 20px;
+  display: flex;
+  .markdown {
+    padding-left: 20px;
+  }
+}
+.help {
+  width: 100vw;
+  min-height: 100vh;
+  position: relative;
+  .help-wrapper {
+    max-width: 1170px;
+    margin: auto;
+  }
+  padding-bottom: 120px;
+}

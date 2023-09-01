@@ -36,7 +36,7 @@ const RoutesJSX = () => {
       mobile: '',
       password: '',
       rememberme: true
-    }));
+    }) as any);
   }, [])
 
   return (

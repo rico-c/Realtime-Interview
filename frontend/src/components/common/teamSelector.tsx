@@ -31,7 +31,7 @@ const TeamSelector = forwardRef((props, ref) => {
       if (res?.find(i => i.teamId === currentTeamId)) {
         currentTeamData = res.find(i => i.teamId === currentTeamId);
       }
-      dispatch(setCurrentTeam(currentTeamData));
+      dispatch(setCurrentTeam(currentTeamData) as any);
     });
   }
 
@@ -50,7 +50,7 @@ const TeamSelector = forwardRef((props, ref) => {
     else {
       const teamInfo = belongTeams.find(i => i.teamId === value);
       if (currentTeamId !== value) {
-        dispatch(setCurrentTeam(teamInfo));
+        dispatch(setCurrentTeam(teamInfo) as any);
       }
     }
   }, [belongTeams, currentTeamId]);

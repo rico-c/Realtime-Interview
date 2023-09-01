@@ -18,7 +18,7 @@ const InterviewTable = (params: { query: string }) => {
   const [reportVisible, setreportVisible] = useState<string | null>(null);
   const [configVisible, setconfigVisible] = useState<string | null>(null);
 
-  const updateInterviewsData = () => dispatch(fetchInterviews(teamId));
+  const updateInterviewsData = () => dispatch(fetchInterviews(teamId) as any);
 
   const dataList = useSelector(state => (state as any).interview.interviewlist);
   const queryDataList = useMemo(() => {

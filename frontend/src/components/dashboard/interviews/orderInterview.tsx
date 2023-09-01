@@ -40,7 +40,7 @@ export const OrderInterview = ({ roomId, setIsModalVisible }: { roomId: string; 
       if (res.code === 0) {
         message.success("创建成功");
         setIsModalVisible(false);
-        dispatch(fetchInterviews(currentTeamId));
+        dispatch(fetchInterviews(currentTeamId) as any);
       } else {
         message.error(res.message);
       }

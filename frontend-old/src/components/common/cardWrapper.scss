@@ -1,0 +1,13 @@
+.card-wrapper {
+  width: 100%;
+  min-height: 80vh;
+  height: calc(100vh - 100px);
+  border-radius: 10px;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  background-color: #ffffff;
+  overflow-x: hidden;
+}
+.card-wrapper ::-webkit-scrollbar {
+  width: 0 !important;
+}

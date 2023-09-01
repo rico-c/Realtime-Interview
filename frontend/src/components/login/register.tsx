@@ -17,7 +17,7 @@ export const Register = ({ setLogin }: { setLogin: (boolean) => void }) => {
     if (!checkRes.state) {
       return setHelp(checkRes.msg);
     }
-    dispatch(register(values));
+    dispatch(register(values) as any);
   }
   const roomId = getUrlParam('r');
   useLoginJump(roomId);

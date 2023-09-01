@@ -73,7 +73,7 @@ const Interview: FC = () => {
             <div className="top-right">
               <Button className="c-gap-right" ghost icon={<ClearOutlined />} onClick={clearTerminal} >清空终端</Button>
               <Popover
-                content={InvitePopover}
+                content={InvitePopover as any}
                 placement="bottomRight"
                 trigger="click"
                 visible={inviteVisible}

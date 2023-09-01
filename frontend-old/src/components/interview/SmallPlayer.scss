@@ -1,0 +1,41 @@
+.small-player {
+  background-color: #000;
+  position: relative;
+  .top-info {
+    position: absolute;
+    width: 240px;
+    top: 0px;
+    left: 5px;
+    z-index: 10;
+    span {
+      text-shadow: #bbbbbb 1px 0 0, #bbbbbb 0 1px 0, #bbbbbb -1px 0 0,
+        #bbbbbb 0 -1px 0;
+    }
+  }
+  .video-player {
+    width: 240px;
+    height: 150px;
+  }
+  border-radius: 5px;
+  overflow: hidden;
+  .bottom-btns {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    display: flex;
+    .player-btn {
+      width: 30px;
+      height: 30px;
+      border-radius: 20%;
+      background-color: #bdbdbd85;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      margin: 2px;
+      &:hover {
+        background-color: #bdbdbd65;
+      }
+    }
+  }
+}

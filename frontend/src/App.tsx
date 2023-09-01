@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Provider } from 'react-redux';
-import store from '@/reducers/store';
-import { persistor } from '@/reducers/store';
+import store from './reducers/store';
+import { persistor } from './reducers/store';
 import { PersistGate } from 'redux-persist/lib/integration/react';
 import RoutesJSX from './routes';
 import './App.scss';

@@ -1,0 +1,46 @@
+.dashboard {
+  height: 100vh;
+  .layout {
+    background-color: #e8eff7;
+    .sider {
+      height: 100vh;
+      text-align: center;
+      background-color: #e8eff7;
+      .logo {
+        padding: 20px 0;
+        img {
+          width: 200px;
+        }
+      }
+      .ant-menu {
+        background-color: #e8eff7;
+      }
+      .menu-item {
+        height: 55px;
+        padding-left: 20px;
+        padding-right: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .icon {
+          width: 20px;
+          margin-right: 10px;
+        }
+      }
+      // .ant-menu-item::after {
+      //   border: none;
+      // }
+      .ant-layout-sider-children {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        .user-dropdown {
+          width: 80%;
+          margin-bottom: 50px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

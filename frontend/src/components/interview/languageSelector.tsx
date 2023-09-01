@@ -14,7 +14,7 @@ const LanguageSelector = ({ socket, userAccount }: { socket?: any, userAccount?:
   // const name = userAccount?.name || '未知用户';
   // const isLogin = userAccount?.useId;
   const onChange = useCallback((id) => {
-    dispatch(updateLang(id));
+    dispatch(updateLang(id) as any);
   }, [dispatch]);
 
   // useEffect(() => {

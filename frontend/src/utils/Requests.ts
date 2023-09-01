@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { runCodeAPI } from "./API";
+import { runCodeAPI } from "./api";
 // @ts-ignore
 export const runCodeToken = async ({ source_code, language_id }) => {
   try {

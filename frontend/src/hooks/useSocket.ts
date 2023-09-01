@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import io from "socket.io-client";
-import { tsocketHost } from "utils/API";
+import { tsocketHost } from "@/utils/api";
 
 export const useSocket = (roomId: string) => {
   const [socket, setSocket] = useState(null);
