@@ -1,6 +1,6 @@
 import React, { FC, useMemo, useCallback, useRef, useEffect } from 'react';
 import { XTerm } from 'xterm-for-react';
-import { FitAddon } from 'xterm-addon-fit';
+// import { FitAddon } from 'xterm-addon-fit';
 import { decode } from 'utils/EnCode';
 
 import './terminal.scss';
@@ -10,7 +10,7 @@ interface TerminalProps {
   ternimalRef: any;
 }
 
-const fitAddon = new FitAddon();
+// const fitAddon = new FitAddon();
 
 const Terminal: FC<TerminalProps> = props => {
   const { socket, ternimalRef } = props;
@@ -58,9 +58,9 @@ const Terminal: FC<TerminalProps> = props => {
     ternimalRef.current.clear = clear;
   }, [clear]);
 
-  useEffect(() => {
-    fitAddon.fit();
-  }, [])
+  // useEffect(() => {
+  //   fitAddon.fit();
+  // }, [])
 
   const options = useMemo(() => {
     return {
@@ -71,7 +71,7 @@ const Terminal: FC<TerminalProps> = props => {
 
   return (
     <div className="terminal">
-      <XTerm className="x-term" ref={xtermRef} options={options} addons={[fitAddon]} />
+      <XTerm className="x-term" ref={xtermRef} options={options}  />
     </div>
   );
 };

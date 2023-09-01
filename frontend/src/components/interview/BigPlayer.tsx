@@ -2,8 +2,10 @@ import { ILocalVideoTrack, IRemoteVideoTrack, ILocalAudioTrack, IRemoteAudioTrac
 import React, { useRef, useEffect, useState, useCallback } from "react";
 import { Tooltip, Drawer } from 'antd';
 import { QuestionCircleOutlined} from '@ant-design/icons'
-import markdown from 'markdown-it';
+import Markdown from 'markdown-it';
 import './BigPlayer.scss';
+
+const markdown = new Markdown();
 
 const markdownHTML = markdown.render(`
   请按以下步骤检查：

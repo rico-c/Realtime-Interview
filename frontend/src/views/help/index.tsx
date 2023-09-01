@@ -4,7 +4,7 @@ import { Footer } from 'components/homepage/footer';
 import { Menu } from 'antd';
 import '../home/home.scss';
 import './index.scss';
-import markdown from 'markdown-it';
+import Markdown from 'markdown-it';
 import { useParams } from 'react-router-dom';
 
 import progressForBoss from 'documents/progressforboss.md';
@@ -16,6 +16,8 @@ import price from 'documents/price.md';
 import qa from 'documents/qa.md';
 import feedback from 'documents/feedback.md';
 import contract from 'documents/contract.md';
+
+const markdown = new Markdown();
 
 const dic = {
   progressForBoss,

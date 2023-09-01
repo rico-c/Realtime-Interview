@@ -106,7 +106,7 @@ class Team {
         const users = teamresult.users;
         const userId = userresult.userId;
         if (!users.includes(userId)) {
-          await TeamModel.update(
+          await TeamModel.updateOne(
             { teamId: teamId },
             { $push: { users: userId } }
           );
@@ -153,7 +153,7 @@ class Team {
         const users = teamresult.users;
         const userId = userresult.userId;
         if (!users.includes(userId)) {
-          await TeamModel.update(
+          await TeamModel.updateOne(
             { teamId: teamId },
             { $push: { users: userId } }
           );
@@ -185,7 +185,7 @@ class Team {
           message: "找不到该用户",
         });
       } else {
-        await TeamModel.update(
+        await TeamModel.updateOne(
           {
             teamId,
           },
@@ -223,7 +223,7 @@ class Team {
           message: "找不到该用户",
         });
       } else {
-        await TeamModel.update(
+        await TeamModel.updateOne(
           { teamId: teamId },
           { $pull: { users: userId } }
         );

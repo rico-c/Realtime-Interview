@@ -1,14 +1,14 @@
 const mongoose = require("mongoose");
 const config = require("./config");
 
-const moreConfig = {
-  auth: { authSource: "interview" }, //对应要连接数据库
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-};
+// const moreConfig = {
+//   auth: { authSource: "interview" }, //对应要连接数据库
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+// };
 
 mongoose
-  .connect(config, moreConfig)
+  .connect(config)
   .then(() => console.log("数据库连接成功"))
   .catch(() => console.log("数据库连接失败"));
 mongoose.Promise = global.Promise;
@@ -22,7 +22,7 @@ db.on("error", function(error) {
 
 db.on("close", function() {
   console.log("数据库断开，重新连接数据库");
-  mongoose.connect(url, { server: { auto_reconnect: true } });
+  mongoose.connect(config, { server: { auto_reconnect: true } });
 });
 
 module.exports = db;

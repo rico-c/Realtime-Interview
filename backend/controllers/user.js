@@ -102,7 +102,7 @@ class User {
       if (sessionUserId !== userId) {
         throw new Error("session与userid不一致");
       }
-      await UserModel.update(
+      await UserModel.updateOne(
         { userId },
         {
           name,
@@ -160,14 +160,6 @@ class User {
           userId,
           belongTeams,
           createTime: new Date(),
-        },
-        (err) => {
-          if (err) {
-            return res.send({
-              code: 1,
-              message: err,
-            });
-          }
         }
       );
       req.session.userId = userId;

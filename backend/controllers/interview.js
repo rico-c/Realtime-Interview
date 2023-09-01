@@ -1,6 +1,6 @@
 const InterviewModel = require("../models/interview");
 const UserModel = require("../models/user");
-const { customAlphabet } = require("nanoid");
+const {customAlphabet} = require("nanoid");
 
 const nanoid = customAlphabet("123456789ABCDEFGHIJKLMNPQRSTUVWXYZ", 10);
 
@@ -52,7 +52,7 @@ class Interview {
   // 创建预约面试
   async create(req, res) {
     const params = req.body;
-    const { roomId } = params;
+    const {roomId} = params;
     const exsitId = await InterviewModel.findOne({
       roomId,
     });
@@ -62,25 +62,28 @@ class Interview {
         message: "未找到面试 ID，请稍后重试",
       });
     } else {
-      await InterviewModel.update({ roomId: roomId }, params, (err) => {
+      try {
+        await InterviewModel.updateOne({roomId: roomId}, params);
+        res.send({
+          code: 0,
+          message: "创建成功",
+        });
+      } catch (err) {
         if (err) {
           return res.send({
             code: 1,
             message: err,
           });
         }
-        res.send({
-          code: 0,
-          message: "创建成功",
-        });
-      });
+      }
+
     }
   }
 
   // 修改面试信息
   async update(req, res) {
     const params = req.body;
-    const { joinerName,time,rate,comment, roomId } = params;
+    const {joinerName, time, rate, comment, roomId} = params;
     const exsitId = await InterviewModel.findOne({
       roomId,
     });
@@ -91,30 +94,32 @@ class Interview {
       });
     } else {
       const updateParams = {};
-      if(joinerName) {
+      if (joinerName) {
         updateParams.joinerName = joinerName;
       }
-      if(time) {
+      if (time) {
         updateParams.time = time;
       }
-      if(rate) {
+      if (rate) {
         updateParams.rate = rate;
       }
-      if(comment) {
+      if (comment) {
         updateParams.comment = comment;
       }
-      await InterviewModel.update({ roomId: roomId }, updateParams, (err) => {
+      try {
+        await InterviewModel.updateOne({roomId: roomId}, updateParams);
+        res.send({
+          code: 0,
+          message: "修改成功",
+        });
+      } catch (err) {
         if (err) {
           return res.send({
             code: 1,
             message: err,
           });
         }
-        res.send({
-          code: 0,
-          message: "修改成功",
-        });
-      });
+      }
     }
   }
 
@@ -127,7 +132,7 @@ class Interview {
       });
     }
     const params = req.query;
-    const { roomId } = params;
+    const {roomId} = params;
     const exsitId = await InterviewModel.deleteOne({
       roomId,
     });
@@ -175,7 +180,7 @@ class Interview {
     });
     res.send({
       code: 0,
-      data: { list, creatorsinfo },
+      data: {list, creatorsinfo},
     });
   }
 
@@ -202,8 +207,8 @@ class Interview {
   // 更新面试笔记
   async updateNote(req, res) {
     const params = req.body;
-    const { roomId, content } = params;
-    await InterviewModel.update(
+    const {roomId, content} = params;
+    await InterviewModel.updateOne(
       {
         roomId,
       },
@@ -229,32 +234,33 @@ class Interview {
   // 结束面试
   async endInterview(req, res) {
     const params = req.body;
-    const { roomId, rate, comment, interviewer } = params;
-    await InterviewModel.update(
-      {
-        roomId,
-      },
-      {
-        roomId,
-        rate,
-        comment,
-        interviewer,
-        status: 3,
-        endTime: new Date(),
-      },
-      (err) => {
-        if (err) {
-          return res.send({
-            code: 1,
-            message: err,
-          });
+    const {roomId, rate, comment, interviewer} = params;
+    try {
+      await InterviewModel.updateOne(
+        {
+          roomId,
+        },
+        {
+          roomId,
+          rate,
+          comment,
+          interviewer,
+          status: 3,
+          endTime: new Date(),
         }
-        res.send({
-          code: 0,
-          data: "更新成功",
+      );
+      res.send({
+        code: 0,
+        message: "修改成功",
+      });
+    } catch (err) {
+      if (err) {
+        return res.send({
+          code: 1,
+          message: err,
         });
       }
-    );
+    }
   }
 }
 

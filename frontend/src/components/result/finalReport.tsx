@@ -1,7 +1,7 @@
 import React, { FC, useCallback, useEffect, useState } from 'react';
 import { useInterviewDetail } from 'hooks';
 import { useParams } from 'react-router-dom';
-import markdown from 'markdown-it';
+import Markdown from 'markdown-it';
 import { jsPDF } from "jspdf";
 import moment from 'moment';
 
@@ -11,6 +11,7 @@ interface FinalReportProps {
   propRoomId?: string;
   reportRef?: any
 }
+const markdown = new Markdown();
 
 const FinalReport: FC<FinalReportProps> = props => {
   const { propRoomId, reportRef } = props;

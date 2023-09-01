@@ -21,18 +21,20 @@ class WrittenExam {
         message: "未找到笔试 ID，请稍后重试"
       });
     } else {
-      await writtenexamModel.update({ roomId: roomId }, params, err => {
+      try {
+        await writtenexamModel.updateOne({ roomId: roomId }, params);
+        res.send({
+          code: 0,
+          message: "创建成功",
+        });
+      } catch (err) {
         if (err) {
           return res.send({
             code: 1,
-            message: err
+            message: err,
           });
         }
-        res.send({
-          code: 0,
-          message: "创建成功"
-        });
-      });
+      }
     }
   }
 
