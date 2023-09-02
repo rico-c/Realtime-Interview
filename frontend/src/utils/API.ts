@@ -1,8 +1,9 @@
 const ENV = process.env.NODE_ENV;
-
+console.log('>>>>', ENV);
 // let remoteIp = "124.70.3.148";
 let remoteIp = "https://www.realtimeinterview.work";
 let localIp = "http://127.0.0.1";
+export const judgeHost = 'https://judge0-ce.p.rapidapi.com';
 
 // backend接口
 let APIHostIp;
@@ -16,12 +17,11 @@ if (ENV === "production") {
 // 代码websocket同步  port 1234
 export const yjsHost = `wss://www.realtimeinterview.work/y`;
 // terminal同步 port 4000
-export const tsocketHost = `wss://www.realtimeinterview.work`;
-// export const tsocketHost = `ws://127.0.0.1:4000`;
+// export const tsocketHost = `wss://www.realtimeinterview.work`;
+export const tsocketHost = `ws://127.0.0.1:4000`;
 
 // 代码运行docker
-export const judgeHost = remoteIp + '/judge';
-export const runCodeAPI = `${judgeHost}/submissions`;
+export const runCodeAPI = `/submissions`;
 
 // express接口 port 3001
 export const APIHost = APIHostIp;

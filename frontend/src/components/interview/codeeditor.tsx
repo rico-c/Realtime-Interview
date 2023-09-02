@@ -126,7 +126,7 @@ const CodeEditor: FC<CodeEditorProp> = props => {
   return (
     <div className="editor">
       <div className="top-bar">
-        <span>
+        <span className="flex items-center">
           <img src={LOGO} alt="" />
           {!demo && <Button type="link" icon={<LeftOutlined />} onClick={backDashboard}>返回控制台</Button>}
           <Button danger type="primary" onClick={endInterview}>

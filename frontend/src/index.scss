@@ -1,5 +1,6 @@
-/* @import '~antd/lib/style/themes/default.less';
-@import '~antd/dist/antd.less';  */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 body {
   margin: 0;
