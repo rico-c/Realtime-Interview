@@ -1,5 +1,5 @@
 import axios from "axios";
-import { createopinionAPI } from "../utils/api";
+import { createopinionAPI } from "utils/api";
 import { message } from "antd";
 
 export const createOpinion = async (params: {

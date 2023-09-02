@@ -15,7 +15,7 @@ import {
   getWrittenexamsAPI,
   deleteInterviewAPI,
   updateAPI,
-} from "../utils/api";
+} from "utils/api";
 import moment from "moment";
 
 axios.defaults.withCredentials = true;

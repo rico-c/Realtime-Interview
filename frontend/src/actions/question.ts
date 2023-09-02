@@ -1,6 +1,6 @@
 import { CreateQuestion } from "@/types";
 import axios from "axios";
-import { createQuestionAPI } from "../utils/api";
+import { createQuestionAPI } from "utils/api";
 
 export const createQuestion = async (params: CreateQuestion) => {
   console.log(params);
