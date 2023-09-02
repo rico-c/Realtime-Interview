@@ -1,5 +1,5 @@
 const ENV = process.env.NODE_ENV;
-console.log('>>>>', ENV);
+
 // let remoteIp = "124.70.3.148";
 let remoteIp = "https://www.realtimeinterview.work";
 let localIp = "http://127.0.0.1";
