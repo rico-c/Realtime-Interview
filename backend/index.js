@@ -16,7 +16,7 @@ const MongoStore = require("connect-mongo")(session);
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
 
-app.use(cors({ credentials: true, origin: "http://127.0.0.1:3000" }));
+app.use(cors({ credentials: true }));
 app.use(
   session({
     secret: "realtime-interview-secreat",

@@ -1,7 +1,7 @@
 const app = require("express")();
 const cors = require("cors");
 
-app.use(cors({ origin: "http://127.0.0.1:3000" }));
+app.use(cors());
 
 const http = require("http").Server(app);
 const io = require("socket.io")(http);
