@@ -6,7 +6,7 @@ const APIHostURI = isProduction ? backendURI + "/api" : 'http://127.0.0.1:3001';
 // 代码websocket同步  port 1234
 export const yjsHost = isProduction ? `wss://${backendHost}/y` : `ws://127.0.0.1:1234`;
 // terminal同步 port 4000
-export const tsocketHost = isProduction ? `wss://${backendHost}` : `ws://127.0.0.1:4000`;
+export const tsocketHost = isProduction ? `wss://${backendHost}/t` : `ws://127.0.0.1:4000`;
 
 export const judgeHost = "https://judge0-ce.p.rapidapi.com";
 
