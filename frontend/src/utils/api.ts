@@ -1,30 +1,20 @@
-const ENV = process.env.NODE_ENV;
+const isProduction = process.env.NODE_ENV === "production";
 
-// let remoteIp = "124.70.3.148";
-let remoteIp = "https://www.realtimeinterview.work";
-let localIp = "http://127.0.0.1";
-export const judgeHost = 'https://judge0-ce.p.rapidapi.com';
-
-// backend接口
-let APIHostIp;
-
-if (ENV === "production") {
-  APIHostIp = remoteIp + '/api';
-} else if (ENV === "development") {
-  APIHostIp = localIp + ":3001";
-}
-
+const backendHost = "realtime-interview.up.railway.app";
+const backendURI = `https://${backendHost}`;
+const APIHostURI = isProduction ? backendURI + "/api" : 'http://127.0.0.1:3001';
 // 代码websocket同步  port 1234
-export const yjsHost = `wss://www.realtimeinterview.work/y`;
+export const yjsHost = isProduction ? `wss://${backendHost}/y` : `ws://127.0.0.1:1234`;
 // terminal同步 port 4000
-// export const tsocketHost = `wss://www.realtimeinterview.work`;
-export const tsocketHost = `ws://127.0.0.1:4000`;
+export const tsocketHost = isProduction ? `wss://${backendHost}` : `ws://127.0.0.1:4000`;
+
+export const judgeHost = "https://judge0-ce.p.rapidapi.com";
 
 // 代码运行docker
 export const runCodeAPI = `/submissions`;
 
 // express接口 port 3001
-export const APIHost = APIHostIp;
+export const APIHost = APIHostURI;
 
 export const loginAPI = `${APIHost}/user/login`;
 export const logoutAPI = `${APIHost}/user/logout`;
@@ -52,5 +42,4 @@ export const createTeamAPI = `${APIHost}/team/createteam`;
 export const belongTeamsAPI = `${APIHost}/team/belongteams`;
 
 export const gettokenAPI = `${APIHost}/agora/gettoken`;
-
 export const createopinionAPI = `${APIHost}/opinion/create`;
