@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "serve": "PORT=3001 nodemon ./bin/www",
-    "tsocket": "PORT=4000 nodemon ./bin/tsocket.js",
-    "ysocket": "PORT=1234 nodemon ./node_modules/y-websocket/bin/server.js"
+    "serve": "PORT=3001 node ./bin/www",
+    "tsocket": "PORT=4000 node ./bin/tsocket.js",
+    "ysocket": "PORT=1234 node ./node_modules/y-websocket/bin/server.js"
   },
   "dependencies": {
     "agora-access-token": "^2.0.4",
