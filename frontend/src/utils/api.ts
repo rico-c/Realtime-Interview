@@ -1,4 +1,5 @@
-const isProduction = process.env.NODE_ENV === "production";
+// const isProduction = process.env.NODE_ENV === "production";
+const isProduction = true;
 
 const backendHost = "realtime-interview.up.railway.app";
 const backendURI = `https://${backendHost}`;

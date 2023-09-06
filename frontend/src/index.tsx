@@ -1,10 +1,11 @@
 import React from "react";
-import ReactDOM from 'react-dom/client';
+import ReactDOM from "react-dom/client";
 import * as Sentry from "@sentry/react";
 import { Integrations } from "@sentry/tracing";
 import "./index.scss";
 import App from "./App";
 import { ConfigProvider } from "antd";
+import { StyleProvider } from '@ant-design/cssinjs';
 import zhCN from "antd/lib/locale/zh_CN";
 // import ErrorBoundary from "views/errorbundary";
 
@@ -27,6 +28,8 @@ root.render(
       },
     }}
   >
-    <App />
+    <StyleProvider hashPriority="high">
+      <App />
+    </StyleProvider>
   </ConfigProvider>
 );
