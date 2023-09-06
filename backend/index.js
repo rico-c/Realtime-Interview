@@ -16,7 +16,7 @@ const MongoStore = require("connect-mongo")(session);
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
 
-app.use(cors({ credentials: true, origin: "https://realtime-interview.vercel.app/" }));
+app.use(cors({ credentials: true, origin: "https://realtime-interview.vercel.app" }));
 app.use(
   session({
     secret: "realtime-interview-secreat",
