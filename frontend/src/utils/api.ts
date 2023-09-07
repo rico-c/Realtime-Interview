@@ -2,11 +2,11 @@ const isProduction = process.env.NODE_ENV === "production";
 
 const backendHost = "realtime-interview.up.railway.app";
 const backendURI = `https://${backendHost}`;
-const APIHostURI = isProduction ? backendURI + "/api" : 'http://127.0.0.1:3001';
+const APIHostURI = isProduction ? backendURI + "/api" : 'http://127.0.0.1:3003/api';
 // 代码websocket同步  port 1234
-export const yjsHost = isProduction ? `wss://${backendHost}/y` : `ws://127.0.0.1:1234`;
+export const yjsHost = isProduction ? `ws://${backendHost}/y` : `ws://127.0.0.1:3003/y`;
 // terminal同步 port 4000
-export const tsocketHost = isProduction ? `wss://${backendHost}` : `ws://127.0.0.1:4000`;
+export const tsocketHost = isProduction ? `ws://${backendHost}` : `ws://127.0.0.1:3003`;
 
 export const judgeHost = "https://judge0-ce.p.rapidapi.com";
 
