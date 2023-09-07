@@ -50,6 +50,6 @@ workspaces.on("connection", (socket) => {
   });
 });
 
-http.listen(4000, function () {
+http.listen(4000, '0.0.0.0' ,function () {
   console.log("socketio listening on 4000");
 });
