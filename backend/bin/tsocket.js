@@ -4,7 +4,12 @@ const cors = require("cors");
 app.use(cors({ origin: "https://realtime-interview.vercel.app" }));
 
 const http = require("http").Server(app);
-const io = require("socket.io")(http);
+const io = require("socket.io")(http, {
+  cors: {
+    origin: "https://realtime-interview.vercel.app",
+    credentials: true
+  }
+});
 
 let users = [];
 const workspaces = io.of(/^\/\w+$/);
