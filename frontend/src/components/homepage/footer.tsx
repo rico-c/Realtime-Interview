@@ -1,10 +1,14 @@
 import "./footer.scss";
 import React from "react";
 import languageList from "utils/Languages";
+import Icon from "assets/logo/logo-white.png";
 
 export const Footer = () => {
   return (
     <div className="footer">
+      <div className="w-1/2 mb-5">
+        <img src={Icon} width="250" style={{transform: 'translateX(-20px)'}}/>
+      </div>
       <div className="w-1/2 pb-2 border-b border-gray">
         <div className="font-bold text-lg pb-2 text-white">支持语言</div>
         <div className="flex flex-wrap gap-1">
