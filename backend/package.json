@@ -5,7 +5,7 @@
   "scripts": {
     "serve": "PORT=3001 node ./bin/www",
     "tsocket": "PORT=4000 node ./bin/tsocket.js",
-    "ysocket": "PORT=1234 node ./node_modules/y-websocket/bin/server.js"
+    "ysocket": "PORT=1234 HOST=0.0.0.0 node ./node_modules/y-websocket/bin/server.js"
   },
   "dependencies": {
     "agora-access-token": "^2.0.4",
