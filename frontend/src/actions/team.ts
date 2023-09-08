@@ -9,6 +9,8 @@ import {
   belongTeamsAPI,
 } from "utils/api";
 
+axios.defaults.withCredentials = true;
+
 export const getTeamInfo = async (teamId: string) => {
   const res = await axios.get(getTeamInfoAPI, {
     params: {

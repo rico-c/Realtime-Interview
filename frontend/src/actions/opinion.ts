@@ -1,6 +1,7 @@
 import axios from "axios";
 import { createopinionAPI } from "utils/api";
 import { message } from "antd";
+axios.defaults.withCredentials = true;
 
 export const createOpinion = async (params: {
   userId: string;

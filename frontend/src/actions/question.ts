@@ -2,6 +2,8 @@ import { CreateQuestion } from "@/types";
 import axios from "axios";
 import { createQuestionAPI } from "utils/api";
 
+axios.defaults.withCredentials = true;
+
 export const createQuestion = async (params: CreateQuestion) => {
   console.log(params);
   const res = await axios.post(createQuestionAPI, params);
