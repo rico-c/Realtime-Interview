@@ -24,7 +24,8 @@ app.use(
     saveUninitialized: false,
     cookie: {
       // secure: true, // https
-      maxAge: 60000 * 60 * 24 * 7//7天
+      maxAge: 60000 * 60 * 24 * 7,
+      sameSite: 'none'
     },
     store: new MongoStore({
       url: dbConfig,
