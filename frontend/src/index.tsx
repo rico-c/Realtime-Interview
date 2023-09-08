@@ -7,6 +7,7 @@ import App from "./App";
 import { ConfigProvider } from "antd";
 import { StyleProvider } from '@ant-design/cssinjs';
 import zhCN from "antd/lib/locale/zh_CN";
+import "./i18n";
 // import ErrorBoundary from "views/errorbundary";
 
 Sentry.init({

@@ -3,10 +3,12 @@ import { Button, message } from "antd";
 import { useHistory } from "react-router-dom";
 import { createInterview, createRoomid } from "actions";
 import Intro from "assets/imgs/homepageIntro.png";
+import { useTranslation } from "react-i18next";
 import "./homepage.scss";
 
 const HomePage: FC = () => {
   const history = useHistory();
+  const { t } = useTranslation("common");
 
   const jumpDemo = useCallback(async () => {
     const roomid = await createRoomid("trydemo");
@@ -33,14 +35,14 @@ const HomePage: FC = () => {
 
   return (
     <div className="home-page">
-      <div className="title text-center">一站式在线技术面试平台</div>
+      <div className="title text-center">{t("slogan")}</div>
       <div className="main flex justify-center">
         <div className="left text-center">
-          <div className="sub-title">多人同步的在线VSCode编辑器</div>
-          <div className="sub-title">17种主流代码语言实时编译</div>
-          <div className="sub-title">高清视频语音通话</div>
+          <div className="sub-title">{t("slogan2")}</div>
+          <div className="sub-title">{t("slogan3")}</div>
+          <div className="sub-title">{t("slogan4")}</div>
           <Button className="try my-10" type="primary" onClick={jumpDemo}>
-            立即试用
+            {t("try-demo")}
           </Button>
         </div>
       </div>
@@ -51,26 +53,26 @@ const HomePage: FC = () => {
         <div className="desc-item">
           <i className="iconfont">&#xe61a;</i>
           <div>
-            <div className="desc-title">VSCode般的顺滑编码体验</div>
+            <div className="desc-title">{t("slogan5")}</div>
             <div className="desc-txt">
-              多人瞬时同步代码同步，snippets随叫随到
+            {t("slogan6")}
             </div>
           </div>
         </div>
         <div className="desc-item">
           <i className="iconfont">&#xe61b;</i>
           <div>
-            <div className="desc-title">随意切换主流代码语言</div>
+            <div className="desc-title">{t("slogan7")}</div>
             <div className="desc-txt">
-              支持Java/Python/PHP/JS/TS/C++/Go等主流语言
+            {t("slogan8")}
             </div>
           </div>
         </div>
         <div className="desc-item">
           <i className="iconfont">&#xe61c;</i>
           <div>
-            <div className="desc-title">免费高清视频通话</div>
-            <div className="desc-txt">想面多久，就面多久</div>
+            <div className="desc-title">{t("slogan9")}</div>
+            <div className="desc-txt">{t("slogan10")}</div>
           </div>
         </div>
       </div>

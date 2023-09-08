@@ -1,8 +1,12 @@
 import React, { FC, useCallback } from "react";
-import { Menu } from 'antd';
+import { Menu, Button } from 'antd';
 import { useHistory } from "react-router-dom";
 import Icon from "assets/logo/logo.png";
 import { useSelector } from 'react-redux';
+import { useTranslation } from "react-i18next";
+import {
+  TranslationOutlined
+} from '@ant-design/icons';
 import "./header.scss";
 
 const { SubMenu } = Menu;
@@ -13,6 +17,12 @@ const Header: FC = () => {
   const jumpRoute = useCallback((e) => {
     history.push(e.key);
   }, [])
+  const { t, i18n } = useTranslation("common");
+
+  const changeLang = () => {
+    const changeTo = i18n.language === "en" ? "zh" : "en";
+    i18n.changeLanguage(changeTo);
+  }
 
   return (
     <div className="header">
@@ -22,24 +32,21 @@ const Header: FC = () => {
         </span>
       </div>
       <div className="home-menu">
-        <Menu onClick={jumpRoute} selectedKeys={[]} mode="horizontal">
-          {/* <Menu.Item title="" key="/product">
-            产品
-          </Menu.Item>
-          <Menu.Item key="/price">
-            价格
-          </Menu.Item> */}
+        <Menu onClick={jumpRoute} selectedKeys={[]} mode="horizontal" className="flex items-center">
+          <Button onClick={changeLang} type="text" className="text-gray-500  ">
+            <TranslationOutlined style={{fontSize: '20px'}} />
+            </Button>
           <Menu.Item key="/help/">
-            帮助
+            {t('help')}
           </Menu.Item>
           {
             userId ? (
               <Menu.Item key="/dashboard">
-                控制台
+                {t('dashboard')}
               </Menu.Item>
             ) : (
               <Menu.Item key="/login">
-                登录
+                {t('login')}
               </Menu.Item>
             )
           }
