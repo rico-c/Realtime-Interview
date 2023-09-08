@@ -44,7 +44,9 @@ const Help = () => {
   }, [type])
 
   useEffect(() => {
-    fetch(dic[key] || progressForBoss).then(res => res.text()).then(text => setHtml(markdown.render(text)));
+    fetch(dic[key] || progressForBoss).then(res => res.text()).then(text => {
+      setHtml(markdown.render(text))
+    });
   }, [key])
 
   return (
