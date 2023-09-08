@@ -8,10 +8,12 @@ import { checkLogin } from 'utils/checkValidate'
 import { useLoginJump } from 'hooks/useLogin';
 import { getUrlParam } from 'utils/GetUrlParams';
 import { useHistory } from 'react-router';
+import { useTranslation } from "react-i18next";
 
 export const Login = ({ setLogin }: { setLogin: (boolean) => void }) => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const { t } = useTranslation("common");
   const [help, setHelp] = useState<string>('');
 
   const onFinish = async (values) => {
@@ -29,7 +31,7 @@ export const Login = ({ setLogin }: { setLogin: (boolean) => void }) => {
 
   return (
     <div className="password-login">
-      <h1>登录</h1>
+      <h1>{t('login')}</h1>
       <Form
         className="form"
         initialValues={{ rememberme: true }}
@@ -37,29 +39,29 @@ export const Login = ({ setLogin }: { setLogin: (boolean) => void }) => {
         size="large"
       >
         <Form.Item name="mobile">
-          <Input placeholder="手机号码" className="input" />
+          <Input placeholder={t('mobile')} className="input" />
         </Form.Item>
 
         <Form.Item name="password" help={<HelpCom />}>
-          <Input.Password placeholder="密码" className="input" />
+          <Input.Password placeholder={t('pass')} className="input" />
         </Form.Item>
 
         <Form.Item name="rememberme" valuePropName="checked">
-          <Checkbox> 记住我</Checkbox>
+          <Checkbox>{t('rememberme')}</Checkbox>
         </Form.Item>
 
         <Form.Item>
           <WidthButton type="primary" htmlType="submit" className="login-btn" size="large">
-            登录
+            {t('login')}
           </WidthButton>
         </Form.Item>
       </Form>
       <div>
         <Button type="link" icon={<LeftOutlined />} className="float-left" onClick={() => history.push('/')}>
-          返回首页
+          {t('backhome')}
         </Button>
         <Button type="link" className="float-right" onClick={() => setLogin(false)}>
-          注册账号
+          {t('signup')}
         </Button>
       </div>
     </div>

@@ -7,6 +7,7 @@ import Draggable from 'react-draggable';
 import { PhoneOutlined } from '@ant-design/icons';
 import './videoCall.scss';
 import { useUserInfo } from 'hooks/useLogin';
+import { useTranslation } from "react-i18next";
 
 const VideoCall = (props: { socket: any; roomId: string }) => {
   const { socket, roomId } = props;
@@ -14,6 +15,7 @@ const VideoCall = (props: { socket: any; roomId: string }) => {
   const [videoBigSize, setSize] = useState('me');
   const [videoJoiner, setVideoJoiner] = useState<string | null | undefined>(null);
   const { name } = useUserInfo();
+  const {t} = useTranslation('common');
   const {
     localAudioTrack,
     localVideoTrack,
@@ -74,7 +76,7 @@ const VideoCall = (props: { socket: any; roomId: string }) => {
           placement="bottom"
           visible={!!videoJoiner && !joinState}
         >
-          <Button className="make-call" ghost onClick={handleJoin} icon={<PhoneOutlined />}>开启视频通话</Button>
+          <Button className="make-call" ghost onClick={handleJoin} icon={<PhoneOutlined />}>{t('open-call')}</Button>
         </Popover>
       )}
       {isJoined && (

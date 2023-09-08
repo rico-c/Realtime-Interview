@@ -19,7 +19,7 @@ import LOGO from 'assets/logo/logo-white.png';
 import {
   LoadingOutlined,
 } from '@ant-design/icons';
-
+import { useTranslation } from "react-i18next";
 import './codeeditor.scss';
 
 interface CodeEditorProp {
@@ -39,11 +39,10 @@ const CodeEditor: FC<CodeEditorProp> = props => {
 
   const userAccount = useSelector(state => (state as any).accout);
   const currentLanguage = useSelector(state => (state as any).editor.language);
-
+  const {t, i18n} = useTranslation('common')
   const currentLanguageName = useMemo(() => {
     const one = languageList.find(i => currentLanguage === i.id);
     const res = one ? one.highlight : 'javascript';
-    console.log('current language is : ' + res);
     return res;
   }, [currentLanguage]);
 
@@ -128,9 +127,9 @@ const CodeEditor: FC<CodeEditorProp> = props => {
       <div className="top-bar">
         <span className="flex items-center">
           <img src={LOGO} alt="" />
-          {!demo && <Button type="link" icon={<LeftOutlined />} onClick={backDashboard}>返回控制台</Button>}
+          {!demo && <Button type="link" icon={<LeftOutlined />} onClick={backDashboard}>{t('back-dashboard')}</Button>}
           <Button danger type="primary" onClick={endInterview}>
-            结束面试
+            {t('end-interview')}
           </Button>
         </span>
         {videocallDom}
@@ -153,16 +152,14 @@ const CodeEditor: FC<CodeEditorProp> = props => {
         editorDidMount={editorDidMount}
       />
       <div className="bottom-bar">
-        {/* <Tooltip placement="top" title={os === 'mac' ? '⌘+i' : 'Ctl+i'}> */}
         <Button
           className="run-btn"
           type="primary"
           icon={running ? <LoadingOutlined /> : <CaretRightFilled />}
           onClick={runCodeCallback}
         >
-          {!running && '运行'}
+          {!running && t('run-code')}
         </Button>
-        {/* </Tooltip> */}
         <div className="selectors">
           <LanguageSelector socket={socket} userAccount={userAccount} />
           <SettingSelector

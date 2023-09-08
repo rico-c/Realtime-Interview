@@ -13,6 +13,7 @@ import { useSocket, useInterviewDetail } from 'hooks';
 import { useParams, useLocation } from 'react-router-dom';
 import { useUserInfo } from 'hooks/useLogin';
 import { getTeamInfo } from 'actions';
+import { useTranslation } from "react-i18next";
 
 import './interview.scss';
 
@@ -27,6 +28,7 @@ const Interview: FC = () => {
   const interviewDetail = useInterviewDetail(roomId);
   const socket = useSocket(roomId);
   const { userId } = useUserInfo();
+  const {t, i18n} = useTranslation('common')
 
   const handleInviteVisibleChange = useCallback(value => {
     setInviteVisible(value);
@@ -63,15 +65,15 @@ const Interview: FC = () => {
                 onChange={onTypeChange}
               >
                 <Radio.Button value="terminal">
-                  <CodeOutlined />终端
+                  <CodeOutlined />{t('termial')}
                 </Radio.Button>
                 <Radio.Button value="note">
-                  <EditOutlined />笔记
+                  <EditOutlined />{t('note')}
                 </Radio.Button>
               </Radio.Group>}
             </div>
             <div className="top-right">
-              <Button className="c-gap-right" ghost icon={<ClearOutlined />} onClick={clearTerminal} >清空终端</Button>
+              <Button className="c-gap-right" ghost icon={<ClearOutlined />} onClick={clearTerminal} >{t('clear-terminal')}</Button>
               <Popover
                 content={InvitePopover as any}
                 placement="bottomRight"
@@ -79,7 +81,7 @@ const Interview: FC = () => {
                 visible={inviteVisible}
                 onVisibleChange={handleInviteVisibleChange}
               >
-                <Button icon={<UserAddOutlined />} ghost>邀请面试者</Button>
+                <Button icon={<UserAddOutlined />} ghost>{t('invite')}</Button>
               </Popover>
 
               <UserTab userAccount={userAccount} socket={socket} demo={demo} />

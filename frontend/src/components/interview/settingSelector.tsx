@@ -6,6 +6,7 @@ import {
   ZoomInOutlined,
   ZoomOutOutlined
 } from '@ant-design/icons';
+import { useTranslation } from "react-i18next";
 
 interface SettingSelectorProps {
     setFontsize: any,
@@ -22,6 +23,7 @@ const SettingSelector: FC<SettingSelectorProps> = props => {
   const suggestionChange = useCallback(value => {
     setSuggestion(value);
   }, []);
+  const {t} = useTranslation('common');
   const content = (
     <div className="editor-setting-pop">
       <div className="item">
@@ -50,7 +52,7 @@ const SettingSelector: FC<SettingSelectorProps> = props => {
       visible={visible}
       onVisibleChange={() => setVisible(!visible)}
     >
-      <Button ghost icon={<SettingFilled />} className="btn">设置</Button>
+      <Button ghost icon={<SettingFilled />} className="btn">{t('setting')}</Button>
     </Popover>
   );
 };

@@ -7,10 +7,12 @@ import { register } from 'actions/accout'
 import { useLoginJump } from 'hooks/useLogin';
 import { checkRegister } from 'utils/checkValidate'
 import { getUrlParam } from 'utils/GetUrlParams';
+import { useTranslation } from "react-i18next";
 
 export const Register = ({ setLogin }: { setLogin: (boolean) => void }) => {
   const dispatch = useDispatch();
   const [help, setHelp] = useState<string>('');
+  const { t } = useTranslation("common");
 
   const onRegister = (values) => {
     const checkRes = checkRegister(values);
@@ -26,7 +28,7 @@ export const Register = ({ setLogin }: { setLogin: (boolean) => void }) => {
 
   return (
     <div className="register">
-      <h1>注册新用户</h1>
+      <h1>{t('signupnew')}</h1>
       <Form
         className="form"
         labelCol={{ span: 5}}
@@ -34,33 +36,33 @@ export const Register = ({ setLogin }: { setLogin: (boolean) => void }) => {
         initialValues={{ readProtocol: false }}
         size="large"
       >
-        <Form.Item name="name" label="姓名">
-          <Input placeholder="面试时会展现您的姓名" className="input" />
+        <Form.Item name="name" label={t('name')}>
+          <Input placeholder={t('showname')} className="input" />
         </Form.Item>
 
-        <Form.Item name="mobile" label="手机">
-          <Input placeholder="手机号码" className="input" />
+        <Form.Item name="mobile" label={t('mobile')}>
+          <Input placeholder={t('mobile')} className="input" />
         </Form.Item>
 
-        <Form.Item name="password" label="密码">
-          <Input placeholder="密码" className="input" type="password" />
+        <Form.Item name="password" label={t('pass')}>
+          <Input placeholder={t('pass')} className="input" type="password" />
         </Form.Item>
 
-        <Form.Item name="repeatpassword" help={<HelpCom />} label="确认密码">
-          <Input placeholder="请再输入一次密码" className="input" type="password" />
+        <Form.Item name="repeatpassword" help={<HelpCom />} label={t('pass-confirm')}>
+          <Input placeholder={t('pass-confirm')} className="input" type="password" />
         </Form.Item>
 
         <Form.Item>
           <WidthButton type="primary" htmlType="submit" size="large">
-            注册
+            {t('signup')}
           </WidthButton>
         </Form.Item>
         <Form.Item valuePropName="checked" name="readProtocol">
-          <Checkbox> 阅读并接受<Link to="/help/contract" target="_blank">《用户协议》</Link></Checkbox>
+          <Checkbox> {t('readaccept')}<Link to="/help/contract" target="_blank"> {t('contract')}</Link></Checkbox>
         </Form.Item>
       </Form>
       <Button type="link" className="float-right" onClick={() => setLogin(true)}>
-        已有帐号？去登录
+        {t('hasaccount')}
       </Button>
     </div>
   )

@@ -10,7 +10,6 @@ const Login = () => {
     <div className="login">
       <div className="bg-img">
         <Link to="/"><img src={LOGO} alt="" className="logo" /></Link>
-        <p>一站式在线技术面试平台</p>
         <img src={BG} alt="" className="bg" />
       </div>
       <div className="login-area">

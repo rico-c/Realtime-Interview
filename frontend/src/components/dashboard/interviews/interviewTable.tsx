@@ -8,12 +8,14 @@ import moment from 'moment';
 import FinalReport from 'components/result/finalReport';
 import { UpdateInterview } from 'components/dashboard/interviews/updateInterview';
 import './interviewTable.scss';
+import { useTranslation } from "react-i18next";
 
 const InterviewTable = (params: { query: string }) => {
   const query = params.query;
   const history = useHistory();
   const teamId = useSelector(state => (state as any)?.currentteam?.teamId);
   const dispatch = useDispatch();
+  const {t, i18n} = useTranslation('common')
 
   const [reportVisible, setreportVisible] = useState<string | null>(null);
   const [configVisible, setconfigVisible] = useState<string | null>(null);
@@ -33,7 +35,7 @@ const InterviewTable = (params: { query: string }) => {
   const statusDic = useMemo(() => {
     return {
       1: { txt: '未开始', color: '#FFB7A9' },
-      2: { txt: '进行中', color: '#92B6AC' },
+      2: { txt: t('ongoing'), color: '#92B6AC' },
       3: { txt: '已结束', color: '#94ABB5' }
     };
   }, []);
@@ -54,7 +56,7 @@ const InterviewTable = (params: { query: string }) => {
 
   const columns = [
     {
-      title: '状态',
+      title: t('state'),
       dataIndex: 'status',
       key: 'status',
       sorter: true,
@@ -62,19 +64,19 @@ const InterviewTable = (params: { query: string }) => {
       render: (index: any) => <Tag color={statusDic[index].color}>{statusDic[index].txt}</Tag>
     },
     {
-      title: "面试间ID",
+      title: t('interview-id'),
       dataIndex: "roomId",
       key: "roomId"
     },
     {
-      title: '面试者',
+      title: t('joiner'),
       dataIndex: 'joinerName',
       key: 'joinerName',
       ellipsis: true,
       render: (joinerName: string) => <span>{joinerName || '-'}</span>
     },
     {
-      title: '面试时间',
+      title: t('interview-time'),
       dataIndex: 'time',
       key: 'time',
       ellipsis: false,
@@ -87,13 +89,13 @@ const InterviewTable = (params: { query: string }) => {
       )
     },
     {
-      title: '创建人',
+      title: t('creator'),
       dataIndex: 'name',
       ellipsis: true,
       key: 'name'
     },
     {
-      title: '评分',
+      title:t('rate') ,
       dataIndex: 'rate',
       key: 'rate',
       render: (text, record) => (
@@ -101,7 +103,7 @@ const InterviewTable = (params: { query: string }) => {
       )
     },
     {
-      title: '评价',
+      title: t('comment'),
       dataIndex: 'comment',
       key: 'comment',
       render: (text, record) => (
@@ -109,7 +111,7 @@ const InterviewTable = (params: { query: string }) => {
       )
     },
     {
-      title: '操作',
+      title: t('operate'),
       key: 'action',
       width: '250px',
       dataIndex: 'action',
@@ -118,16 +120,16 @@ const InterviewTable = (params: { query: string }) => {
           {record.status === 3 ? (
             <Button onClick={_ => setreportVisible(record.roomId)}>查看报告{record.note && '/笔记'}</Button>
           ) : (
-            <Button onClick={_ => enterInterview(record.roomId)} type="primary" ghost>进入面试</Button>
+            <Button onClick={_ => enterInterview(record.roomId)} type="primary" ghost>{t('interview-enter')}</Button>
           )}
-          <Button onClick={_ => setconfigVisible(record.roomId)} type="link">修改</Button>
+          <Button onClick={_ => setconfigVisible(record.roomId)} type="link">{t('modify')}</Button>
           <Popconfirm
             title="删除后不可恢复"
             onConfirm={_ => doDeleteInterview(record.roomId)}
             okText="确认删除"
             cancelText="取消"
           >
-            <a>删除</a>
+            <a>{t('delete')}</a>
           </Popconfirm>
         </Space>
       )

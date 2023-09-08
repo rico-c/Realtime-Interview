@@ -14,6 +14,7 @@ import "./interviewHeader.scss";
 import { createInterview, createRoomid } from "actions";
 import { OrderInterview } from "./orderInterview";
 import { useUserInfo } from "hooks/useLogin";
+import { useTranslation } from "react-i18next";
 
 const { Search } = Input;
 
@@ -27,6 +28,7 @@ const Header = (params: {
   const [visible, setVisible] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [roomId, setroomId] = useState("");
+  const {t, i18n} = useTranslation('common')
 
   const currentTeam = useSelector(
     state => (state as any).currentteam
@@ -106,7 +108,7 @@ const Header = (params: {
   return (
     <div className="header">
       <div className="header-left">
-        <span className="header-title">面试列表</span>
+        <span className="header-title">{t('interview-list')}</span>
         <Search allowClear size="middle" placeholder="搜索面试者" onSearch={onSearch} style={{ width: 300 }} />
       </div>
       <div className="header-right">
@@ -119,7 +121,7 @@ const Header = (params: {
           onVisibleChange={handleVisibleChange}
         >
           <Button type="primary" size="large">
-            新建面试
+            {t('interview-create')}
           </Button>
         </Popover>
       </div>

@@ -11,7 +11,7 @@ import Interview from "assets/imgs/interview.svg";
 import Logo from "assets/logo/logo.png";
 import InsertIMG from "assets/states/paper.png";
 import { useUserInfo } from "hooks/useLogin";
-
+import { useTranslation } from "react-i18next";
 import "./index.scss";
 
 export const Sider = () => {
@@ -19,19 +19,20 @@ export const Sider = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const user = useUserInfo();
+  const {t, i18n} = useTranslation('common')
   const menuData = useRef([
     {
-      name: "面试",
+      name: t('interview'),
       icon: Interview,
       path: "/dashboard/interviewlist",
     },
     {
-      name: "团队",
+      name: t('team'),
       icon: Group,
       path: "/dashboard/team",
     },
     {
-      name: "设置",
+      name: t('setting'),
       icon: Setting,
       path: "/dashboard/settings",
     },
