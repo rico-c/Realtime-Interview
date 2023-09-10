@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "serve": "PORT=3001 node ./bin/www",
+    "serve": "PORT=3001 nodemon ./bin/www",
     "tsocket": "PORT=4000 node ./bin/tsocket.js",
     "ysocket": "PORT=1234 HOST=0.0.0.0 node ./node_modules/y-websocket/bin/server.js"
   },
@@ -34,7 +34,9 @@
     "yjs": "^13.4.5"
   },
   "devDependencies": {
-    "nodemon": "^2.0.6"
+    "nodemon": "^2.0.6",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.0"
   },
   "engines": {
     "node": "18"

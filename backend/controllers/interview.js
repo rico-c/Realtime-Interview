@@ -10,6 +10,33 @@ class Interview {
   }
 
   // 创建房间ID
+  /**
+   * @swagger
+   * /api/create-room:
+   *   post:
+   *     summary: Create a new interview room
+   *     tags:
+   *       - Interview
+   *     parameters:
+   *       - name: userId
+   *         in: query
+   *         description: The ID of the creator
+   *         required: true
+   *         type: string
+   *     responses:
+   *       200:
+   *         description: Successful room creation
+   *         schema:
+   *           type: object
+   *           properties:
+   *             code:
+   *               type: integer
+   *               description: Result code (0 for success, 1 for failure)
+   *             data:
+   *               type: string
+   *               description: Unique room ID
+   */
+
   async createRoom(req, res) {
     const creator = req.query.userId;
     let roomId = nanoid();
