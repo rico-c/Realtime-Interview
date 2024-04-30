@@ -34,7 +34,7 @@ app.use(
   })
 );
 app.enable('trust proxy');
-app.use(cors({credentials: true, origin: ["https://realtime-interview.vercel.app", 'http://localhost:3000']}));
+app.use(cors({credentials: true, origin: "*"}));
 app.use(bodyParser.json());
 app.use(logger("dev"));
 app.use(express.json());
