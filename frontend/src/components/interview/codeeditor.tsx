@@ -135,7 +135,7 @@ const CodeEditor: FC<CodeEditorProp> = props => {
         {videocallDom}
       </div>
       <Modal
-        title="面试评价"
+        title={t('interviewcomment')}
         width={500}
         visible={isModalVisible}
         onCancel={handleCancel}

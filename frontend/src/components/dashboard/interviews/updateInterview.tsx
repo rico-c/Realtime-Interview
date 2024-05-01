@@ -5,6 +5,7 @@ import { SettingItem } from 'components/setting/settingItem';
 import locale from "antd/es/date-picker/locale/zh_CN";
 import { updateInterview } from 'actions';
 import moment from 'moment';
+import { useTranslation } from "react-i18next";
 
 export const UpdateInterview = (props: { roomId: string; setconfigVisible: Function; updateInterviewsData: Function }) => {
   const { roomId, setconfigVisible, updateInterviewsData } = props;
@@ -24,6 +25,8 @@ export const UpdateInterview = (props: { roomId: string; setconfigVisible: Funct
   const [showTimeBtn, setShowTimeBtn] = useState<boolean>(false);
   const [showRateBtn, setShowRateBtn] = useState<boolean>(false);
   const [showCommentBtn, setShowCommentBtn] = useState<boolean>(false);
+
+  const {t, i18n} = useTranslation('common')
 
   useEffect(() => {
     if (interviewDetail) {
@@ -172,7 +175,7 @@ export const UpdateInterview = (props: { roomId: string; setconfigVisible: Funct
       </SettingItem>
       <SettingItem>
         <>
-          <span className="c-font-medium c-color-gray-a">面试评价</span>
+          <span className="c-font-medium c-color-gray-a">{t('interviewcomment')}</span>
           <span>
             <Input
               value={comment}

@@ -54,5 +54,16 @@
   "invite": "邀请面试者",
   "run-code": "运行",
   "invite-desc": "通过连接邀请",
-  "copy": "拷贝"
+  "copy": "拷贝",
+  "company": "深圳市氪林科技有限公司",
+  "quitCall": "退出通话",
+  "codenotice": "代码提示",
+  "codesize": "代码字号",
+  "tab": "Tab空格",
+  "interviewcomment": "面试评价",
+  "confirmend": "确认结束",
+  "cancel": "取消",
+  "open": "开启",
+  "close": "关闭",
+  "placeholder-end": "对候选人的评语，可包含优缺点，是否推荐进入下一轮面试"
 }

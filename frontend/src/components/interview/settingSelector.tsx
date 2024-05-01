@@ -27,16 +27,16 @@ const SettingSelector: FC<SettingSelectorProps> = props => {
   const content = (
     <div className="editor-setting-pop">
       <div className="item">
-        <span className="labelname">代码提示：</span>
-        <Switch checkedChildren="开启" unCheckedChildren="关闭" onChange={suggestionChange} checked={suggestion} />
+        <span className="labelname">{t('codenotice')}：</span>
+        <Switch checkedChildren={t('open')} unCheckedChildren={t('close')} onChange={suggestionChange} checked={suggestion} />
       </div>
       <div className="item">
-        <span className="labelname">代码字号：</span>
+        <span className="labelname">{t('codesize')}：</span>
         <Button icon={<ZoomInOutlined />} onClick={() => setFontsize(value => value + 1)}></Button>
         <Button icon={<ZoomOutOutlined />} onClick={() => setFontsize(value => value - 1)}></Button>
       </div>
       <div className="item">
-        <span className="labelname">Tab空格：</span>
+        <span className="labelname">{t('tab')}：</span>
         <Select defaultValue="4" onChange={value => setTabsize(Number(value))} >
           <Option value="2">2格</Option>
           <Option value="4">4格</Option>

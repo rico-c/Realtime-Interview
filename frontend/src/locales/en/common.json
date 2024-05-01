@@ -54,5 +54,16 @@
   "invite": "Invite Candidate",
   "run-code": "Run Code",
   "invite-desc": "Invite by URL",
-  "copy": "Copy"
+  "copy": "Copy",
+  "company": "Shenzhen Colin Technology Co., LTD",
+  "quitCall": "Exit",
+  "codenotice": "Code Sippets",
+  "codesize": "Font Size",
+  "tab": "Tab",
+  "interviewcomment": "Interview Assessment",
+  "confirmend": "Confirm",
+  "cancel": "Cancel",
+  "open": "Open",
+  "close": "Close",
+  "placeholder-end": "Comment on the candidate, including strengths and weaknesses, whether to recommend for the next round of interviews"
 }

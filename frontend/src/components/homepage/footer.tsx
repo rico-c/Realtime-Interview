@@ -25,7 +25,7 @@ export const Footer = () => {
         ricardocao.biker@gmail.com
       </div>
       <div className="w-1/2 py-2 text-sm">
-        COPYRIGHT © 2019-2023 深圳市氪林科技有限公司
+        COPYRIGHT © 2019-2023 {t('company')}
       </div>
     </div>
   );

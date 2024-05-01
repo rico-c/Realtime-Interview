@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { Button, Modal, Input, notification } from 'antd';
 import { InterviewRoute } from 'types';
 import { SmileOutlined, ExportOutlined } from '@ant-design/icons';
+import { useTranslation } from "react-i18next";
 
 export const UserTab = ({ userAccount, socket, demo }: { userAccount: any, socket: any, demo: any }) => {
   const dispatch = useDispatch();
@@ -17,6 +18,8 @@ export const UserTab = ({ userAccount, socket, demo }: { userAccount: any, socke
   const jumpLogin = useCallback(() => {
     history.push(`/login?r=${roomId}`);
   }, [])
+
+  const {t} = useTranslation('common');
 
   const handleInputname = useCallback(() => {
     if (!!username) {
@@ -104,7 +107,7 @@ export const UserTab = ({ userAccount, socket, demo }: { userAccount: any, socke
           <i className="online-icon" />
           <span className="c-gap-left-small">{myName}</span>
         </span >
-      ) : <Button type="link" className="c-gap-left-large" onClick={jumpLogin}>登录</Button>}
+      ) : <Button type="link" className="c-gap-left-large" onClick={jumpLogin}>{t('login')}</Button>}
     </>
 
   )

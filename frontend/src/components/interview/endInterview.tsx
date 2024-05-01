@@ -3,6 +3,7 @@ import { Rate, Input, Button } from 'antd';
 import { useHistory } from 'react-router-dom';
 import { endInterview } from 'actions';
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 const { TextArea } = Input;
 
@@ -19,6 +20,7 @@ const EndInterview: FC<EndProp> = props => {
   const [comment, setComment] = useState('');
 
   const history = useHistory();
+  const {t, i18n} = useTranslation('common')
 
   const rateChange = useCallback(rate => {
     setRateNumber(rate);
@@ -68,10 +70,10 @@ const EndInterview: FC<EndProp> = props => {
           className="c-gap-right"
           onClick={onFinish}
         >
-          确认结束
+          {t('confirmend')}
         </Button>
         <Button size="large" onClick={closeModal}>
-          取消
+          {t('cancel')}
         </Button>
       </div>
     </div>

@@ -69,7 +69,7 @@ const VideoCall = (props: { socket: any; roomId: string }) => {
   return (
     <div className="video-call">
       {isJoined ? (
-        <Button onClick={handleLeave} ghost>退出通话</Button>
+        <Button onClick={handleLeave} ghost>{t('quitCall')}</Button>
       ) : (
         <Popover
           content={`${videoJoiner}已开启视频通话，点击加入`}
@@ -91,7 +91,7 @@ const VideoCall = (props: { socket: any; roomId: string }) => {
                   leave={handleLeave}
                   shareScreen={shareScreen}
                   closeShareScreen={doCloseShareScreen}
-                  name="我"
+                  name="Me"
                   id="me"
                   isme={true}
                 ></BigPlayer>
@@ -103,7 +103,7 @@ const VideoCall = (props: { socket: any; roomId: string }) => {
                 videoTrack={localVideoTrack}
                 audioTrack={localAudioTrack}
                 setSize={setSize}
-                name="我"
+                name="Me"
                 id="me"
                 isme={true}
               ></SmallPlayer>
